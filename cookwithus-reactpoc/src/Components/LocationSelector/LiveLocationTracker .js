@@ -10,13 +10,13 @@ const LiveLocationTracker = ({}) => {
     });
     
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setLiveLocation({
-              latitude:position.coords.latitude,
-              longitude:position.coords.longitude,
-            });
-            console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
-          });
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLiveLocation({
+          latitude:position.coords.latitude,
+          longitude:position.coords.longitude,
+        });
+        console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
+      });
         const intervalId = setInterval(() => {
           navigator.geolocation.getCurrentPosition((position) => {
             setLiveLocation({
@@ -25,7 +25,7 @@ const LiveLocationTracker = ({}) => {
             });
             console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
           });
-        }, 5000); // Update every 5 seconds
+        }, 5000);
     
         // Clean up the interval on component unmount
         return () => clearInterval(intervalId);
@@ -38,11 +38,18 @@ const LiveLocationTracker = ({}) => {
         height:'43rem',
         }}
     >
-      <Box>
-        <GoogleMap 
+      <Box
+        sx={{
+          width:'90%',
+          margin:'auto',
+        }}
+      >
+        <GoogleMap
             latitude={liveLocation?.latitude}
             longitude={liveLocation?.longitude}
             zoom={15}
+            width={'800px'}
+            height={'400px'}
         />
       </Box>
     </Box>

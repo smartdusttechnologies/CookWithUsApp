@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import {GOOGLE_MAPS_KEY} from '../../config/constants'
 
 class GoogleMap extends Component {
   render() {
     const { latitude, longitude, zoom , width , height } = this.props;
     const mapStyles = {
-      width: width ? width : '100%',
-      height: height ? height : '400px',
-      margin:'20px auto',
+      width: width ? width : '95%',
+      height: height ? height : '100%',
     };
 
     return (
@@ -17,12 +17,14 @@ class GoogleMap extends Component {
         style={mapStyles}
         initialCenter={{ lat: latitude, lng: longitude }}
       >
-        <Marker position={{ lat: latitude, lng: longitude }} />
+        <Marker 
+          position={{ lat: latitude, lng: longitude }}
+         />
       </Map>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCzNP5qQql2a5y8lOoO-1yj1lj_tzjVImA',
+  apiKey: GOOGLE_MAPS_KEY,
 })(GoogleMap);
