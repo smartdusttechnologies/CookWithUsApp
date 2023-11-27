@@ -3,10 +3,10 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 class GoogleMap extends Component {
   render() {
-    const { latitude, longitude, zoom } = this.props;
+    const { latitude, longitude, zoom , width , height } = this.props;
     const mapStyles = {
-      width: '70%',
-      height: '400px',
+      width: width ? width : '100%',
+      height: height ? height : '400px',
       margin:'20px auto',
     };
 
@@ -24,5 +24,5 @@ class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  apiKey: 'AIzaSyCzNP5qQql2a5y8lOoO-1yj1lj_tzjVImA',
 })(GoogleMap);

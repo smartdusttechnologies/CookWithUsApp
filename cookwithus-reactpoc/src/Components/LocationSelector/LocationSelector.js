@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from '@mui/material';
 import axios from 'axios';
 import LiveLocationTracker from './LiveLocationTracker ';
 import GoogleMap from './GoogleMap';
 
 function LocationSelector() {
   const [openDialog, setOpenDialog] = useState(false);
-  const [latitude , setLatitude] = useState(0);
-  const [longitude , setLongitude] = useState(0);
   const [selectedLocation, setSelectedLocation] = useState({
     latitude: 0,
     longitude: 0,
     address: '',
   });
+  const [loading , setLoading] = useState(false);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -24,36 +23,36 @@ function LocationSelector() {
   };
 
   const handleLocationSelection = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setLatitude(position.coords.latitude)
-          setLongitude(position.coords.longitude)
-          console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
-        });
+    setLoading(true)
+    navigator.geolocation.getCurrentPosition((position) => {
+      setSelectedLocation({
+        latitude: position.coords.latitude,
+        longitude : position.coords.longitude,
+      })
+      fetchAddressFromLatLng(position.coords.latitude, position.coords.longitude);
+      setLoading(false)
+      console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
+    });
+  };
+  const fetchAddressFromLatLng = (latitude, longitude) => {
+    const apiKey = 'AIzaSyCzNP5qQql2a5y8lOoO-1yj1lj_tzjVImA';
+    const geocodingApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
 
-        const apiKey = 'c5b7441c5f00403e91fadb5fa6db09ef';
-        const geocodingUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
-
-        axios.get(geocodingUrl)
-          .then((response) => {
-            console.log(response)
-            const results = response.data.results;
-            if (results.length > 0) {
-              console.log(results[0].formatted)
-              const address = results[0].formatted;
-              setSelectedLocation({
-                latitude,
-                longitude,
-                address,
-              });
-            } else {
-              console.error('No results found');
-            }
-            // setLoading(false);
-          })
-          .catch((error) => {
-            console.error('Error fetching address:', error);
-            // setLoading(false);
-          });
+    // Fetch address from Google Maps Geocoding API
+    axios.get(geocodingApiUrl)
+    .then((response) => {
+      console.log(response , 'geocodingApiUrl')
+      if (response?.data.results && response?.data.results.length > 0) {
+        const formattedAddress = response?.data.results[0].formatted_address;
+        setSelectedLocation((prevLocation) => ({
+          ...prevLocation,
+          address: formattedAddress,
+        }));
+      }
+    })
+      .catch((error) => {
+        console.error('Error fetching address:', error);
+      });
   };
 
   useEffect(() => {
@@ -71,33 +70,30 @@ function LocationSelector() {
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Select Your Location</DialogTitle>
         <Divider/>
-        <DialogContent>
-            <Button 
-              variant="outlined"
-              size="small"
-              onClick={handleLocationSelection}
-            >
-                Click here to pick your current location
-            </Button>
-
-            {/* {selectedLocation.address && (
+        <DialogContent
+          sx={{
+            width:'600px',
+            height:'400px'
+          }}
+        >
+          { 
+            loading ? <Box sx={{display:'flex', justifyContent:'center'}}><CircularProgress/></Box> : <>
               <Box>
-                <Typography>
-                  Address: {selectedLocation.address}
-                </Typography>
+                  <Typography>
+                    Address: {selectedLocation.address}
+                  </Typography>
+                </Box>
+
+              <Box>
+                <GoogleMap 
+                  latitude={selectedLocation?.latitude} 
+                  longitude={selectedLocation?.longitude} 
+                  width={'500px'}
+                  height={'300px'}
+                />
               </Box>
-            )} */}
-            <Box
-              sx={{
-                width:'600px',
-                height:'400px',
-              }}
-            >
-              <GoogleMap 
-                latitude={selectedLocation?.latitude} 
-                longitude={selectedLocation?.longitude} 
-              />
-            </Box>
+            </>
+          }
             
         </DialogContent>
         <DialogActions>
