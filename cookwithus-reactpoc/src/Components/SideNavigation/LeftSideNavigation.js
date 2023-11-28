@@ -52,37 +52,26 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   );
   
-  const lightTheme = createTheme({
-    palette: {
-      mode: 'light',
-    },
-  });
-  
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
-
 const LeftSideNavigation = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isSideNavOpen = useSelector((state) => state.cart.isSideNavOpen);
-    const darkMode = useSelector((state) => state.cart.darkMode);
+    const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
+    const darkMode = useSelector((state) => state.app.darkMode);
 
     const handleNavigationAndKeepMenuOpen = (route) => {
       navigate(route);
     };
 
   return (
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <CssBaseline/>
         <Drawer 
           variant="permanent" 
           open={isSideNavOpen}
           sx={{
             bgcolor: 'background.default',
             color: 'text.primary',
+            '@media (max-width: 500px)': {
+              display:'none'
+            },
           }}
         >
           <List component="nav">
@@ -126,7 +115,6 @@ const LeftSideNavigation = () => {
             {secondaryListItems}
           </List>
         </Drawer>
-      </ThemeProvider>  
   )
 }
 

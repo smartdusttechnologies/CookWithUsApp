@@ -23,8 +23,8 @@ const Cart = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const isSideNavOpen = useSelector((state) => state.cart.isSideNavOpen);
-  const darkMode = useSelector((state) => state.cart.darkMode);
+  const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
+  const darkMode = useSelector((state) => state.app.darkMode);
 
   const increaseQuantity = (item)=>{
       const updatedCart = cart.map((cartItem) => {

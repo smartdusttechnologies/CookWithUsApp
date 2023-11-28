@@ -27,24 +27,11 @@ const FlexBox = styled(Box)`
   justify-content: space-between;
   align-items: center;
 `;
-  
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
 const ShowMoreMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isMenuOpen = useSelector((state) => state.cart.isMenuOpen);
-  const darkMode = useSelector((state) => state.cart.darkMode);
+  const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
 
   const handleNavigationAndCloseMenu = (route) => {
     navigate(route);
@@ -52,8 +39,6 @@ const ShowMoreMenu = () => {
   };
 
   return (
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <CssBaseline/>
         <Box
           display={isMenuOpen ? "block" : "none"}
           position="fixed"
@@ -161,7 +146,6 @@ const ShowMoreMenu = () => {
             </Box>
           </Box>
         </Box>
-      </ThemeProvider>
   );
 };
 

@@ -12,28 +12,13 @@ const FlexBox = styled(Box)`
   justify-content: space-between;
   align-items: center;
 `;
-  
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
 const ThreeDotBottomNav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isBottomNavMenuOpen = useSelector((state) => state.cart.isBottomNavMenuOpen);
-  const darkMode = useSelector((state) => state.cart.darkMode);
+  const isBottomNavMenuOpen = useSelector((state) => state.app.isBottomNavMenuOpen);
 
   return (
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <CssBaseline/>
         <Box
           display={isBottomNavMenuOpen ? "block" : "none"}
           position="fixed"
@@ -76,7 +61,6 @@ const ThreeDotBottomNav = () => {
             </Box>
           </Box>
         </Box>
-      </ThemeProvider>
   );
 };
 

@@ -8,8 +8,8 @@ const initialState = {
   isRightSideNavigationOpen: false,
 };
 
-export const cartSlice = createSlice({
-  name: "cart",
+export const appSlice = createSlice({
+  name: "app",
   initialState,
   reducers: {
     setisSideNavOpen: (state) => {
@@ -40,6 +40,6 @@ export const {
   setisBottomNavMenuOpen,
   setRightSideNavigationOpen,
   toggleDarkMode,
-} = cartSlice.actions;
+} = appSlice.actions;
 
-export default cartSlice.reducer;
+export default appSlice.reducer;

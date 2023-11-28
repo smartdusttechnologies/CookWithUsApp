@@ -8,36 +8,38 @@ import LeftSideNavigation from './Components/SideNavigation/LeftSideNavigation';
 import Box from '@mui/material/Box';
 import ThreeDotBottomNav from './Components/BottomNavigation/ThreeDotBottomNav';
 import RightSideNavigation from './Components/SideNavigation/RightSideNavigation';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { useSelector } from 'react-redux';
+
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
+  const darkMode = useSelector((state) => state.app.darkMode);
+
   return (
       <div>
-        <NavBar/>
-        <Box sx={{ display: 'flex' }}>
-          <Box
-           sx={{
-            '@media (max-width: 500px)': {
-              display:'none'
-            },
-           }}
-          >
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+          <NavBar/>
+          <Box sx={{ display: 'flex' }}>
             <LeftSideNavigation/>
-          </Box>
-          <AllRoutes/>
-          <Box
-           sx={{
-            '@media (max-width: 500px)': {
-              display:'none'
-            },
-           }}
-          >
+            <AllRoutes/>
             <RightSideNavigation/>
           </Box>
-        </Box>
-        <ShowMoreMenu/>
-        <ThreeDotBottomNav/>
-        <Footer/>
-        <BottomNav/>
+          <ShowMoreMenu/>
+          <ThreeDotBottomNav/>
+          <Footer/>
+          <BottomNav/>
+        </ThemeProvider>
       </div>
   );
 }

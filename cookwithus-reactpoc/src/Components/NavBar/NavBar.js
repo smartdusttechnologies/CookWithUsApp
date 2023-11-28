@@ -63,34 +63,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#1976d2',
-    },
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#101418',
-    },
-  },
-});
-
 export default function NavBar() {
   const { auth } = React.useContext(AuthContext);
   const dispatch = useDispatch();
-  const isSideNavOpen = useSelector((state) => state.cart.isSideNavOpen);
-  const darkMode = useSelector((state) => state.cart.darkMode);
-  const isRightSideNavigationOpen = useSelector((state) => state.cart.isRightSideNavigationOpen);
+  const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
+  const darkMode = useSelector((state) => state.app.darkMode);
+  const isRightSideNavigationOpen = useSelector((state) => state.app.isRightSideNavigationOpen);
 
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" >
             <Toolbar 
@@ -200,6 +181,5 @@ export default function NavBar() {
             </Toolbar>
           </AppBar>
       </Box>
-    </ThemeProvider>
   );
 }

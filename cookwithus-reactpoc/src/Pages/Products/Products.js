@@ -62,8 +62,8 @@ const data = [
 const Products = () => {
   const [meals, setMeals] = useState(data);
   const [cart, setCart] = useState([]);
-  const isSideNavOpen = useSelector((state) => state.cart.isSideNavOpen);
-  const darkMode = useSelector((state) => state.cart.darkMode);
+  const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
+  const darkMode = useSelector((state) => state.app.darkMode);
 
   const handleAddToCart = (item) => {
     let cartData = JSON.parse(localStorage.getItem('cart')) || [];

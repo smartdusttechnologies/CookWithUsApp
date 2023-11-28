@@ -54,24 +54,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       },
     }),
   );
-  
-  const lightTheme = createTheme({
-    palette: {
-      mode: 'light',
-    },
-  });
-  
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-    },
-  });
 
 const RightSideNavigation = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isRightSideNavigationOpen = useSelector((state) => state.cart.isRightSideNavigationOpen);
-    const darkMode = useSelector((state) => state.cart.darkMode);
+    const isRightSideNavigationOpen = useSelector((state) => state.app.isRightSideNavigationOpen);
 
     const handlePhoneClick = () => {
       window.location.href = `tel:7857068847`;
@@ -86,14 +73,15 @@ const RightSideNavigation = () => {
     };
 
   return (
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <CssBaseline/>
         <Drawer 
           variant="permanent" 
           open={isRightSideNavigationOpen}
           sx={{
             bgcolor: 'background.default',
             color: 'text.primary',
+            '@media (max-width: 500px)': {
+              display:'none'
+            },
           }}
         >
           <List component="nav">
@@ -132,7 +120,6 @@ const RightSideNavigation = () => {
               </ListItemButton>
           </List>
         </Drawer>
-      </ThemeProvider>  
   )
 }
 

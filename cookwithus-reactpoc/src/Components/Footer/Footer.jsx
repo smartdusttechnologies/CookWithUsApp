@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 
 const Footer = () => {
-  const darkMode = useSelector((state) => state.cart.darkMode)
+  const darkMode = useSelector((state) => state.app.darkMode)
 
   return (
     <div className='Footer-body' style={{backgroundColor: !darkMode ? '#489bee' : '#101418' }}>

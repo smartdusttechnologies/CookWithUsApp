@@ -16,7 +16,7 @@ import IcecreamIcon from '@mui/icons-material/Icecream';
 import { useSelector } from 'react-redux';
 
 const ExpandableAccordion = ({handleNavigationAndCloseMenu}) => {
-    const isSideNavOpen = useSelector((state) => state.cart.isSideNavOpen);
+    const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
 
   return (
     <div>
