@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import GoogleMap from './GoogleMap';
 import { Box } from '@mui/material';
+import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent ';
 
 const LiveLocationTracker = ({}) => {
     const [liveLocation, setLiveLocation] = useState({
@@ -44,12 +44,10 @@ const LiveLocationTracker = ({}) => {
           margin:'auto',
         }}
       >
-        <GoogleMap
+        <GoogleMapComponent
             latitude={liveLocation?.latitude}
             longitude={liveLocation?.longitude}
             zoom={15}
-            width={'800px'}
-            height={'400px'}
         />
       </Box>
     </Box>

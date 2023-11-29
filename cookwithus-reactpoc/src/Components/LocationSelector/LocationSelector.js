@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
-import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from '@mui/material';
-import axios from 'axios';
-import LiveLocationTracker from './LiveLocationTracker ';
-import GoogleMap from './GoogleMap';
-import {GOOGLE_MAPS_KEY} from '../../config/constants'
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, InputAdornment, TextField, Tooltip, Typography } from '@mui/material';
+import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 import useLocation from '../../hooks/useLocation';
+import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent ';
 
 function LocationSelector() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -20,6 +19,11 @@ function LocationSelector() {
     setOpenDialog(false);
   };
 
+  const center = {
+    lat: location?.latitude,
+    lng: location?.longitude,
+  };
+
   return (
     <div>
       <Tooltip title="Select Location">
@@ -28,43 +32,82 @@ function LocationSelector() {
         </IconButton>
       </Tooltip>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
+      <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true}>
+        <Box display="flex" justifyContent="flex-end">
+          <IconButton
+            size="medium"
+            onClick={handleCloseDialog}
+          >
+            <CloseIcon color="primary" />
+          </IconButton>
+        </Box>
         <DialogTitle>Select Your Location</DialogTitle>
         <Divider/>
         <DialogContent
           sx={{
-            width:'600px',
-            height:'400px'
           }}
         >
-          { 
-            loading ? <Box sx={{display:'flex', justifyContent:'center'}}><CircularProgress/></Box> : <>
-              <Box>
-                  <Typography>
-                    Address: {location.address}
-                  </Typography>
-                </Box>
-
-              <Box>
-                <GoogleMap
-                  latitude={location?.latitude} 
-                  longitude={location?.longitude} 
-                  width={'500px'}
-                  height={'300px'}
-                />
-              </Box>
-            </>
-          }
-            
+          <TextField
+            variant="outlined"
+            label="Enter your area"
+            fullWidth
+            // value={locationName}
+            disabled
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {loading ? (
+                    <CircularProgress size={24} />
+                  ) : (
+                    <IconButton
+                      // onClick={(e) => {
+                      //   e.preventDefault();
+                      //   if (!loading) {
+                      //     setLoading(true);
+                      //     getCurrentLocation(locationCallback);
+                      //   }
+                      // }}
+                      size="large"
+                    >
+                      <GpsFixedIcon color="primary" />
+                    </IconButton>
+                  )}
+                </InputAdornment>
+              ),
+            }}
+          />
+          <GoogleMapComponent
+          latitude={location?.latitude}
+          longitude={location?.longitude}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            disabled={loading}
+            // className={classes.btnBase}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   submitAddress();
+            // }}
+          >
+            {loading ? (
+              <CircularProgress color="secondary" />
+            ) : (
+              <Typography variant="subtitle2" >
+                Submit
+              </Typography>
+            )}
+          </Button>
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions> */}
           {/* <Button onClick={handleLocationSelection} color="primary">
             Save
           </Button> */}
-          <Button onClick={handleCloseDialog} color="error">
+          {/* <Button onClick={handleCloseDialog} color="error">
             Cancel
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </div>
   );
