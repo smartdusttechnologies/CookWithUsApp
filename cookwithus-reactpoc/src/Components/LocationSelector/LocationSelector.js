@@ -19,11 +19,6 @@ function LocationSelector() {
     setOpenDialog(false);
   };
 
-  const center = {
-    lat: location?.latitude,
-    lng: location?.longitude,
-  };
-
   return (
     <div>
       <Tooltip title="Select Location">
@@ -33,7 +28,8 @@ function LocationSelector() {
       </Tooltip>
 
       <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true}>
-        <Box display="flex" justifyContent="flex-end">
+        <Box display="flex" justifyContent="space-between">
+          <DialogTitle>Select Your Location</DialogTitle>
           <IconButton
             size="medium"
             onClick={handleCloseDialog}
@@ -41,17 +37,19 @@ function LocationSelector() {
             <CloseIcon color="primary" />
           </IconButton>
         </Box>
-        <DialogTitle>Select Your Location</DialogTitle>
         <Divider/>
         <DialogContent
           sx={{
+            display:'flex',
+            flexDirection:'column',
+            gap:'15px',
           }}
         >
           <TextField
             variant="outlined"
             label="Enter your area"
             fullWidth
-            // value={locationName}
+            value={location.address}
             disabled
             InputProps={{
               endAdornment: (
@@ -60,13 +58,12 @@ function LocationSelector() {
                     <CircularProgress size={24} />
                   ) : (
                     <IconButton
-                      // onClick={(e) => {
-                      //   e.preventDefault();
-                      //   if (!loading) {
-                      //     setLoading(true);
-                      //     getCurrentLocation(locationCallback);
-                      //   }
-                      // }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (!loading) {
+                          getCurrentLocation();
+                        }
+                      }}
                       size="large"
                     >
                       <GpsFixedIcon color="primary" />
@@ -76,16 +73,17 @@ function LocationSelector() {
               ),
             }}
           />
+
           <GoogleMapComponent
-          latitude={location?.latitude}
-          longitude={location?.longitude}
+            latitude={location?.latitude}
+            longitude={location?.longitude}
           />
+          
           <Button
             variant="contained"
             color="primary"
             fullWidth
             disabled={loading}
-            // className={classes.btnBase}
             // onClick={(e) => {
             //   e.preventDefault();
             //   submitAddress();
@@ -100,14 +98,6 @@ function LocationSelector() {
             )}
           </Button>
         </DialogContent>
-        {/* <DialogActions> */}
-          {/* <Button onClick={handleLocationSelection} color="primary">
-            Save
-          </Button> */}
-          {/* <Button onClick={handleCloseDialog} color="error">
-            Cancel
-          </Button>
-        </DialogActions> */}
       </Dialog>
     </div>
   );

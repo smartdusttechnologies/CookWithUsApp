@@ -45,9 +45,9 @@ const LiveLocationTracker = ({}) => {
         }}
       >
         <GoogleMapComponent
-            latitude={liveLocation?.latitude}
-            longitude={liveLocation?.longitude}
-            zoom={15}
+          latitude={liveLocation?.latitude}
+          longitude={liveLocation?.longitude}
+          zoom={15}
         />
       </Box>
     </Box>
