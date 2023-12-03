@@ -8,28 +8,35 @@ const LiveLocationTracker = ({}) => {
       longitude: 0,
     //   address: '',
     });
-    
+
     useEffect(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLiveLocation({
-          latitude:position.coords.latitude,
-          longitude:position.coords.longitude,
-        });
-        console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
-      });
-        const intervalId = setInterval(() => {
-          navigator.geolocation.getCurrentPosition((position) => {
-            setLiveLocation({
-              latitude:position.coords.latitude,
-              longitude:position.coords.longitude,
-            });
-            console.log(position.coords.latitude , position.coords.longitude , 'position.coords.')
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          setLiveLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
           });
-        }, 5000);
-    
-        // Clean up the interval on component unmount
-        return () => clearInterval(intervalId);
-      }, []);
+          console.log(
+            position.coords.latitude,
+            position.coords.longitude,
+            'position.coords.'
+          );
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+        },
+        {
+          enableHighAccuracy: true,
+          maximumAge: 0,
+          timeout: 5000,
+        }
+      );
+
+      // Clean up the watchPosition on component unmount
+      return () => {
+        navigator.geolocation.clearWatch(watchId);
+      };
+    }, []);
 
   return (
     <Box
