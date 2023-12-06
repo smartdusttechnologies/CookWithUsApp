@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import NavigationIcon from '@mui/icons-material/Navigation';
+import ExpandableFloatButton from '../../Components/FloatButton/ExpandableFloatButton';
+import FloatButton from '../../Components/FloatButton/FloatButton';
 
 const Home = () => {
   return (
@@ -11,26 +12,8 @@ const Home = () => {
         width:'100%',
       }}
     >
-      <Fab 
-        color="secondary"
-        style={{
-          position: 'fixed',
-          bottom: 76,
-          right: 236,
-        }}
-      >
-        <AddIcon />
-      </Fab>
-      <Fab variant="extended"
-        style={{
-          position: 'fixed',
-          bottom: 83,
-          right: 86,
-        }}
-      >
-        <NavigationIcon sx={{ mr: 1 }} />
-        Navigate
-      </Fab>
+      <FloatButton/>
+      <ExpandableFloatButton/>
     </div>
   )
 }
