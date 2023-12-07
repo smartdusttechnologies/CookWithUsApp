@@ -9,7 +9,7 @@ const FloatButton = () => {
       sx={{
         position: 'fixed',
         bottom: 76,
-        right: 176,
+        left: 156,
         '@media (max-width: 500px)': {
           display: 'none',
         },

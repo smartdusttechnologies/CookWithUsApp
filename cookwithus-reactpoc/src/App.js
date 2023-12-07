@@ -10,6 +10,7 @@ import ThreeDotBottomNav from './Components/BottomNavigation/ThreeDotBottomNav';
 import RightSideNavigation from './Components/SideNavigation/RightSideNavigation';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
+import BottomActionBar from './Components/BottomNavigation/BottomActionBar';
 
 const lightTheme = createTheme({
   palette: {
@@ -39,6 +40,7 @@ function App() {
           <ThreeDotBottomNav/>
           <Footer/>
           <BottomNav/>
+          <BottomActionBar/>
         </ThemeProvider>
       </div>
   );
