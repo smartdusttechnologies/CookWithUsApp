@@ -11,6 +11,7 @@ import RightSideNavigation from './Components/SideNavigation/RightSideNavigation
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import BottomActionBar from './Components/BottomNavigation/BottomActionBar';
+import ThreedotMenu from './Components/Menu/ThreedotMenu';
 
 const lightTheme = createTheme({
   palette: {
@@ -31,6 +32,7 @@ function App() {
       <div>
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <NavBar/>
+          <ThreedotMenu/>
           <Box sx={{ display: 'flex' }}>
             <LeftSideNavigation/>
             <AllRoutes/>
