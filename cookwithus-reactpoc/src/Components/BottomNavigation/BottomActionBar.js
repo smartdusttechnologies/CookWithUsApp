@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Paper } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
@@ -26,11 +26,21 @@ const BottomActionBar = () => {
                 onChange={(event, newValue) => {
                 setValue(newValue);
                 }}
-                sx={{justifyContent:'space-around'}}
+                sx={{
+                    justifyContent:'space-around',
+                    alignItems:'center'
+                }}
             >
-                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Download" icon={<DownloadIcon />} />
-                <BottomNavigationAction label="Need Help" icon={<HelpIcon />} />
+                {/* <BottomNavigationAction label="Need Help" icon={<HelpIcon />} /> */}
+                <Button variant="contained" startIcon={<HelpIcon />}>
+                    Need Help
+                </Button>
+                <Button variant="contained" startIcon={<FavoriteIcon />}>
+                    Favorites
+                </Button>
+                <Button variant="contained" startIcon={<DownloadIcon />}>
+                    Download
+                </Button>
             </BottomNavigation>
         </Paper>
     </Box>
