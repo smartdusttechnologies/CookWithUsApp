@@ -76,8 +76,7 @@ function LocationSelector() {
           />
 
           <GoogleMapComponent
-            latitude={location?.latitude}
-            longitude={location?.longitude}
+            origin={{lat:location?.latitude, lng:location?.longitude}}
           />
           
           <Button

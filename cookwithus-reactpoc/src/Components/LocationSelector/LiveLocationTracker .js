@@ -101,13 +101,13 @@ const LiveLocationTracker = ({}) => {
       </Box>
       <Button
         variant="contained"
-       onClick={() => joinRoom('yash' , 'swiggy')}
+        onClick={() => joinRoom('yash' , 'swiggy')}
       >
         Get Location
       </Button>
       <Button
         variant="contained"
-       onClick={() => sendLocation(27.5908, 86.1348)}
+        onClick={() => sendLocation(30.5908, 86.1348)}
       >
         Send Location
       </Button>

@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const Home = () => {
   return (
-    <div 
+    <div
       style={{
-        height:'43rem',
-        width:'100%',
+        height: "43rem",
+        width: "100%",
       }}
-    >
-    </div>
-  )
-}
+    ></div>
+  );
+};
 
-export default Home
+export default Home;

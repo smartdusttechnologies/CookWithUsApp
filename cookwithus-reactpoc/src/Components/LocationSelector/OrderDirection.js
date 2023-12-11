@@ -8,19 +8,19 @@ const OrderDirection = () => {
       sx={{
         width:'100%',
         height:'43rem',
-      }}  
+      }}
     >
-        <Box
+      <Box
         sx={{
-            width:'90%',
-            margin:'auto',
+          width:'90%',
+          margin:'auto',
         }}
-        >
+      >
         <GoogleMapComponent
-            origin={{lat:25.5908, lng:85.1348}}
-            destination={{lat:24.5908, lng:85.1348}}
+          origin={{lat:25.5908, lng:85.1348}}
+          destination={{lat:25.4908, lng:85.1348}}
         />
-        </Box>
+      </Box>
     </Box>
   )
 }
