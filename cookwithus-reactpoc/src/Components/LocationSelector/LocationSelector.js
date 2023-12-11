@@ -5,11 +5,12 @@ import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, Di
 import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 import useLocation from '../../hooks/useLocation';
 import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent ';
+import { useNavigate } from 'react-router-dom';
 
 function LocationSelector() {
   const [openDialog, setOpenDialog] = useState(false);
-
   const { location, loading, getCurrentLocation } = useLocation();
+  const navigate = useNavigate()
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -84,10 +85,11 @@ function LocationSelector() {
             color="primary"
             fullWidth
             disabled={loading}
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   submitAddress();
-            // }}
+            onClick={(e) => {
+              // e.preventDefault();
+              // submitAddress();
+              navigate('/livelocationmap')
+            }}
           >
             {loading ? (
               <CircularProgress color="secondary" />

@@ -20,15 +20,17 @@ const BottomActionBar = () => {
         }}
     >
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-            <BottomNavigation
-                showLabels
-                value={value}
-                onChange={(event, newValue) => {
-                setValue(newValue);
-                }}
+            <Box
+                // showLabels
+                // value={value}
+                // onChange={(event, newValue) => {
+                // setValue(newValue);
+                // }}
                 sx={{
+                    display:'flex',
                     justifyContent:'space-around',
-                    alignItems:'center'
+                    alignItems:'center',
+                    height:'53px',
                 }}
             >
                 {/* <BottomNavigationAction label="Need Help" icon={<HelpIcon />} /> */}
@@ -41,7 +43,7 @@ const BottomActionBar = () => {
                 <Button variant="contained" startIcon={<DownloadIcon />}>
                     Download
                 </Button>
-            </BottomNavigation>
+            </Box>
         </Paper>
     </Box>
   )
