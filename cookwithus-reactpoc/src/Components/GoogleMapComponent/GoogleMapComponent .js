@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import {
   GoogleMap,
   Marker,
@@ -8,6 +8,10 @@ import {
 import { GOOGLE_MAPS_KEY } from "../../config/constants";
 import { Box, Typography } from "@mui/material";
 import CircularLoading from "../LoadingComponent/CircularLoading";
+import PizzaDelivery from "../../assets/PizzaDelivery.png";
+import car from "../../assets/car.png";
+import VanDelivery from "../../assets/VanDelivery.png";
+import BikeDelivery from "../../assets/BikeDelivery.png";
 
 const GoogleMapComponent = ({ origin, destination, zoom }) => {
   const { isLoaded } = useJsApiLoader({
@@ -52,6 +56,13 @@ const GoogleMapComponent = ({ origin, destination, zoom }) => {
     lng: origin.lng,
   };
 
+  const icon = {
+    url: VanDelivery,
+    scaledSize: new window.google.maps.Size(40, 40),
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(20, 40),
+  };
+
   return isLoaded ? (
     <Box>
       <Box>
@@ -62,11 +73,10 @@ const GoogleMapComponent = ({ origin, destination, zoom }) => {
           onLoad={onLoad}
         >
           {directions && <DirectionsRenderer directions={directions} />}
-          <Marker position={origin} />
-          <Marker position={destination} />
+          {!destination && <Marker position={origin} icon={icon} />}
         </GoogleMap>
       </Box>
-      {destination ? (
+      {destination && (
         <Box
           sx={{
             display: "flex",
@@ -77,11 +87,11 @@ const GoogleMapComponent = ({ origin, destination, zoom }) => {
           {distance && <Typography>Distance: {distance}</Typography>}
           {duration && <Typography>Duration: {duration}</Typography>}
         </Box>
-      ) : null}
+      )}
     </Box>
   ) : (
     <CircularLoading />
   );
 };
 
-export default GoogleMapComponent;
+export default memo(GoogleMapComponent);

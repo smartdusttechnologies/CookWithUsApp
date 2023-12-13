@@ -6,9 +6,8 @@ import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 const LiveLocationTracker = ({}) => {
     const [liveLocation, setLiveLocation] = useState({
-      latitude: 0,
-      longitude: 0,
-    //   address: '',
+      latitude: 25.5908,
+      longitude: 85.1348,
     });
     const [connection, setConnection] = useState();
   
@@ -20,9 +19,10 @@ const LiveLocationTracker = ({}) => {
           .configureLogging(LogLevel.Information)
           .build();
   
-        connection.on("GetLocation", (user, message) => {
+        connection.on("GetLocation", (user, location) => {
           // setMessages(messages => [...messages, { user, message }]);
-          console.log("location" , message)
+          console.log("location" , location)
+          setLiveLocation(location)
         });
   
         // connection.on("UsersInRoom", (users) => {
@@ -50,36 +50,50 @@ const LiveLocationTracker = ({}) => {
         console.log(e);
       }
     }
-  
 
-    useEffect(() => {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setLiveLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          // console.log(
-          //   position.coords.latitude,
-          //   position.coords.longitude,
-          //   'position.coords.'
-          // );
-        },
-        (error) => {
-          console.error('Error getting location:', error);
-        },
-        {
-          enableHighAccuracy: true,
-          maximumAge: 0,
-          timeout: 5000,
-        }
-      );
+    // useEffect(() => {
+    //   const watchId = navigator.geolocation.watchPosition(
+    //     (position) => {
+    //       setLiveLocation({
+    //         latitude: position.coords.latitude,
+    //         longitude: position.coords.longitude,
+    //       });
+    //       // console.log(
+    //       //   position.coords.latitude,
+    //       //   position.coords.longitude,
+    //       //   'position.coords.'
+    //       // );
+    //     },
+    //     (error) => {
+    //       console.error('Error getting location:', error);
+    //     },
+    //     {
+    //       enableHighAccuracy: true,
+    //       maximumAge: 0,
+    //       timeout: 5000,
+    //     }
+    //   );
 
-      // Clean up the watchPosition on component unmount
-      return () => {
-        navigator.geolocation.clearWatch(watchId);
-      };
-    }, []);
+    //   // Clean up the watchPosition on component unmount
+    //   return () => {
+    //     navigator.geolocation.clearWatch(watchId);
+    //   };
+    // }, []);
+
+    let currentLatitude = 25.5908;
+    let intervalId;
+    
+    const updatingLocation = () => {
+      // joinRoom('yash' , 'swiggy')
+      intervalId = setInterval(() => {
+        sendLocation(currentLatitude, 85.1348);
+        currentLatitude += 0.0100;
+      }, 5000);
+    };
+    
+    const stopUpdatingLocation = () => {
+      clearInterval(intervalId);
+    };
 
   return (
     <Box
@@ -101,15 +115,22 @@ const LiveLocationTracker = ({}) => {
       </Box>
       <Button
         variant="contained"
-        onClick={() => joinRoom('yash' , 'swiggy')}
+        onClick={() => joinRoom('raj' , 'swiggy')}
       >
         Get Location
       </Button>
       <Button
         variant="contained"
-        onClick={() => sendLocation(30.5908, 86.1348)}
+        onClick={updatingLocation}
       >
         Send Location
+      </Button>
+      <Button
+        variant="contained"
+        color='success'
+        onClick={stopUpdatingLocation}
+      >
+        Delivered
       </Button>
     </Box>
   );

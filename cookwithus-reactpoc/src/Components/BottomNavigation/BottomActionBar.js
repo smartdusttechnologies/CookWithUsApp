@@ -9,7 +9,6 @@ import DownloadIcon from "@mui/icons-material/Download";
 import HelpIcon from "@mui/icons-material/Help";
 
 const BottomActionBar = () => {
-  const [value, setValue] = React.useState(null);
 
   return (
     <Box
@@ -23,30 +22,33 @@ const BottomActionBar = () => {
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
-        <Box
-          // showLabels
-          // value={value}
-          // onChange={(event, newValue) => {
-          // setValue(newValue);
-          // }}
+        <BottomNavigation
+          showLabels
           sx={{
-            display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
-            height: "53px",
           }}
         >
-          {/* <BottomNavigationAction label="Need Help" icon={<HelpIcon />} /> */}
-          <Button variant="contained" startIcon={<HelpIcon />}>
+          <BottomNavigationAction label="Need Help" icon={<HelpIcon />} />
+          {/* <Button variant="contained" startIcon={<HelpIcon />}>
             Need Help
-          </Button>
-          <Button variant="contained" startIcon={<FavoriteIcon />}>
+          </Button> */}
+          <Button
+            variant="contained"
+            startIcon={<FavoriteIcon />}
+            sx={{ height: "40px" }}
+            color="secondary"
+          >
             Favorites
           </Button>
-          <Button variant="contained" startIcon={<DownloadIcon />}>
+          <Button
+            variant="contained"
+            startIcon={<DownloadIcon />}
+            sx={{ height: "40px" }}
+          >
             Download
           </Button>
-        </Box>
+        </BottomNavigation>
       </Paper>
     </Box>
   );

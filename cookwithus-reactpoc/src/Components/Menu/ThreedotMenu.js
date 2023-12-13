@@ -31,6 +31,7 @@ export default function ThreedotMenu() {
       <Box
         sx={{
           display: "flex",
+          justifyContent:'end',
           alignItems: "center",
           textAlign: "center",
           "@media (min-width: 500px)": {
@@ -38,7 +39,7 @@ export default function ThreedotMenu() {
           },
         }}
       >
-        <Tooltip title="Account Menu">
+        <Tooltip title="Menu">
           <IconButton
             onClick={handleClick}
             size="large"
@@ -73,7 +74,7 @@ export default function ThreedotMenu() {
               display: "block",
               position: "absolute",
               top: 0,
-              left: 10,
+              right: 10,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
