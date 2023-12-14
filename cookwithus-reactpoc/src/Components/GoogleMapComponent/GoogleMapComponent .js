@@ -13,7 +13,7 @@ import car from "../../assets/car.png";
 import VanDelivery from "../../assets/VanDelivery.png";
 import BikeDelivery from "../../assets/BikeDelivery.png";
 
-const GoogleMapComponent = ({ origin, destination, zoom }) => {
+const GoogleMapComponent = ({ origin, destination, zoom, iconImage }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: GOOGLE_MAPS_KEY,
@@ -57,10 +57,10 @@ const GoogleMapComponent = ({ origin, destination, zoom }) => {
   };
 
   const icon = {
-    url: VanDelivery,
-    scaledSize: new window.google.maps.Size(40, 40),
-    origin: new window.google.maps.Point(0, 0),
-    anchor: new window.google.maps.Point(20, 40),
+    url: iconImage,
+    scaledSize: map && new window.google.maps.Size(40, 40),
+    origin: map && new window.google.maps.Point(0, 0),
+    anchor: map && new window.google.maps.Point(20, 40),
   };
 
   return isLoaded ? (
