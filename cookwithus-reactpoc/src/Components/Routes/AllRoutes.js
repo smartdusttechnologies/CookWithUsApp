@@ -9,6 +9,7 @@ import PaymentCard from "../../Pages/Checkout/PaymentCard";
 import LiveLocationTracker from "../LocationSelector/LiveLocationTracker ";
 import OrderDirection from "../LocationSelector/OrderDirection";
 import RegistrationForm from "../../Pages/RegisterwithUs/RegisterAsChef/RegistrationForm";
+import RegisterAsRider from "../../Pages/RegisterwithUs/RegisterAsRider/RegisterAsRider";
 
 const AllRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AllRoutes = () => {
       <Route path="/livelocationmap" element={<LiveLocationTracker />} />
       <Route path="/trackorder" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />
+      <Route path="/registerasrider" element={<RegisterAsRider />} />
     </Routes>
   );
 };

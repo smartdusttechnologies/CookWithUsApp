@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Box, TextField, Typography, Button, Chip } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Chip,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { styled } from "@mui/material/styles";
@@ -17,7 +27,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const RegistrationForm = () => {
+const RegisterAsRider = () => {
   const [file, setFile] = useState([]);
 
   const handleFileChange = (e) => {
@@ -36,8 +46,8 @@ const RegistrationForm = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "40rem" }}>
-      <Box sx={{ width: "92%", margin: "auto", mt: "60px" }}>
+    <Box sx={{ width: "100%", height: "100%" }}>
+      <Box sx={{ width: "92%", margin: "auto", mt: "40px", mb: "30px" }}>
         <Box>
           <Formik
             onSubmit={handleFormSubmit}
@@ -56,7 +66,7 @@ const RegistrationForm = () => {
               <form onSubmit={handleSubmit}>
                 <Box>
                   <Typography sx={{ mb: "15px" }} fontSize="18px">
-                    Register as a Chef
+                    Register as a Rider
                   </Typography>
                   <TextField
                     fullWidth
@@ -106,8 +116,40 @@ const RegistrationForm = () => {
                     helperText={touched.address && errors.address}
                     sx={{ gridColumn: "span 4", marginBottom: "15px" }}
                   />
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-select-small-label">
+                      Vehicle Type
+                    </InputLabel>
+                    <Select
+                      name="vehicleType"
+                      label='Vehicle Type'
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.vehicleType}
+                      error={!!touched.vehicleType && !!errors.vehicleType}
+                      helperText={touched.vehicleType && errors.vehicleType}
+                    >
+                      <MenuItem value={"Bike"}>
+                        Bike
+                      </MenuItem>
+                      <MenuItem value={"Cycle"}>
+                        Cycle
+                      </MenuItem>
+                      <MenuItem value={"Car"}>
+                        Car
+                      </MenuItem>
+                      <MenuItem value={"Van"}>
+                        Van
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                   <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      mt: "15px",
+                    }}
                   >
                     <Button
                       component="label"
@@ -170,6 +212,7 @@ const initialValues = {
   email: "",
   phoneNumber: "",
   address: "",
+  vehicleType: "",
 };
 
 const checkoutSchema = [
@@ -181,7 +224,8 @@ const checkoutSchema = [
     email: yup.string().email("Invalid email").required("Email is required"),
     phoneNumber: yup.string().required("Phone Number is required"),
     address: yup.string().required("Address Number is required"),
+    vehicleType: yup.string().required("Vehicle Type is required"),
   }),
 ];
 
-export default RegistrationForm;
+export default RegisterAsRider;
