@@ -72,7 +72,14 @@ const GoogleMapComponent = ({ origin, destination, zoom, iconImage }) => {
           center={center}
           onLoad={onLoad}
         >
-          {directions && <DirectionsRenderer directions={directions} />}
+          {directions && (
+            <DirectionsRenderer
+              directions={directions}
+              options={{
+                markerOptions: { icon: icon },
+              }}
+            />
+          )}
           {!destination && <Marker position={origin} icon={icon} />}
         </GoogleMap>
       </Box>

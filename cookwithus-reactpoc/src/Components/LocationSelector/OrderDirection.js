@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
+import PizzaDelivery from "../../assets/PizzaDelivery.png";
 
 const OrderDirection = () => {
   const [origin, setOrigin] = useState({ lat: 25.5908, lng: 85.1348 });
@@ -34,6 +35,7 @@ const OrderDirection = () => {
         <GoogleMapComponent
           origin={origin}
           destination={{ lat: 25.4908, lng: 85.1348 }}
+          iconImage={PizzaDelivery}
         />
       </Box>
       <Box>
