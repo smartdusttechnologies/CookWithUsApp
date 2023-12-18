@@ -15,24 +15,53 @@ const Home = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: 'space-around',
           alignItems: "center",
           marginTop: "30px",
-          gap: 2,
         }}
       >
-        <Typography color="text.secondary" sx={{ fontSize: "21px" }}>
-          Cook With us as a Chef
-        </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          endIcon={<ArrowForwardIcon />}
-          onClick={() => navigate("/registeraschef")}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
         >
-          Get Started
-        </Button>
+          <Typography color="text.secondary" sx={{ fontSize: "21px" }}>
+            Cook with us as a Chef
+          </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => navigate("/registeraschef")}
+          >
+            Get Started
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <Typography color="text.secondary" sx={{ fontSize: "21px" }}>
+            Register as a Delivery Partner
+          </Typography>
+          <Button
+            variant="contained"
+            color="error"
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => navigate("/registerasrider")}
+          >
+            Get Started
+          </Button>
+        </Box>
       </Box>
     </div>
   );

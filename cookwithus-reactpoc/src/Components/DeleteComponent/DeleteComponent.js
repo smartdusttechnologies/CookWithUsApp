@@ -30,7 +30,7 @@ const DeleteComponent = ({ onDelete, id }) => {
   return (
     <>
       <Tooltip title="Delete">
-        <IconButton onClick={handleDeleteClick}>
+        <IconButton color="error" onClick={handleDeleteClick}>
           <DeleteIcon />
         </IconButton>
       </Tooltip>

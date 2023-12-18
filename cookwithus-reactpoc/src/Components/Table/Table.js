@@ -21,11 +21,18 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { fakeData, usStates } from "./makeData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteComponent from "../DeleteComponent/DeleteComponent";
 
-const Example = () => {
+const usStates = [
+  { value: 'AL', label: 'Alabama' },
+  { value: 'AK', label: 'Alaska' },
+  { value: 'AZ', label: 'Arizona' },
+  // Add more states as needed
+];
+
+const Table = ({data}) => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const columns = useMemo(
@@ -109,7 +116,7 @@ const Example = () => {
     isError: isLoadingUsersError,
     isFetching: isFetchingUsers,
     isLoading: isLoadingUsers,
-  } = useGetUsers();
+  } = useGetUsers(data);
   //call UPDATE hook
   const { mutateAsync: updateUser, isPending: isUpdatingUser } =
     useUpdateUser();
@@ -139,13 +146,6 @@ const Example = () => {
     setValidationErrors({});
     await updateUser(values);
     table.setEditingRow(null); //exit editing mode
-  };
-
-  //DELETE action
-  const openDeleteConfirmModal = (row) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      deleteUser(row.original.id);
-    }
   };
 
   const table = useMaterialReactTable({
@@ -205,11 +205,7 @@ const Example = () => {
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Delete">
-          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <DeleteComponent onDelete={deleteUser} id={row.original.id}/>
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (
@@ -263,13 +259,13 @@ function useCreateUser() {
 }
 
 //READ hook (get users from api)
-function useGetUsers() {
+function useGetUsers(data) {
   return useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       //send api request here
       await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
-      return Promise.resolve(fakeData);
+      return Promise.resolve(data);
     },
     refetchOnWindowFocus: false,
   });
@@ -317,14 +313,14 @@ function useDeleteUser() {
 
 const queryClient = new QueryClient();
 
-const ExampleWithProviders = () => (
+const TableWithProviders = ({data}) => (
   //Put this with your other react-query providers near root of your app
   <QueryClientProvider client={queryClient}>
-    <Example />
+    <Table data={data} />
   </QueryClientProvider>
 );
 
-export default ExampleWithProviders;
+export default TableWithProviders;
 
 const validateRequired = (value) => !!value.length;
 const validateEmail = (email) =>

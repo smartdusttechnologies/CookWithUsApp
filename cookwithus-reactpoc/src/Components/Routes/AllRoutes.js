@@ -10,6 +10,7 @@ import LiveLocationTracker from "../LocationSelector/LiveLocationTracker ";
 import OrderDirection from "../LocationSelector/OrderDirection";
 import RegistrationForm from "../../Pages/RegisterwithUs/RegisterAsChef/RegistrationForm";
 import RegisterAsRider from "../../Pages/RegisterwithUs/RegisterAsRider/RegisterAsRider";
+import AdminDashboard from "../../Pages/AdminDashboard/AdminDashboard";
 
 const AllRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AllRoutes = () => {
       <Route path="/trackorder" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />
       <Route path="/registerasrider" element={<RegisterAsRider />} />
+      <Route path="/admindashboard" element={<AdminDashboard />} />
     </Routes>
   );
 };
