@@ -11,6 +11,9 @@ import OrderDirection from "../LocationSelector/OrderDirection";
 import RegistrationForm from "../../Pages/RegisterwithUs/RegisterAsChef/RegistrationForm";
 import RegisterAsRider from "../../Pages/RegisterwithUs/RegisterAsRider/RegisterAsRider";
 import AdminDashboard from "../../Pages/AdminDashboard/AdminDashboard";
+import ChefDashboard from "../../Pages/ChefDashboard/ChefDashboard";
+import Login from "../../Pages/Login/Login";
+import Signup from "../../Pages/Signup/Signup";
 
 const AllRoutes = () => {
   return (
@@ -26,6 +29,9 @@ const AllRoutes = () => {
       <Route path="/registeraschef" element={<RegistrationForm />} />
       <Route path="/registerasrider" element={<RegisterAsRider />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
+      <Route path="/chefdashboard" element={<ChefDashboard />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 };

@@ -12,7 +12,6 @@ const fakeData = [
   { id: '7', firstName: 'Frank', lastName: 'Miller', email: 'frank.miller@example.com', state: 'MI' },
   { id: '8', firstName: 'Grace', lastName: 'Taylor', email: 'grace.taylor@example.com', state: 'WA' },
   { id: '9', firstName: 'Henry', lastName: 'Clark', email: 'henry.clark@example.com', state: 'OR' },
-  { id: '10', firstName: 'Ivy', lastName: 'Moore', email: 'ivy.moore@example.com', state: 'CO' },
 ];
 
 const AdminDashboard = () => {

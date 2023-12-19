@@ -96,15 +96,15 @@ const LeftSideNavigation = () => {
           </ListItemButton>
           <ListItemButton onClick={() => navigate("/admindashboard")}>
             <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
-            <ListItemText primary="Customers" />
+            <ListItemText primary="Admin Reports" />
+          </ListItemButton>
+          <ListItemButton onClick={() => navigate("/chefdashboard")}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Chef Dashboard" />
           </ListItemButton>
           <ListItemButton>
             <ListItemIcon>
