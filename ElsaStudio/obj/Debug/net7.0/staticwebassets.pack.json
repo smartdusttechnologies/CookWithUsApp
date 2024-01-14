@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\ElsaStudioBlazorWasm\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\ElsaStudioBlazorWasm\\obj\\Debug\\net7.0\\compressed\\1wo68j3ykk.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\ElsaStudioBlazorWasm\\obj\\Debug\\net7.0\\scopedcss\\bundle\\ElsaStudioBlazorWasm.styles.css",
+      "PackagePath": "staticwebassets\\ElsaStudioBlazorWasm.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\ElsaStudioBlazorWasm\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\ElsaStudioBlazorWasm\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ElsaStudioBlazorWasm.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.ElsaStudioBlazorWasm.props",
+      "PackagePath": "build\\ElsaStudioBlazorWasm.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.ElsaStudioBlazorWasm.props",
+      "PackagePath": "buildMultiTargeting\\ElsaStudioBlazorWasm.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.ElsaStudioBlazorWasm.props",
+      "PackagePath": "buildTransitive\\ElsaStudioBlazorWasm.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
