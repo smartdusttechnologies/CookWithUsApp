@@ -1,0 +1,447 @@
+{
+  "id": "9ed41b8a05b9198a",
+  "definitionId": "69b70f7e21f8c6f0",
+  "name": "Food Delivery",
+  "description": "A Food Delivery App workflow which requests to a restaurant through api and then after getting success response starts a loop to Request delivery partners one by one and after getting success response from there it breaks the loop and send the HTTP Response",
+  "createdAt": "2024-01-12T17:42:02.1835531+00:00",
+  "version": 59,
+  "toolVersion": "3.0.0.0",
+  "variables": [
+    {
+      "id": "23fbeddd07e4ac61",
+      "name": "FoodData",
+      "typeName": "Object",
+      "isArray": false,
+      "storageDriverTypeName": "Elsa.Workflows.Services.WorkflowStorageDriver, Elsa.Workflows.Core"
+    },
+    {
+      "id": "6dac9d4382281a08",
+      "name": "CurrentDeliveryPartner",
+      "typeName": "String",
+      "isArray": false,
+      "storageDriverTypeName": "Elsa.Workflows.Services.WorkflowStorageDriver, Elsa.Workflows.Core"
+    }
+  ],
+  "inputs": [],
+  "outputs": [],
+  "outcomes": [],
+  "customProperties": {},
+  "isReadonly": false,
+  "isLatest": true,
+  "isPublished": false,
+  "options": {
+    "usableAsActivity": false,
+    "autoUpdateConsumingWorkflows": false
+  },
+  "root": {
+    "type": "Elsa.Flowchart",
+    "version": 1,
+    "id": "5eec9a3f16e67f4e",
+    "nodeId": "Workflow1:5eec9a3f16e67f4e",
+    "metadata": {},
+    "customProperties": {
+      "source": "FlowchartJsonConverter.cs:45",
+      "notFoundConnections": [],
+      "canStartWorkflow": false,
+      "runAsynchronously": false
+    },
+    "activities": [
+      {
+        "path": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "order-food" }
+        },
+        "supportedMethods": {
+          "typeName": "String[]",
+          "expression": { "type": "Object", "value": "[\u0022POST\u0022]" }
+        },
+        "authorize": {
+          "typeName": "Boolean",
+          "expression": { "type": "Literal", "value": false }
+        },
+        "policy": { "typeName": "String", "expression": { "type": "Literal" } },
+        "requestTimeout": null,
+        "requestSizeLimit": null,
+        "fileSizeLimit": null,
+        "allowedFileExtensions": null,
+        "blockedFileExtensions": null,
+        "allowedMimeTypes": null,
+        "exposeRequestTooLargeOutcome": false,
+        "exposeFileTooLargeOutcome": false,
+        "exposeInvalidFileExtensionOutcome": false,
+        "exposeInvalidFileMimeTypeOutcome": false,
+        "parsedContent": {
+          "typeName": "Object",
+          "memoryReference": { "id": "23fbeddd07e4ac61" }
+        },
+        "files": null,
+        "routeData": null,
+        "queryStringData": null,
+        "headers": null,
+        "result": null,
+        "id": "c28d6c08f7bb19a7",
+        "nodeId": "Workflow1:5eec9a3f16e67f4e:c28d6c08f7bb19a7",
+        "name": "HttpEndpoint1",
+        "type": "Elsa.HttpEndpoint",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": true,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": -144.1999969482422, "y": 161.51250457763672 },
+            "size": { "width": 180, "height": 81.51250457763672 }
+          },
+          "showDescription": true,
+          "description": "Order Food here"
+        }
+      },
+      {
+        "expectedStatusCodes": {
+          "typeName": "Int32[]",
+          "expression": {
+            "type": "Object",
+            "value": "[\u0022200\u0022,\u0022403\u0022]"
+          }
+        },
+        "url": {
+          "typeName": "System.Uri, System.Private.Uri",
+          "expression": {
+            "type": "Literal",
+            "value": "https://reqres.in/api/login"
+          }
+        },
+        "method": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "POST" }
+        },
+        "content": {
+          "typeName": "Object",
+          "expression": {
+            "type": "JavaScript",
+            "value": "\u0060{\r\n    \u0022email\u0022: \u0022eve.holt@reqres.in\u0022,\r\n    \u0022password\u0022: \u0022cityslicka\u0022\r\n}\u0060"
+          }
+        },
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "application/json" }
+        },
+        "authorization": null,
+        "disableAuthorizationHeaderValidation": {
+          "typeName": "Boolean",
+          "expression": { "type": "Literal", "value": "False" }
+        },
+        "requestHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": {} }
+        },
+        "parsedContent": {
+          "typeName": "Object",
+          "memoryReference": { "id": "23fbeddd07e4ac61" }
+        },
+        "result": null,
+        "id": "1bbd9cc738f986d8",
+        "nodeId": "Workflow1:5eec9a3f16e67f4e:1bbd9cc738f986d8",
+        "name": "FlowSendHttpRequest1",
+        "type": "Elsa.FlowSendHttpRequest",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 154.5625, "y": 161.51250457763672 },
+            "size": { "width": 231.35000610351562, "height": 81.51250457763672 }
+          },
+          "displayText": "Food Order Request",
+          "description": "Sends Request to Restaurant",
+          "showDescription": true
+        }
+      },
+      {
+        "statusCode": {
+          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+          "expression": { "type": "Literal", "value": "OK" }
+        },
+        "content": {
+          "typeName": "Object",
+          "expression": {
+            "type": "JavaScript",
+            "value": "\u0060{\r\n    Order on the way\r\n}\r\n\u0060"
+          }
+        },
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "text/json" }
+        },
+        "responseHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": {} }
+        },
+        "id": "b1ac02b7920fcf67",
+        "nodeId": "Workflow1:5eec9a3f16e67f4e:b1ac02b7920fcf67",
+        "name": "WriteHttpResponse2",
+        "type": "Elsa.WriteHttpResponse",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 1100, "y": -60 },
+            "size": { "width": 200, "height": 81.51250457763672 }
+          },
+          "showDescription": true,
+          "description": "Delivery Accepted",
+          "displayText": "Order on the way"
+        }
+      },
+      {
+        "statusCode": {
+          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+          "expression": { "type": "Literal", "value": "Forbidden" }
+        },
+        "content": null,
+        "contentType": null,
+        "responseHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": {} }
+        },
+        "id": "83ede29a684c7a78",
+        "nodeId": "Workflow1:5eec9a3f16e67f4e:83ede29a684c7a78",
+        "name": "WriteHttpResponse1",
+        "type": "Elsa.WriteHttpResponse",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 540, "y": 243.02500915527344 },
+            "size": { "width": 295.07501220703125, "height": 81.51250457763672 }
+          },
+          "displayText": "Order Not Accepted",
+          "showDescription": true,
+          "description": "Sends Not Accepted Status to the Client"
+        }
+      },
+      {
+        "items": {
+          "typeName": "Object[]",
+          "expression": {
+            "type": "JavaScript",
+            "value": "[\u00271\u0027,\u00272\u0027,\u00273\u0027,\u00274\u0027]"
+          }
+        },
+        "body": {
+          "type": "Elsa.Flowchart",
+          "version": 1,
+          "id": "98c786fe562812c",
+          "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5:98c786fe562812c",
+          "metadata": {},
+          "customProperties": {
+            "source": "FlowchartJsonConverter.cs:45",
+            "notFoundConnections": [],
+            "canStartWorkflow": false,
+            "runAsynchronously": false
+          },
+          "activities": [
+            {
+              "expectedStatusCodes": [
+                {
+                  "statusCode": 200,
+                  "activity": {
+                    "type": "Elsa.Flowchart",
+                    "version": 1,
+                    "id": "885c08563081469c",
+                    "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5:98c786fe562812c:d6680baf7704ddaf:885c08563081469c",
+                    "metadata": {},
+                    "customProperties": {
+                      "source": "FlowchartJsonConverter.cs:45",
+                      "notFoundConnections": [],
+                      "canStartWorkflow": false,
+                      "runAsynchronously": false
+                    },
+                    "activities": [
+                      {
+                        "id": "c7cb4eaab6e3705a",
+                        "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5:98c786fe562812c:d6680baf7704ddaf:885c08563081469c:c7cb4eaab6e3705a",
+                        "name": "Break1",
+                        "type": "Elsa.Break",
+                        "version": 1,
+                        "customProperties": {
+                          "canStartWorkflow": false,
+                          "runAsynchronously": false
+                        },
+                        "metadata": {
+                          "designer": {
+                            "position": {
+                              "x": -234.97503662109375,
+                              "y": -478.70001220703125
+                            },
+                            "size": {
+                              "width": 107.67500305175781,
+                              "height": 49.60000228881836
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "statusCode": {
+                          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+                          "expression": { "type": "Literal", "value": "OK" }
+                        },
+                        "content": {
+                          "typeName": "Object",
+                          "expression": {
+                            "type": "JavaScript",
+                            "value": "\u0060{\r\n    Order on the way ${getCurrentDeliveryPartner()}\r\n}\r\n{\r\n    Delivery Accepted\r\n}\r\n\u0060"
+                          }
+                        },
+                        "contentType": {
+                          "typeName": "String",
+                          "expression": {
+                            "type": "Literal",
+                            "value": "text/json"
+                          }
+                        },
+                        "responseHeaders": {
+                          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+                          "expression": { "type": "Literal", "value": {} }
+                        },
+                        "id": "adfba03b2fdadeb6",
+                        "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5:98c786fe562812c:d6680baf7704ddaf:885c08563081469c:adfba03b2fdadeb6",
+                        "name": "WriteHttpResponse1",
+                        "type": "Elsa.WriteHttpResponse",
+                        "version": 1,
+                        "customProperties": {
+                          "canStartWorkflow": false,
+                          "runAsynchronously": false
+                        },
+                        "metadata": {
+                          "designer": {
+                            "position": { "x": -600, "y": -478.70001220703125 },
+                            "size": {
+                              "width": 188.5124969482422,
+                              "height": 81.51250457763672
+                            }
+                          },
+                          "displayText": "Order on the way",
+                          "description": "Delivery Accepted",
+                          "showDescription": true
+                        }
+                      }
+                    ],
+                    "connections": [
+                      {
+                        "source": {
+                          "activity": "adfba03b2fdadeb6",
+                          "port": "Done"
+                        },
+                        "target": {
+                          "activity": "c7cb4eaab6e3705a",
+                          "port": "In"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "unmatchedStatusCode": null,
+              "failedToConnect": null,
+              "timeout": null,
+              "url": {
+                "typeName": "System.Uri, System.Private.Uri",
+                "expression": {
+                  "type": "Literal",
+                  "value": "https://reqres.in/api/login"
+                }
+              },
+              "method": {
+                "typeName": "String",
+                "expression": { "type": "Literal", "value": "POST" }
+              },
+              "content": {
+                "typeName": "Object",
+                "expression": {
+                  "type": "JavaScript",
+                  "value": "\u0060{\r\n    \u0022email\u0022: \u0022eve.holt@reqres.in\u0022,\r\n    \u0022password\u0022: \u0022cityslicka\u0022\r\n}\u0060"
+                }
+              },
+              "contentType": {
+                "typeName": "String",
+                "expression": { "type": "Literal", "value": "application/json" }
+              },
+              "authorization": null,
+              "disableAuthorizationHeaderValidation": null,
+              "requestHeaders": {
+                "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+                "expression": { "type": "Literal", "value": {} }
+              },
+              "parsedContent": null,
+              "result": null,
+              "id": "d6680baf7704ddaf",
+              "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5:98c786fe562812c:d6680baf7704ddaf",
+              "name": "SendHttpRequest1",
+              "type": "Elsa.SendHttpRequest",
+              "version": 1,
+              "customProperties": {
+                "canStartWorkflow": false,
+                "runAsynchronously": false
+              },
+              "metadata": {
+                "designer": {
+                  "position": { "x": -1340, "y": -1540 },
+                  "size": {
+                    "width": 416.5249938964844,
+                    "height": 119.5999984741211
+                  }
+                },
+                "displayText": "Delivery Request"
+              }
+            }
+          ],
+          "connections": []
+        },
+        "currentValue": {
+          "typeName": "Object",
+          "memoryReference": { "id": "6dac9d4382281a08" }
+        },
+        "id": "5dc1d9eda76d2e5",
+        "nodeId": "Workflow1:5eec9a3f16e67f4e:5dc1d9eda76d2e5",
+        "name": "ForEach1",
+        "type": "Elsa.ForEach",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 540, "y": 5.000001907348633 },
+            "size": { "width": 227.5, "height": 119.5999984741211 }
+          },
+          "displayText": "Delivery Request Loop"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "source": { "activity": "c28d6c08f7bb19a7", "port": "Done" },
+        "target": { "activity": "1bbd9cc738f986d8", "port": "In" }
+      },
+      {
+        "source": { "activity": "1bbd9cc738f986d8", "port": "403" },
+        "target": { "activity": "83ede29a684c7a78", "port": "In" }
+      },
+      {
+        "source": { "activity": "1bbd9cc738f986d8", "port": "200" },
+        "target": { "activity": "5dc1d9eda76d2e5", "port": "In" }
+      }
+    ]
+  }
+}

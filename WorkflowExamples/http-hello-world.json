@@ -1,0 +1,143 @@
+{
+  "id": "5c38df8132852415",
+  "definitionId": "3c714b537c410169",
+  "name": "HTTP Hello World",
+  "description": "This is a simple workflow that listens for HTTP requests and responds with a \u0022Hello World\u0022 message.",
+  "createdAt": "2024-01-15T10:24:38.7123211+00:00",
+  "version": 9,
+  "toolVersion": "3.0.0.0",
+  "variables": [],
+  "inputs": [],
+  "outputs": [],
+  "outcomes": [],
+  "customProperties": {},
+  "isReadonly": false,
+  "isLatest": true,
+  "isPublished": false,
+  "options": { "autoUpdateConsumingWorkflows": false },
+  "root": {
+    "type": "Elsa.Flowchart",
+    "version": 1,
+    "id": "b8438ba042b1e09",
+    "nodeId": "Workflow1:b8438ba042b1e09",
+    "metadata": {},
+    "customProperties": {
+      "source": "FlowchartJsonConverter.cs:45",
+      "notFoundConnections": [],
+      "canStartWorkflow": false,
+      "runAsynchronously": false
+    },
+    "activities": [
+      {
+        "text": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "Hello Bhailog!" }
+        },
+        "id": "96007c8cc0707db2",
+        "nodeId": "Workflow1:b8438ba042b1e09:96007c8cc0707db2",
+        "name": "WriteLine1",
+        "type": "Elsa.WriteLine",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 141.99655151367188, "y": 80 },
+            "size": { "width": 138.6999969482422, "height": 49.60000228881836 }
+          }
+        }
+      },
+      {
+        "path": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "/hello-bhailog" }
+        },
+        "supportedMethods": {
+          "typeName": "String[]",
+          "expression": { "type": "Object", "value": "[\u0022GET\u0022]" }
+        },
+        "authorize": {
+          "typeName": "Boolean",
+          "expression": { "type": "Literal", "value": false }
+        },
+        "policy": { "typeName": "String", "expression": { "type": "Literal" } },
+        "requestTimeout": null,
+        "requestSizeLimit": null,
+        "fileSizeLimit": null,
+        "allowedFileExtensions": null,
+        "blockedFileExtensions": null,
+        "allowedMimeTypes": null,
+        "exposeRequestTooLargeOutcome": false,
+        "exposeFileTooLargeOutcome": false,
+        "exposeInvalidFileExtensionOutcome": false,
+        "exposeInvalidFileMimeTypeOutcome": false,
+        "parsedContent": null,
+        "files": null,
+        "routeData": null,
+        "queryStringData": null,
+        "headers": null,
+        "result": null,
+        "id": "66f05b20effc9ab4",
+        "nodeId": "Workflow1:b8438ba042b1e09:66f05b20effc9ab4",
+        "name": "HttpEndpoint1",
+        "type": "Elsa.HttpEndpoint",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": true,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": -140, "y": 80 },
+            "size": { "width": 175.8000030517578, "height": 49.60000228881836 }
+          }
+        }
+      },
+      {
+        "statusCode": {
+          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+          "expression": { "type": "Literal", "value": "OK" }
+        },
+        "content": {
+          "typeName": "Object",
+          "expression": { "type": "Literal", "value": "Hello World!" }
+        },
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "text/plain" }
+        },
+        "responseHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": {} }
+        },
+        "id": "fe9fc435b86f1b9b",
+        "nodeId": "Workflow1:b8438ba042b1e09:fe9fc435b86f1b9b",
+        "name": "WriteHttpResponse1",
+        "type": "Elsa.WriteHttpResponse",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 389.0553894042969, "y": 80 },
+            "size": { "width": 183.0500030517578, "height": 49.60000228881836 }
+          }
+        }
+      }
+    ],
+    "connections": [
+      {
+        "source": { "activity": "66f05b20effc9ab4", "port": "Done" },
+        "target": { "activity": "96007c8cc0707db2", "port": "In" }
+      },
+      {
+        "source": { "activity": "96007c8cc0707db2", "port": "Done" },
+        "target": { "activity": "fe9fc435b86f1b9b", "port": "In" }
+      }
+    ]
+  }
+}

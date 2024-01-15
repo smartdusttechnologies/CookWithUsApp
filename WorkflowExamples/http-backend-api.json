@@ -1,0 +1,272 @@
+{
+  "id": "60dad8cf9cca10c0",
+  "definitionId": "1bafc5cef75c421595901db0131b7d18",
+  "name": "HTTP backend API",
+  "description": "A simple workflow that handles inbound HTTP requests and invokes a backend API. The response of that API is then sent back to the HTTP response.",
+  "createdAt": "2024-01-04T18:13:09.967161+00:00",
+  "version": 10,
+  "toolVersion": "3.0.0.0",
+  "variables": [
+    {
+      "id": "80fe4633185848e3bcdfcdb2ff17e9c3",
+      "name": "RouteData",
+      "typeName": "Microsoft.AspNetCore.Routing.RouteData, Microsoft.AspNetCore.Routing.Abstractions",
+      "isArray": false
+    },
+    {
+      "id": "fb788cc0fb6b4048966a12cbfaf8c590",
+      "name": "UserId",
+      "typeName": "String",
+      "isArray": false
+    },
+    {
+      "id": "c074419f9da546879eab1e1aa188bc6f",
+      "name": "UserData",
+      "typeName": "Object",
+      "isArray": false
+    }
+  ],
+  "inputs": [],
+  "outputs": [],
+  "outcomes": [],
+  "customProperties": {},
+  "isReadonly": false,
+  "isLatest": true,
+  "isPublished": false,
+  "options": { "autoUpdateConsumingWorkflows": false },
+  "root": {
+    "type": "Elsa.Flowchart",
+    "version": 1,
+    "id": "vAUhzcTZLUWswNAOPavLzA",
+    "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA",
+    "metadata": {},
+    "customProperties": {
+      "source": "FlowchartJsonConverter.cs:45",
+      "notFoundConnections": [],
+      "canStartWorkflow": false,
+      "runAsynchronously": false
+    },
+    "activities": [
+      {
+        "statusCode": {
+          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+          "expression": { "type": "Literal", "value": "NotFound" }
+        },
+        "content": null,
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "application/json" }
+        },
+        "responseHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": "{}" }
+        },
+        "id": "S9eOV3SCf0mCYk3WW_JMgg",
+        "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA:S9eOV3SCf0mCYk3WW_JMgg",
+        "name": "WriteHttpResponse2",
+        "type": "Elsa.WriteHttpResponse",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 640, "y": -125 },
+            "size": { "width": 302.546875, "height": 81.90625 }
+          },
+          "displayText": "HTTP Not Found",
+          "description": "Send a 404 status code back to the client",
+          "showDescription": true
+        }
+      },
+      {
+        "path": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "/users/{userId}" }
+        },
+        "supportedMethods": {
+          "typeName": "String[]",
+          "expression": { "type": "Object", "value": "[\u0022GET\u0022]" }
+        },
+        "authorize": {
+          "typeName": "Boolean",
+          "expression": { "type": "Literal", "value": "False" }
+        },
+        "policy": { "typeName": "String", "expression": { "type": "Literal" } },
+        "requestTimeout": null,
+        "requestSizeLimit": null,
+        "fileSizeLimit": null,
+        "allowedFileExtensions": null,
+        "blockedFileExtensions": null,
+        "allowedMimeTypes": null,
+        "exposeRequestTooLargeOutcome": false,
+        "exposeFileTooLargeOutcome": false,
+        "exposeInvalidFileExtensionOutcome": false,
+        "exposeInvalidFileMimeTypeOutcome": false,
+        "parsedContent": null,
+        "files": null,
+        "routeData": {
+          "typeName": "ObjectDictionary",
+          "memoryReference": { "id": "80fe4633185848e3bcdfcdb2ff17e9c3" }
+        },
+        "queryStringData": null,
+        "headers": null,
+        "result": null,
+        "id": "Syu79_D6R0ejXBu9zR_0Gg",
+        "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA:Syu79_D6R0ejXBu9zR_0Gg",
+        "name": "HttpEndpoint1",
+        "type": "Elsa.HttpEndpoint",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": true,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": -500, "y": -226 },
+            "size": { "width": 180.28125, "height": 81.90625 }
+          },
+          "showDescription": true,
+          "description": "GET /users/{userId}"
+        }
+      },
+      {
+        "statusCode": {
+          "typeName": "System.Net.HttpStatusCode, System.Net.Primitives",
+          "expression": { "type": "Literal", "value": "OK" }
+        },
+        "content": {
+          "typeName": "Object",
+          "expression": {
+            "type": "JavaScript",
+            "value": "{\r\n    getUserData();\r\n}"
+          }
+        },
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "application/json" }
+        },
+        "responseHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": "{}" }
+        },
+        "id": "EPNT_N1zq0GNnHTEBZrakw",
+        "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA:EPNT_N1zq0GNnHTEBZrakw",
+        "name": "WriteHttpResponse1",
+        "type": "Elsa.WriteHttpResponse",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 640, "y": -360 },
+            "size": { "width": 333.15625, "height": 81.90625 }
+          },
+          "displayText": "HTTP OK",
+          "description": "Write the user data back to the HTTP response",
+          "showDescription": true
+        }
+      },
+      {
+        "variable": {
+          "id": "fb788cc0fb6b4048966a12cbfaf8c590",
+          "name": "UserId",
+          "typeName": "String"
+        },
+        "value": null,
+        "id": "LfTEB_s7CUG8pNyHpOKR-w",
+        "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA:LfTEB_s7CUG8pNyHpOKR-w",
+        "name": "SetVariable1",
+        "type": "Elsa.SetVariable",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": -220, "y": -226 },
+            "size": { "width": 237.15625, "height": 81.90625 }
+          },
+          "displayText": "Set User ID",
+          "description": "Read the \u0022userId\u0022 route param",
+          "showDescription": true
+        }
+      },
+      {
+        "expectedStatusCodes": {
+          "typeName": "Int32[]",
+          "expression": {
+            "type": "Object",
+            "value": "[\u0022200\u0022,\u0022404\u0022]"
+          }
+        },
+        "url": {
+          "typeName": "System.Uri, System.Private.Uri",
+          "expression": {
+            "type": "Literal",
+            "value": "https://639b3492d5141501974eaf28.mockapi.io/nykaa"
+          }
+        },
+        "method": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "GET" }
+        },
+        "content": null,
+        "contentType": {
+          "typeName": "String",
+          "expression": { "type": "Literal", "value": "" }
+        },
+        "authorization": null,
+        "disableAuthorizationHeaderValidation": null,
+        "requestHeaders": {
+          "typeName": "Elsa.Http.Models.HttpHeaders, Elsa.Http",
+          "expression": { "type": "Literal", "value": "{}" }
+        },
+        "parsedContent": {
+          "typeName": "Object",
+          "memoryReference": { "id": "c074419f9da546879eab1e1aa188bc6f" }
+        },
+        "result": null,
+        "id": "VJgkxfCjMEuhaLi72zRxJw",
+        "nodeId": "Workflow1:vAUhzcTZLUWswNAOPavLzA:VJgkxfCjMEuhaLi72zRxJw",
+        "name": "FlowSendHttpRequest1",
+        "type": "Elsa.FlowSendHttpRequest",
+        "version": 1,
+        "customProperties": {
+          "canStartWorkflow": false,
+          "runAsynchronously": false
+        },
+        "metadata": {
+          "designer": {
+            "position": { "x": 162.578125, "y": -226 },
+            "size": { "width": 276.609375, "height": 81.90625 }
+          },
+          "showDescription": true,
+          "displayText": "Fetch user from backend API"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "source": { "activity": "Syu79_D6R0ejXBu9zR_0Gg", "port": "Done" },
+        "target": { "activity": "LfTEB_s7CUG8pNyHpOKR-w", "port": "In" }
+      },
+      {
+        "source": { "activity": "LfTEB_s7CUG8pNyHpOKR-w", "port": "Done" },
+        "target": { "activity": "VJgkxfCjMEuhaLi72zRxJw", "port": "In" }
+      },
+      {
+        "source": { "activity": "VJgkxfCjMEuhaLi72zRxJw", "port": "200" },
+        "target": { "activity": "EPNT_N1zq0GNnHTEBZrakw", "port": "In" }
+      },
+      {
+        "source": { "activity": "VJgkxfCjMEuhaLi72zRxJw", "port": "404" },
+        "target": { "activity": "S9eOV3SCf0mCYk3WW_JMgg", "port": "In" }
+      }
+    ]
+  }
+}
