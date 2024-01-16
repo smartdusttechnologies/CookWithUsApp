@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XuMEwIqIKCvTxWpdweKKEK7XjY3b3xlqFHb2VuGvwQ6bnVLwbep6/D/eVmD8UPbmifBt6UKqI1Gf1m+Cgq8DHg==",
+  "dgSpecHash": "Qf72oTW1tOId4IIqFQXCPuCmcEs1Poi5LywNY86fcFC/0sNbPEWTUBitFEd32jKLWZj4po83WC6fCCIjzX+1CA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\Smartdust\\BookingApp\\OnlineServiceBookingApp\\ServiceBooking\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\Smartdust\\ElsaPOC\\Cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
@@ -27,7 +27,10 @@
     "C:\\Users\\HP\\.nuget\\packages\\system.data.sqlclient\\4.8.5\\system.data.sqlclient.4.8.5.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+    "C:\\Users\\HP\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
   "logs": [
     {
