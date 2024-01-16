@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
-import emptyCart from "../../assets/Cart.webp";
+import EmptyCart from "./EmptyCart";
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -88,41 +88,7 @@ const Cart = () => {
       }}
     >
       {cart.length === 0 ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
-            height: "35rem",
-          }}
-        >
-          <Box
-            sx={{
-              margin: "auto",
-            }}
-          >
-            <img
-              src={emptyCart}
-              style={{
-                width: "50%",
-                marginBottom: "20px",
-              }}
-            />
-            <Typography
-              fontSize="20px"
-              color={!darkMode ? "text.secondary" : "white"}
-              sx={{ flex: 1 }}
-            >
-              Your cart is empty
-            </Typography>
-            <Typography
-              color={!darkMode ? "text.secondary" : "white"}
-              sx={{ flex: 1 }}
-            >
-              You can go to home page to view more restaurants
-            </Typography>
-          </Box>
-        </Box>
+        <EmptyCart />
       ) : (
         <>
           <Grid

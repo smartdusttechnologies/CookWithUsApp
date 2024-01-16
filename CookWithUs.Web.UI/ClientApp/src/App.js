@@ -35,7 +35,9 @@ function App() {
         <ThreedotMenu />
         <Box sx={{ display: "flex" }}>
           <LeftSideNavigation />
-          <AllRoutes />
+          <Box sx={{ width: "100%" }}>
+            <AllRoutes />
+          </Box>
           <RightSideNavigation />
         </Box>
         <ShowMoreMenu />

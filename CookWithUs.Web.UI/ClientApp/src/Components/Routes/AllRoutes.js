@@ -14,6 +14,7 @@ import AdminDashboard from "../../Pages/AdminDashboard/AdminDashboard";
 import ChefDashboard from "../../Pages/ChefDashboard/ChefDashboard";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
+import RestaurantDetails from "../../Pages/Products/RestaurantDetails";
 
 const AllRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const AllRoutes = () => {
       <Route path="/registerasrider" element={<RegisterAsRider />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/chefdashboard" element={<ChefDashboard />} />
+      <Route path="/restaurant/chicagopizza/id" element={<RestaurantDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>

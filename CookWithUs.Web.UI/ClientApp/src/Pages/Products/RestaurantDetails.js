@@ -1,26 +1,70 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 const data = [
   {
     id: 1,
     src: "https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ",
-    title: "Chicago Pizza",
+    title: "Don Diablo @ Tomorrowland Main Stage 2019 | Official…",
     channel: "Don Diablo",
     views: "396k views",
     createdAt: "a week ago",
-    address: "Danapur",
+    price: 350,
+  },
+  {
+    id: 2,
+    src: "https://i.ytimg.com/vi/_Uu12zY01ts/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpX6Jan2rxrCAZxJYDXppTP4MoQA",
+    title: "Queen - Greatest Hits",
+    channel: "Queen Official",
+    views: "40M views",
+    createdAt: "3 years ago",
+    price: 350,
+  },
+  {
+    id: 3,
+    src: "https://i.ytimg.com/vi/kkLk2XWMBf8/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLB4GZTFu1Ju2EPPPXnhMZtFVvYBaw",
+    title: "Calvin Harris, Sam Smith - Promises (Official Video)",
+    channel: "Calvin Harris",
+    views: "130M views",
+    createdAt: "10 months ago",
+    price: 350,
+  },
+  {
+    id: 4,
+    src: "https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ",
+    title: "Don Diablo @ Tomorrowland Main Stage 2019 | Official…",
+    channel: "Don Diablo",
+    views: "396k views",
+    createdAt: "a week ago",
     price: 350,
   },
 ];
 
-const Home = () => {
-  const navigate = useNavigate();
+const RestaurantDetails = () => {
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
+
+  const handleAddToCart = (item) => {
+    let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    const itemInCart = cartData.find((cartItem) => cartItem.id === item.id);
+
+    if (itemInCart) {
+      toast.warn("Item is already in the cart.", {
+        position: "bottom-center",
+        theme: "dark",
+      });
+    } else {
+      // If the item is not in the cart, add it with a quantity of 1
+      cartData = [...cartData, { ...item, quantity: 1 }];
+      toast.success("Item Added to cart", {
+        position: "bottom-center",
+        theme: "dark",
+      });
+    }
+    localStorage.setItem("cart", JSON.stringify(cartData));
+  };
 
   return (
     <div
@@ -33,10 +77,21 @@ const Home = () => {
         sx={{
           width: "75%",
           margin: "auto",
-          mt: "30px",
         }}
       >
-        <Typography variant="h5">Top restaurant chains in Patna</Typography>
+        <Box
+          sx={{ mt: "50px", display: "flex", justifyContent: "space-between" }}
+        >
+          <Box>
+            <Typography>Chicago Pizza</Typography>
+            <Typography>Pizzas</Typography>
+            <Typography>Danapur 5.0 km</Typography>
+          </Box>
+          <Box>
+            <Typography>Opens at: 10 A.M</Typography>
+            <Typography>Closes at 9 P.M</Typography>
+          </Box>
+        </Box>
         <Grid
           container
           sx={{
@@ -78,7 +133,6 @@ const Home = () => {
                     my: 5,
                   },
                 }}
-                onClick={() => navigate("/restaurant/chicagopizza/id")}
               >
                 <img
                   style={{ width: 210, height: 118, borderRadius: "10px" }}
@@ -92,74 +146,37 @@ const Home = () => {
                   <Typography gutterBottom variant="body2" noWrap>
                     {item.title}
                   </Typography>
+                  <Typography display="block" variant="caption">
+                    {`₹ ${item.price}`}
+                  </Typography>
                   <Typography
                     variant="caption"
                     color={!darkMode ? "text.secondary" : "white"}
                   >
-                    {item.address}
+                    {`${item.views} • ${item.createdAt}`}
                   </Typography>
                 </Box>
                 <Box sx={{ pt: 0.5 }}>
                   {/* <Skeleton /> */}
                   {/* <Skeleton width="60%" /> */}
                 </Box>
+
+                <Box sx={{ pr: 2, ml: 1 }}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    Add to Cart
+                  </Button>
+                </Box>
               </Box>
             ))}
         </Grid>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: "30px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          <Typography color="text.secondary" sx={{ fontSize: "21px" }}>
-            Cook with us as a Chef
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            endIcon={<ArrowForwardIcon />}
-            onClick={() => navigate("/registeraschef")}
-          >
-            Get Started
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 2,
-          }}
-        >
-          <Typography color="text.secondary" sx={{ fontSize: "21px" }}>
-            Register as a Delivery Partner
-          </Typography>
-          <Button
-            variant="contained"
-            color="error"
-            endIcon={<ArrowForwardIcon />}
-            onClick={() => navigate("/registerasrider")}
-          >
-            Get Started
-          </Button>
-        </Box>
-      </Box>
+      <ToastContainer />
     </div>
   );
 };
 
-export default Home;
+export default RestaurantDetails;
