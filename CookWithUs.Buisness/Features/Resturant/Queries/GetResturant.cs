@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CookWithUs.Buisness.Models;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,7 @@ namespace ServcieBooking.Buisness.Features.Resturant
 {
     public static class GetResturant
     {
-        public class Command : IRequest<object>
+        public class Command : IRequest<List<Restaurant>>
         {
         }
         public class Authorization : IAuthorizationRule<Command>
@@ -28,18 +29,18 @@ namespace ServcieBooking.Buisness.Features.Resturant
                 return Task.FromException(new UnauthorizedAccessException("You are Unauthorized"));
             }
         }
-        public class Handler : IRequestHandler<Command, object>
+        public class Handler : IRequestHandler<Command, List<Restaurant>>
         {
-            private readonly IResturantRepository _returant;
+            private readonly IResturantRepository _restaurant;
 
-            public Handler(IResturantRepository resturant)
+            public Handler(IResturantRepository restaurant)
             {
-                _returant = resturant;
+                _restaurant = restaurant;
             }
 
-            Task<object> IRequestHandler<Command, object>.Handle(Command request, CancellationToken cancellationToken)
+            Task<List<Restaurant>> IRequestHandler<Command, List<Restaurant>>.Handle(Command request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_returant.Get());
+                return Task.FromResult(_restaurant.Get());
             }
         }
     }

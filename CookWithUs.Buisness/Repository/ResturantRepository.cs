@@ -6,38 +6,30 @@ using ServcieBooking.Buisness.Repository.Interface;
 using Newtonsoft.Json;
 using ServiceBooking.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
+using CookWithUs.Buisness.Models;
 
 namespace ServcieBooking.Buisness.Repository
 {
     public class ResturantRepository : IResturantRepository
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConnectionFactory _connectionFactory;
 
-        public ResturantRepository(IHostingEnvironment hostingEnvironment)
+        public ResturantRepository(IHostingEnvironment hostingEnvironment, IConnectionFactory connectionFactory)
         {
             _hostingEnvironment = hostingEnvironment;
+            _connectionFactory = connectionFactory;
         }
-        public object Get()
+        public List<Restaurant> Get()
         {
-            try
-            {
-                // Specify the path to the JSON file in wwwroot
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "resturant.json");
+            using IDbConnection db = _connectionFactory.GetConnection;
 
-                // Read the JSON file
-                var jsonContent = System.IO.File.ReadAllText(filePath);
+            var query = @"
+                SELECT ID, Name, Address, CONVERT(VARCHAR(5), OpeningTime, 108) AS OpeningTime
+                FROM Restaurant";
 
-                // Deserialize JSON to C# object
-                return JsonConvert.DeserializeObject<object>(jsonContent);
+            return db.Query<Restaurant>(query).ToList();
 
-                // Use 'myObject' as needed
-                //return myObject;
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-                return "Error";
-            }
         }
         public object Get(string resturantId)
         {

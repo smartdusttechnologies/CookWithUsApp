@@ -31,16 +31,16 @@ namespace ServcieBooking.Buisness.Features.Resturant
         }
         public class Handler : IRequestHandler<Command, object>
         {
-            private readonly IResturantRepository _returant;
+            private readonly IResturantRepository _restaurant;
 
             public Handler(IResturantRepository resturant)
             {
-                _returant = resturant;
+                _restaurant = resturant;
             }
 
             Task<object> IRequestHandler<Command, object>.Handle(Command request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_returant.Get(request.resturantId));
+                return Task.FromResult(_restaurant.Get(request.resturantId));
             }
         }
     }

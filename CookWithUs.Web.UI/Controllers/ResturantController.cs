@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CookWithUs.Buisness.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ServcieBooking.Buisness.Features.Resturant;
 
@@ -16,7 +17,7 @@ namespace ServiceBooking.Web.UI.Controllers
         }
         [Route("Get")]
         [HttpGet]
-        public object Get()
+        public Task<List<Restaurant>> Get()
         {
             var resp = _mediator.Send(new GetResturant.Command());
             return resp;

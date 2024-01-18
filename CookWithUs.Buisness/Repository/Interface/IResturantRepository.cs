@@ -1,8 +1,10 @@
-﻿namespace ServiceBooking.Buisness.Repository.Interface
+﻿using CookWithUs.Buisness.Models;
+
+namespace ServiceBooking.Buisness.Repository.Interface
 {
     public interface IResturantRepository
     {
-        object Get();
+        List<Restaurant> Get();
         object Get(string resturantId);
     }
 }

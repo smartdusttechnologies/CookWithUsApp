@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Grid, Skeleton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const data = [
   {
@@ -18,9 +19,31 @@ const data = [
 ];
 
 const Home = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
+
+  const getRestaurants = () => {
+    setLoading(true);
+    axios
+      .get("/resturant/Get")
+      .then((response) => {
+        console.log(response.data);
+        setRestaurants(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
 
   return (
     <div
@@ -60,51 +83,56 @@ const Home = () => {
             },
           }}
         >
-          {data.length > 0 &&
-            data.map((item, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: 210,
-                  marginRight: 0.5,
-                  my: 5,
-                  cursor: "pointer",
-                  transition: "transform 0.3s",
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                  },
-                  "@media (max-width: 500px)": {
-                    margin: "auto",
+          {loading
+            ? [1,2,3,4].map(() => (
+                <Box>
+                  <Skeleton variant="rectangular" width={210} height={118} />
+                  <Box sx={{ pt: 0.5 }}>
+                    <Skeleton />
+                    <Skeleton width="60%" />
+                  </Box>
+                </Box>
+              ))
+            : restaurants.map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    width: 210,
+                    marginRight: 0.5,
                     my: 5,
-                  },
-                }}
-                onClick={() => navigate("/restaurant/chicagopizza/id")}
-              >
-                <img
-                  style={{ width: 210, height: 118, borderRadius: "10px" }}
-                  alt={item.title}
-                  src={item.src}
-                />
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                    },
+                    "@media (max-width: 500px)": {
+                      margin: "auto",
+                      my: 5,
+                    },
+                  }}
+                  onClick={() => navigate(`/restaurant/${item.id}`)}
+                >
+                  <Box>
+                    {/* <img
+                      style={{ width: 210, height: 118, borderRadius: "10px" }}
+                      alt={item.title}
+                      src={item.src}
+                    /> */}
 
-                {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
-
-                <Box sx={{ pr: 2, ml: 1 }}>
-                  <Typography gutterBottom variant="body2" noWrap>
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color={!darkMode ? "text.secondary" : "white"}
-                  >
-                    {item.address}
-                  </Typography>
+                    <Box sx={{ pr: 2, ml: 1 }}>
+                      <Typography gutterBottom variant="body2" noWrap>
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        color={!darkMode ? "text.secondary" : "white"}
+                      >
+                        {item.address}
+                      </Typography>
+                    </Box>
+                  </Box>
                 </Box>
-                <Box sx={{ pt: 0.5 }}>
-                  {/* <Skeleton /> */}
-                  {/* <Skeleton width="60%" /> */}
-                </Box>
-              </Box>
-            ))}
+              ))}
         </Grid>
       </Box>
       <Box

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const data = [
   {
@@ -43,8 +44,13 @@ const data = [
 ];
 
 const RestaurantDetails = () => {
+  const { id } = useParams();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
+
+  useEffect(() => {
+    console.log(id, "id");
+  }, []);
 
   const handleAddToCart = (item) => {
     let cartData = JSON.parse(localStorage.getItem("cart")) || [];

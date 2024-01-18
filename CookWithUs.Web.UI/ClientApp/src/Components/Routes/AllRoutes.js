@@ -31,7 +31,7 @@ const AllRoutes = () => {
       <Route path="/registerasrider" element={<RegisterAsRider />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/chefdashboard" element={<ChefDashboard />} />
-      <Route path="/restaurant/chicagopizza/id" element={<RestaurantDetails />} />
+      <Route path="/restaurant/:id" element={<RestaurantDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>
