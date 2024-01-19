@@ -3,20 +3,7 @@ import { Box, Button, Grid, Skeleton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector } from "react-redux";
-import axios from "axios";
-
-const data = [
-  {
-    id: 1,
-    src: "https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ",
-    title: "Chicago Pizza",
-    channel: "Don Diablo",
-    views: "396k views",
-    createdAt: "a week ago",
-    address: "Danapur",
-    price: 350,
-  },
-];
+import { getRestaurants } from "../../services/restaurantServices";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -26,23 +13,20 @@ const Home = () => {
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
 
-  const getRestaurants = () => {
+  const handleGetRestaurants = () => {
     setLoading(true);
-    axios
-      .get("/resturant/Get")
+    getRestaurants()
       .then((response) => {
-        console.log(response.data);
         setRestaurants(response.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    getRestaurants();
+    handleGetRestaurants();
   }, []);
 
   return (
