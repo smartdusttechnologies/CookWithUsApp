@@ -17,6 +17,7 @@ const Home = () => {
     setLoading(true);
     getRestaurants()
       .then((response) => {
+        console.log(response.data);
         setRestaurants(response.data);
         setLoading(false);
       })
@@ -68,7 +69,7 @@ const Home = () => {
           }}
         >
           {loading
-            ? [1,2,3,4].map(() => (
+            ? [1, 2, 3, 4].map(() => (
                 <Box>
                   <Skeleton variant="rectangular" width={210} height={118} />
                   <Box sx={{ pt: 0.5 }}>
@@ -97,11 +98,11 @@ const Home = () => {
                   onClick={() => navigate(`/restaurant/${item.id}`)}
                 >
                   <Box>
-                    {/* <img
-                      style={{ width: 210, height: 118, borderRadius: "10px" }}
-                      alt={item.title}
-                      src={item.src}
-                    /> */}
+                    <img
+                      style={{ width: 160, height: 110, borderRadius: "10px" }}
+                      alt={item.name}
+                      src={item.imageUrl}
+                    />
 
                     <Box sx={{ pr: 2, ml: 1 }}>
                       <Typography gutterBottom variant="body2" noWrap>

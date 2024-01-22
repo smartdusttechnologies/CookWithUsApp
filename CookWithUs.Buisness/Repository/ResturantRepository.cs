@@ -3,7 +3,6 @@ using System.Data;
 using ServcieBooking.Buisness.Models;
 using ServcieBooking.Buisness.Infrastructure;
 using ServcieBooking.Buisness.Repository.Interface;
-using Newtonsoft.Json;
 using ServiceBooking.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using CookWithUs.Buisness.Models;
@@ -25,33 +24,51 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT ID, Name, Address, CONVERT(VARCHAR(5), OpeningTime, 108) AS OpeningTime
-                FROM Restaurant";
+                SELECT R.ID, R.Name, R.Address, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime, D.DocUrl AS ImageUrl
+                FROM Restaurant R
+                LEFT JOIN Document D ON R.ImageID = D.ID";
 
             return db.Query<Restaurant>(query).ToList();
 
         }
-        public object Get(string resturantId)
+        public RestaurantDetails Get(int restaurantId)
         {
-            try
-            {
-                // Specify the path to the JSON file in wwwroot
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "resturantDetails.json");
+            using IDbConnection db = _connectionFactory.GetConnection;
 
-                // Read the JSON file
-                var jsonContent = System.IO.File.ReadAllText(filePath);
+            var query = @"
+                SELECT R.ID, R.Name, R.Address, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+                       M.ID, M.Name, M.Type, M.Price, M.Quantity, D.DocUrl AS ImageUrl
+                FROM Restaurant R
+                LEFT JOIN Menu M ON R.ID = M.RestaurantID
+                LEFT JOIN Document D ON R.ImageID = D.ID
+                WHERE R.ID = @restaurantId";
 
-                // Deserialize JSON to C# object
-                var myObject = JsonConvert.DeserializeObject<object>(jsonContent);
+            var parameters = new { restaurantId };
 
-                // Use 'myObject' as needed
-                return myObject;
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-                return "Error";
-            }
+            var restaurantDetailsDictionary = new Dictionary<int, RestaurantDetails>();
+            var result = db.Query<RestaurantDetails, RestaurantMenu, RestaurantDetails>(
+                query,
+                (restaurant, menu) =>
+                {
+                    if (!restaurantDetailsDictionary.TryGetValue(restaurant.ID, out var restaurantEntry))
+                    {
+                        restaurantEntry = restaurant;
+                        restaurantEntry.restaurantMenus = new List<RestaurantMenu>();
+                        restaurantDetailsDictionary.Add(restaurantEntry.ID, restaurantEntry);
+                    }
+
+                    if (menu != null)
+                    {
+                        restaurantEntry.restaurantMenus.Add(menu);
+                    }
+
+                    return restaurantEntry;
+                },
+                parameters,
+                splitOn: "ID"
+            );
+
+            return result.FirstOrDefault();
         }
     }
 }

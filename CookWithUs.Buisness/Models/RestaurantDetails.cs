@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CookWithUs.Buisness.Models
 {
-    public class Restaurant
+    public class RestaurantDetails
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime OpeningTime { get; set; }
-        public string ImageUrl { get; set; }
+        public List<RestaurantMenu> restaurantMenus { get; set; }
     }
 }
