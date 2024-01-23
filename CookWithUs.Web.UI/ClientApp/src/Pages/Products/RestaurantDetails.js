@@ -19,13 +19,10 @@ const RestaurantDetails = () => {
     setLoading(true);
     getRestaurantDetails(id)
       .then((response) => {
-        setRestaurant(response.data);
-        setMenu(response.data.restaurantMenus);
+        setRestaurant(response?.data);
+        setMenu(response?.data?.restaurantMenus);
         setLoading(false);
-        console.log(
-          response.data.restaurantMenus,
-          "restaurant.restaurantMenus"
-        );
+        console.log(response.data);
       })
       .catch((error) => {
         setLoading(false);
@@ -136,7 +133,7 @@ const RestaurantDetails = () => {
                       src={item.imageUrl}
                     />
                   ) : (
-                    <Box style={{ width: 160, height: 110 }}></Box>
+                    <Box style={{ width: 160, height: 110 }}>No Images Found</Box>
                   )}
 
                   <Box sx={{ pr: 2, ml: 1 }}>
@@ -165,7 +162,9 @@ const RestaurantDetails = () => {
           </Grid>
         </Box>
       ) : (
-        <Box sx={{mt:3}}><CircularLoading /></Box>
+        <Box sx={{ mt: 3 }}>
+          <CircularLoading />
+        </Box>
       )}
       <ToastContainer />
     </div>

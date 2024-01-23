@@ -144,7 +144,7 @@ const Cart = () => {
                       src={item.imageUrl}
                     />
                   ) : (
-                    <Box style={{ width: 160, height: 110 }}></Box>
+                    <Box style={{ width: 160, height: 110 }}>No Images Found</Box>
                   )}
 
                   <Box sx={{ pr: 2, ml: 1 }}>
