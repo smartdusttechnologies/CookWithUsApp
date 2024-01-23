@@ -13,5 +13,7 @@ namespace CookWithUs.Buisness.Models
         public string Address { get; set; }
         public DateTime OpeningTime { get; set; }
         public List<RestaurantMenu> restaurantMenus { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 }

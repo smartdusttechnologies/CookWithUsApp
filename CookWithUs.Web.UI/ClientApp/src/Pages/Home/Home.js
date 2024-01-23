@@ -98,11 +98,24 @@ const Home = () => {
                   onClick={() => navigate(`/restaurant/${item.id}`)}
                 >
                   <Box>
-                    <img
-                      style={{ width: 160, height: 110, borderRadius: "10px" }}
-                      alt={item.name}
-                      src={item.imageUrl}
-                    />
+                    {item.imageUrl ? (
+                      <img
+                        style={{
+                          width: 160,
+                          height: 110,
+                          borderRadius: "10px",
+                        }}
+                        alt={item.name}
+                        src={item.imageUrl}
+                      />
+                    ) : (
+                      <Box
+                        style={{
+                          width: 160,
+                          height: 110,
+                        }}
+                      ></Box>
+                    )}
 
                     <Box sx={{ pr: 2, ml: 1 }}>
                       <Typography gutterBottom variant="body2" noWrap>

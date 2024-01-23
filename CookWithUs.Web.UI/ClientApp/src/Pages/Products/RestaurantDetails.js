@@ -6,45 +6,6 @@ import { useParams } from "react-router-dom";
 import { getRestaurantDetails } from "../../services/restaurantServices";
 import CircularLoading from "../../Components/LoadingComponent/CircularLoading";
 
-const data = [
-  {
-    id: 1,
-    src: "https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ",
-    title: "Don Diablo @ Tomorrowland Main Stage 2019 | Official…",
-    channel: "Don Diablo",
-    views: "396k views",
-    createdAt: "a week ago",
-    price: 350,
-  },
-  {
-    id: 2,
-    src: "https://i.ytimg.com/vi/_Uu12zY01ts/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpX6Jan2rxrCAZxJYDXppTP4MoQA",
-    title: "Queen - Greatest Hits",
-    channel: "Queen Official",
-    views: "40M views",
-    createdAt: "3 years ago",
-    price: 350,
-  },
-  {
-    id: 3,
-    src: "https://i.ytimg.com/vi/kkLk2XWMBf8/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLB4GZTFu1Ju2EPPPXnhMZtFVvYBaw",
-    title: "Calvin Harris, Sam Smith - Promises (Official Video)",
-    channel: "Calvin Harris",
-    views: "130M views",
-    createdAt: "10 months ago",
-    price: 350,
-  },
-  {
-    id: 4,
-    src: "https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ",
-    title: "Don Diablo @ Tomorrowland Main Stage 2019 | Official…",
-    channel: "Don Diablo",
-    views: "396k views",
-    createdAt: "a week ago",
-    price: 350,
-  },
-];
-
 const RestaurantDetails = () => {
   const [loading, setLoading] = useState(false);
   const [restaurant, setRestaurant] = useState({});
@@ -168,13 +129,15 @@ const RestaurantDetails = () => {
                     },
                   }}
                 >
-                  <img
-                    style={{ width: 160, height: 110, borderRadius: "10px" }}
-                    alt={item.name}
-                    src={item.imageUrl}
-                  />
-
-                  {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
+                  {item.imageUrl ? (
+                    <img
+                      style={{ width: 160, height: 110, borderRadius: "10px" }}
+                      alt={item.name}
+                      src={item.imageUrl}
+                    />
+                  ) : (
+                    <Box style={{ width: 160, height: 110 }}></Box>
+                  )}
 
                   <Box sx={{ pr: 2, ml: 1 }}>
                     <Typography gutterBottom variant="body2" noWrap>
@@ -186,10 +149,6 @@ const RestaurantDetails = () => {
                     <Typography display="block" variant="caption">
                       {`Quantity: ${item.quantity} Plates`}
                     </Typography>
-                  </Box>
-                  <Box sx={{ pt: 0.5 }}>
-                    {/* <Skeleton /> */}
-                    {/* <Skeleton width="60%" /> */}
                   </Box>
 
                   <Box sx={{ pr: 2, ml: 1 }}>
@@ -206,7 +165,7 @@ const RestaurantDetails = () => {
           </Grid>
         </Box>
       ) : (
-        <CircularLoading />
+        <Box sx={{mt:3}}><CircularLoading /></Box>
       )}
       <ToastContainer />
     </div>

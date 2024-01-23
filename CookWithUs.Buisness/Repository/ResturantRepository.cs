@@ -24,7 +24,7 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT R.ID, R.Name, R.Address, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime, D.DocUrl AS ImageUrl
+                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime, D.DocUrl AS ImageUrl
                 FROM Restaurant R
                 LEFT JOIN Document D ON R.ImageID = D.ID";
 
@@ -36,11 +36,11 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT R.ID, R.Name, R.Address, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
                        M.ID, M.Name, M.Type, M.Price, M.Quantity, D.DocUrl AS ImageUrl
                 FROM Restaurant R
                 LEFT JOIN Menu M ON R.ID = M.RestaurantID
-                LEFT JOIN Document D ON R.ImageID = D.ID
+                LEFT JOIN Document D ON M.ImageID = D.ID
                 WHERE R.ID = @restaurantId";
 
             var parameters = new { restaurantId };

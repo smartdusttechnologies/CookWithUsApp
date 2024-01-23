@@ -137,35 +137,23 @@ const Cart = () => {
                     },
                   }}
                 >
-                  <img
-                    style={{
-                      width: "210px",
-                      height: 118,
-                      borderRadius: "10px",
-                    }}
-                    alt={item.title}
-                    src={item.src}
-                  />
-
-                  {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
+                  {item.imageUrl ? (
+                    <img
+                      style={{ width: 160, height: 110, borderRadius: "10px" }}
+                      alt={item.name}
+                      src={item.imageUrl}
+                    />
+                  ) : (
+                    <Box style={{ width: 160, height: 110 }}></Box>
+                  )}
 
                   <Box sx={{ pr: 2, ml: 1 }}>
                     <Typography gutterBottom variant="body2" noWrap>
-                      {item.title}
+                      {item.name}
                     </Typography>
                     <Typography display="block" variant="caption">
                       {`₹ ${item.price}`}
                     </Typography>
-                    <Typography
-                      variant="caption"
-                      color={!darkMode ? "text.secondary" : "white"}
-                    >
-                      {`${item.views} • ${item.createdAt}`}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ pt: 0.5 }}>
-                    {/* <Skeleton /> */}
-                    {/* <Skeleton width="60%" /> */}
                   </Box>
 
                   <Box sx={{ pr: 2, ml: 1 }}>
