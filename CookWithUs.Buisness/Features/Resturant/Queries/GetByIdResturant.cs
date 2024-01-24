@@ -14,6 +14,11 @@ namespace ServcieBooking.Buisness.Features.Resturant
         public class Command : IRequest<RestaurantDetails>
         {
             public int resturantId { get; set; }
+
+            public Command(int id)
+            {
+                resturantId = id;
+            }
         }
         public class Authorization : IAuthorizationRule<Command>
         {

@@ -21,19 +21,19 @@ namespace ServiceBooking.Web.UI.Controllers
         }
         [Route("Get")]
         [HttpGet]
-        public Task<List<Restaurant>> Get()
+        public IActionResult Get(decimal latitude, decimal longitude)
         {
-            var response = _mediator.Send(new GetResturant.Command());
-            return response;
+            var response = _mediator.Send(new GetResturant.Command(latitude, longitude)).Result;
+            return Ok(response);
         }
 
         [Route("GetById/{resturantId}")]
         [HttpGet]
-        public Task<RestaurantDetails> Get(int resturantId)
+        public IActionResult Get(int resturantId)
         {
-            //return _mediator.Send(new GetByIdResturant.Command().resturantId = resturantId);
-            var response = Task.FromResult(_restaurant.Get(resturantId));
-            return response;
+            var response = _mediator.Send(new GetByIdResturant.Command(resturantId)).Result;
+            //var response = Task.FromResult(_restaurant.Get(resturantId));
+            return Ok(response);
         }
     }
 }

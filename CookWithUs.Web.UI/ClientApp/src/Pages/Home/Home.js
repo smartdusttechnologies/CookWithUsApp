@@ -8,49 +8,17 @@ import useLocation from "../../hooks/useLocation";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { location } = useLocation();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
-  const { location } = useLocation();
 
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth radius in kilometers
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    const distance = R * c; // Distance in kilometers
-    return distance;
-  };
-  const nearbyRestaurants = restaurants.filter((restaurant) => {
-    const distance = calculateDistance(
-      location?.latitude,
-      location?.longitude,
-      restaurant?.latitude,
-      restaurant?.longitude
-    );
-    console.log(location?.latitude,
-      location?.longitude,
-      restaurant?.latitude,
-      restaurant?.longitude)
-    console.log(distance, "km");
-    // You can adjust the distance threshold based on your preference
-    return distance < 10; // Only show restaurants within 10 kilometers
-  });
-
-  const handleGetRestaurants = () => {
+  const handleGetRestaurants = (latitude, longitude) => {
     setLoading(true);
-    getRestaurants()
+    console.log(latitude, longitude, "(latitude, longitude)");
+    getRestaurants(latitude, longitude)
       .then((response) => {
         console.log(response.data);
         setRestaurants(response.data);
@@ -62,7 +30,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    handleGetRestaurants();
+    navigator.geolocation.getCurrentPosition((position) => {
+      handleGetRestaurants(
+        position?.coords?.latitude,
+        position?.coords?.longitude
+      );
+    });
   }, []);
 
   return (
@@ -103,7 +76,7 @@ const Home = () => {
             },
           }}
         >
-          {loading
+          {isLoading
             ? [1, 2, 3, 4].map(() => (
                 <Box>
                   <Skeleton variant="rectangular" width={210} height={118} />
@@ -113,7 +86,7 @@ const Home = () => {
                   </Box>
                 </Box>
               ))
-            : nearbyRestaurants.map((item, index) => (
+            : restaurants.map((item, index) => (
                 <Box
                   key={index}
                   sx={{

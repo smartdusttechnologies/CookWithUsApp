@@ -13,6 +13,13 @@ namespace ServcieBooking.Buisness.Features.Resturant
     {
         public class Command : IRequest<List<Restaurant>>
         {
+            public decimal latitude { get; set; }
+            public decimal longitude { get; set; }
+            public Command(decimal lat, decimal lon)
+            {
+                latitude = lat;
+                longitude = lon;
+            }
         }
         public class Authorization : IAuthorizationRule<Command>
         {
@@ -40,8 +47,49 @@ namespace ServcieBooking.Buisness.Features.Resturant
 
             Task<List<Restaurant>> IRequestHandler<Command, List<Restaurant>>.Handle(Command request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_restaurant.Get());
+                var userLatitude = request.latitude;
+                var userLongitude = request.longitude;
+                var maxDistance = 10; // Adjust based on your preference
+
+                var allRestaurants = _restaurant.Get();
+
+                var nearbyRestaurants = allRestaurants
+                    .Where(restaurant =>
+                    {
+                        var distance = CalculateDistance(
+                            userLatitude, userLongitude,
+                            restaurant.Latitude, restaurant.Longitude
+                        );
+
+                        // You can adjust the maxDistance based on your preference
+                        return distance < maxDistance;
+                    })
+                    .ToList();
+
+                return Task.FromResult(nearbyRestaurants);
             }
+            private decimal CalculateDistance(decimal lat1, decimal lon1, decimal lat2, decimal lon2)
+            {
+                double R = 6371; // Earth radius in kilometers
+                double dLat = ToRadians((double)(lat2 - lat1));
+                double dLon = ToRadians((double)(lon2 - lon1));
+
+                double a =
+                    Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                    Math.Cos(ToRadians((double)lat1)) * Math.Cos(ToRadians((double)lat2)) *
+                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+                double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+                double distance = R * c; // Distance in kilometers
+                return (decimal)distance;
+            }
+
+            private double ToRadians(double angleInDegrees)
+            {
+                return Math.PI * angleInDegrees / 180.0;
+            }
+
         }
     }
     
