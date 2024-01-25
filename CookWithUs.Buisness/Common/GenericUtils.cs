@@ -1,4 +1,4 @@
-﻿namespace SmartdustApp.Business.Common
+﻿namespace CookWithUs.Business.Common
 {
     /// <summary>
     /// These are common utility methods used across projects at class level. 

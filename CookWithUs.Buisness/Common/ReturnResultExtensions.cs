@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
     /// <summary>
     /// this contains all the extenstion methods of requested results return type.

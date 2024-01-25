@@ -1,4 +1,4 @@
-﻿namespace SmartdustApp.Business.Common
+﻿namespace CookWithUs.Business.Common
 {
     public class ValidationMessage
     {

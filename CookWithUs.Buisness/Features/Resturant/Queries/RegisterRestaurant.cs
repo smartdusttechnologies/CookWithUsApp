@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using ServcieBooking.Buisness.Interface;
 using ServiceBooking.Buisness.Repository.Interface;
-using SmartdustApp.Business.Common;
+using CookWithUs.Business.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace CookWithUs.Buisness.Features.Resturant.Queries
             public Task Authorize(Command request, CancellationToken cancellationToken, IHttpContextAccessor contex)
             {
                 //Check If This Rquest Is Accessable To User Or Not
-                var user = new { UserId = 10, UserName = "Rajgupta" };
+                var user = new { UserId = 10, UserName = "Yashraj" };
                 var userClaim = new { UserId = 10, ClaimType = "application", Claim = "GetUiPageType" };
                 if (userClaim.Claim == "GetUiPageType" && user.UserId == userClaim.UserId)
                 {

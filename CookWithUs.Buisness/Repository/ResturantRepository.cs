@@ -6,7 +6,7 @@ using ServcieBooking.Buisness.Repository.Interface;
 using ServiceBooking.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using CookWithUs.Buisness.Models;
-using SmartdustApp.Business.Common;
+using CookWithUs.Business.Common;
 
 namespace ServcieBooking.Buisness.Repository
 {
@@ -74,7 +74,31 @@ namespace ServcieBooking.Buisness.Repository
 
         public RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails)
         {
-            return new RequestResult<bool>(true);
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = @"
+                   INSERT INTO [Restaurant] (Name, Address)
+                   VALUES (@Name, @Address);";
+
+            var parameters = new
+            {
+                restaurantDetails.Name,
+                restaurantDetails.Address
+            };
+
+            int result = db.Execute(query, parameters);
+
+            if (result > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+                };
+                return new RequestResult<bool>(false, validationMessages);
+            }
         }
     }
 }

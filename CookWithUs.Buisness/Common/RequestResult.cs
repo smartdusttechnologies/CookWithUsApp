@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
     public class RequestResult<T> : ResultBase
     {

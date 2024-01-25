@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Text;
 
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
 
     public static class Helpers

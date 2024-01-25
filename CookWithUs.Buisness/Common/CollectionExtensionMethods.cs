@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
     public static class CollectionExtensionMethods
     {

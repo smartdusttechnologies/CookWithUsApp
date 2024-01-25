@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
 
     [System.AttributeUsage(System.AttributeTargets.Class)]

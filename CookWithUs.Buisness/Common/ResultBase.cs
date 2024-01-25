@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SmartdustApp.Business.Common
+namespace CookWithUs.Business.Common
 {
     /// <summary>
     /// This is the base cass of RequestResults.

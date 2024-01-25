@@ -1,5 +1,5 @@
 ﻿using CookWithUs.Buisness.Models;
-using SmartdustApp.Business.Common;
+using CookWithUs.Business.Common;
 
 namespace ServiceBooking.Buisness.Repository.Interface
 {

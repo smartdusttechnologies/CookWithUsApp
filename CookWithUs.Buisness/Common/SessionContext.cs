@@ -1,6 +1,6 @@
 ﻿
 
-namespace SmartdustApp.Common
+namespace CookWithUs.Common
 {
     public class SessionContext
     {

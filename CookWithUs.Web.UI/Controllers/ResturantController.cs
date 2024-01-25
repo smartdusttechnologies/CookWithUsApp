@@ -15,12 +15,14 @@ namespace ServiceBooking.Web.UI.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IResturantRepository _restaurant;
+        private readonly IMapper _mapper;
 
 
-        public ResturantController(IMediator mediator,IResturantRepository restaurant)
+        public ResturantController(IMediator mediator,IResturantRepository restaurant, IMapper mapper)
         {
             _mediator = mediator;
             _restaurant = restaurant;
+            _mapper = mapper;
         }
         [Route("Get")]
         [HttpGet]
@@ -42,8 +44,15 @@ namespace ServiceBooking.Web.UI.Controllers
         [HttpPost]
         public IActionResult RestaurantRegister (RegisterRestaurantDTO restaurantDetails)
         {
-            //var restaurantDetailsmodel = _mapper.Map<RegisterRestaurantDTO, RegisterRestaurantModel>(restaurantDetails);
-            var restaurantModel = new RegisterRestaurantModel();
+            var restaurantModel = _mapper.Map<RegisterRestaurantDTO, RegisterRestaurantModel>(restaurantDetails);
+            //var restaurantModel = new RegisterRestaurantModel
+            //{
+            //    Name = restaurantDetails.Name,
+            //    Email = restaurantDetails.Email,
+            //    Address = restaurantDetails.Address,
+            //    PhoneNumber = restaurantDetails.PhoneNumber,
+            //    AttachedFileIDs = restaurantDetails.AttachedFileIDs
+            //};
             var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
             return Ok(response);
         }

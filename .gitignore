@@ -1,0 +1,6 @@
+
+*.vsidx
+*.dll
+*.bin
+*.v2
+.vs/CookWithUs/v17/.suo
