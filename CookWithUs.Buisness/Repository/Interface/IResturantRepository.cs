@@ -1,4 +1,5 @@
 ﻿using CookWithUs.Buisness.Models;
+using SmartdustApp.Business.Common;
 
 namespace ServiceBooking.Buisness.Repository.Interface
 {
@@ -6,5 +7,6 @@ namespace ServiceBooking.Buisness.Repository.Interface
     {
         List<Restaurant> Get();
         RestaurantDetails Get(int resturantId);
+        RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails);
     }
 }

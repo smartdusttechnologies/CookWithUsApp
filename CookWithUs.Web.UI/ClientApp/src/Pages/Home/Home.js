@@ -17,7 +17,6 @@ const Home = () => {
 
   const handleGetRestaurants = (latitude, longitude) => {
     setLoading(true);
-    console.log(latitude, longitude, "(latitude, longitude)");
     getRestaurants(latitude, longitude)
       .then((response) => {
         console.log(response.data);

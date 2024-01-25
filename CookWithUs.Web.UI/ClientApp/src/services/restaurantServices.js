@@ -1,6 +1,6 @@
 import axiosInstance from "../utils/axiosInstance";
 
-export const getRestaurants = (latitude,longitude) => {
+export const getRestaurants = (latitude, longitude) => {
   return axiosInstance.get("/resturant/Get", {
     params: {
       latitude: latitude,
@@ -11,4 +11,8 @@ export const getRestaurants = (latitude,longitude) => {
 
 export const getRestaurantDetails = (id) => {
   return axiosInstance.get(`/resturant/GetById/${id}`);
+};
+
+export const ResgisterRestaurant = (details) => {
+  return axiosInstance.post('/resturant/RestaurantResgister',details);
 };

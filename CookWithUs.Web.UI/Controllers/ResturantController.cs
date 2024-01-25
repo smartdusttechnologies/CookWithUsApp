@@ -1,4 +1,7 @@
-﻿using CookWithUs.Buisness.Models;
+﻿using AutoMapper;
+using CookWithUs.Buisness.Features.Resturant.Queries;
+using CookWithUs.Buisness.Models;
+using CookWithUs.Web.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ServcieBooking.Buisness.Features.Resturant;
@@ -14,7 +17,7 @@ namespace ServiceBooking.Web.UI.Controllers
         private readonly IResturantRepository _restaurant;
 
 
-        public ResturantController(IMediator mediator, IResturantRepository restaurant)
+        public ResturantController(IMediator mediator,IResturantRepository restaurant)
         {
             _mediator = mediator;
             _restaurant = restaurant;
@@ -32,7 +35,16 @@ namespace ServiceBooking.Web.UI.Controllers
         public IActionResult Get(int resturantId)
         {
             var response = _mediator.Send(new GetByIdResturant.Command(resturantId)).Result;
-            //var response = Task.FromResult(_restaurant.Get(resturantId));
+            return Ok(response);
+        }
+
+        [Route("RestaurantResgister")]
+        [HttpPost]
+        public IActionResult RestaurantRegister (RegisterRestaurantDTO restaurantDetails)
+        {
+            //var restaurantDetailsmodel = _mapper.Map<RegisterRestaurantDTO, RegisterRestaurantModel>(restaurantDetails);
+            var restaurantModel = new RegisterRestaurantModel();
+            var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
             return Ok(response);
         }
     }

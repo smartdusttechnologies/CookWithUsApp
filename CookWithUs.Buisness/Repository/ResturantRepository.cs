@@ -6,6 +6,7 @@ using ServcieBooking.Buisness.Repository.Interface;
 using ServiceBooking.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using CookWithUs.Buisness.Models;
+using SmartdustApp.Business.Common;
 
 namespace ServcieBooking.Buisness.Repository
 {
@@ -69,6 +70,11 @@ namespace ServcieBooking.Buisness.Repository
             );
 
             return result.FirstOrDefault();
+        }
+
+        public RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails)
+        {
+            return new RequestResult<bool>(true);
         }
     }
 }

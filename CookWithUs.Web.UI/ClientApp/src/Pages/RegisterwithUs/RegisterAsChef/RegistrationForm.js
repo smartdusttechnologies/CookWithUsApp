@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { ResgisterRestaurant } from "../../../services/restaurantServices";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -31,6 +32,10 @@ const RegistrationForm = () => {
 
   const handleFormSubmit = (values, { setSubmitting }) => {
     // Handle form submission logic here
+    ResgisterRestaurant({ ...values, attachedFileIDs: [1, 2] })
+    .then((response)=>{
+      console.log(response.data)
+    })
     console.log(values);
     setSubmitting(false);
   };
