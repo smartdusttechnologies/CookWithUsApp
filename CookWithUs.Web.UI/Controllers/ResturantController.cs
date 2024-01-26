@@ -45,14 +45,7 @@ namespace ServiceBooking.Web.UI.Controllers
         public IActionResult RestaurantRegister (RegisterRestaurantDTO restaurantDetails)
         {
             var restaurantModel = _mapper.Map<RegisterRestaurantDTO, RegisterRestaurantModel>(restaurantDetails);
-            //var restaurantModel = new RegisterRestaurantModel
-            //{
-            //    Name = restaurantDetails.Name,
-            //    Email = restaurantDetails.Email,
-            //    Address = restaurantDetails.Address,
-            //    PhoneNumber = restaurantDetails.PhoneNumber,
-            //    AttachedFileIDs = restaurantDetails.AttachedFileIDs
-            //};
+
             var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
             return Ok(response);
         }
