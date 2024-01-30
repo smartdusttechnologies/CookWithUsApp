@@ -50,8 +50,6 @@ namespace CookWithUs.Buisness.Features.Document.Queries
 
             Task<List<int>> IRequestHandler<Command, List<int>>.Handle(Command request, CancellationToken cancellationToken)
             {
-                //return Task.FromResult(_restaurant.Get(request.resturantId));
-
                 List<int> uploadedFileIds = new List<int>();
 
                 foreach (var file in request.files)
@@ -63,7 +61,6 @@ namespace CookWithUs.Buisness.Features.Document.Queries
                     }
                 }
 
-                //return uploadedFileIds;
                 return Task.FromResult(uploadedFileIds);
             }
             private int UploadSingleFile(IFormFile file)

@@ -25,7 +25,7 @@ namespace CookWithUs.Buisness.Repository
         /// </summary>
         public int FileUpload(DocumentModel File)
         {
-            string query = @"INSERT INTO [DocumentTable](Name, FileType, DataFiles)
+            string query = @"INSERT INTO [Document](Name, FileType, DataFiles)
                     VALUES (@Name, @FileType, @DataFiles);
                     SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
@@ -39,7 +39,7 @@ namespace CookWithUs.Buisness.Repository
         public DocumentModel DownloadDocument(int documentID)
         {
             using IDbConnection con = _connectionFactory.GetConnection;
-            return con.Query<DocumentModel>(@"select * from [DocumentTable] where ID = @ID ", new { ID = documentID }).FirstOrDefault();
+            return con.Query<DocumentModel>(@"select * from [Document] where ID = @ID ", new { ID = documentID }).FirstOrDefault();
         }
     }
 }

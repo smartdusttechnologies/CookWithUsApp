@@ -33,8 +33,8 @@ const RegistrationForm = () => {
     setFile(file?.filter((file, index) => index !== indexToDelete));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values) => {
+    // e.preventDefault();
     setLoading(true);
     const formData = new FormData();
 
@@ -63,32 +63,32 @@ const RegistrationForm = () => {
       if (formData.has("files")) {
         // Upload files and get AttachedFileIDs
         axios
-          .post("api/document/FileUpload", formData, {
-            // headers: {
-            //   Authorization: `${auth.accessToken}`,
-            // },
-          })
+          .post("/document/FileUpload", formData)
           .then((response) => {
-            // Call ApplyLeave with AttachedFileIDs
-            // ApplyLeave(response.data);
+            // Call ResgisterRestaurant with AttachedFileIDs
+            handleResgisterRestaurant(values, response?.data);
           })
           .catch((error) => {
             console.error(error);
           });
       }
     } else {
-      // Call ApplyLeave without AttachedFileIDs
-      // ApplyLeave([]);
+      // Call ResgisterRestaurant without AttachedFileIDs
+      handleResgisterRestaurant(values, []);
     }
+  };
+  const handleResgisterRestaurant = (values, attachedFileIDs) => {
+    ResgisterRestaurant({ ...values, attachedFileIDs: attachedFileIDs })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleFormSubmit = (values, { setSubmitting }) => {
-    // Handle form submission logic here
-    ResgisterRestaurant({ ...values, attachedFileIDs: [1, 2] }).then(
-      (response) => {
-        console.log(response.data);
-      }
-    );
+    handleSubmit(values);
     console.log(values);
     setSubmitting(false);
   };

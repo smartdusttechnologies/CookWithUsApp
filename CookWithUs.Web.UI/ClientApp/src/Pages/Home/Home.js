@@ -76,8 +76,8 @@ const Home = () => {
           }}
         >
           {isLoading
-            ? [1, 2, 3, 4].map(() => (
-                <Box>
+            ? [1, 2, 3, 4].map((item, index) => (
+                <Box key={index}>
                   <Skeleton variant="rectangular" width={210} height={118} />
                   <Box sx={{ pt: 0.5 }}>
                     <Skeleton />
