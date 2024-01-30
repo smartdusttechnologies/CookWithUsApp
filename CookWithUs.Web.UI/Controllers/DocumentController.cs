@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CookWithUs.Business.Common;
+using MediatR;
 
 namespace CookWithUs.Web.UI.Controllers
 {
-    public class DocumentController : Controller
+    public class DocumentController : ControllerBase
     {
+        private readonly IMediator _mediator;
 
-        public DocumentController()
+        public DocumentController(IMediator mediator)
         {
+            _mediator = mediator;
         }
 
         /// <summary>

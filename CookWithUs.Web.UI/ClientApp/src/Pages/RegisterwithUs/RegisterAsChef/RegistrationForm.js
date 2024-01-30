@@ -5,6 +5,8 @@ import { Formik } from "formik";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { ResgisterRestaurant } from "../../../services/restaurantServices";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -20,6 +22,7 @@ const VisuallyHiddenInput = styled("input")({
 
 const RegistrationForm = () => {
   const [file, setFile] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const filesArray = Array.from(e.target.files);
@@ -30,12 +33,62 @@ const RegistrationForm = () => {
     setFile(file?.filter((file, index) => index !== indexToDelete));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData();
+
+    // Check if there are files to upload
+    if (file && file.length > 0) {
+      file.forEach((file) => {
+        const fileName = file.name;
+        const fileExtension = fileName.split(".").pop().toLowerCase();
+        // Check for allowed file extensions
+        if (["jpg", "jpeg", "png", "xlsx", "pdf"].includes(fileExtension)) {
+          if (file.size <= 1024 * 1024) {
+            // Check file size
+            formData.append("files", file);
+          } else {
+            toast.warn("File size should not exceed 1MB.", {
+              position: "bottom-center",
+            });
+            setLoading(false);
+          }
+        } else {
+          toast.warn("Wrong File Type!", { position: "bottom-center" });
+          setLoading(false);
+        }
+      });
+
+      if (formData.has("files")) {
+        // Upload files and get AttachedFileIDs
+        axios
+          .post("api/document/FileUpload", formData, {
+            // headers: {
+            //   Authorization: `${auth.accessToken}`,
+            // },
+          })
+          .then((response) => {
+            // Call ApplyLeave with AttachedFileIDs
+            // ApplyLeave(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } else {
+      // Call ApplyLeave without AttachedFileIDs
+      // ApplyLeave([]);
+    }
+  };
+
   const handleFormSubmit = (values, { setSubmitting }) => {
     // Handle form submission logic here
-    ResgisterRestaurant({ ...values, attachedFileIDs: [1, 2] })
-    .then((response)=>{
-      console.log(response.data)
-    })
+    ResgisterRestaurant({ ...values, attachedFileIDs: [1, 2] }).then(
+      (response) => {
+        console.log(response.data);
+      }
+    );
     console.log(values);
     setSubmitting(false);
   };
@@ -166,6 +219,7 @@ const RegistrationForm = () => {
           </Formik>
         </Box>
       </Box>
+      <ToastContainer />
     </Box>
   );
 };

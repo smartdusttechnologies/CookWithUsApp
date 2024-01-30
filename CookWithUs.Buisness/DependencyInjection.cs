@@ -4,6 +4,7 @@ using ServcieBooking.Buisness.Interface;
 using ServcieBooking.Buisness.PipelineBehaviors;
 using ServcieBooking.Buisness.Features.Resturant;
 using CookWithUs.Buisness.Features.Resturant.Queries;
+using CookWithUs.Buisness.Features.Document.Queries;
 
 namespace ServcieBooking.Buisness
 {
@@ -18,9 +19,8 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<GetResturant.Command>, GetResturant.Authorization>();
             services.AddTransient<IAuthorizationRule<GetByIdResturant.Command>, GetByIdResturant.Authorization>();
             services.AddTransient<IAuthorizationRule<RegisterRestaurant.Command>, RegisterRestaurant.Authorization>();
-            //services.AddTransient<IAuthorizationRule<CreateUiPageType.Command>, CreateUiPageType.Authorization>();
-            //services.AddTransient<IAuthorizationRule<UpdateUiPageType.Command>, UpdateUiPageType.Authorization>();
-            //services.AddTransient<IAuthorizationRule<DeleteUiPageType.Command>, DeleteUiPageType.Authorization>();
+            services.AddTransient<IAuthorizationRule<DownloadFile.Command>, DownloadFile.Authorization>();
+            services.AddTransient<IAuthorizationRule<UploadFiles.Command>, UploadFiles.Authorization>();
             return services;
 
         }

@@ -6,3 +6,7 @@
 .vs/CookWithUs/v17/.suo
 *.bin
 .vs/CookWithUs/v17/.suo
+CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.AssemblyInfo.cs
+.vs/CookWithUs/v17/.suo
+CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.AssemblyInfoInputs.cache
+*.dll

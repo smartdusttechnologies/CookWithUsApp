@@ -1,3 +1,5 @@
+using CookWithUs.Buisness.Repository;
+using CookWithUs.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using ServcieBooking.Buisness;
 using ServcieBooking.Buisness.Infrastructure;
@@ -39,6 +41,7 @@ namespace ServcieBooking.Web.UI
             services.AddScoped<IResturantRepository,ResturantRepository>();
             services.AddScoped<IConnectionFactory,ConnectionFactory>();
             services.AddScoped<IResturantRepository,ResturantRepository>();
+            services.AddScoped<IDocumentRepository,DocumentRepository>();
             services.AddApplication();
 
             // In production, the React files will be served from this directory
