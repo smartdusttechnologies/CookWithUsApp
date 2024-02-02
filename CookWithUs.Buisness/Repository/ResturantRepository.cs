@@ -77,7 +77,8 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
             string query = @"
                    INSERT INTO [Restaurant] (Name, Address)
-                   VALUES (@Name, @Address);";
+                   VALUES (@Name, @Address);
+                   SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
             var parameters = new
             {
@@ -85,19 +86,39 @@ namespace ServcieBooking.Buisness.Repository
                 restaurantDetails.Address
             };
 
-            int result = db.Execute(query, parameters);
-
-            if (result > 0)
+            // Prepare the parameters for restaurantIDAttachedFiles
+            List<RestaurantAttachment> restaurantIDAttachedFilesParameters = null;
+            if (restaurantDetails.AttachedFileIDs != null && restaurantDetails.AttachedFileIDs.Any())
             {
+                restaurantIDAttachedFilesParameters = restaurantDetails.AttachedFileIDs.Select(DocumentID => new RestaurantAttachment { RestaurantID = 0, DocumentID = DocumentID }).ToList();
+            }
+            // Transaction to ensure both inserts are executed atomically
+            using var transaction = db.BeginTransaction();
+
+            try
+            {
+                // Insert into the restaurantID table and get the newly inserted RestaurantID
+                int restaurantID = db.QuerySingle<int>(query, parameters, transaction);
+
+                if (restaurantIDAttachedFilesParameters != null && restaurantIDAttachedFilesParameters.Any())
+                {
+                    // Set the restaurantIDID for all attached files
+                    restaurantIDAttachedFilesParameters.ForEach(f => f.RestaurantID = restaurantID);
+
+                    // Insert all attached files into the restaurantIDAttachedFiles table in a single batch
+                    string restaurantIDAttachedFilesInsertQuery = "INSERT INTO restaurantIDAttachedFile (RestaurantID, DocumentID) VALUES (@RestaurantID, @DocumentID)";
+                    db.Execute(restaurantIDAttachedFilesInsertQuery, restaurantIDAttachedFilesParameters, transaction);
+                }
+
+                // If all inserts are successful, commit the transaction
+                transaction.Commit();
                 return new RequestResult<bool>(true);
             }
-            else
+            catch (Exception ex)
             {
-                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
-                {
-                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
-                };
-                return new RequestResult<bool>(false, validationMessages);
+                // If any insert fails, roll back the transaction and return an error
+                transaction.Rollback();
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
             }
         }
     }

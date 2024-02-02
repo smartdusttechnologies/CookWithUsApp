@@ -16,3 +16,5 @@ CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.AssemblyInfoInputs.cach
 CookWithUs.Buisness/bin/Debug/net6.0/CookWithUs.Buisness.pdb
 CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.sourcelink.json
 *.pdb
+*.v2
+*.bin
