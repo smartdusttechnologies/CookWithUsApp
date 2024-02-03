@@ -66,7 +66,7 @@ const RegistrationForm = () => {
           .post("/document/FileUpload", formData)
           .then((response) => {
             // Call ResgisterRestaurant with AttachedFileIDs
-            handleResgisterRestaurant(values, [response?.data]);
+            handleResgisterRestaurant(values, response?.data);
           })
           .catch((error) => {
             console.error(error);

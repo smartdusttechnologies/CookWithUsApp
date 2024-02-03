@@ -9,6 +9,7 @@ namespace SmartdustApp.Web.UI.Mappers
         public MappingProfile()
         {
             CreateMap<RegisterRestaurantDTO, RegisterRestaurantModel>().ReverseMap();
+            CreateMap<MenuDTO, RestaurantMenu>().ReverseMap();
         }
     }
 }

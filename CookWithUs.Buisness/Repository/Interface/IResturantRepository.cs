@@ -8,5 +8,7 @@ namespace ServiceBooking.Buisness.Repository.Interface
         List<Restaurant> Get();
         RestaurantDetails Get(int resturantId);
         RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails);
+        RequestResult<bool> CreateMenu(RestaurantMenu menu);
+        RequestResult<bool> UpdateMenu(RestaurantMenu menu);
     }
 }

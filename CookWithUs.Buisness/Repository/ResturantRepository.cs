@@ -106,7 +106,7 @@ namespace ServcieBooking.Buisness.Repository
                     restaurantIDAttachedFilesParameters.ForEach(f => f.RestaurantID = restaurantID);
 
                     // Insert all attached files into the restaurantIDAttachedFiles table in a single batch
-                    string restaurantIDAttachedFilesInsertQuery = "INSERT INTO restaurantIDAttachedFile (RestaurantID, DocumentID) VALUES (@RestaurantID, @DocumentID)";
+                    string restaurantIDAttachedFilesInsertQuery = "INSERT INTO RestaurantAttachment (RestaurantID, DocumentID) VALUES (@RestaurantID, @DocumentID)";
                     db.Execute(restaurantIDAttachedFilesInsertQuery, restaurantIDAttachedFilesParameters, transaction);
                 }
 
@@ -119,6 +119,92 @@ namespace ServcieBooking.Buisness.Repository
                 // If any insert fails, roll back the transaction and return an error
                 transaction.Rollback();
                 return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
+            }
+        }
+
+        public RequestResult<bool> CreateMenu(RestaurantMenu menu)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string imageInsertQuery = @"
+                   INSERT INTO [Document] (DocUrl)
+                   VALUES (@ImageUrl);
+                   SELECT CAST(SCOPE_IDENTITY() AS INT)";
+
+            var parameters = new
+            {
+                menu.ImageUrl
+            };
+
+            int imageId = db.QuerySingle<int>(imageInsertQuery , parameters);
+
+            string menuInsertQuery = @"
+                   INSERT INTO [Menu] (RestaurantID,Name,Type,Price,Quantity,ImageID)
+                   VALUES (@RestaurantID, @Name, @Type, @Price, @Quantity, @imageID)";
+            var menuParameters = new
+            {
+                menu.RestaurantID,
+                menu.Name,
+                menu.Type,
+                menu.Price,
+                menu.Quantity,
+                imageId
+            };
+            
+            int result = db.Execute(menuInsertQuery, menuParameters);
+            if (result > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+                };
+                return new RequestResult<bool>(false, validationMessages);
+            }
+        }
+        public RequestResult<bool> UpdateMenu(RestaurantMenu menu)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            string updateQuery = @"
+                   UPDATE m
+                   SET
+                       m.Name = @Name,
+                       m.Type = @Type,
+                       m.Price = @Price,
+                       m.Quantity = @Quantity,
+                       d.DocUrl = @ImageUrl
+                   FROM
+                       [Menu] m
+                   JOIN
+                       [Document] d ON m.ImageID = d.ID
+                   WHERE
+                       m.ID = @ID;";
+
+            var parameters = new
+            {
+                menu.Name,
+                menu.Type,
+                menu.Price,
+                menu.Quantity,
+                menu.ImageUrl,
+                menu.ID
+            };
+
+            int result = db.Execute(updateQuery, parameters);
+            if (result > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+                };
+                return new RequestResult<bool>(false, validationMessages);
             }
         }
     }

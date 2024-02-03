@@ -16,9 +16,7 @@ namespace CookWithUs.Buisness.Features.Resturant.Queries
     {
         public class Command : IRequest<RequestResult<bool>>
         {
-            public int resturantId { get; set; }
             public RegisterRestaurantModel restaurantDetails { get; set; }
-
             public Command(RegisterRestaurantModel registerRestaurantModel)
             {
                 restaurantDetails = registerRestaurantModel;

@@ -25,6 +25,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteComponent from "../../../Components/DeleteComponent/DeleteComponent";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
 
 const usStates = [
   { value: "AL", label: "Alabama" },
@@ -93,6 +94,23 @@ const Table = ({ data }) => {
             }),
         },
       },
+      {
+        accessorKey: "url",
+        header: "Image Url",
+        muiEditTextFieldProps: {
+          type: "text",
+          required: true,
+          error: !!validationErrors?.url,
+          helperText: validationErrors?.url,
+          //remove any previous validation errors when food focuses on the input
+          onFocus: () =>
+            setValidationErrors({
+              ...validationErrors,
+              url: undefined,
+            }),
+          //optionally add validation checking for onBlur or onChange
+        },
+      },
       //   {
       //     accessorKey: "email",
       //     header: "Email",
@@ -143,26 +161,67 @@ const Table = ({ data }) => {
 
   //Createaction
   const handleCreatefood = async ({ values, table }) => {
-    const newValidationErrors = validatefood(values);
-    if (Object.values(newValidationErrors).some((error) => error)) {
-      setValidationErrors(newValidationErrors);
-      return;
-    }
-    setValidationErrors({});
-    await createfood(values);
-    table.setCreatingRow(null); //exit creating mode
+    console.log(values);
+    // const newValidationErrors = validatefood(values);
+    // if (Object.values(newValidationErrors).some((error) => error)) {
+    //   setValidationErrors(newValidationErrors);
+    //   return;
+    // }
+    // setValidationErrors({});
+    // await createfood(values);
+    // table.setCreatingRow(null); //exit creating mode
+    axios
+      .post("/resturant/CreateMenu", {
+        id: 0,
+        restaurantID: 1,
+        name: values.name,
+        type: "",
+        price: values.price,
+        quantity: values.quantity,
+        imageUrl: values.url,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   //UPDATE action
   const handleSavefood = async ({ values, table }) => {
-    const newValidationErrors = validatefood(values);
-    if (Object.values(newValidationErrors).some((error) => error)) {
-      setValidationErrors(newValidationErrors);
-      return;
-    }
-    setValidationErrors({});
-    await updatefood(values);
-    table.setEditingRow(null); //exit editing mode
+    console.log(values);
+    // const newValidationErrors = validatefood(values);
+    // if (Object.values(newValidationErrors).some((error) => error)) {
+    //   setValidationErrors(newValidationErrors);
+    //   return;
+    // }
+    // setValidationErrors({});
+    // await updatefood(values);
+    // table.setEditingRow(null); //exit editing mode
+    // axios
+    //   .post("/resturant/UpdateMenu", {
+    //     id: 0,
+    //     restaurantID: 1,
+    //     name: values.name,
+    //     type: "",
+    //     price: values.price,
+    //     quantity: values.quantity,
+    //     imageUrl: values.url,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+    axios
+      .post("/resturant/UpdateMenu", {
+        id: 0,
+        restaurantID: 1,
+        name: values.name,
+        type: "",
+        price: values.price,
+        quantity: 1,
+        imageUrl: values.url,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   const table = useMaterialReactTable({

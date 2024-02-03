@@ -49,5 +49,25 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
             return Ok(response);
         }
+
+        [Route("CreateMenu")]
+        [HttpPost]
+        public IActionResult CreateMenu (MenuDTO menuDTO)
+        {
+            var menuModel = _mapper.Map<MenuDTO, RestaurantMenu>(menuDTO);
+
+            var response = _mediator.Send(new CreateMenu.Command(menuModel)).Result;
+            return Ok(response);
+        }
+
+        [Route("UpdateMenu")]
+        [HttpPost]
+        public IActionResult UpdateMenu (MenuDTO menuDTO)
+        {
+            var menuModel = _mapper.Map<MenuDTO, RestaurantMenu>(menuDTO);
+
+            var response = _mediator.Send(new UpdateMenu.Command(menuModel)).Result;
+            return Ok(response);
+        }
     }
 }

@@ -14,5 +14,5 @@ export const getRestaurantDetails = (id) => {
 };
 
 export const ResgisterRestaurant = (details) => {
-  return axiosInstance.post('/resturant/RestaurantResgister',details);
+  return axiosInstance.post("/resturant/RestaurantResgister", details);
 };
