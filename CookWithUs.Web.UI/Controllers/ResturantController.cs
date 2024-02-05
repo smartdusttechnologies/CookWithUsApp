@@ -69,5 +69,13 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new UpdateMenu.Command(menuModel)).Result;
             return Ok(response);
         }
+
+        [Route("DeleteMenu/{menuId}")]
+        [HttpPost]
+        public IActionResult DeleteMenu(int menuId)
+        {
+            var response = _mediator.Send(new DeleteMenu.Command(menuId)).Result;
+            return Ok(response);
+        }
     }
 }

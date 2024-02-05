@@ -22,17 +22,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteComponent from "../../../Components/DeleteComponent/DeleteComponent";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
-
-const usStates = [
-  { value: "AL", label: "Alabama" },
-  { value: "AK", label: "Alaska" },
-  { value: "AZ", label: "Arizona" },
-  // Add more states as needed
-];
+import { CreateMenu, UpdateMenu } from "../../../services/restaurantServices";
 
 const Table = ({ data }) => {
   const [validationErrors, setValidationErrors] = useState({});
@@ -111,33 +104,6 @@ const Table = ({ data }) => {
           //optionally add validation checking for onBlur or onChange
         },
       },
-      //   {
-      //     accessorKey: "email",
-      //     header: "Email",
-      //     muiEditTextFieldProps: {
-      //       type: "email",
-      //       required: true,
-      //       error: !!validationErrors?.email,
-      //       helperText: validationErrors?.email,
-      //       //remove any previous validation errors when food focuses on the input
-      //       onFocus: () =>
-      //         setValidationErrors({
-      //           ...validationErrors,
-      //           email: undefined,
-      //         }),
-      //     },
-      //   },
-      //   {
-      //     accessorKey: "state",
-      //     header: "State",
-      //     editVariant: "select",
-      //     editSelectOptions: usStates,
-      //     muiEditTextFieldProps: {
-      //       select: true,
-      //       error: !!validationErrors?.state,
-      //       helperText: validationErrors?.state,
-      //     },
-      //   },
     ],
     [validationErrors]
   );
@@ -162,66 +128,45 @@ const Table = ({ data }) => {
   //Createaction
   const handleCreatefood = async ({ values, table }) => {
     console.log(values);
-    // const newValidationErrors = validatefood(values);
-    // if (Object.values(newValidationErrors).some((error) => error)) {
-    //   setValidationErrors(newValidationErrors);
-    //   return;
-    // }
-    // setValidationErrors({});
-    // await createfood(values);
-    // table.setCreatingRow(null); //exit creating mode
-    axios
-      .post("/resturant/CreateMenu", {
-        id: 0,
-        restaurantID: 1,
-        name: values.name,
-        type: "",
-        price: values.price,
-        quantity: values.quantity,
-        imageUrl: values.url,
-      })
+    CreateMenu({
+      id: 0,
+      restaurantID: 1,
+      name: values.name,
+      type: "",
+      price: values.price,
+      quantity: values.quantity,
+      imageUrl: values.url,
+    })
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
   //UPDATE action
   const handleSavefood = async ({ values, table }) => {
     console.log(values);
-    // const newValidationErrors = validatefood(values);
-    // if (Object.values(newValidationErrors).some((error) => error)) {
-    //   setValidationErrors(newValidationErrors);
-    //   return;
-    // }
-    // setValidationErrors({});
-    // await updatefood(values);
-    // table.setEditingRow(null); //exit editing mode
-    // axios
-    //   .post("/resturant/UpdateMenu", {
-    //     id: 0,
-    //     restaurantID: 1,
-    //     name: values.name,
-    //     type: "",
-    //     price: values.price,
-    //     quantity: values.quantity,
-    //     imageUrl: values.url,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
-    axios
-      .post("/resturant/UpdateMenu", {
-        id: 0,
-        restaurantID: 1,
-        name: values.name,
-        type: "",
-        price: values.price,
-        quantity: 1,
-        imageUrl: values.url,
-      })
+    UpdateMenu({
+      id: 7,
+      restaurantID: 1,
+      name: values.name,
+      type: "",
+      price: values.price,
+      quantity: 1,
+      imageUrl: values.url,
+    })
       .then((response) => {
         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
+  };
+
+  const handleDeletefood = (id) => {
+    axios.post(`/resturant/DeleteMenu/${id}`);
   };
 
   const table = useMaterialReactTable({
@@ -281,7 +226,7 @@ const Table = ({ data }) => {
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <DeleteComponent onDelete={deletefood} id={row.original.id} />
+        <DeleteComponent onDelete={handleDeletefood} id={row.original.id} />
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (

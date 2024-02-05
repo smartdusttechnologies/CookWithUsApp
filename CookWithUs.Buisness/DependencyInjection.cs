@@ -23,6 +23,7 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<UploadFiles.Command>, UploadFiles.Authorization>();
             services.AddTransient<IAuthorizationRule<CreateMenu.Command>, CreateMenu.Authorization>();
             services.AddTransient<IAuthorizationRule<UpdateMenu.Command>, UpdateMenu.Authorization>();
+            services.AddTransient<IAuthorizationRule<DeleteMenu.Command>, DeleteMenu.Authorization>();
             return services;
 
         }

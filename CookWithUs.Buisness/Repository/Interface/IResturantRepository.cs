@@ -10,5 +10,6 @@ namespace ServiceBooking.Buisness.Repository.Interface
         RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails);
         RequestResult<bool> CreateMenu(RestaurantMenu menu);
         RequestResult<bool> UpdateMenu(RestaurantMenu menu);
+        RequestResult<bool> DeleteMenu(int menuId);
     }
 }

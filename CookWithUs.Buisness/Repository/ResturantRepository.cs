@@ -7,6 +7,7 @@ using ServiceBooking.Buisness.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using CookWithUs.Buisness.Models;
 using CookWithUs.Business.Common;
+using System.Transactions;
 
 namespace ServcieBooking.Buisness.Repository
 {
@@ -166,34 +167,80 @@ namespace ServcieBooking.Buisness.Repository
         }
         public RequestResult<bool> UpdateMenu(RestaurantMenu menu)
         {
-            using IDbConnection db = _connectionFactory.GetConnection;
-
-            string updateQuery = @"
-                   UPDATE m
-                   SET
-                       m.Name = @Name,
-                       m.Type = @Type,
-                       m.Price = @Price,
-                       m.Quantity = @Quantity,
-                       d.DocUrl = @ImageUrl
-                   FROM
-                       [Menu] m
-                   JOIN
-                       [Document] d ON m.ImageID = d.ID
-                   WHERE
-                       m.ID = @ID;";
-
-            var parameters = new
+            using (IDbConnection db = _connectionFactory.GetConnection)
             {
-                menu.Name,
-                menu.Type,
-                menu.Price,
-                menu.Quantity,
-                menu.ImageUrl,
-                menu.ID
-            };
+                using (var transaction = db.BeginTransaction())
+                {
+                    try
+                    {
+                        string updateQuery = @"
+                               UPDATE [Menu] SET
+                                   Name = @Name,
+                                   Type = @Type,
+                                   Price = @Price,
+                                   Quantity = @Quantity
+                               WHERE
+                                   ID = @ID;";
 
-            int result = db.Execute(updateQuery, parameters);
+                        string docQuery = @"UPDATE [Document]
+                               SET
+                                   [DocUrl] = @ImageUrl
+                               WHERE
+                                   ID = (SELECT ImageID FROM [Menu] WHERE ID = @ID);";
+
+                        var docParameters = new
+                        {
+                            menu.ID,
+                            menu.ImageUrl
+                        };
+                        var parameters = new
+                        {
+                            menu.Name,
+                            menu.Type,
+                            menu.Price,
+                            menu.Quantity,
+                            menu.ID,
+                        };
+
+                        int menuUpdateResult = db.Execute(updateQuery, parameters, transaction);
+                        int docUpdateResult = db.Execute(docQuery, docParameters, transaction);
+
+                        if (menuUpdateResult > 0 && docUpdateResult > 0)
+                        {
+                            transaction.Commit();
+                            return new RequestResult<bool>(true);
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                    {
+                        new ValidationMessage() { Reason = "Unable to update records.", Severity = ValidationSeverity.Error }
+                    };
+                            return new RequestResult<bool>(false, validationMessages);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        // Handle exception, log it, etc.
+                        List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "An error occurred during the update.", Severity = ValidationSeverity.Error }
+                };
+                        return new RequestResult<bool>(false, validationMessages);
+                    }
+                }
+            }
+        }
+
+        public RequestResult<bool> DeleteMenu(int menuId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = @"delete from [Menu] where ID=@ID";
+
+            int result = db.Execute(query, new { ID = menuId });
+
             if (result > 0)
             {
                 return new RequestResult<bool>(true);

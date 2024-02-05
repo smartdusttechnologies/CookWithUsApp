@@ -16,3 +16,11 @@ export const getRestaurantDetails = (id) => {
 export const ResgisterRestaurant = (details) => {
   return axiosInstance.post("/resturant/RestaurantResgister", details);
 };
+
+export const CreateMenu = (details) => {
+  return axiosInstance.post("/resturant/CreateMenu", details);
+};
+
+export const UpdateMenu = (details) => {
+  return axiosInstance.post("/resturant/UpdateMenu", details);
+};
