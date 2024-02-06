@@ -56,18 +56,18 @@ const Table = ({ data }) => {
         },
       },
       {
-        accessorKey: "category",
-        header: "Category",
+        accessorKey: "type",
+        header: "Type",
         muiEditTextFieldProps: {
           type: "text",
           required: true,
-          error: !!validationErrors?.category,
-          helperText: validationErrors?.category,
+          error: !!validationErrors?.type,
+          helperText: validationErrors?.type,
           //remove any previous validation errors when food focuses on the input
           onFocus: () =>
             setValidationErrors({
               ...validationErrors,
-              category: undefined,
+              type: undefined,
             }),
         },
       },
@@ -88,18 +88,20 @@ const Table = ({ data }) => {
         },
       },
       {
-        accessorKey: "url",
+        accessorKey: "imageUrl",
         header: "Image Url",
+        size: 150,
+        maxSize: 200,
         muiEditTextFieldProps: {
           type: "text",
           required: true,
-          error: !!validationErrors?.url,
-          helperText: validationErrors?.url,
+          error: !!validationErrors?.imageUrl,
+          helperText: validationErrors?.imageUrl,
           //remove any previous validation errors when food focuses on the input
           onFocus: () =>
             setValidationErrors({
               ...validationErrors,
-              url: undefined,
+              imageUrl: undefined,
             }),
           //optionally add validation checking for onBlur or onChange
         },
@@ -132,13 +134,14 @@ const Table = ({ data }) => {
       id: 0,
       restaurantID: 1,
       name: values.name,
-      type: "",
+      type: values.type,
       price: values.price,
       quantity: values.quantity,
-      imageUrl: values.url,
+      imageUrl: values.imageUrl,
     })
       .then((response) => {
         console.log(response);
+        table.setCreatingRow(null); //exit creating mode
       })
       .catch((error) => {
         console.log(error);
@@ -152,11 +155,23 @@ const Table = ({ data }) => {
       id: 7,
       restaurantID: 1,
       name: values.name,
-      type: "",
+      type: values.type,
       price: values.price,
-      quantity: 1,
-      imageUrl: values.url,
+      quantity: values.quantity,
+      imageUrl: values.imageUrl,
     })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    table.setEditingRow(null); //exit editing mode
+  };
+
+  const handleDeletefood = (id) => {
+    axios
+      .post(`/resturant/DeleteMenu/${id}`)
       .then((response) => {
         console.log(response);
       })
@@ -165,13 +180,9 @@ const Table = ({ data }) => {
       });
   };
 
-  const handleDeletefood = (id) => {
-    axios.post(`/resturant/DeleteMenu/${id}`);
-  };
-
   const table = useMaterialReactTable({
     columns,
-    data: fetchedfoods,
+    data: data,
     createDisplayMode: "modal", //default ('row', and 'custom' are also available)
     editDisplayMode: "modal", //default ('row', 'cell', 'table', and 'custom' are also available)
     enableEditing: true,
@@ -349,7 +360,7 @@ const validateRequired = (value) => !!value.length;
 function validatefood(food) {
   return {
     name: !validateRequired(food.name) ? "First Name is Required" : "",
-    // category: !validateRequired(food.category) ? "Last Name is Required" : "",
+    // type: !validateRequired(food.type) ? "Last Name is Required" : "",
     // email: !validateEmail(food.email) ? "Incorrect Email Format" : "",
   };
 }
