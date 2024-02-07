@@ -11,5 +11,6 @@ namespace ServiceBooking.Buisness.Repository.Interface
         RequestResult<bool> CreateMenu(RestaurantMenu menu);
         RequestResult<bool> UpdateMenu(RestaurantMenu menu);
         RequestResult<bool> DeleteMenu(int menuId);
+        RestaurantDetails GetByUserID(int userId);
     }
 }

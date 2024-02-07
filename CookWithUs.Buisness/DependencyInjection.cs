@@ -24,6 +24,7 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<CreateMenu.Command>, CreateMenu.Authorization>();
             services.AddTransient<IAuthorizationRule<UpdateMenu.Command>, UpdateMenu.Authorization>();
             services.AddTransient<IAuthorizationRule<DeleteMenu.Command>, DeleteMenu.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetRestaurantByUserID.Command>, GetRestaurantByUserID.Authorization>();
             return services;
 
         }

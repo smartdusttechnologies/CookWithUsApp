@@ -73,6 +73,47 @@ namespace ServcieBooking.Buisness.Repository
             return result.FirstOrDefault();
         }
 
+        public RestaurantDetails GetByUserID(int userId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+                       M.ID, M.Name, M.Type, M.Price, M.Quantity, D.DocUrl AS ImageUrl
+                FROM Restaurant R
+                LEFT JOIN Menu M ON R.ID = M.RestaurantID
+                LEFT JOIN Document D ON M.ImageID = D.ID
+                LEFT JOIN RestaurantPartner RP ON R.ID = RP.RestaurantID
+                WHERE RP.UserID = @userId";
+
+            var parameters = new { userId };
+
+            var restaurantDetailsDictionary = new Dictionary<int, RestaurantDetails>();
+            var result = db.Query<RestaurantDetails, RestaurantMenu, RestaurantDetails>(
+                query,
+                (restaurant, menu) =>
+                {
+                    if (!restaurantDetailsDictionary.TryGetValue(restaurant.ID, out var restaurantEntry))
+                    {
+                        restaurantEntry = restaurant;
+                        restaurantEntry.restaurantMenus = new List<RestaurantMenu>();
+                        restaurantDetailsDictionary.Add(restaurantEntry.ID, restaurantEntry);
+                    }
+
+                    if (menu != null)
+                    {
+                        restaurantEntry.restaurantMenus.Add(menu);
+                    }
+
+                    return restaurantEntry;
+                },
+                parameters,
+                splitOn: "ID"
+            );
+
+            return result.FirstOrDefault();
+
+        }
         public RequestResult<bool> RegisterRestaurant(RegisterRestaurantModel restaurantDetails)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
@@ -214,9 +255,9 @@ namespace ServcieBooking.Buisness.Repository
                         {
                             transaction.Rollback();
                             List<ValidationMessage> validationMessages = new List<ValidationMessage>()
-                    {
-                        new ValidationMessage() { Reason = "Unable to update records.", Severity = ValidationSeverity.Error }
-                    };
+                            {
+                                new ValidationMessage() { Reason = "Unable to update records.", Severity = ValidationSeverity.Error }
+                            };
                             return new RequestResult<bool>(false, validationMessages);
                         }
                     }
@@ -225,9 +266,9 @@ namespace ServcieBooking.Buisness.Repository
                         transaction.Rollback();
                         // Handle exception, log it, etc.
                         List<ValidationMessage> validationMessages = new List<ValidationMessage>()
-                {
-                    new ValidationMessage() { Reason = "An error occurred during the update.", Severity = ValidationSeverity.Error }
-                };
+                        {
+                            new ValidationMessage() { Reason = "An error occurred during the update.", Severity = ValidationSeverity.Error }
+                        };
                         return new RequestResult<bool>(false, validationMessages);
                     }
                 }

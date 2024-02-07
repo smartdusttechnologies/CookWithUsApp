@@ -40,6 +40,14 @@ namespace ServiceBooking.Web.UI.Controllers
             return Ok(response);
         }
 
+        [Route("GetByUserID/{userId}")]
+        [HttpGet]
+        public IActionResult GetByUserID(int userId)
+        {
+            var response = _mediator.Send(new GetRestaurantByUserID.Command(userId)).Result;
+            return Ok(response);
+        }
+
         [Route("RestaurantResgister")]
         [HttpPost]
         public IActionResult RestaurantRegister (RegisterRestaurantDTO restaurantDetails)

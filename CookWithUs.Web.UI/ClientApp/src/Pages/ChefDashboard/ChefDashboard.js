@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import ChefDashboardTable from "./ChefDashboardComponents/ChefDashboardTable";
-import { getRestaurantDetails } from "../../services/restaurantServices";
+import {
+  getRestaurantDetails,
+  getRestaurantDetailsByUserID,
+} from "../../services/restaurantServices";
 import CircularLoading from "../../Components/LoadingComponent/CircularLoading";
+import axios from "axios";
 
 const fakeFoodMenu = [
   { id: "1", name: "Classic Burger", type: "Burgers", price: "9" },
@@ -23,7 +27,7 @@ const ChefDashboard = () => {
 
   const handleGetRestaurantDetails = () => {
     setLoading(true);
-    getRestaurantDetails(1)
+    getRestaurantDetailsByUserID(4)
       .then((response) => {
         setRestaurant(response?.data);
         setMenu(response?.data?.restaurantMenus);
