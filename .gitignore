@@ -33,3 +33,8 @@ CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.sourcelink.json
 *.dll
 *.v2
 *.pdb
+*.v2
+*.bin
+*.dll
+*.pdb
+*.dll

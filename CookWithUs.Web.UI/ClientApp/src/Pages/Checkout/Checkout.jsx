@@ -6,6 +6,7 @@ import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { useRoutes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -14,15 +15,16 @@ const Checkout = () => {
   const isSecondStep = activeStep === 1;
 
   const getCartData = () => {
-    const cartData = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(cartData)
-  }
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cartData);
+  };
 
   useEffect(() => {
-    getCartData()
+    getCartData();
   }, []);
 
   const handleFormSubmit = async (values, actions) => {
+    // console.log(values);
     setActiveStep(activeStep + 1);
 
     // this copies the billing address onto shipping address
@@ -39,25 +41,32 @@ const Checkout = () => {
 
     actions.setTouched({});
   };
- const navigate = useNavigate();
+  const navigate = useNavigate();
   async function makePayment(values) {
-   // const stripe = await stripePromise;
+    // const stripe = await stripePromise;
     const requestBody = {
-      userName: [values.firstName, values.lastName].join(" "),
-      email: values.email,
-      products: cart.map(({ id, count }) => ({
-        id,
-        count,
+      userID: 1,
+      address: values.billingAddress.street1,
+      zipCode: values.billingAddress.zipCode,
+      orderPrice: cart.reduce(
+        (total, cartItem) => total + cartItem.price * cartItem.quantity,
+        0
+      ),
+      phone: values.phoneNumber,
+      // userName: [
+      //   values.billingAddress.firstName,
+      //   values.billingAddress.lastName,
+      // ].join(" "),
+      products: cart.map(({ id, quantity }) => ({
+        productID: id,
+        quantity,
       })),
     };
-
-    // const response = await fetch("http://localhost:1337/api/orders", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(requestBody),
-    // });
-    // const session = await response.json();
-    navigate("/payment")
+    console.log(requestBody, "requestBody");
+    axios.post("/resturant/PlaceOrder", requestBody).then((response) => {
+      console.log(response);
+    });
+    // navigate("/payment");
   }
 
   return (
@@ -113,7 +122,7 @@ const Checkout = () => {
                     color="primary"
                     variant="contained"
                     sx={{
-                      backgroundColor: '',
+                      backgroundColor: "",
                       boxShadow: "none",
                       color: "white",
                       borderRadius: 0,
@@ -130,7 +139,7 @@ const Checkout = () => {
                   color="primary"
                   variant="contained"
                   sx={{
-                    backgroundColor: '',
+                    backgroundColor: "",
                     boxShadow: "none",
                     color: "white",
                     borderRadius: 0,

@@ -85,5 +85,15 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new DeleteMenu.Command(menuId)).Result;
             return Ok(response);
         }
+
+        [Route("PlaceOrder")]
+        [HttpPost]
+        public IActionResult PlaceOrder(OrderDTO orderDTO)
+        {
+            var orderModel = _mapper.Map<OrderDTO, OrderModel>(orderDTO);
+
+            var response = _mediator.Send(new PlaceOrder.Command(orderModel)).Result;
+            return Ok(response);
+        }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using CookWithUs.Buisness.Models;
 using CookWithUs.Business.Common;
 using System.Transactions;
+using CookWithUs.Buisness.Features.Resturant.Queries;
 
 namespace ServcieBooking.Buisness.Repository
 {
@@ -293,6 +294,58 @@ namespace ServcieBooking.Buisness.Repository
                     new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
                 };
                 return new RequestResult<bool>(false, validationMessages);
+            }
+        }
+        public RequestResult<bool> PlaceOrder(OrderModel order)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = @"
+                   INSERT INTO [Orders] (UserID, Address, ZipCode, OrderPrice, Phone)
+                   VALUES (@UserID, @Address, @ZipCode, @OrderPrice, @Phone);
+                   SELECT CAST(SCOPE_IDENTITY() AS INT)";
+
+            var parameters = new
+            {
+                order.UserID,
+                order.Address,
+                order.ZipCode,
+                order.OrderPrice,
+                order.Phone,
+            };
+
+            // Prepare the parameters for restaurantIDAttachedFiles
+            List<OrdersProduct> ordersProducts = null;
+            if (order.Products != null && order.Products.Any())
+            {
+                ordersProducts = order.Products.Select(product => new OrdersProduct { OrderID = 0, ProductID = product.ProductID, Quantity = product.Quantity}).ToList();
+            }
+            // Transaction to ensure both inserts are executed atomically
+            using var transaction = db.BeginTransaction();
+
+            try
+            {
+                // Insert into the Order table and get the newly inserted orderID
+                int orderID = db.QuerySingle<int>(query, parameters, transaction);
+
+                if (ordersProducts != null && ordersProducts.Any())
+                {
+                    // Set the restaurantIDID for all attached files
+                    ordersProducts.ForEach(f => f.OrderID = orderID);
+
+                    // Insert all attached files into the restaurantIDAttachedFiles table in a single batch
+                    string OrdersProductInsertQuery = "INSERT INTO OrdersProduct (OrderID, ProductID, Quantity) VALUES (@OrderID, @ProductID, @Quantity)";
+                    db.Execute(OrdersProductInsertQuery, ordersProducts, transaction);
+                }
+
+                // If all inserts are successful, commit the transaction
+                transaction.Commit();
+                return new RequestResult<bool>(true);
+            }
+            catch (Exception ex)
+            {
+                // If any insert fails, roll back the transaction and return an error
+                transaction.Rollback();
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
             }
         }
     }
