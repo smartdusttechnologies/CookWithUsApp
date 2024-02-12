@@ -14,7 +14,7 @@ const LiveLocationTracker = ({}) => {
   const joinRoom = async (user, room) => {
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl("https://localhost:7184/location")
+        .withUrl("https://localhost:7042/location")
         .configureLogging(LogLevel.Information)
         .build();
 

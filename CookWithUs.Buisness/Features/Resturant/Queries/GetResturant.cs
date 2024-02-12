@@ -49,7 +49,7 @@ namespace ServcieBooking.Buisness.Features.Resturant
             {
                 var userLatitude = request.latitude;
                 var userLongitude = request.longitude;
-                var maxDistance = 20; // Adjust based on your preference
+                var maxDistance = 150; // Adjust based on your preference
 
                 var allRestaurants = _restaurant.Get();
 

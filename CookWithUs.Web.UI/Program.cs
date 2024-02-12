@@ -1,5 +1,8 @@
+using CookWithUs.Buisness.Hubs;
+using CookWithUs.Buisness.Models.LocationService;
 using CookWithUs.Buisness.Repository;
 using CookWithUs.Buisness.Repository.Interface;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using ServcieBooking.Buisness;
 using ServcieBooking.Buisness.Infrastructure;
@@ -43,6 +46,18 @@ namespace ServcieBooking.Web.UI
             services.AddScoped<IResturantRepository,ResturantRepository>();
             services.AddScoped<IDocumentRepository,DocumentRepository>();
             services.AddApplication();
+            services.AddSignalR();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://localhost:44481")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            });
+            services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -65,7 +80,7 @@ namespace ServcieBooking.Web.UI
             {
                 app.UseExceptionHandler("/Error");
             }
-            //app.UseCors();
+            app.UseCors();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseHttpsRedirection();
@@ -75,6 +90,7 @@ namespace ServcieBooking.Web.UI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapFallbackToFile("index.html");
+                endpoints.MapHub<LocationHub>("/location");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");

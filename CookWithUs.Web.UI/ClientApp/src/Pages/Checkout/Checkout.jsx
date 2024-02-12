@@ -53,20 +53,15 @@ const Checkout = () => {
         0
       ),
       phone: values.phoneNumber,
-      // userName: [
-      //   values.billingAddress.firstName,
-      //   values.billingAddress.lastName,
-      // ].join(" "),
       products: cart.map(({ id, quantity }) => ({
         productID: id,
         quantity,
       })),
     };
-    console.log(requestBody, "requestBody");
     axios.post("/resturant/PlaceOrder", requestBody).then((response) => {
-      console.log(response);
+      console.log(response.data);
+      navigate("/payment");
     });
-    // navigate("/payment");
   }
 
   return (
