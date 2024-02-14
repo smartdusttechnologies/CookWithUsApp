@@ -28,3 +28,11 @@ export const CreateMenu = (details) => {
 export const UpdateMenu = (details) => {
   return axiosInstance.post("/resturant/UpdateMenu", details);
 };
+
+export const GetOrderDetails = (orderId) => {
+  return axiosInstance.get(`/resturant/GetOrderDetails/${orderId}`);
+};
+
+export const GetOrdersByUserID = (userId) => {
+  return axiosInstance.get(`/resturant/GetOrdersByUserID/${userId}`);
+};

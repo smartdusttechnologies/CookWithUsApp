@@ -5,6 +5,7 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import vanDeliveryImage from "../../assets/VanDelivery.png";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
 import axios from "axios";
+import { GetOrderDetails } from "../../services/restaurantServices";
 
 const LiveLocationTracker = ({}) => {
   const [liveLocation, setLiveLocation] = useState({
@@ -98,8 +99,7 @@ const LiveLocationTracker = ({}) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`/resturant/GetOrderDetails/${3}`)
+    GetOrderDetails(3)
       .then((response) => {
         console.log(response.data);
         setOrder(response.data);
@@ -108,6 +108,11 @@ const LiveLocationTracker = ({}) => {
         console.log(error);
       });
   }, []);
+
+  const handleOpenMaps = (latitude, longitude) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    window.open(url, "_blank");
+  };
 
   return (
     <Box
@@ -133,6 +138,9 @@ const LiveLocationTracker = ({}) => {
         sx={{
           width: "90%",
           margin: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 3,
         }}
       >
         <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
@@ -140,6 +148,12 @@ const LiveLocationTracker = ({}) => {
         </Button>
         <Button variant="contained" onClick={updatingLocation}>
           Started Delivering
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => handleOpenMaps(order?.latitude, order?.longitude)}
+        >
+          See Direction
         </Button>
         <Button
           variant="contained"
