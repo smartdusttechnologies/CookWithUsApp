@@ -7,7 +7,7 @@ const OrderDirection = () => {
   const [origin, setOrigin] = useState({ lat: 25.5908, lng: 85.1348 });
 
   let currentLatitude = 25.5908;
-  let intervalId;
+  var intervalId;
 
   const updatingLocation = () => {
     intervalId = setInterval(() => {

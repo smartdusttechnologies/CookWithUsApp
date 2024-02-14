@@ -3,6 +3,8 @@ import { Box, Button } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import vanDeliveryImage from "../../assets/VanDelivery.png";
+import PizzaDelivery from "../../assets/PizzaDelivery.png";
+import axios from "axios";
 
 const LiveLocationTracker = ({}) => {
   const [liveLocation, setLiveLocation] = useState({
@@ -10,6 +12,7 @@ const LiveLocationTracker = ({}) => {
     longitude: 85.1348,
   });
   const [connection, setConnection] = useState();
+  const [order, setOrder] = useState({});
 
   const joinRoom = async (user, room) => {
     try {
@@ -94,6 +97,18 @@ const LiveLocationTracker = ({}) => {
     clearInterval(intervalId);
   };
 
+  useEffect(() => {
+    axios
+      .get(`/resturant/GetOrderDetails/${3}`)
+      .then((response) => {
+        console.log(response.data);
+        setOrder(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -109,23 +124,31 @@ const LiveLocationTracker = ({}) => {
       >
         <GoogleMapComponent
           origin={{ lat: liveLocation?.latitude, lng: liveLocation?.longitude }}
+          destination={{ lat: order?.latitude, lng: order?.longitude }}
           zoom={15}
-          iconImage={vanDeliveryImage}
+          iconImage={PizzaDelivery}
         />
       </Box>
-      <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
-        Get Location
-      </Button>
-      <Button variant="contained" onClick={updatingLocation}>
-        Send Location
-      </Button>
-      <Button
-        variant="contained"
-        color="success"
-        onClick={stopUpdatingLocation}
+      <Box
+        sx={{
+          width: "90%",
+          margin: "auto",
+        }}
       >
-        Delivered
-      </Button>
+        <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
+          Accept Order
+        </Button>
+        <Button variant="contained" onClick={updatingLocation}>
+          Started Delivering
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={stopUpdatingLocation}
+        >
+          Delivered
+        </Button>
+      </Box>
     </Box>
   );
 };

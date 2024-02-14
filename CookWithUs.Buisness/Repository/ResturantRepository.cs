@@ -313,7 +313,7 @@ namespace ServcieBooking.Buisness.Repository
                 order.Phone,
             };
 
-            // Prepare the parameters for restaurantIDAttachedFiles
+            // Prepare the parameters for OrdersProduct
             List<OrdersProduct> ordersProducts = null;
             if (order.Products != null && order.Products.Any())
             {
@@ -347,6 +347,45 @@ namespace ServcieBooking.Buisness.Repository
                 transaction.Rollback();
                 return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
             }
+        }
+        public List<OrderModel> GetOrders()
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
+                FROM Orders O";
+
+            return db.Query<OrderModel>(query).ToList();
+
+        }
+        public List<OrderModel> GetOrdersByUserID(int userId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
+                FROM Orders O
+                WHERE O.UserID = @userId";
+
+            var parameters = new { userId };
+
+            return db.Query<OrderModel>(query, parameters).ToList();
+
+        }
+        public OrderModel GetOrderDetails(int orderId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode, O.Latitude, O.Longitude
+                FROM Orders O
+                WHERE O.ID = @orderId";
+
+            var parameters = new { orderId };
+
+            return db.QueryFirstOrDefault<OrderModel>(query, parameters);
+
         }
     }
 }

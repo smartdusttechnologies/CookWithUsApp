@@ -95,5 +95,29 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new PlaceOrder.Command(orderModel)).Result;
             return Ok(response);
         }
+
+        [Route("GetOrders")]
+        [HttpGet]
+        public IActionResult GetOrders()
+        {
+            var response = _mediator.Send(new GetOrders.Command()).Result;
+            return Ok(response);
+        }
+
+        [Route("GetOrdersByUserID/{userId}")]
+        [HttpGet]
+        public IActionResult GetOrdersByUserID(int userId)
+        {
+            var response = _mediator.Send(new GetOrdersByUserID.Command(userId)).Result;
+            return Ok(response);
+        }
+
+        [Route("GetOrderDetails/{orderId}")]
+        [HttpGet]
+        public IActionResult GetOrderDetails(int orderId)
+        {
+            var response = _mediator.Send(new GetOrderDetails.Command(orderId)).Result;
+            return Ok(response);
+        }
     }
 }
