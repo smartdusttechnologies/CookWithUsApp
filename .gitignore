@@ -46,3 +46,7 @@ CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.sourcelink.json
 .vs/CookWithUs/v17/.suo
 *.bin
 .vs/CookWithUs/v17/.suo
+*.v2
+*.bin
+*.dll
+*.pdb

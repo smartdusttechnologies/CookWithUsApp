@@ -3,6 +3,7 @@ import { Box, Button } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { GetOrderDetails } from "../../services/restaurantServices";
 
 const OrderDirection = () => {
   const [connection, setConnection] = useState();
@@ -10,6 +11,8 @@ const OrderDirection = () => {
     latitude: 25.5908,
     longitude: 85.1348,
   });
+  const [order, setOrder] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   const joinRoom = async (user, room) => {
     try {
@@ -19,7 +22,6 @@ const OrderDirection = () => {
         .build();
 
       connection.on("GetLocation", (user, location) => {
-        // setMessages(messages => [...messages, { user, message }]);
         console.log("location", location);
         setLiveLocation(location);
       });
@@ -41,6 +43,24 @@ const OrderDirection = () => {
       console.log(e);
     }
   };
+
+  const handleGetOrderDetails = () => {
+    setLoading(true);
+    GetOrderDetails(3)
+      .then((response) => {
+        console.log(response.data);
+        setOrder(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    handleGetOrderDetails();
+  }, []);
 
   return (
     <Box
@@ -68,8 +88,11 @@ const OrderDirection = () => {
           mt: 3,
         }}
       >
-        <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
-          See Order
+        <Button
+          variant="contained"
+          onClick={() => joinRoom("raj", order?.id.toString())}
+        >
+          Track Order
         </Button>
       </Box>
     </Box>

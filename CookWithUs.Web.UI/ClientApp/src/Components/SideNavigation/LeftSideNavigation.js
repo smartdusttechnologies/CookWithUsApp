@@ -2,20 +2,11 @@ import React from "react";
 import { CssBaseline, Divider, IconButton, List, Toolbar } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { mainListItems, secondaryListItems } from "./list";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { setisSideNavOpen } from "../../state";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
@@ -56,7 +47,6 @@ const LeftSideNavigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
-  const darkMode = useSelector((state) => state.app.darkMode);
 
   const handleNavigationAndKeepMenuOpen = (route) => {
     navigate(route);

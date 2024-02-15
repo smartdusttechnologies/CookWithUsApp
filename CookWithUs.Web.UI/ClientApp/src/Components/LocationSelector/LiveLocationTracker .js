@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Skeleton } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import vanDeliveryImage from "../../assets/VanDelivery.png";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
-import axios from "axios";
 import { GetOrderDetails } from "../../services/restaurantServices";
 
 const LiveLocationTracker = ({}) => {
@@ -14,6 +13,7 @@ const LiveLocationTracker = ({}) => {
   });
   const [connection, setConnection] = useState();
   const [order, setOrder] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   const joinRoom = async (user, room) => {
     try {
@@ -23,7 +23,6 @@ const LiveLocationTracker = ({}) => {
         .build();
 
       connection.on("GetLocation", (user, location) => {
-        // setMessages(messages => [...messages, { user, message }]);
         console.log("location", location);
         setLiveLocation(location);
       });
@@ -84,7 +83,7 @@ const LiveLocationTracker = ({}) => {
   // }, []);
 
   let currentLatitude = 25.5908;
-  let intervalId;
+  var intervalId;
 
   const updatingLocation = () => {
     // joinRoom('yash' , 'swiggy')
@@ -98,15 +97,22 @@ const LiveLocationTracker = ({}) => {
     clearInterval(intervalId);
   };
 
-  useEffect(() => {
+  const handleGetOrderDetails = () => {
+    setLoading(true);
     GetOrderDetails(3)
       .then((response) => {
         console.log(response.data);
         setOrder(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    handleGetOrderDetails();
   }, []);
 
   const handleOpenMaps = (latitude, longitude) => {
@@ -121,48 +127,69 @@ const LiveLocationTracker = ({}) => {
         height: "43rem",
       }}
     >
-      <Box
+      {isLoading ? (
+        <Box
         sx={{
           width: "90%",
           margin: "auto",
-        }}
-      >
-        <GoogleMapComponent
-          origin={{ lat: liveLocation?.latitude, lng: liveLocation?.longitude }}
-          destination={{ lat: order?.latitude, lng: order?.longitude }}
-          zoom={15}
-          iconImage={PizzaDelivery}
-        />
-      </Box>
-      <Box
-        sx={{
-          width: "90%",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "space-between",
-          mt: 3,
-        }}
-      >
-        <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
-          Accept Order
-        </Button>
-        <Button variant="contained" onClick={updatingLocation}>
-          Started Delivering
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => handleOpenMaps(order?.latitude, order?.longitude)}
-        >
-          See Direction
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={stopUpdatingLocation}
-        >
-          Delivered
-        </Button>
-      </Box>
+        }}>
+          <Skeleton variant="rectangular" width="100%" height={350} />
+          <Box sx={{ pt: 0.5 }}>
+            <Skeleton height={60} />
+          </Box>
+        </Box>
+      ) : (
+        <>
+          <Box
+            sx={{
+              width: "90%",
+              margin: "auto",
+            }}
+          >
+            <GoogleMapComponent
+              origin={{
+                lat: liveLocation?.latitude,
+                lng: liveLocation?.longitude,
+              }}
+              destination={{ lat: order?.latitude, lng: order?.longitude }}
+              zoom={15}
+              iconImage={PizzaDelivery}
+            />
+          </Box>
+          <Box
+            sx={{
+              width: "90%",
+              margin: "auto",
+              display: "flex",
+              justifyContent: "space-between",
+              mt: 3,
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={() => joinRoom("raj", order?.id.toString())}
+            >
+              Accept Order
+            </Button>
+            <Button variant="contained" onClick={updatingLocation}>
+              Started Delivering
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => handleOpenMaps(order?.latitude, order?.longitude)}
+            >
+              See Direction
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={stopUpdatingLocation}
+            >
+              Delivered
+            </Button>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

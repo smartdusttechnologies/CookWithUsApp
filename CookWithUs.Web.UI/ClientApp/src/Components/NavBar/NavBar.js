@@ -69,7 +69,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
-  const { auth } = React.useContext(AuthContext);
   const dispatch = useDispatch();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
@@ -115,14 +114,14 @@ export default function NavBar() {
             Cook With Us
           </Typography>
           {/* <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </Search> */}
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box
             sx={{
@@ -132,9 +131,6 @@ export default function NavBar() {
                 width: "100%",
                 justifyContent: "space-around",
               },
-              // '@media (max-width: 500px)': {
-              //   display: 'none',
-              // },
             }}
           >
             {/* ShowMore For Phone Mode  */}
@@ -200,8 +196,6 @@ export default function NavBar() {
                 )}
               </IconButton>
             </Tooltip>
-
-            {/* {!auth.isAuthenticated && (<Link to={'/login'}><span>Sign in </span></Link>)}  */}
           </Box>
         </Toolbar>
       </AppBar>
