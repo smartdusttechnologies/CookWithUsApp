@@ -15,9 +15,11 @@ import MastercardIcon from "../../assets/icons/MastercardIcon";
 import PayPalIcon from "../../assets/icons/PayPalIcon";
 import VisaIcon from "../../assets/icons/VisaIcon";
 // import useStyles from "./styles";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { InitiateRazorPayPayment } from "../../services/paymentServices";
 
 const PAYMENT_OPTIONS = [
   {
@@ -41,6 +43,43 @@ const PAYMENT_OPTIONS = [
   },
 ];
 
+const handleRazorpayPayment = async () => {
+  const data = {
+    id: 2,
+    customerName: "Yash raj",
+    email: "itsyash@gmail.com",
+    mobile: "123456789",
+    totalAmount: 233,
+  }; // here anything extra can be passed while creating an order
+  const response = await InitiateRazorPayPayment(data);
+  const order_id = response.data.id;
+  const options = {
+    key: `razorpay_key`,
+    amount: 200,
+    currency: "INR",
+    name: "Cook With Us",
+    description: "Food Order",
+    image: "/your_logo.png",
+    order_id: order_id,
+    handler: (response) => {
+      axios
+        .post(`payment/confirm`, response)
+        .then((response) => alert(response.data))
+        .catch((err) => console.log(err));
+    },
+    prefill: {
+      name: "TESTUSER", //your customer's name
+      email: "testuser@mail.com",
+      contact: "9000000000", //Provide the customer's phone number
+    },
+    theme: {
+      color: "#F37254",
+    },
+  };
+  const rzp1 = new window.Razorpay(options);
+  rzp1.open();
+};
+
 function PaymentCard({
   paymentMethod,
   setPaymentMethod,
@@ -62,7 +101,7 @@ function PaymentCard({
           paddingBottom: theme.spacing(2),
           paddingTop: theme.spacing(2),
           marginTop: theme.spacing(4),
-          margin:'auto',
+          margin: "auto",
         }}
       >
         <Container>
@@ -119,7 +158,8 @@ function PaymentCard({
               borderRadius: 0,
             }}
             onClick={() => {
-              navigate('/success')
+              // navigate("/success");
+              handleRazorpayPayment();
               // if (validateOrder()) onPayment();
             }}
           >

@@ -19,6 +19,7 @@
 	  <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.14" />
 	  <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.32" />
 	  <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.31" />
+	  <PackageReference Include="Razorpay" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>

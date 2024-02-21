@@ -129,10 +129,11 @@ const LiveLocationTracker = ({}) => {
     >
       {isLoading ? (
         <Box
-        sx={{
-          width: "90%",
-          margin: "auto",
-        }}>
+          sx={{
+            width: "90%",
+            margin: "auto",
+          }}
+        >
           <Skeleton variant="rectangular" width="100%" height={350} />
           <Box sx={{ pt: 0.5 }}>
             <Skeleton height={60} />
