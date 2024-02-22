@@ -33,6 +33,15 @@
     <ProjectReference Include="..\CookWithUs.Buisness\CookWithUs.Buisness.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="paytm">
+      <HintPath>..\..\..\PaymentGateways\PaytmDotNetCore\PaytmTest\PaytmTest\bin\paytm.dll</HintPath>
+    </Reference>
+    <Reference Include="PaytmChecksum">
+      <HintPath>..\..\..\PaymentGateways\PaytmChecksum.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

@@ -1,6 +1,10 @@
 ﻿using CookWithUs.Buisness.Models.Payment;
+using CookWithUs.Web.UI.Models.Payment;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 using Razorpay.Api;
+using System;
+using System.IO;
 
 namespace CookWithUs.Web.UI.Controllers
 {
@@ -8,41 +12,18 @@ namespace CookWithUs.Web.UI.Controllers
     [Route("[controller]")]
     public class PaymentController : Controller
     {
-        //public OrderEntity _OrderDetails { get; set; }
-
-        private RazorpayClient _razorpayClient;
-        public PaymentController()
+        private readonly IConfiguration _configuration;
+        public PaymentController(IConfiguration configuration)
         {
-            _razorpayClient = new RazorpayClient("key",
-                "secret");
+            _configuration = configuration;
         }
 
         [HttpPost]
-        [Route("initialize")]
-        public async Task<IActionResult> InitializePayment()
+        [Route("InitiateRzpOrder")]
+        public IActionResult InitiateOrder(PaymentDTO orderDetails)
         {
-            var options = new Dictionary<string, object>
-            {
-                { "amount", 200 },
-                { "currency", "INR" },
-                { "receipt", "recipt_1" },
-                // auto capture payments rather than manual capture
-                // razor pay recommended option
-                { "payment_capture", true }
-            };
-
-            var order = _razorpayClient.Order.Create(options);
-            var orderId = order["id"].ToString();
-            var orderJson = order.Attributes.ToString();
-            return Ok(orderJson);
-        }
-
-        [HttpPost]
-        [Route("InitiateOrder")]
-        public IActionResult InitiateOrder(OrderEntity orderDetails)
-        {
-            string key = "<Enter your Api Key here>";
-            string secret = "<Enter your Api Secret here>";
+            string key = _configuration["PaymentGatewayKeys:RzpApiKey"];
+            string secret = _configuration["PaymentGatewayKeys:RzpSecretKey"];
 
             Random _random = new Random();
             string TransactionId = _random.Next(0, 10000).ToString();
@@ -61,16 +42,9 @@ namespace CookWithUs.Web.UI.Controllers
             return Ok(orderDetails);
         }
 
-        public class ConfirmPaymentPayload
-        {
-            public string razorpay_payment_id { get; }
-            public string razorpay_order_id { get; }
-            public string razorpay_signature { get; }
-        }
-
         [HttpPost]
-        [Route("confirm")]
-        public async Task<IActionResult> ConfirmPayment(ConfirmPaymentPayload confirmPayment)
+        [Route("confirmRzpPayment")]
+        public async Task<IActionResult> ConfirmRazorpayPayment(ConfirmPaymentPayload confirmPayment)
         {
             var attributes = new Dictionary<string, string>
             {
@@ -98,6 +72,91 @@ namespace CookWithUs.Web.UI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPost]
+        [Route("CreatePaytmPayment")]
+        public IActionResult CreatePaytmPayment(PaymentDTO data)
+        {
+            string merchantKey = _configuration["PaymentGatewayKeys:PaytmMerchantKey"];
+            Dictionary<string, string> parameters = new Dictionary<string, string>
+            {
+                { "MID", _configuration["PaymentGatewayKeys:PaytmMerchantId"] },
+                { "CHANNEL_ID", "channel id value" },
+                { "INDUSTRY_TYPE_ID", "industry value" },
+                { "WEBSITE", "website value" },
+                { "EMAIL", data.Email },
+                { "MOBILE_NO", data.Mobile },
+                { "CUST_ID", "1" },
+                { "ORDER_ID", "ajsldfsafd4" },
+                { "TXN_AMOUNT", data.TotalAmount.ToString() },
+                { "CALLBACK_URL", "PaytmPaymentCallback" } //This parameter is not mandatory. Use this to pass the callback url dynamically.
+            };
+
+            string checksum = paytm.CheckSum.generateCheckSum(merchantKey, parameters);
+            parameters.Add("CHECKSUMHASH", checksum);
+
+            string paytmURL = "https://securegw-stage.paytm.in/theia/processTransaction?orderid=" + parameters.FirstOrDefault(x => x.Key == "ORDER_ID").Value;
+            parameters.Add("paytmURL", paytmURL);
+
+            //string outputHTML = "<html>";
+            //outputHTML += "<head>";
+            //outputHTML += "<title>Merchant Check Out Page</title>";
+            //outputHTML += "</head>";
+            //outputHTML += "<body>";
+            //outputHTML += "<center><h1>Please do not refresh this page...</h1></center>";
+            //outputHTML += "<form method='post' action='" + paytmURL + "' name='f1'>";
+            //outputHTML += "<table border='1'>";
+            //outputHTML += "<tbody>";
+            //foreach (string key in parameters.Keys)
+            //{
+            //    outputHTML += "<input type='hidden' name='" + key + "' value='" + parameters[key] + "'>";
+            //}
+            //outputHTML += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "'>";
+            //outputHTML += "</tbody>";
+            //outputHTML += "</table>";
+            //outputHTML += "<script type='text/javascript'>";
+            //outputHTML += "document.f1.submit();";
+            //outputHTML += "</script>";
+            //outputHTML += "</form>";
+            //outputHTML += "</body>";
+            //outputHTML += "</html>";
+
+            //ViewBag.htmlData = outputHTML;
+
+            //return View("PaymentPage");
+            return Ok(parameters);
+        }
+
+        [HttpPost]
+        [Route("PaytmPaymentCallback")]
+        public IActionResult PaytmResponse(PaytmResponse data)
+        {
+            string merchantKey = _configuration["PaymentGatewayKeys:PaytmMerchantKey"];
+
+            Dictionary<string, string> paytmParams = new Dictionary<string, string>
+            {
+                { "MID", data.MID },
+                { "ORDER_ID", data.ORDERID }
+            };
+
+            var paytmChecksum = data.CHECKSUMHASH;
+            bool verifySignature = Paytm.Checksum.verifySignature(paytmParams, merchantKey, paytmChecksum);
+            if (verifySignature)
+            {
+                if (data.STATUS == "TXN_SUCCESS")
+                {
+                    return Redirect($"http://localhost:3000/success?orderId={data.ORDERID}&message={data.RESPMSG}");
+                }
+                else
+                {
+                    return Redirect($"http://localhost:3000/failure?orderId={data.ORDERID}&message={data.RESPMSG}");
+                }
+            }
+            else
+            {
+                return BadRequest("something went wrong");
+            }
         }
     }
 }

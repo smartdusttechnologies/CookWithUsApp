@@ -9,31 +9,32 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CodIcon from "../../assets/icons/CodIcon";
 import MastercardIcon from "../../assets/icons/MastercardIcon";
 import PayPalIcon from "../../assets/icons/PayPalIcon";
 import VisaIcon from "../../assets/icons/VisaIcon";
-// import useStyles from "./styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { InitiateRazorPayPayment } from "../../services/paymentServices";
+import { ToastContainer, toast } from "react-toastify";
 
 const PAYMENT_OPTIONS = [
   {
     id: 0,
-    payment: "STRIPE",
-    label: "Credit / Debit Card",
+    payment: "RazorPay",
+    label: "RazorPay UPI / Credit / Debit",
     icon: <VisaIcon />,
     icon1: <MastercardIcon />,
   },
   {
     id: 1,
-    payment: "PAYPAL",
-    label: "Paypal",
-    icon: <PayPalIcon />,
+    payment: "Paytm",
+    label: "Paytm UPI / Card",
+    icon: <VisaIcon />,
+    icon1: <MastercardIcon />,
   },
   {
     id: 2,
@@ -63,8 +64,11 @@ const handleRazorpayPayment = async () => {
     order_id: order_id,
     handler: (response) => {
       axios
-        .post(`payment/confirm`, response)
-        .then((response) => alert(response.data))
+        .post(`payment/confirmRzpPayment`, response)
+        .then((response) => {
+          alert(response.data);
+          console.log(response.data);
+        })
         .catch((err) => console.log(err));
     },
     prefill: {
@@ -80,17 +84,88 @@ const handleRazorpayPayment = async () => {
   rzp1.open();
 };
 
-function PaymentCard({
-  paymentMethod,
-  setPaymentMethod,
-  validateOrder,
-  onPayment,
-  loading,
-}) {
+const handlePaytmPayment = async () => {
+  const data = {
+    id: 2,
+    customerName: "Yash raj",
+    email: "itsyash@gmail.com",
+    mobile: "123456789",
+    totalAmount: 233,
+  }; // here anything extra can be passed while creating an order
+
+  await axios.post("payment/CreatePaytmPayment", data).then((response) => {
+    console.log(response.data);
+    const { paytmURL, ...params } = response?.data;
+    post({
+      action: paytmURL,
+      params: params,
+    });
+  });
+};
+
+function buildForm({ action, params }) {
+  const form = document.createElement("form");
+  form.setAttribute("method", "post");
+  form.setAttribute("action", action);
+
+  Object.keys(params)?.forEach((key) => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", key);
+    input.setAttribute("value", stringifyValue(params[key]));
+    form.appendChild(input);
+  });
+  return form;
+}
+
+function post(details) {
+  const form = buildForm(details);
+  document.body.appendChild(form);
+  // setLoading(false);
+  form.submit();
+  form.remove();
+}
+function isDate(val) {
+  // Cross realm comptatible
+  return Object.prototype.toString.call(val) === "[object Date]";
+}
+function isObj(val) {
+  return typeof val === "object";
+}
+function stringifyValue(val) {
+  if (isObj(val) && !isDate(val)) {
+    return JSON.stringify(val);
+  } else {
+    return val;
+  }
+}
+
+function PaymentCard({ loading }) {
   const navigate = useNavigate();
+  const [paymentMethod, setPaymentMethod] = useState(null);
+
+  const handlePayment = () => {
+    if (!paymentMethod) {
+      toast.warn("Please select a payment method.");
+      return;
+    }
+
+    switch (paymentMethod?.id) {
+      case 0:
+        handleRazorpayPayment();
+        break;
+      case 1:
+        handlePaytmPayment();
+        break;
+      case 2:
+        // navigate("/success");
+        break;
+      default:
+        toast.warn("Invalid payment method.");
+    }
+  };
 
   const theme = createTheme();
-  // const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
@@ -129,7 +204,7 @@ function PaymentCard({
               <Box display="flex" alignItems="center">
                 <Radio
                   color="primary"
-                  // checked={paymentMethod.id === item.id}
+                  checked={paymentMethod?.id === item.id}
                   onChange={() => setPaymentMethod(item)}
                 />
                 <Typography variant="body1" color="textSecondary">
@@ -158,9 +233,7 @@ function PaymentCard({
               borderRadius: 0,
             }}
             onClick={() => {
-              // navigate("/success");
-              handleRazorpayPayment();
-              // if (validateOrder()) onPayment();
+              handlePayment();
             }}
           >
             {loading ? (
@@ -190,6 +263,7 @@ function PaymentCard({
             transactions will be processed abroad.
           </Typography>
         </Container>
+        <ToastContainer />
       </Paper>
     </ThemeProvider>
   );

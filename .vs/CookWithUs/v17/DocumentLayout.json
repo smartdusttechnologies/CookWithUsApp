@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|c:\\users\\hp\\desktop\\smartdust\\cookwithusapp\\cookwithusapp\\cookwithus.web.ui\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|c:\\users\\hp\\desktop\\smartdust\\cookwithusapp\\cookwithusapp\\cookwithus.web.ui\\models\\payment\\paytmresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\models\\payment\\paytmresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|c:\\users\\hp\\desktop\\smartdust\\cookwithusapp\\cookwithusapp\\cookwithus.web.ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PaytmResponse.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\Models\\Payment\\PaytmResponse.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\Models\\Payment\\PaytmResponse.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\Models\\Payment\\PaytmResponse.cs",
+              "RelativeToolTip": "CookWithUs.Web.UI\\Models\\Payment\\PaytmResponse.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAYwAUAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-22T17:17:59.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\Controllers\\PaymentController.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "CookWithUs.Web.UI\\Controllers\\PaymentController.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAEwF0AAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-21T09:48:08.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\appsettings.json",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\appsettings.json",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Web.UI\\appsettings.json",
+              "RelativeToolTip": "CookWithUs.Web.UI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-22T12:21:59.204Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
