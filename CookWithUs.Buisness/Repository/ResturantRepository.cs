@@ -387,5 +387,7 @@ namespace ServcieBooking.Buisness.Repository
             return db.QueryFirstOrDefault<OrderModel>(query, parameters);
 
         }
+
+
     }
 }

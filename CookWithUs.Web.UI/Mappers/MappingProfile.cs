@@ -11,6 +11,7 @@ namespace SmartdustApp.Web.UI.Mappers
             CreateMap<RegisterRestaurantDTO, RegisterRestaurantModel>().ReverseMap();
             CreateMap<MenuDTO, RestaurantMenu>().ReverseMap();
             CreateMap<OrderDTO, OrderModel>().ReverseMap();
+            CreateMap<OrderHistoryDTO, OrderHistoryModel>().ReverseMap();
         }
     }
 }

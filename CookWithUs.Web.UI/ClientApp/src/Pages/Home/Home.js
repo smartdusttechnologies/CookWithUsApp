@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useSelector } from "react-redux";
 import { getRestaurants } from "../../services/restaurantServices";
-import useLocation from "../../hooks/useLocation";
+/*import useLocation from "../../hooks/useLocation";*/
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { location } = useLocation();
+  //const { location } = useLocation();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
   const darkMode = useSelector((state) => state.app.darkMode);
 

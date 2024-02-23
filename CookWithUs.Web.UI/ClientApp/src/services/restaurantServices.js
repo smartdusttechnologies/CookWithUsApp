@@ -36,3 +36,4 @@ export const GetOrderDetails = (orderId) => {
 export const GetOrdersByUserID = (userId) => {
   return axiosInstance.get(`/resturant/GetOrdersByUserID/${userId}`);
 };
+
