@@ -88,9 +88,9 @@ namespace CookWithUs.Web.UI.Controllers
                 { "EMAIL", data.Email },
                 { "MOBILE_NO", data.Mobile },
                 { "CUST_ID", "1" },
-                { "ORDER_ID", "ajsldfsafd4" },
+                { "ORDER_ID", data.Id.ToString() },
                 { "TXN_AMOUNT", data.TotalAmount.ToString() },
-                { "CALLBACK_URL", "PaytmPaymentCallback" } //This parameter is not mandatory. Use this to pass the callback url dynamically.
+                { "CALLBACK_URL", "" } //This parameter is not mandatory. Use this to pass the callback url dynamically.
             };
 
             string checksum = paytm.CheckSum.generateCheckSum(merchantKey, parameters);
