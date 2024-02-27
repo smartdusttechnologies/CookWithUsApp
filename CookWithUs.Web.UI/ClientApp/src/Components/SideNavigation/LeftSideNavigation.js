@@ -96,11 +96,11 @@ const LeftSideNavigation = () => {
             </ListItemIcon>
             <ListItemText primary="Chef Dashboard" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate("/myorders")}>
             <ListItemIcon>
               <LayersIcon />
             </ListItemIcon>
-            <ListItemText primary="Integrations" />
+            <ListItemText primary="Orders" />
           </ListItemButton>
         </React.Fragment>
         <Divider sx={{ my: 1 }} />

@@ -99,32 +99,6 @@ namespace CookWithUs.Web.UI.Controllers
             string paytmURL = "https://securegw-stage.paytm.in/theia/processTransaction?orderid=" + parameters.FirstOrDefault(x => x.Key == "ORDER_ID").Value;
             parameters.Add("paytmURL", paytmURL);
 
-            //string outputHTML = "<html>";
-            //outputHTML += "<head>";
-            //outputHTML += "<title>Merchant Check Out Page</title>";
-            //outputHTML += "</head>";
-            //outputHTML += "<body>";
-            //outputHTML += "<center><h1>Please do not refresh this page...</h1></center>";
-            //outputHTML += "<form method='post' action='" + paytmURL + "' name='f1'>";
-            //outputHTML += "<table border='1'>";
-            //outputHTML += "<tbody>";
-            //foreach (string key in parameters.Keys)
-            //{
-            //    outputHTML += "<input type='hidden' name='" + key + "' value='" + parameters[key] + "'>";
-            //}
-            //outputHTML += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "'>";
-            //outputHTML += "</tbody>";
-            //outputHTML += "</table>";
-            //outputHTML += "<script type='text/javascript'>";
-            //outputHTML += "document.f1.submit();";
-            //outputHTML += "</script>";
-            //outputHTML += "</form>";
-            //outputHTML += "</body>";
-            //outputHTML += "</html>";
-
-            //ViewBag.htmlData = outputHTML;
-
-            //return View("PaymentPage");
             return Ok(parameters);
         }
 

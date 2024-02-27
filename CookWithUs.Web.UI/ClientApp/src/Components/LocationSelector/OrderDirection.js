@@ -4,6 +4,7 @@ import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { GetOrderDetails } from "../../services/restaurantServices";
+import { useParams } from "react-router-dom";
 
 const OrderDirection = () => {
   const [connection, setConnection] = useState();
@@ -13,6 +14,7 @@ const OrderDirection = () => {
   });
   const [order, setOrder] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const { id } = useParams();
 
   const joinRoom = async (user, room) => {
     try {
@@ -46,10 +48,10 @@ const OrderDirection = () => {
 
   const handleGetOrderDetails = () => {
     setLoading(true);
-    GetOrderDetails(3)
+    GetOrderDetails(id)
       .then((response) => {
-        console.log(response.data);
-        setOrder(response.data);
+        console.log(response?.data, "Single Order");
+        setOrder(response?.data);
         setLoading(false);
       })
       .catch((error) => {

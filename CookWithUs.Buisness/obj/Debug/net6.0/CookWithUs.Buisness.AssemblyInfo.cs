@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CookWithUs.Buisness")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9fe564664f8087b6f463b12c2d29a37ef9908cf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b760d1ef39bd1472a777609ec382cb8631fe324")]
 [assembly: System.Reflection.AssemblyProductAttribute("CookWithUs.Buisness")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CookWithUs.Buisness")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
