@@ -15,6 +15,7 @@ namespace CookWithUs.Buisness.Models
         public int ZipCode { get; set; }
         public int OrderPrice { get; set; }
         public string Phone { get; set; }
+        public string OrderStatus { get; set; }
         public List<OrdersProduct> Products { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }

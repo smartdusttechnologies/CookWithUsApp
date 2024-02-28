@@ -353,7 +353,7 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,, O.OrderStatus,
                        OP.ProductID, OP.Quantity
                 FROM Orders O
                 INNER JOIN OrdersProduct OP ON O.ID = OP.OrderID";
@@ -383,11 +383,12 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
-                       OP.ProductID, OP.Quantity, M.Name, M.Type, M.Price
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode, O.OrderStatus,
+                       OP.ProductID, OP.Quantity, M.Name, M.Type, M.Price, D.DocUrl AS ImageUrl
                 FROM Orders O
                 INNER JOIN OrdersProduct OP ON O.ID = OP.OrderID
                 INNER JOIN Menu M ON M.ID = OP.ProductID
+                LEFT JOIN Document D ON D.ID = M.ImageID
                 WHERE O.UserID = @userId";
 
             var parameters = new { userId };

@@ -110,11 +110,11 @@ const Orders = () => {
                 }}
               >
                 <Box onClick={() => handleBoxClick(item)}>
-                  {item?.imageUrl ? (
+                  {item?.products[0]?.imageUrl ? (
                     <img
                       style={{ width: 160, height: 110, borderRadius: "10px" }}
                       alt={item?.name}
-                      src={item?.imageUrl}
+                      src={item?.products[0]?.imageUrl}
                     />
                   ) : (
                     <Box style={{ width: 160, height: 110 }}>
@@ -131,10 +131,14 @@ const Orders = () => {
                     Price - {`₹ ${item?.orderPrice}`}
                   </Typography>
                 </Box>
-
-                <Button onClick={() => navigate(`/trackorder/${item.id}`)}>
-                  Track Order
-                </Button>
+                {item?.orderStatus == "Processing" && (
+                  <Button
+                    size="small"
+                    onClick={() => navigate(`/trackorder/${item.id}`)}
+                  >
+                    Track Order
+                  </Button>
+                )}
               </Box>
             ))}
       </Grid>
@@ -142,9 +146,7 @@ const Orders = () => {
         <DialogContent>
           {selectedOrder && (
             <>
-              <Typography variant="h6">
-                Order Details and Products
-              </Typography>
+              <Typography variant="h6">Order Details and Products</Typography>
               <Divider />
               <Typography variant="body1">
                 Order ID: {selectedOrder?.id}
