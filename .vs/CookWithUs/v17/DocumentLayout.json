@@ -30,12 +30,11 @@
               "Title": "OrdersProduct.cs",
               "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs",
               "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs*",
-              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs*",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\OrdersProduct.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T09:44:30.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-28T09:44:30.19Z"
             },
             {
               "$type": "Document",
@@ -43,9 +42,9 @@
               "Title": "ResturantRepository.cs",
               "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Repository\\ResturantRepository.cs",
               "RelativeDocumentMoniker": "CookWithUs.Buisness\\Repository\\ResturantRepository.cs",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Repository\\ResturantRepository.cs*",
-              "RelativeToolTip": "CookWithUs.Buisness\\Repository\\ResturantRepository.cs*",
-              "ViewState": "AQIAAHoBAAAAAAAAAAAcwIYBAAAUAAAA",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\Repository\\ResturantRepository.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Repository\\ResturantRepository.cs",
+              "ViewState": "AQIAAHcBAAAAAAAAAAAcwIgBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-28T04:05:54.261Z",
               "EditorCaption": ""
@@ -60,8 +59,7 @@
               "RelativeToolTip": "CookWithUs.Buisness\\Models\\OrderModel.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAuwBIAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T07:24:36.776Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-28T07:24:36.776Z"
             }
           ]
         }

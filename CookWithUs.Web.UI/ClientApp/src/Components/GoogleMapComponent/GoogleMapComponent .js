@@ -8,12 +8,14 @@ import {
 import { GOOGLE_MAPS_KEY } from "../../config/constants";
 import { Box, Typography } from "@mui/material";
 import CircularLoading from "../LoadingComponent/CircularLoading";
-import PizzaDelivery from "../../assets/PizzaDelivery.png";
-import car from "../../assets/car.png";
-import VanDelivery from "../../assets/VanDelivery.png";
-import BikeDelivery from "../../assets/BikeDelivery.png";
 
-const GoogleMapComponent = ({ origin, destination, zoom, iconImage }) => {
+const GoogleMapComponent = ({
+  origin,
+  destination,
+  zoom,
+  iconImage,
+  iconDestination,
+}) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: GOOGLE_MAPS_KEY,
@@ -56,11 +58,13 @@ const GoogleMapComponent = ({ origin, destination, zoom, iconImage }) => {
     lng: origin.lng,
   };
 
-  const icon = {
-    url: iconImage,
-    scaledSize: map && new window.google.maps.Size(40, 40),
-    origin: map && new window.google.maps.Point(0, 0),
-    anchor: map && new window.google.maps.Point(20, 40),
+  const makeIcon = (iconImage) => {
+    return {
+      url: iconImage,
+      scaledSize: map && new window.google.maps.Size(40, 40),
+      origin: map && new window.google.maps.Point(0, 0),
+      anchor: map && new window.google.maps.Point(20, 40),
+    };
   };
 
   return isLoaded ? (
@@ -76,11 +80,19 @@ const GoogleMapComponent = ({ origin, destination, zoom, iconImage }) => {
             <DirectionsRenderer
               directions={directions}
               options={{
-                markerOptions: { icon: icon },
+                suppressMarkers: true,
               }}
             />
           )}
-          {!destination && <Marker position={origin} icon={icon} />}
+          {!destination && (
+            <Marker position={origin} icon={makeIcon(iconImage)} />
+          )}
+          {destination && directions && (
+            <Marker position={origin} icon={makeIcon(iconImage)} />
+          )}
+          {destination && directions && (
+            <Marker position={destination} icon={makeIcon(iconDestination)} />
+          )}
         </GoogleMap>
       </Box>
       {destination && (
