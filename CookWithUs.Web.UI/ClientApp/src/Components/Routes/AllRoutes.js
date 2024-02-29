@@ -27,7 +27,7 @@ const AllRoutes = () => {
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/success" element={<Confirmation />} />
       <Route path="/payment" element={<PaymentCard />} />
-      <Route path="/livelocationmap" element={<LiveLocationTracker />} />
+          <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
       <Route path="/trackorder" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />
       <Route path="/registerasrider" element={<RegisterAsRider />} />

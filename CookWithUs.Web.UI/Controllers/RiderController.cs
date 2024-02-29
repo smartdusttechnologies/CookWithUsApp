@@ -61,5 +61,12 @@ namespace CookWithUs.Web.UI.Controllers
             var response  = _mediator.Send(new RiderOrderById.Command(UserId)).Result;
             return Ok(response);
         }
+        [Route("OrderUpdate")]
+        [HttpPost]
+        public IActionResult OrderUpdate([FromBody] int orderId)
+        {
+            var response = _mediator.Send(new OrderUpdate.Command(orderId)).Result;
+            return Ok(response);
+        }
     }
 }

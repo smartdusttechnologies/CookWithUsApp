@@ -13,6 +13,7 @@ namespace CookWithUs.Buisness.Repository.Interface
         List<RiderListModel> GetRiderList();
         bool OrderDetail(OrderHistoryModel orderHistory);
         List<RIderOrderModel> OrderListById(int id);
+        bool OrderUpdate(int orderDetailId);
 
     }
 }

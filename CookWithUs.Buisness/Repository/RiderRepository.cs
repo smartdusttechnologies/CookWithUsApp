@@ -35,13 +35,12 @@ namespace CookWithUs.Buisness.Repository
         public bool OrderDetail(OrderHistoryModel orderHistory)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
-            var query = @" INSERT INTO OrderHistory (UserId, OrderName, OrderDateTime, Latitude, Longitude, OrderStatus)
-            VALUES (@UserId, @OrderName, @OrderDateTime, @Latitude, @Longitude, @OrderStatus)";
+            var query = @" INSERT INTO Orders (RiderId, OrderDateTime, Latitude, Longitude, OrderStatus)
+            VALUES (@RiderId,  @OrderDateTime, @Latitude, @Longitude, @OrderStatus)";
 
             var parameters = new
             {
-                UserId = orderHistory.UserId,
-                OrderName = orderHistory.OrderName,
+                RiderId = orderHistory.RiderId,
                 OrderDateTime = orderHistory.OrderDateTime,
                 Latitude = orderHistory.Latitude,
                 Longitude = orderHistory.Longitude,
@@ -53,14 +52,25 @@ namespace CookWithUs.Buisness.Repository
 
         }
 
-        public List<RIderOrderModel> OrderListById( int Id)
+        public List<RIderOrderModel> OrderListById(int Id)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            var query = @"  SELECT *  FROM OrderHistory WHERE UserId = @Id";
+            var query = @"  SELECT *  FROM Orders WHERE RiderId = @Id";
 
-           return  db.Query<RIderOrderModel>(query, new { Id }).ToList();
-            
+            return db.Query<RIderOrderModel>(query, new { Id }).ToList();
+
+        }
+
+        public bool OrderUpdate(int orderDetailId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            var query = @"UPDATE Orders SET OrderStatus = 'Delivered' WHERE Id = @Id";
+            int affectedRows = db.Execute(query, new { Id = orderDetailId });
+
+            return affectedRows > 0;
+
+
         }
     }
 }

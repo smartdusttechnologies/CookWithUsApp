@@ -32,6 +32,7 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<GetOrderDetails.Command>, GetOrderDetails.Authorization>();
             services.AddTransient<IAuthorizationRule<RiderList.Command>, RiderList.Authorization>();
             services.AddTransient<IAuthorizationRule<RiderOrderById.Command>, RiderOrderById.Authorization>();
+            services.AddTransient<IAuthorizationRule<OrderUpdate.Command>, OrderUpdate.Authorization>();
 
             services.AddTransient<IAuthorizationRule<OrderHistory.Command>, OrderHistory.Authorization>();
             return services;

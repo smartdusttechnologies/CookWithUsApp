@@ -6,8 +6,13 @@ import vanDeliveryImage from "../../assets/VanDelivery.png";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
 import axios from "axios";
 import { GetOrderDetails } from "../../services/restaurantServices";
+import { updateOrder } from "../../services/riderServices";
+import { useParams } from 'react-router-dom';
 
-const LiveLocationTracker = ({}) => {
+const LiveLocationTracker = ({ }) => {
+
+
+    const { orderId } = useParams();
   const [liveLocation, setLiveLocation] = useState({
     latitude: 25.5908,
     longitude: 85.1348,
@@ -95,11 +100,21 @@ const LiveLocationTracker = ({}) => {
   };
 
   const stopUpdatingLocation = () => {
-    clearInterval(intervalId);
+      clearInterval(intervalId);
+      updateOrder(orderId)
+          .then((response) => {
+              console.log(response.data);
+          })
+          .catch((error) => {
+              console.error('Error updating order:', error);
+          });
+
+
+
   };
 
   useEffect(() => {
-    GetOrderDetails(3)
+      GetOrderDetails(orderId)
       .then((response) => {
         console.log(response.data);
         setOrder(response.data);
@@ -143,9 +158,9 @@ const LiveLocationTracker = ({}) => {
           mt: 3,
         }}
       >
-        <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
-          Accept Order
-        </Button>
+        {/*<Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>*/}
+        {/*  Accept Order*/}
+        {/*</Button>*/}
         <Button variant="contained" onClick={updatingLocation}>
           Started Delivering
         </Button>

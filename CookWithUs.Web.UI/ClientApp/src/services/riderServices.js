@@ -20,3 +20,7 @@ export const Orderdetails = ( orderdetail) => {
 export const OrderList = (UserId) => {
     return axiosInstance.get(`/Rider/RiderOrderList?UserId=${UserId}`);
 };
+
+export const updateOrder = (orderId) => {
+    return axiosInstance.post('/Rider/OrderUpdate', orderId);
+}; 
