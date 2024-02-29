@@ -93,8 +93,14 @@ const LiveLocationTracker = ({ }) => {
 
   const updatingLocation = () => {
     // joinRoom('yash' , 'swiggy')
-    intervalId = setInterval(() => {
-      sendLocation(currentLatitude, 85.1348);
+      intervalId = setInterval(() => {
+
+          navigator.geolocation.getCurrentPosition((position) => {
+              sendLocation(
+                  position?.coords?.latitude,
+                  position?.coords?.longitude
+              );
+          });
       currentLatitude += 0.01;
     }, 5000);
   };
@@ -117,7 +123,8 @@ const LiveLocationTracker = ({ }) => {
       GetOrderDetails(orderId)
       .then((response) => {
         console.log(response.data);
-        setOrder(response.data);
+          setOrder(response.data);
+          joinRoom("raj", response.data.id)
       })
       .catch((error) => {
         console.log(error);
