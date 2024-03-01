@@ -4,6 +4,7 @@ import {
   Marker,
   DirectionsRenderer,
   useJsApiLoader,
+  InfoWindow,
 } from "@react-google-maps/api";
 import { GOOGLE_MAPS_KEY } from "../../config/constants";
 import { Box, Typography } from "@mui/material";
@@ -25,6 +26,15 @@ const GoogleMapComponent = ({
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
+  const [infoWindowOpen, setInfoWindowOpen] = useState(true);
+
+  const handleMarkerClick = () => {
+    setInfoWindowOpen(true);
+  };
+
+  const handleInfoWindowClose = () => {
+    setInfoWindowOpen(false);
+  };
 
   const onLoad = (map) => {
     setMap(map);
@@ -91,7 +101,22 @@ const GoogleMapComponent = ({
             <Marker position={origin} icon={makeIcon(iconImage)} />
           )}
           {destination && directions && (
-            <Marker position={destination} icon={makeIcon(iconDestination)} />
+            <Marker
+              position={destination}
+              icon={makeIcon(iconDestination)}
+              onClick={handleMarkerClick}
+            />
+          )}
+          {infoWindowOpen && (
+            <InfoWindow
+              position={{ lat: destination.lat + 0.015, lng: destination.lng }}
+              onCloseClick={handleInfoWindowClose}
+            >
+              <div>
+                <h3>Duration</h3>
+                <p>{duration}</p>
+              </div>
+            </InfoWindow>
           )}
         </GoogleMap>
       </Box>
