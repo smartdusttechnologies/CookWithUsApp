@@ -35,10 +35,10 @@
 
   <ItemGroup>
     <Reference Include="paytm">
-      <HintPath>..\..\..\PaymentGateways\PaytmDotNetCore\PaytmTest\PaytmTest\bin\paytm.dll</HintPath>
+      <HintPath>paytm.dll</HintPath>
     </Reference>
     <Reference Include="PaytmChecksum">
-      <HintPath>..\..\..\PaymentGateways\PaytmChecksum.dll</HintPath>
+      <HintPath>PaytmChecksum.dll</HintPath>
     </Reference>
   </ItemGroup>
 
