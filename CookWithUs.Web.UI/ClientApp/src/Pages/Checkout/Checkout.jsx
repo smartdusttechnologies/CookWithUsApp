@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import * as yup from "yup";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
+import { useRoutes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Checkout = () => {
-  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [cart, setCart] = useState([]);
   const isFirstStep = activeStep === 0;
@@ -41,7 +41,7 @@ const Checkout = () => {
 
     actions.setTouched({});
   };
-
+  const navigate = useNavigate();
   async function makePayment(values) {
     // const stripe = await stripePromise;
     const requestBody = {

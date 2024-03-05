@@ -353,66 +353,25 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,, O.OrderStatus,
-                       OP.ProductID, OP.Quantity
-                FROM Orders O
-                INNER JOIN OrdersProduct OP ON O.ID = OP.OrderID";
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
+                FROM Orders O";
 
-            var orderDictionary = new Dictionary<int, OrderModel>();
+            return db.Query<OrderModel>(query).ToList();
 
-            db.Query<OrderModel, OrdersProduct, OrderModel>(query,
-                (order, product) =>
-                {
-                    if (!orderDictionary.TryGetValue(order.ID, out var orderEntry))
-                    {
-                        orderEntry = order;
-                        orderEntry.Products = new List<OrdersProduct>();
-                        orderDictionary.Add(order.ID, orderEntry);
-                    }
-
-                    orderEntry.Products.Add(product);
-                    return orderEntry;
-                },
-                splitOn: "ProductID"
-            );
-
-            return orderDictionary.Values.ToList();
         }
         public List<OrderModel> GetOrdersByUserID(int userId)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode, O.OrderStatus,
-                       OP.ProductID, OP.Quantity, M.Name, M.Type, M.Price, D.DocUrl AS ImageUrl
+                SELECT O.ID, O.UserID, O.Address, O.Phone, O.OrderPrice, O.ZipCode,
                 FROM Orders O
-                INNER JOIN OrdersProduct OP ON O.ID = OP.OrderID
-                INNER JOIN Menu M ON M.ID = OP.ProductID
-                LEFT JOIN Document D ON D.ID = M.ImageID
                 WHERE O.UserID = @userId";
 
             var parameters = new { userId };
 
-            var orderDictionary = new Dictionary<int, OrderModel>();
+            return db.Query<OrderModel>(query, parameters).ToList();
 
-            db.Query<OrderModel, OrdersProduct, OrderModel>(query,
-                (order, product) =>
-                {
-                    if (!orderDictionary.TryGetValue(order.ID, out var orderEntry))
-                    {
-                        orderEntry = order;
-                        orderEntry.Products = new List<OrdersProduct>();
-                        orderDictionary.Add(order.ID, orderEntry);
-                    }
-
-                    orderEntry.Products.Add(product);
-                    return orderEntry;
-                },
-                parameters,
-                splitOn: "ProductID"
-            );
-
-            return orderDictionary.Values.ToList();
         }
         public OrderModel GetOrderDetails(int orderId)
         {

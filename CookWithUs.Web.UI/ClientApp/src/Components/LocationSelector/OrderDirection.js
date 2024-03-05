@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
-import car from "../../assets/car.png";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
-import { GetOrderDetails } from "../../services/restaurantServices";
-import { useParams } from "react-router-dom";
 
 const OrderDirection = () => {
   const [connection, setConnection] = useState();
@@ -13,9 +10,6 @@ const OrderDirection = () => {
     latitude: 25.5908,
     longitude: 85.1348,
   });
-  const [order, setOrder] = useState({});
-  const [isLoading, setLoading] = useState(false);
-  const { id } = useParams();
 
   const joinRoom = async (user, room) => {
     try {
@@ -25,6 +19,7 @@ const OrderDirection = () => {
         .build();
 
       connection.on("GetLocation", (user, location) => {
+        // setMessages(messages => [...messages, { user, message }]);
         console.log("location", location);
         setLiveLocation(location);
       });
@@ -47,24 +42,6 @@ const OrderDirection = () => {
     }
   };
 
-  const handleGetOrderDetails = () => {
-    setLoading(true);
-    GetOrderDetails(id)
-      .then((response) => {
-        console.log(response?.data, "Single Order");
-        setOrder(response?.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    handleGetOrderDetails();
-  }, []);
-
   return (
     <Box
       sx={{
@@ -82,7 +59,6 @@ const OrderDirection = () => {
           origin={{ lat: liveLocation?.latitude, lng: liveLocation?.longitude }}
           destination={{ lat: 25.4908, lng: 85.1348 }}
           iconImage={PizzaDelivery}
-          iconDestination={car}
         />
       </Box>
       <Box
@@ -92,11 +68,8 @@ const OrderDirection = () => {
           mt: 3,
         }}
       >
-        <Button
-          variant="contained"
-          onClick={() => joinRoom("raj", order?.id.toString())}
-        >
-          Track Order
+        <Button variant="contained" onClick={() => joinRoom("raj", "swiggy")}>
+          See Order
         </Button>
       </Box>
     </Box>
