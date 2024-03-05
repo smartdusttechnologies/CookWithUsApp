@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
+    "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
+    "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "projectUniqueName": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
         "projectName": "CookWithUs.Buisness",
-        "projectPath": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\Smartdust\\CookWithUsApp\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
+        "projectPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "packagesPath": "C:\\Users\\Ritesh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ritesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -93,26 +88,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
         }
       }
     }
