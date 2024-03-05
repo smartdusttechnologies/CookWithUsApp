@@ -14,14 +14,12 @@ namespace ServiceBooking.Web.UI.Controllers
     public class ResturantController : ControllerBase
     {
         private readonly IMediator _mediator;
-       // private readonly IResturantRepository _restaurant;
         private readonly IMapper _mapper;
 
 
-        public ResturantController(IMediator mediator,/*IResturantRepository restaurant,*/ IMapper mapper)
+        public ResturantController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
-            //_restaurant = restaurant;
             _mapper = mapper;
         }
         [Route("Get")]

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Skeleton } from "@mui/material";
 import GoogleMapComponent from "../GoogleMapComponent/GoogleMapComponent ";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import vanDeliveryImage from "../../assets/VanDelivery.png";
 import PizzaDelivery from "../../assets/PizzaDelivery.png";
-import axios from "axios";
 import { GetOrderDetails } from "../../services/restaurantServices";
 import { updateOrder } from "../../services/riderServices";
 import { useParams } from 'react-router-dom';
@@ -16,6 +15,7 @@ const LiveLocationTracker = ({ }) => {
     const [liveLocation, setLiveLocation] = useState(null);
   const [connection, setConnection] = useState();
   const [order, setOrder] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   const joinRoom = async (user, room) => {
     try {
@@ -25,7 +25,6 @@ const LiveLocationTracker = ({ }) => {
         .build();
 
       connection.on("GetLocation", (user, location) => {
-        // setMessages(messages => [...messages, { user, message }]);
         console.log("location", location);
         setLiveLocation(location);
       });

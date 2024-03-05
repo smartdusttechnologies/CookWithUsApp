@@ -16,19 +16,21 @@ import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
 import RestaurantDetails from "../../Pages/Products/RestaurantDetails";
 import RiderDashboard from "../../Pages/RiderDashboard/Dashboard";
+import Orders from "../../Pages/Orders/Orders";
 
 const AllRoutes = () => {
   return (
     <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/meals" element={< Products />}></Route>
-          
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/meals" element={<Products />}></Route>
+      <Route path="/myorders" element={<Orders />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/success" element={<Confirmation />} />
       <Route path="/payment" element={<PaymentCard />} />
           <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
       <Route path="/trackorder" element={<OrderDirection />} />
+      <Route path="/trackorder/:id" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />
       <Route path="/registerasrider" element={<RegisterAsRider />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
