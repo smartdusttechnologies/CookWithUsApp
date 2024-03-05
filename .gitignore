@@ -46,3 +46,8 @@ CookWithUs.Buisness/obj/Debug/net6.0/CookWithUs.Buisness.sourcelink.json
 .vs/CookWithUs/v17/.suo
 *.bin
 .vs/CookWithUs/v17/.suo
+CookWithUs.DB/CookWithUs.DB.dbmdl
+CookWithUs.DB/CookWithUs.DB.jfm
+.vs/CookWithUs/DesignTimeBuild/.dtbcache.v2
+.vs/CookWithUs/v17/.futdcache.v2
+.vs/CookWithUs/DesignTimeBuild/.dtbcache.v2
