@@ -1087,11 +1087,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+      "projectUniqueName": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppForMerge\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
       "projectName": "CookWithUs.Buisness",
-      "projectPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+      "projectPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppForMerge\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
       "packagesPath": "C:\\Users\\Ritesh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
+      "outputPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppForMerge\\CookWithUs.Buisness\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ritesh\\AppData\\Roaming\\NuGet\\NuGet.Config",

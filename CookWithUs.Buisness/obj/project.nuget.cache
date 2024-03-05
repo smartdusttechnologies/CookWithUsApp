@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H6rLm/LrWYJ7JYPvV1jR8DScDvmK0dBP80aizS1MaStuiPeGCCjQ5lMguW925GxTU5ks9926PgJVzU3NaVT9sA==",
+  "dgSpecHash": "Gq/pMVG2sK3vezxd1VWLSo1Lnskr6kl2nUPyuELf3hpHPVVKvMsWfF702e0av0SR3M0YLEVEbUufyt0A7J3v4g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ritesh\\Documents\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+  "projectFilePath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppForMerge\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ritesh\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Ritesh\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
