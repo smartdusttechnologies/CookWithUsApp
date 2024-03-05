@@ -22,5 +22,5 @@ export const OrderList = (UserId) => {
 };
 
 export const updateOrder = (orderId) => {
-    return axiosInstance.post('/Rider/OrderUpdate', orderId);
-}; 
+    return axiosInstance.post('/Rider/OrderUpdate', { orderId });
+};

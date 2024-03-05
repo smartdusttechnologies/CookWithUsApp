@@ -13,10 +13,7 @@ const LiveLocationTracker = ({ }) => {
 
 
     const { orderId } = useParams();
-  const [liveLocation, setLiveLocation] = useState({
-    latitude: 25.5908,
-    longitude: 85.1348,
-  });
+    const [liveLocation, setLiveLocation] = useState(null);
   const [connection, setConnection] = useState();
   const [order, setOrder] = useState({});
 
@@ -53,7 +50,7 @@ const LiveLocationTracker = ({ }) => {
 
   const sendLocation = async (latitude, longitude) => {
     try {
-      await connection.invoke("SetLocation", { latitude, longitude });
+        await connection.invoke("SetLocation", { latitude, longitude });
     } catch (e) {
       console.log(e);
     }
@@ -88,25 +85,36 @@ const LiveLocationTracker = ({ }) => {
   //   };
   // }, []);
 
-  let currentLatitude = 25.5908;
-  let intervalId;
-
+  //let currentLatitude = 25.5908;
+  //  let intervalId;
+   
+let latitudes = 25.5750000;
+let loangitude = 85.0436640000;
   const updatingLocation = () => {
-    // joinRoom('yash' , 'swiggy')
-      intervalId = setInterval(() => {
+    
+             
+      const updateLiveLocation = () => {
+          const metersToDegreesLat = 100 / 111319.9; 
+          const metersToDegreesLng = 100 / (111319.9 * Math.cos(latitudes * Math.PI / 180)); 
 
-          navigator.geolocation.getCurrentPosition((position) => {
-              sendLocation(
-                  position?.coords?.latitude,
-                  position?.coords?.longitude
-              );
+          latitudes += metersToDegreesLat; 
+          loangitude += metersToDegreesLng;
+          setLiveLocation({
+              latitude: latitudes,
+              longitude: loangitude
           });
-      currentLatitude += 0.01;
-    }, 5000);
+         
+      };
+
+     
+      updateLiveLocation();
+
+      setInterval(updateLiveLocation, 5000);
+   
   };
 
   const stopUpdatingLocation = () => {
-      clearInterval(intervalId);
+     /* clearInterval(intervalId);*/
       updateOrder(orderId)
           .then((response) => {
               console.log(response.data);
@@ -119,17 +127,28 @@ const LiveLocationTracker = ({ }) => {
 
   };
 
-  useEffect(() => {
-      GetOrderDetails(orderId)
-      .then((response) => {
-        console.log(response.data);
-          setOrder(response.data);
-          joinRoom("raj", response.data.id)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    useEffect(() => {
+        GetOrderDetails(orderId)
+            .then((response) => {
+                console.log(response.data);
+                setOrder(response.data);
+                joinRoom("raj", response.data.id);
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        setLiveLocation({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                    },
+                    (error) => {
+                        console.error('Error getting current position:', error);
+                    }
+                );
+            })
+            .catch((error) => {
+                console.error('Error fetching order details:', error);
+            });
+    }, []);
 
   const handleOpenMaps = (latitude, longitude) => {
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
