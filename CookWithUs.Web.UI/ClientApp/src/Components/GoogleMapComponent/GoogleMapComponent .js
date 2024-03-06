@@ -41,6 +41,7 @@ const GoogleMapComponent = ({
   };
 
   useEffect(() => {
+    console.log(origin, "origin");
     if (origin && destination && map) {
       const directionsService = new window.google.maps.DirectionsService();
 
@@ -64,8 +65,8 @@ const GoogleMapComponent = ({
   }, [origin, destination, map]);
 
   const center = {
-    lat: origin.lat,
-    lng: origin.lng,
+    lat: origin?.lat,
+    lng: origin?.lng,
   };
 
   const makeIcon = (iconImage) => {
@@ -107,9 +108,12 @@ const GoogleMapComponent = ({
               onClick={handleMarkerClick}
             />
           )}
-          {infoWindowOpen && (
+          {infoWindowOpen && destination && (
             <InfoWindow
-              position={{ lat: destination.lat + 0.015, lng: destination.lng }}
+              position={{
+                lat: destination?.lat + 0.015,
+                lng: destination?.lng,
+              }}
               onCloseClick={handleInfoWindowClose}
             >
               <div>
