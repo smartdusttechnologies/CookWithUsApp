@@ -5,6 +5,7 @@ using ServcieBooking.Buisness.PipelineBehaviors;
 using ServcieBooking.Buisness.Features.Resturant;
 using CookWithUs.Buisness.Features.Resturant.Queries;
 using CookWithUs.Buisness.Features.Document.Queries;
+using CookWithUs.Buisness.Features.Rider;
 
 namespace ServcieBooking.Buisness
 {
@@ -29,6 +30,11 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<GetOrders.Command>, GetOrders.Authorization>();
             services.AddTransient<IAuthorizationRule<GetOrdersByUserID.Command>, GetOrdersByUserID.Authorization>();
             services.AddTransient<IAuthorizationRule<GetOrderDetails.Command>, GetOrderDetails.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetOrdersByUserID.Command>, GetOrdersByUserID.Authorization>();
+            services.AddTransient<IAuthorizationRule<RiderList.Command>, RiderList.Authorization>();
+            services.AddTransient<IAuthorizationRule<RiderOrderById.Command>, RiderOrderById.Authorization>();
+            services.AddTransient<IAuthorizationRule<OrderUpdate.Command>, OrderUpdate.Authorization>();
+            services.AddTransient<IAuthorizationRule<OrderHistory.Command>, OrderHistory.Authorization>();
             return services;
 
         }

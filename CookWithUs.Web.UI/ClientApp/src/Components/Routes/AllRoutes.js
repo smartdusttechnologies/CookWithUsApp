@@ -16,6 +16,7 @@ import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
 import RestaurantDetails from "../../Pages/Products/RestaurantDetails";
 import Orders from "../../Pages/Orders/Orders";
+import RiderDashboard from "../../Pages/RiderDashboard/Dashboard";
 
 const AllRoutes = () => {
   return (
@@ -27,7 +28,8 @@ const AllRoutes = () => {
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/success" element={<Confirmation />} />
       <Route path="/payment" element={<PaymentCard />} />
-      <Route path="/livelocationmap" element={<LiveLocationTracker />} />
+          <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
+          <Route path="/RiderDashboard" element={<RiderDashboard />} />
       <Route path="/trackorder" element={<OrderDirection />} />
       <Route path="/trackorder/:id" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />

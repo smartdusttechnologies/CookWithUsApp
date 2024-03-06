@@ -1,0 +1,11 @@
+﻿.box {
+    position: absolute;
+    top: 50px; /* Yahan apne desired distance from top de sakte hain */
+    left: 50%; /* Yahan apne desired distance from left de sakte hain */
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.5); /* Background color with low visibility */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow effect */
+}

@@ -107,7 +107,7 @@ const GoogleMapComponent = ({
               onClick={handleMarkerClick}
             />
           )}
-          {infoWindowOpen && (
+                  {infoWindowOpen && destination &&  (
             <InfoWindow
               position={{ lat: destination.lat + 0.015, lng: destination.lng }}
               onCloseClick={handleInfoWindowClose}
