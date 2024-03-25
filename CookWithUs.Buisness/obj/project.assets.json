@@ -1082,19 +1082,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ritesh\\.nuget\\packages\\": {}
+    "C:\\Users\\msi-laptop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+      "projectUniqueName": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
       "projectName": "CookWithUs.Buisness",
-      "projectPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
-      "packagesPath": "C:\\Users\\Ritesh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\obj\\",
+      "projectPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+      "packagesPath": "C:\\Users\\msi-laptop\\.nuget\\packages\\",
+      "outputPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ritesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\msi-laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1173,7 +1173,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -1184,6 +1184,16 @@
       "warningLevel": 1,
       "message": "Detected package version outside of dependency constraint: MediatR.Extensions.Microsoft.DependencyInjection 11.1.0 requires MediatR (>= 11.0.0 && < 12.0.0) but version MediatR 12.2.0 was resolved.",
       "libraryId": "MediatR",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Data.SqlClient' 4.8.5 has a known high severity vulnerability, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
+      "libraryId": "System.Data.SqlClient",
       "targetGraphs": [
         "net6.0"
       ]

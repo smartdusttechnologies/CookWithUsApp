@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
+    "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
+    "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "projectUniqueName": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
         "projectName": "CookWithUs.Buisness",
-        "projectPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
-        "packagesPath": "C:\\Users\\Ritesh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ritesh\\Documents\\CookWithUsAppLatestYash\\CookWithUs.Buisness\\obj\\",
+        "projectPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "packagesPath": "C:\\Users\\msi-laptop\\.nuget\\packages\\",
+        "outputPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ritesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\msi-laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

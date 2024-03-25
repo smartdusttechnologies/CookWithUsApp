@@ -49,3 +49,16 @@ C:\Users\Ritesh\Documents\CookWithUsAppLatestYash\CookWithUs.Buisness\obj\Debug\
 C:\Users\Ritesh\Documents\CookWithUsAppLatestYash\CookWithUs.Buisness\obj\Debug\net6.0\refint\CookWithUs.Buisness.dll
 C:\Users\Ritesh\Documents\CookWithUsAppLatestYash\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.pdb
 C:\Users\Ritesh\Documents\CookWithUsAppLatestYash\CookWithUs.Buisness\obj\Debug\net6.0\ref\CookWithUs.Buisness.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.deps.json
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.pdb
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.csproj.AssemblyReference.cache
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.GeneratedMSBuildEditorConfig.editorconfig
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.AssemblyInfoInputs.cache
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.AssemblyInfo.cs
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.csproj.CoreCompileInputs.cache
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.sourcelink.json
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\refint\CookWithUs.Buisness.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.pdb
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\ref\CookWithUs.Buisness.dll
