@@ -86,9 +86,10 @@ namespace ServiceBooking.Web.UI.Controllers
 
         [Route("PlaceOrder")]
         [HttpPost]
-        public IActionResult PlaceOrder(OrderDTO orderDTO)
+
+        public IActionResult PlaceOrder(OrderDTO requestBody)
         {
-            var orderModel = _mapper.Map<OrderDTO, OrderModel>(orderDTO);
+            var orderModel = _mapper.Map<OrderDTO, OrderModel>(requestBody);
 
             var response = _mediator.Send(new PlaceOrder.Command(orderModel)).Result;
             return Ok(response);

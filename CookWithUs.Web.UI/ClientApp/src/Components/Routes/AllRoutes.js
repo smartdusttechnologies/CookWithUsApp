@@ -17,6 +17,7 @@ import Signup from "../../Pages/Signup/Signup";
 import RestaurantDetails from "../../Pages/Products/RestaurantDetails";
 import Orders from "../../Pages/Orders/Orders";
 import RiderDashboard from "../../Pages/RiderDashboard/Dashboard";
+import Shipping from "../../Pages/Checkout/Shipping";
 
 const AllRoutes = () => {
   return (
@@ -38,7 +39,8 @@ const AllRoutes = () => {
       <Route path="/chefdashboard" element={<ChefDashboard />} />
       <Route path="/restaurant/:id" element={<RestaurantDetails />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/Shipping" element={<Shipping />} />
     </Routes>
   );
 };

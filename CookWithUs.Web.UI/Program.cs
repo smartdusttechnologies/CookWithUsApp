@@ -46,6 +46,9 @@ namespace ServcieBooking.Web.UI
             services.AddScoped<IResturantRepository,ResturantRepository>();
             services.AddScoped<IDocumentRepository,DocumentRepository>();
             services.AddScoped<IRiderRepository, RiderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
             services.AddApplication();
             services.AddSignalR();
             services.AddCors(options =>

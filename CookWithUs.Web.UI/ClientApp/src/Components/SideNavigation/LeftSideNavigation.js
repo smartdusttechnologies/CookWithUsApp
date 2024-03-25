@@ -83,7 +83,13 @@ const LeftSideNavigation = () => {
               <ShoppingCartIcon />
             </ListItemIcon>
             <ListItemText primary="Cart" />
-          </ListItemButton>
+                  </ListItemButton>
+                  <ListItemButton onClick={() => navigate("/riderDashboard")}>
+                      <ListItemIcon>
+                          <ShoppingCartIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="RiderDash" />
+                  </ListItemButton>
           <ListItemButton onClick={() => navigate("/admindashboard")}>
             <ListItemIcon>
               <PeopleIcon />

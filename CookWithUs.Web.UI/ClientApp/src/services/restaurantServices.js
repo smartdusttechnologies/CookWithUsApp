@@ -36,3 +36,8 @@ export const GetOrderDetails = (orderId) => {
 export const GetOrdersByUserID = (userId) => {
   return axiosInstance.get(`/resturant/GetOrdersByUserID/${userId}`);
 };
+
+export const PlaceOrder = (requestBody) => {
+    return axiosInstance.post("/resturant/PlaceOrder",  requestBody );
+};
+
