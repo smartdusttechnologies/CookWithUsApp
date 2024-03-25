@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookWithUs.Web.UI", "CookWi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookWithUs.Buisness", "CookWithUs.Buisness\CookWithUs.Buisness.csproj", "{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CookWithUs.DB", "CookWithUs.DB\CookWithUs.DB.sqlproj", "{AA285CD5-EE87-413C-B774-6BA1994AEC26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA285CD5-EE87-413C-B774-6BA1994AEC26}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

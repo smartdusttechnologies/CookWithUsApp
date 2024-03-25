@@ -6,6 +6,7 @@ import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { PlaceOrder } from  "../../services/restaurantServices";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -44,36 +45,89 @@ const Checkout = () => {
 
   async function makePayment(values) {
     // const stripe = await stripePromise;
-    const requestBody = {
-      userID: 1,
-      address: values.billingAddress.street1,
-      zipCode: values.billingAddress.zipCode,
-      orderPrice: cart.reduce(
-        (total, cartItem) => total + cartItem.price * cartItem.quantity,
-        0
-      ),
-      phone: values.phoneNumber,
-      products: cart.map(({ id, quantity }) => ({
-        productID: id,
-        quantity,
-      })),
-    };
-    axios.post("/resturant/PlaceOrder", requestBody).then((response) => {
+    //const requestBody = {
+    //  userID: 1,
+    //  address: values.billingAddress.street1,
+    //  zipCode: values.billingAddress.zipCode,
+    //  orderPrice: cart.reduce(
+    //    (total, cartItem) => total + cartItem.price * cartItem.quantity,
+    //    0
+    //  ),
+    //  phone: values.phoneNumber,
+    //  products: cart.map(({ id, quantity }) => ({
+    //      ProductID: id,
+    //      Quantity:quantity,
+    //      OrderID: "",
+    //      Name: "",
+    //      Type: "",
+    //      ImageUrl: "",
+    //      Price: ""
+
+    //  })),
+    //  };
+    //  const dummyData = {
+    //      userID: 1,
+    //      address: values.billingAddress.street1,
+    //      zipCode: values.billingAddress.zipCode,
+    //      orderPrice: cart.reduce(
+    //          (total, cartItem) => total + cartItem.price * cartItem.quantity,
+    //          0
+    //      ),
+    //      phone: values.phoneNumber,
+    //      products: cart.map(({ id, quantity }) => ({
+    //          ProductID: id,
+    //          Quantity: quantity,
+    //          OrderID: "",
+    //          Name: "",
+    //          Type: "",
+    //          ImageUrl: "",
+    //          Price: ""
+    //      }))
+    //  };
+      const dummyData = {
+          UserID: 1,
+          Address: "123 Main St",
+          Zipcode: "12345",
+          OrderPrice: 50,
+          Phone: "8709282126",
+          products: [
+              {
+                  OrderID: 1,
+                  ProductID: 2,
+                  Name: "Dummy Product 1",
+                  Type: "Type A",
+                  ImageUrl: "https://example.com/image1.jpg",
+                  Price: 10,
+                  Quantity: 2
+              },
+              {
+                  OrderID: 2,
+                  ProductID: 2,
+                  Name: "Dummy Product 2",
+                  Type: "Type B",
+                  ImageUrl: "https://example.com/image2.jpg",
+                  Price: 15,
+                  Quantity: 3
+              }
+          ]
+      };
+      /*axios.post("/resturant/PlaceOrder", requestBody)*/
+      PlaceOrder(dummyData).then((response) => {
       console.log(response.data);
-      navigate("/payment");
+      navigate("/payment");    
     });
   }
 
   return (
     <Box width="80%" m="100px auto">
-      <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
-        <Step>
-          <StepLabel>Billing</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Payment</StepLabel>
-        </Step>
-      </Stepper>
+      {/*<Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>*/}
+      {/*  <Step>*/}
+      {/*    <StepLabel>Billing</StepLabel>*/}
+      {/*  </Step>*/}
+      {/*  <Step>*/}
+      {/*    <StepLabel>Payment</StepLabel>*/}
+      {/*  </Step>*/}
+      {/*</Stepper>*/}
       <Box>
         <Formik
           onSubmit={handleFormSubmit}
@@ -163,17 +217,17 @@ const initialValues = {
     state: "",
     zipCode: "",
   },
-  shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
+  //shippingAddress: {
+  //  isSameAddress: true,
+  //  firstName: "",
+  //  lastName: "",
+  //  country: "",
+  //  street1: "",
+  //  street2: "",
+  //  city: "",
+  //  state: "",
+  //  zipCode: "",
+  //},
   email: "",
   phoneNumber: "",
 };

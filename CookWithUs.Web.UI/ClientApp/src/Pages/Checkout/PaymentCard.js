@@ -158,7 +158,7 @@ function PaymentCard({ loading }) {
         handlePaytmPayment();
         break;
       case 2:
-        // navigate("/success");
+         navigate("/success");
         break;
       default:
         toast.warn("Invalid payment method.");

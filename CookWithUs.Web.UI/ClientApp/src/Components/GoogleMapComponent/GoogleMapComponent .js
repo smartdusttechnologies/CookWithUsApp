@@ -107,20 +107,20 @@ const GoogleMapComponent = ({
               onClick={handleMarkerClick}
             />
           )}
-                  {infoWindowOpen && destination &&  (
-            <InfoWindow
-              position={{
-                lat: destination?.lat + 0.015,
-                lng: destination?.lng,
-              }}
-              onCloseClick={handleInfoWindowClose}
-            >
-              <div>
-                <h3>Duration</h3>
-                <p>{duration}</p>
-              </div>
-            </InfoWindow>
-          )}
+          {/*        {infoWindowOpen && destination &&  (*/}
+          {/*  <InfoWindow*/}
+          {/*    position={{*/}
+          {/*      lat: destination?.lat + 0.015,*/}
+          {/*      lng: destination?.lng,*/}
+          {/*    }}*/}
+          {/*    onCloseClick={handleInfoWindowClose}*/}
+          {/*  >*/}
+          {/*    <div>*/}
+          {/*      <h3>Duration</h3>*/}
+          {/*      <p>{duration}</p>*/}
+          {/*    </div>*/}
+          {/*  </InfoWindow>*/}
+          {/*)}*/}
         </GoogleMap>
       </Box>
       {destination && (

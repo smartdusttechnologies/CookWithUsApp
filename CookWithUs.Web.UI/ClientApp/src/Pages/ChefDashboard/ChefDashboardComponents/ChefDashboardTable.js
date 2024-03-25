@@ -331,7 +331,7 @@ function useDeletefood() {
   return useMutation({
     mutationFn: async (foodId) => {
       //send api update request here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call  
       return Promise.resolve();
     },
     //client side optimistic update

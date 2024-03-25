@@ -24,8 +24,8 @@ namespace CookWithUs.Buisness.Hubs
 
             _connections[Context.ConnectionId] = userConnection;
 
-            await Clients.Group(userConnection.Room).SendAsync("GetLocation", "BotUser",
-                 new Location { Latitude = 25.5908, Longitude = 85.1348 });
+            //await Clients.Group(userConnection.Room).SendAsync("GetLocation", "BotUser",
+            //     new Location { Latitude = 25.5908, Longitude = 85.1348 });
         }
         public async Task SetLocation(Location location)
         {
@@ -34,6 +34,23 @@ namespace CookWithUs.Buisness.Hubs
                 await Clients.Group(userConnection.Room).SendAsync("GetLocation", userConnection.User, location);
             }
         }
+
+
+        //public async Task OrderBook(string orderId)
+        //{
+        //    // Handle user ordering a book
+        //    // You can perform any necessary business logic here
+        //    await Clients.All.SendAsync("BookOrdered", orderId);
+        //}
+
+        //public async Task StartDelivery(string orderId, string riderId)
+        //{
+        //    // Handle rider starting delivery
+        //    // You can perform any necessary business logic here
+        //    await Clients.All.SendAsync("DeliveryStarted", orderId, riderId);
+        //}
+
+      
 
     }
 }

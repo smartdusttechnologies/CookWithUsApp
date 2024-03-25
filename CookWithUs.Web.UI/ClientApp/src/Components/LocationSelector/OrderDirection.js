@@ -41,7 +41,8 @@ const OrderDirection = () => {
 
       await connection.start();
       await connection.invoke("JoinRoom", { user, room });
-      setConnection(connection);
+        setConnection(connection);
+        console.log(connection);
     } catch (e) {
       console.log(e);
     }
