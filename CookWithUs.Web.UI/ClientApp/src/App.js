@@ -14,40 +14,41 @@ import BottomActionBar from "./Components/BottomNavigation/BottomActionBar";
 import ThreedotMenu from "./Components/Menu/ThreedotMenu";
 
 const lightTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
+    palette: {
+        mode: "light",
+    },
 });
 
 const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
+    palette: {
+        mode: "dark",
+    },
 });
 
 function App() {
-  const darkMode = useSelector((state) => state.app.darkMode);
+    const darkMode = useSelector((state) => state.app.darkMode);
 
-  return (
-    <div>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <NavBar />
-        <ThreedotMenu />
-        <Box sx={{ display: "flex" }}>
-          <LeftSideNavigation />
-          <Box sx={{ width: "100%" }}>
-            <AllRoutes />
-          </Box>
-          <RightSideNavigation />
-        </Box>
-        <ShowMoreMenu />
-        <ThreeDotBottomNav />
-        <Footer />
-        <BottomNav />
-        <BottomActionBar />
-      </ThemeProvider>
-    </div>
-  );
+    return (
+        <div>
+            <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+
+                <NavBar />
+                <ThreedotMenu />
+                <Box sx={{ display: "flex" }}>
+                  {/*  <LeftSideNavigation />*/}
+                    <Box sx={{ width: "100%" }}>
+                        <AllRoutes />
+                    </Box>
+                   {/* <RightSideNavigation />*/}
+                </Box>
+                <ShowMoreMenu />
+                <ThreeDotBottomNav />
+                <Footer />
+                <BottomNav />
+                <BottomActionBar />
+            </ThemeProvider>
+        </div>
+    );
 }
 
 export default App;

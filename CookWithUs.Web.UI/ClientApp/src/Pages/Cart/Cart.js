@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import EmptyCart from "./EmptyCart";
 import AddressDropdown from "../Checkout/AddressDropdown";
 import "./Carts.css";
+import AddressUpdate from "./AddressUpdate";
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -116,6 +117,11 @@ const Cart = () => {
         fetchAddresses();
         getCartData();
     }, []);
+    const [showAddressUpdate, setShowAddressUpdate] = useState(false);
+
+    const handleAddressUpdateClick = () => {
+        setShowAddressUpdate(true);
+    };
 
     return (
 
@@ -145,6 +151,12 @@ const Cart = () => {
                                         </div>
                                     </div>
                                 ))}
+                                <div class="_2nd--" onClick={handleAddressUpdateClick}><div class="_3p8Mf Ldi91"><div class="WtfuC _3mJDe">
+                                    <div class="icon-location"></div><div class="_2_VIS">+</div></div><div>
+                                        <div class="_2xgU6">Add new Address</div>
+                                    <div class="KYAcN"></div>
+                                        <div class="_3dNWs _1AS3P">Add New</div></div></div></div>
+                                {showAddressUpdate && <AddressUpdate />}
                             </div>
 
                             <div class="_250uQ _26MRf"></div>
