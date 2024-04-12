@@ -4,10 +4,13 @@ using AutoMapper;
 using MediatR;
 using CookWithUs.Buisness.Features.User;
 using CookWithUs.Buisness.Models;
+using AutoMapper.Configuration.Conventions;
 
 namespace CookWithUs.Web.UI.Controllers
 {
-    public class UserController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class UserController : ControllerBase
     {
 
         private readonly IMediator _mediator;
@@ -23,18 +26,38 @@ namespace CookWithUs.Web.UI.Controllers
         }
         [Route("AddressUpdate")]
         [HttpPost]
-        public IActionResult AddressUpdate( AddressDTO Detail)
+        public IActionResult AddressUpdate( AddressDTO Details)
         {
-            var orderValue = _mapper.Map<AddressDTO, AddressModel>(Detail);
+            var orderValue = _mapper.Map<AddressDTO, AddressModel>(Details);
             var response = _mediator.Send(new AddressUpdate.Command(orderValue)).Result;
-            return View();
+            return Ok(response);
         }
 
-        [Route("FetchAddress")]
+        [Route("FetchAddress/{UserId}")]
         [HttpGet]
         public IActionResult FetchAddress( int UserId) {
             var response = _mediator.Send(new FetchAddress.Command(UserId)).Result;
-            return View(response);
+            return Ok(response);
         }
+
+        [Route("CartUpdate")]
+        [HttpPost]
+        public IActionResult CartUpdate(int  Id, int Quantity)
+        {
+            
+            var response = _mediator.Send(new Cart.Command(Id,Quantity)).Result;
+            return Ok(response);
+        }
+
+        [Route("CartDetails/{UserID}")]
+        [HttpGet]
+        public IActionResult CartDetails(int  UserId)
+        {
+            
+            var response = _mediator.Send(new FetchCartDetail.Command(UserId)).Result;
+            return Ok(response);
+        }
+
+        
     }
 }

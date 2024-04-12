@@ -81,7 +81,7 @@ const GoogleMapComponent = ({
     <Box>
       <Box>
         <GoogleMap
-          mapContainerStyle={{ height: "400px", width: "100%" }}
+          mapContainerStyle={{ height: "250px", width: "100%" }}
           zoom={zoom ? zoom : 16}
           center={center}
           onLoad={onLoad}

@@ -22,8 +22,8 @@ namespace CookWithUs.Web.UI.Controllers
         [Route("InitiateRzpOrder")]
         public IActionResult InitiateOrder(PaymentDTO orderDetails)
         {
-            string key = _configuration["PaymentGatewayKeys:RzpApiKey"];
-            string secret = _configuration["PaymentGatewayKeys:RzpSecretKey"];
+            string key = _configuration["PaymentGatewayKeys:DIY12386817555501617"];
+            string secret = _configuration["PaymentGatewayKeys:bKMfNxPPf_QdZppa"];
 
             Random _random = new Random();
             string TransactionId = _random.Next(0, 10000).ToString();

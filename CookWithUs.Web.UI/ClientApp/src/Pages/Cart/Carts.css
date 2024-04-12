@@ -1,5 +1,8 @@
 ﻿
 
+
+
+
 .CartMenu {
     max-width: 1000px;
    /* min-width: 1200px;*/
@@ -222,7 +225,7 @@ _1rtRz {
     -ms-flex-direction: column;
     flex-direction: column;
     overflow: hidden;
-    height: 100%
+   
 }
 
 .ProdBox, ._2XVjJ {
@@ -23783,4 +23786,6 @@ img[src^="https://maps.gstatic.com/mapfiles/api-3/images/google_white5_hdpi.png"
     right: -45px
 }
 
-/*# sourceMappingURL=styles.04c8ec5db5aa2e1d51a55d20e426aae4.css.map*/
+.Sidebar-closed{
+    display:none;
+}

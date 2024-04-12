@@ -25,29 +25,25 @@ namespace CookWithUs.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-            INSERT INTO UserDetails (UserId,Name, Country, StreetAddress, StreetAddress2, City, State, Pincode, MobileNo)
-            VALUES (@Name, @Country, @StreetAddress, @StreetAddress2, @City, @State, @Pincode, @MobileNo)";
+            INSERT INTO UserAddress (UserId,Address, LocationType, LandMark, Building)
+            VALUES (@UserId, @Address, @LocationType, @LandMark, @Building)";
 
             var parameters = new
             {
                 address.UserId,
-                address.name,
-                address.country,
-                address.streetAddress,
-                address.streetAddress2,
-                address.city,
-                address.state,
-                address.pincode,
-                address.mobileNo
+                address.Address,
+                address.LocationType,
+                address.LandMark,
+                address.Building
             };
-
-            int rowsAffected = db.Execute(query, parameters);
+             
+        int rowsAffected = db.Execute(query, parameters);
             return rowsAffected > 0;
         }
         public List<AddressModel> FetchAddress(int UserId) {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            string query = "SELECT * FROM Addresses WHERE UserId = @UserId";
+            string query = "SELECT * FROM UserAddress WHERE UserId = @UserId";
 
             var parameters = new { UserId = UserId };
 
@@ -55,5 +51,37 @@ namespace CookWithUs.Buisness.Repository
 
             
         }
+
+        public bool CartUpdate(CartModel cart)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+
+            string query = "UPDATE UserCartTable SET quantity = @Quantity WHERE Id = @Id";
+
+            
+            int rowsAffected = db.Execute(query, new { Quantity = cart.Quantity, Id = cart.Id });
+
+            
+            if (rowsAffected > 0)
+            {
+                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public List<CartModel> CartDetails(int UserId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            string query = "SELECT * FROM UserCartTable WHERE UserId = @UserId AND Quantity > 0";
+            var parameters = new { UserId = UserId };
+
+            return db.Query<CartModel>(query, parameters).ToList();
+        }
+
     }
 }

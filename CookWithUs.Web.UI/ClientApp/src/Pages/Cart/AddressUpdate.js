@@ -1,17 +1,21 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useRef, useState, useEffect } from "react";
 import useLocation from "../../hooks/useLocation";
 import GoogleMapComponent from "../../Components/GoogleMapComponent/GoogleMapComponent ";
+import { AddAddress } from "../../services/UserService";
 
+const AddressUpdate = ({
 
-const AddressUpdate = () => {
+    setIsSidebarOpen, IsSidebarOpen }
+) => {
     const [currentLocation, setCurrentLocation] = useState(null);
     const { location, loading, getCurrentLocation } = useLocation();
-
+    const [LocationType, SetLocationType] = useState(null);
     const [address, setAddress] = useState('');
-    const [doorLandmark, setDoorLandmark] = useState('');
+    const [addedClasses, setAddedClasses] = useState(false);
 
     useEffect(() => {
-        // Fetch current location
+
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -49,53 +53,136 @@ const AddressUpdate = () => {
         }
     }, [currentLocation]);
 
-    const handleDoorLandmarkChange = (event) => {
-        setDoorLandmark(event.target.value);
-    };
+
 
     const handleSubmit = () => {
+        const Details = {
+            UserId: 1,
+            Id: 0, 
+            Address: address,
+            LandMark: document.getElementById("landmark").value,
+            LocationType: LocationType, 
+            Building: document.getElementById("building").value
 
-        console.log('Address:', address);
-        console.log('Door/Landmark:', doorLandmark);
+            
+        };
+        AddAddress(Details)
+            .then(response => {
+               
+                console.log("Address added successfully:", response);
+            })
+            .catch(error => {
+                
+                console.error("An error occurred while adding address:", error);
+            });
+       
+        
+    };
+    const sidebarOpenClose = () => {
+
+
+        setIsSidebarOpen(false);
+    }
+   
+
+    const handleInput = (event) => {
+        const nextSibling1 = event.target.nextSibling;
+        const nextSibling2 = nextSibling1.nextSibling;
+
+        // Check if the classes exist before adding
+        if (!addedClasses) {
+            if (!nextSibling1.classList.contains("_26LFr")) {
+                nextSibling1.classList.add("_26LFr");
+            }
+            if (!nextSibling2.classList.contains("_2tL9P")) {
+                nextSibling2.classList.add("_2tL9P");
+            }
+            setAddedClasses(true);
+        }
+    }
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            const inputElements = document.querySelectorAll('input[name="building"], input[name="landmark"]');
+            const nextSiblings = document.querySelectorAll('input[name="building"] + div, input[name="landmark"] + div');
+
+            if (!inputElements || !nextSiblings) return;
+
+            inputElements.forEach((input, index) => {
+                if (input.value === "") {
+                    if (event.target !== input && event.target !== nextSiblings[index]) {
+                        nextSiblings[index].classList.remove("_26LFr");
+                        nextSiblings[index].nextElementSibling.classList.remove("_2tL9P");
+                        setAddedClasses(false);
+                    }
+                }
+            });
+        };
+
+        document.addEventListener('click', handleOutsideClick);
+        return () => {
+            document.removeEventListener('click', handleOutsideClick);
+        };
+    }, []);
+    const handleLocationType = (id) => {
+        const IdList = ["other", "home", "work"];
+
+       
+        IdList.forEach((itemId) => {
+            
+            const element = document.getElementById(itemId);
+            if (element) {
+                
+                if (itemId === id) {
+                    SetLocationType(id);
+                    element.style.background = "black";
+                    element.style.color = "white";
+                } else {
+                    
+                    element.style.background = "";
+                    element.style.color = "";
+                }
+            }
+        });
     };
     return (
 
-        <div>
+        <div className={IsSidebarOpen ? "" : "Sidebar-closed"}>
+
             <div className="FYlIl"></div>
-            <div className="_3vi_e" style={{ left: '0px', right: 'auto', transform: 'translate(0%, 0px)' }}>
+
+            <div className="_3vi_e" style={{ left: "0px", right: "auto", transform: "translate(0%, 0px)" }}>
                 <div className="_12S7_">
-                    <div className="_3btQx">sticky_sentinel sticky_sentinel--top</div>
-                    <div style={{ paddingLeft: '112px', paddingRight: '40px', width: '442px', zIndex: '2' }}>
-                        <div className="_1L8WG">
-                            <span className="SSFcO icon-close"></span>
-                            <div className="_2Joay">Save delivery address</div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="_3btQx">sticky_sentinel sticky_sentinel--top</div>
+                        <div style={{ paddingLeft: '112px', paddingRight: '40px', width: '442px', zIndex: '2' }}>
+                            <div className="_1L8WG" onClick={sidebarOpenClose}>
+                                <span className="SSFcO icon-close"></span>
+                                <div className="_2Joay">Save delivery address</div>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{ paddingLeft: '80px', paddingRight: '40px', width: '442px' }}>
-
-                        <div class="" >
-                            <GoogleMapComponent
-                                origin={{ lat: location?.latitude, lng: location?.longitude }}
-                            />
-                        </div>
-
-
-
-                        <div className="_3Um38 _9Wk87">
-                            <input
-                                className="_381fS"
-                                disabled
-                                type="text"
-                                name=""
-                                value={address}
-                                readOnly
-                            />
-                            <div className="_2EeI1 _26LFr"></div>
-                            <label className="_1Cvlf _2tL9P">Address</label>
-                        </div>
-                        <div className="jbXOs">
+                        <div style={{ paddingLeft: '80px', paddingRight: '40px', width: '442px' }}>
                             <div>
-                                <div className="_3Um38 _23P1X">
+                                <GoogleMapComponent
+                                    origin={{ lat: location?.latitude, lng: location?.longitude }}
+                                />
+                            </div>
+
+                            <div className="_3Um38 _9Wk87">
+                                <input
+                                    className="_381fS"
+                                    disabled
+                                    type="text"
+                                    name=""
+                                    value={address}
+                                    readOnly
+                                />
+                                <div className="_2EeI1 _26LFr"></div>
+                                <label className="_1Cvlf _2tL9P">Address</label>
+                            </div>
+
+                            <div className="jbXOs">
+                                <div className="_3Um38 _23P1X*">
                                     <input
                                         className="_381fS"
                                         type="text"
@@ -103,78 +190,66 @@ const AddressUpdate = () => {
                                         id="building"
                                         tabIndex="1"
                                         autoComplete="off"
-                                        value=""
+                                        onClick={handleInput}
                                     />
                                     <div className="_2EeI1"></div>
-                                    <label className="_1Cvlf" htmlFor="building">
-                                        Door / Flat No.
-                                    </label>
+                                    <label className="_1Cvlf" htmlFor="building">Door / Flat No.</label>
+
                                 </div>
-                            </div>
-                            <div>
+
                                 <div className="_3Um38 _23P1X">
                                     <input
+
                                         className="_381fS"
                                         type="text"
                                         name="landmark"
                                         id="landmark"
                                         tabIndex="1"
                                         autoComplete="off"
-                                        value=""
+                                        onClick={handleInput}
                                     />
                                     <div className="_2EeI1"></div>
-                                    <label className="_1Cvlf" htmlFor="landmark">
-                                        Landmark
-                                    </label>
+                                    <label className="_1Cvlf" htmlFor="landmark">Landmark</label>
                                 </div>
-                            </div>
-                            <div className="_2i256">
-                                <div className="_1dzL9">
-                                    <span className="_3Ey3V icon-home"></span>
-                                    <div className="sf8jl">Home</div>
-                                </div>
-                                <div className="_1dzL9">
-                                    <span className="_3Ey3V icon-work"></span>
-                                    <div className="sf8jl">Work</div>
-                                </div>
-                                <div className="_1dzL9">
-                                    <span className="_3Ey3V icon-location"></span>
-                                    <div className="sf8jl">Other</div>
-                                </div>
-                                <div className="_1qe1S">
-                                    <div className="_3Um38 _3vwW5">
-                                        <input
-                                            className="_381fS _1oTLG _2VYMY"
-                                            type="text"
-                                            name="annotation"
-                                            id="annotation"
-                                            tabIndex="1"
-                                            placeholder="Dad’s home, my man cave"
-                                            maxLength="20"
-                                            value=""
-                                        />
-                                        <div className="_2EeI1 _26LFr"></div>
-                                        <label className="_1Cvlf _2tL9P" htmlFor="annotation"></label>
+
+                                <div className="_2i256">
+                                    <div className="_1dzL9" id="home" onClick={() => handleLocationType("home")}>
+                                        <span className="_3Ey3V icon-home"></span>
+                                        <div className="sf8jl">Home</div>
+                                    </div>
+                                    <div className="_1dzL9" id="work" onClick={() => handleLocationType("work")}>
+                                        <span className="_3Ey3V icon-work"></span>
+                                        <div className="sf8jl">Work</div>
+                                    </div>
+                                    <div className="_1dzL9" id="other" onClick={() => handleLocationType("other")}>
+                                        <span className="_3Ey3V icon-location"></span>
+                                        <div className="sf8jl">Other</div>
                                     </div>
                                 </div>
+
+                            </div>
+
+
+                        </div>
+                        <div className="" style={{ paddingLeft: '80px', paddingRight: '40px', width: '442px' }}>
+                            <div className="gbzB0">
+                                <div className="_25qBi">
+                                    <button type="submit" className="_2sd1x">
+                                        SAVE ADDRESS &amp; PROCEED
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="" style={{ paddingLeft: '80px', paddingRight: '40px', width: '480px' }}>
-                        <div className="gbzB0">
-                            <div className="_25qBi">
-                                <a href className="_2sd1x">
-                                    <input type="submit" style={{ display: 'none' }} />
-                                    SAVE ADDRESS &amp; PROCEED
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </div>
+
+        </div >
+
+
 
     );
 };
+
 
 export default AddressUpdate;

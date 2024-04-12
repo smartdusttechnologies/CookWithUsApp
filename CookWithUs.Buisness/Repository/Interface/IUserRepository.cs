@@ -12,5 +12,8 @@ namespace CookWithUs.Buisness.Repository.Interface
 
        public  bool AddressUpdate(AddressModel address) ;
         public List<AddressModel> FetchAddress(int UserId) ;
+        public bool CartUpdate (CartModel cart) ;
+        public List<CartModel> CartDetails(int  UserId) ;
+
     }
 }
