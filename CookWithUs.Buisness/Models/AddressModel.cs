@@ -10,13 +10,9 @@ namespace CookWithUs.Buisness.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string name { get; set; }
-        public string country { get; set; }
-        public string streetAddress { get; set; }
-        public string streetAddress2 { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string pincode { get; set; }
-        public string mobileNo { get; set; }
+        public string Address { get; set; }
+        public string LocationType { get; set; }
+        public string LandMark { get; set; }
+        public string Building { get; set; }
     }
 }

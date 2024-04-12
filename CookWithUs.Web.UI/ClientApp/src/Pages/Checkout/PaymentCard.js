@@ -168,15 +168,16 @@ function PaymentCard({ loading }) {
   const theme = createTheme();
 
   return (
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} style={{marginTop: "100px"} }>
       <Paper
         style={{
           background: theme.palette.common.white,
           borderRadius: "inherit",
           paddingBottom: theme.spacing(2),
           paddingTop: theme.spacing(2),
-          marginTop: theme.spacing(4),
-          margin: "auto",
+          marginTop: theme.spacing(2),
+                  margin: "auto",
+
         }}
       >
         <Container>
