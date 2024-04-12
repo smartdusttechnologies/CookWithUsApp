@@ -15,5 +15,8 @@ namespace CookWithUs.Buisness.Models
         public int Price { get; set; }
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
+        public string rating { get; set; }
+        public string customer { get; set; }
+        public string info { get; set; }
     }
 }

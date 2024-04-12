@@ -1,0 +1,349 @@
+﻿.dtRKre.visible {
+    opacity: 1;
+    transition: all 200ms ease-in-out 0s;
+    display: flex;
+}
+.dtRKre {
+    z-index: 11999;
+    position: fixed;
+    inset: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    transition: all 200ms ease-in-out 0s;
+    background: rgba(2, 6, 12, 0.6);
+    opacity: 0;
+    display: none;
+    padding: 16px;
+}
+.cehVFM.open {
+    opacity: 1;
+    transition: all 200ms ease-out 0s;
+}
+.cehVFM {
+    position: relative;
+    border-radius: 24px;
+    width: 600px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0;
+    border: none;
+    z-index: 12000;
+    box-shadow: rgba(27, 30, 36, 0.1) 0px 12px 28px 0px;
+    transition: all 200ms ease-in 0s;
+}
+.cXOKdF {
+    position: relative;
+}
+._2bLF7 {
+    width: 100%;
+    z-index: 200;
+    background-color: #f0f0f5;
+    border-radius: 24px;
+}
+.jVBhu {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    height: 100%;
+    max-height: 80vh;
+}
+.jSHOAm {
+    border-bottom: 1px solid rgb(226, 226, 231);
+    margin: 32px 16px 16px;
+}
+.hGyeQP {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ScreenReaderOnly_screenReaderOnly___ww-V {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    display: block;
+    font-size: 1px;
+    line-height: 1px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 1px;
+    width: 1px;
+}
+.gXaIUH {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.6);
+}
+.ga-dKzr {
+    margin: 0px 8px;
+}
+.gXaIUH {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.6);
+}
+.gXaIUH {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.6);
+}
+.dXwaOZ {
+    margin-bottom: 12px;
+    margin-top: 4px;
+}
+.crvuvl {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+}
+.jDxRDo {
+    padding: 0px 16px 20px;
+    overflow: hidden auto;
+}
+.hwFboc {
+    margin-bottom: 16px;
+}
+.ldmbCi {
+    display: flex;
+    padding: 8px 0px 16px;
+}
+.gnOsqr {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+}
+.fJMNTH {
+    padding: 20px 16px 0px;
+}
+.cqeEBJ {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    border: 1px solid transparent;
+}
+.ziKYZ {
+    display: flex;
+    margin-bottom: 20px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.fewQoG {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+}
+.hnjUPe {
+    margin-right: 12px;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+.kXdCAL {
+    --fill-color: rgba(2, 6, 12, 0.92);
+    --stroke-color: rgba(2, 6, 12, 0.92);
+    line-height: 0;
+}
+.eVBcAq {
+    margin-right: 12px;
+    flex: 1 1 0%;
+}
+.hwpmTk {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+}
+.dzoNVH {
+    margin-right: 4px;
+    display: flex;
+}
+.fSrSXg {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.6);
+}
+.iWAipi {
+    margin-left: 8px;
+}
+.kNZrsh {
+    position: relative;
+    display: flex;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+    .kNZrsh input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0px;
+        width: 0px;
+    }
+.ziKYZ .custom-checkbox {
+    padding: 0px;
+}
+
+.kNZrsh .custom-checkbox {
+    z-index: 0;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    padding: 8px 0px;
+    left: 0px;
+}
+.kNZrsh label {
+    width: 100%;
+    z-index: 1;
+    cursor: pointer;
+    padding: 8px 0px 8px calc(24px);
+}
+.hwpmTk {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+}
+.jKwhVe {
+    padding: 16px;
+    border-radius: 0px 0px 24px 24px;
+    background-color: rgb(255, 255, 255);
+    bottom: 0px;
+    width: 100%;
+}
+.bteTIX {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.cCLHLr {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 4px;
+}
+.fVyUCm {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.92);
+}
+.cYKJrR {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.1px;
+    color: rgb(241, 87, 0);
+}
+.blXEkA {
+    width: 55%;
+}
+.kOMrTR {
+    position: relative;
+    text-align: center;
+}
+[type=reset], [type=submit], button, html [type=button] {
+    -webkit-appearance: button;
+}
+.jOgkDG {
+    text-align: center;
+}
+.cEzNDB {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(27, 166, 114);
+    width: 100%;
+    transition: transform 0.1s ease-in 0s;
+    min-width: 96px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 44px;
+    border: 0px;
+    border-radius: 12px;
+}
+.dHuylL {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    color: rgba(255, 255, 255, 0.92);
+    overflow: hidden;
+    width: 100%;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.gEiytQ {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+    border: none;
+    outline: none;
+    font: initial;
+}
+.bMdcuJ {
+    --fill-color: rgba(2, 6, 12, 0.75);
+    --stroke-color: rgba(2, 6, 12, 0.92);
+    line-height: 0;
+}

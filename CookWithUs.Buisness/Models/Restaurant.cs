@@ -15,5 +15,9 @@ namespace CookWithUs.Buisness.Models
         public string ImageUrl { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+        public string Offer { get; set; }
+        public string CookingTime { get; set; }
+        public float Ratting { get; set; }
+        public string Service { get; set; }
     }
 }
