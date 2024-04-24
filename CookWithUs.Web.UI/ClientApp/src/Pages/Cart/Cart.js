@@ -112,12 +112,12 @@ const Cart = () => {
                 }
             });
 
-            // Handle the response data as needed
+
             console.log("Response:", response.data);
             fetchData();
 
         } catch (error) {
-            // Handle errors if any
+
             console.error("Error fetching data:", error);
         }
     };
@@ -336,8 +336,8 @@ const Cart = () => {
 
                 </div>
             ) : (
-                    <div className="CheckoutPg" style={{ marginTop: "100px" }}>
-                        <PAYMENT_OPTIONS />
+                <div className="CheckoutPg" style={{ marginTop: "100px" }}>
+                        <PAYMENT_OPTIONS FoodItem={{ items }} Address={{ OrderPicker }} TotalAmount={{ totalToPay }} />
                 </div>
 
             )}

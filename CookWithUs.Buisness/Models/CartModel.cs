@@ -9,6 +9,7 @@ namespace CookWithUs.Buisness.Models
     public class CartModel
     {
         public int Id { get; set; }
+        public int OrderId { get; set; }
         public int UserId { get; set; }
         public string Name { get; set; }
         public int ItemId { get; set; }

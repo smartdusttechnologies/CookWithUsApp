@@ -11,46 +11,32 @@ namespace CookWithUs.Buisness.Hubs
 {
     public class LocationHub : Hub
     {
-        private readonly IDictionary<string, UserConnection> _connections;
+        //private readonly IDictionary<string, UserConnection> _connections;
 
-        public LocationHub(IDictionary<string, UserConnection> connections)
-        {
-            _connections = connections;
-        }
-
-        public async Task JoinRoom(UserConnection userConnection)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, userConnection.Room);
-
-            _connections[Context.ConnectionId] = userConnection;
-
-            //await Clients.Group(userConnection.Room).SendAsync("GetLocation", "BotUser",
-            //     new Location { Latitude = 25.5908, Longitude = 85.1348 });
-        }
-        public async Task SetLocation(Location location)
-        {
-            if (_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
-            {
-                await Clients.Group(userConnection.Room).SendAsync("GetLocation", userConnection.User, location);
-            }
-        }
-
-
-        //public async Task OrderBook(string orderId)
+        //public LocationHub(IDictionary<string, UserConnection> connections)
         //{
-        //    // Handle user ordering a book
-        //    // You can perform any necessary business logic here
-        //    await Clients.All.SendAsync("BookOrdered", orderId);
+        //    _connections = connections;
         //}
 
-        //public async Task StartDelivery(string orderId, string riderId)
-        //{
-        //    // Handle rider starting delivery
-        //    // You can perform any necessary business logic here
-        //    await Clients.All.SendAsync("DeliveryStarted", orderId, riderId);
-        //}
+        public async Task JoinRoom(int orderId)
+        {
+            string roomName = $"OrderRoom_{orderId}";
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
 
-      
+            //_connections[Context.ConnectionId] = userConnection;
+
+         
+        }
+        public async Task NotifySpecificRestaurantForNewOrder(int orderId, int restaurantId)
+        {
+            string restaurantRoomName = $"OrderRoom_Restaurant_{restaurantId}";
+            await Clients.Group(restaurantRoomName).SendAsync("NewOrderNotification", orderId);
+        }
+       
+
+
+
+
 
     }
 }

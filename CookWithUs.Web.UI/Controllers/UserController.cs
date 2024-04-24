@@ -58,6 +58,16 @@ namespace CookWithUs.Web.UI.Controllers
             return Ok(response);
         }
 
-        
+        [Route("PlaceOrder")]
+        [HttpPost]
+        public IActionResult PlaceOrder(OrderHistoryDTO Data)
+        {
+            var value = _mapper.Map<OrderHistoryDTO, OrderHistoryModel>(Data);
+            var response = _mediator.Send(new OrderPlace.Command(value)).Result;
+
+            return Ok(response);
+        }
+
+
     }
 }
