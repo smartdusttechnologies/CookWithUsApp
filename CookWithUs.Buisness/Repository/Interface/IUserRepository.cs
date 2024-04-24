@@ -15,5 +15,7 @@ namespace CookWithUs.Buisness.Repository.Interface
         public bool CartUpdate (CartModel cart) ;
         public List<CartModel> CartDetails(int  UserId) ;
 
+        public int OrderUpdate(OrderHistoryModel orderDetail);
+
     }
 }

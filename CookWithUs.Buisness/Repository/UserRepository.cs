@@ -83,5 +83,31 @@ namespace CookWithUs.Buisness.Repository
             return db.Query<CartModel>(query, parameters).ToList();
         }
 
+        public int OrderUpdate(OrderHistoryModel orderdetail)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            string insertQuery = @"
+                INSERT INTO [OrderDetails] (UserID, OrderDate, DeliveryAddress, PaymentMethod, TotalAmount, OrderStatus, RiderId, RestaurantId)
+                VALUES (@UserID, @OrderDate, @DeliveryAddress, @PaymentMethod, @TotalAmount, @OrderStatus, @RiderId, @RestaurantId);
+                SELECT CAST(SCOPE_IDENTITY() AS int);"; // Get the last inserted ID
+
+            // Execute the insert query and get the last inserted ID
+            int generatedOrderId = db.QuerySingle<int>(insertQuery, orderdetail);
+            foreach (var cartItem in orderdetail.FoodList)
+            {  
+                cartItem.OrderId = generatedOrderId;
+                // Define the SQL insert query
+                string query = @"
+                INSERT INTO OrderItems (UserId, Name, ItemId,OrderId, Quantity, RestaurantId, Price, DiscountedPrice, Time, RestaurantLocation, RestaurantName)
+                VALUES (@UserId, @Name, @ItemId,@OrderId, @Quantity, @RestaurantId, @Price, @DiscountedPrice, @Time, @RestaurantLocation, @RestaurantName);";
+
+                int rowsAffected = db.Execute(query, cartItem);
+
+            }
+            return generatedOrderId;
+           
+        }
+
     }
 }
