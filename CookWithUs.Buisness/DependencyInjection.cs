@@ -35,6 +35,11 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<RiderList.Command>, RiderList.Authorization>();
             services.AddTransient<IAuthorizationRule<RiderOrderById.Command>, RiderOrderById.Authorization>();
             services.AddTransient<IAuthorizationRule<OrderUpdate.Command>, OrderUpdate.Authorization>();
+            services.AddTransient<IAuthorizationRule<OrderPlace.Command>, OrderPlace.Authorization>();
+
+            services.AddTransient<IAuthorizationRule<FetchAddress.Command>, FetchAddress.Authorization>();
+            services.AddTransient<IAuthorizationRule<AddressUpdate.Command>, AddressUpdate.Authorization>();
+            services.AddTransient<IAuthorizationRule<FetchCartDetail.Command>, FetchCartDetail.Authorization>();
             services.AddTransient<IAuthorizationRule<OrderHistory.Command>, OrderHistory.Authorization>();
             services.AddTransient<IAuthorizationRule<FetchAddress.Command>, FetchAddress.Authorization>();
             services.AddTransient<IAuthorizationRule<AddressUpdate.Command>, AddressUpdate.Authorization>();
@@ -45,6 +50,8 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
             services.AddTransient<IAuthorizationRule<CreateMenuCategory.Command>, CreateMenuCategory.Authorization>();
             services.AddTransient<IAuthorizationRule<FetchAllMenuCategory.Command>, FetchAllMenuCategory.Authorization>();
+
+            services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
             return services;
 
         }

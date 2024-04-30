@@ -40,7 +40,7 @@ function App() {
                 {/*<NavBar />*/}
                 {/*<ThreedotMenu />*/}
                 <Box sx={{ display: "flex" }}>
-                  {/*  <LeftSideNavigation />*/}
+                    <LeftSideNavigation />
                     <Box sx={{ width: "100%" }}>
                         <AllRoutes isActive={isActive} />
                     </Box>

@@ -8,13 +8,15 @@ namespace CookWithUs.Buisness.Models
 {
     public class OrderHistoryModel
     {
-        public int Id { get; set; }
-        public int RiderId { get; set; }
-        public int OrderPrice { get; set; }
-        
-        public DateTime OrderDateTime { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public int OrderID { get; set; }
+        public int UserID { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string DeliveryAddress { get; set; }
+        public string PaymentMethod { get; set; }
+        public decimal TotalAmount { get; set; }
         public string OrderStatus { get; set; }
+        public int RiderId { get; set; }
+        public int RestaurantId { get; set; }
+        public List<CartModel> FoodList { get; set; }
     }
 }

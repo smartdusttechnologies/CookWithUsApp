@@ -41,9 +41,9 @@ namespace CookWithUs.Buisness.Repository
             var parameters = new
             {
                 RiderId = orderHistory.RiderId,
-                OrderDateTime = orderHistory.OrderDateTime,
-                Latitude = orderHistory.Latitude,
-                Longitude = orderHistory.Longitude,
+                //OrderDateTime = orderHistory.OrderDateTime,
+                //Latitude = orderHistory.Latitude,
+                //Longitude = orderHistory.Longitude,
                 OrderStatus = orderHistory.OrderStatus
             };
 
