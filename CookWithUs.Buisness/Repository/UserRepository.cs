@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Data;
 using CookWithUs.Buisness.Repository.Interface;
 using ServcieBooking.Buisness.Infrastructure;
+using CookWithUs.Buisness.Features.User;
 
 
 
@@ -40,16 +41,74 @@ namespace CookWithUs.Buisness.Repository
         int rowsAffected = db.Execute(query, parameters);
             return rowsAffected > 0;
         }
+        public bool UpdateAddress(AddressModel address)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"UPDATE UserAddress SET UserId = @UserId, Address = @Address, LocationType = @LocationType, LandMark = @LandMark, Building = @Building WHERE Id = @Id";
+
+            var parameters = new
+            {
+                address.Id,
+                address.UserId,
+                address.Address,
+                address.LocationType,
+                address.LandMark,
+                address.Building
+            };
+
+            int rowsAffected = db.Execute(query, parameters);
+            return rowsAffected > 0;
+        }
+        public bool AddToCart(CartModel details)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+            INSERT INTO UserCartTable (UserId,ItemId, Quantity, Time, RestaurantName,RestaurantLocation,RestaurantId,Price,Name,DiscountedPrice)
+            VALUES (@UserId,@ItemId,@Quantity,@Time,@RestaurantName,@RestaurantLocation,@RestaurantId,@Price,@Name,@DiscountedPrice)";
+
+            var parameters = new
+            {
+                details.UserId,
+                details.ItemId,
+                details.Quantity,
+                details.Time,
+                details.RestaurantName,
+                details.RestaurantLocation,
+                details.RestaurantId,
+                details.Price,
+                details.Name,
+                details.DiscountedPrice
+            };
+
+            int rowsAffected = db.Execute(query, parameters);
+            return rowsAffected > 0;
+        }
         public List<AddressModel> FetchAddress(int UserId) {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            string query = "SELECT * FROM UserAddress WHERE UserId = @UserId";
+            string query = "SELECT * FROM UserAddress WHERE UserId = @UserId AND IsDeleted =0;";
 
             var parameters = new { UserId = UserId };
 
             return db.Query<AddressModel>(query, parameters).ToList();
 
             
+        }
+        public bool DeleteAddress(int AddressId) {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = "UPDATE UserAddress SET IsDeleted = 1 WHERE Id = @Id";
+            int rowsAffected = db.Execute(query, new {  Id = AddressId });
+            if (rowsAffected > 0)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool CartUpdate(CartModel cart)
@@ -82,6 +141,5 @@ namespace CookWithUs.Buisness.Repository
 
             return db.Query<CartModel>(query, parameters).ToList();
         }
-
     }
 }

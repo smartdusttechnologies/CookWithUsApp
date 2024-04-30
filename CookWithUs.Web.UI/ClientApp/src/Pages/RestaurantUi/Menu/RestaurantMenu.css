@@ -1,0 +1,223 @@
+﻿.activeButtonBorder {
+    margin: 0px 40px 0px 0px;
+    height: 40px;
+    border-bottom: 3px solid #d9995e;
+}
+.allCategory {
+    width: 20vw;
+    display: flex;
+    margin: 10px 0;
+    flex-direction: column;
+    overflow-x: hidden;
+    height: 57vh;
+}
+.menuCategory {
+    padding: 10px;
+    margin: 5px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6d8d8;
+}
+
+.menuCategory {
+    display: flex;
+    justify-content: space-between;
+}
+.toggle-container {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 13px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+    .toggle-label:before {
+        content: '';
+        position: absolute;
+        top: -10%;
+        left: -2px;
+        width: 17px;
+        height: 17px;
+        background-color: #009f37;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+.toggle-input:checked + .toggle-label:before {
+    transform: translateX(25px);
+}
+.categorySection {
+    border-right: 1px solid gray;
+}
+.menuSection{
+    display:flex;
+}
+.itemSection {
+    margin: 0 20px;
+    width: 70vw;
+}
+.menuItem{
+    display:flex;
+    justify-content:space-between;
+}
+.allItem {
+    margin: 20px 0;
+    overflow-x: hidden;
+    height: 57vh;
+}
+.itemVariant {
+    color: blue;
+    font-weight: 400;
+}
+.itemName {
+    font-weight: 500;
+    margin: 5px 0;
+}
+.itemPrice {
+    font-weight: 500;
+    margin: 5px 0;
+}
+.menuItem {
+    padding: 10px;
+    margin: 5px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6d8d8;
+}
+.basic-details-heading {
+    justify-content: space-between;
+    display: flex;
+    margin: 10px 0;
+}
+.basic-details {
+    margin: 40px 0 0 0;
+}
+.text-area-header {
+    display: flex;
+    height: 30px;
+}
+.basic-details-itemName {
+    border: 1px solid;
+    width: 80%;
+    padding: 5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px 0 0 0;
+}
+.basic-details-itemType {
+    border: 1px solid;
+    width: 20%;
+    font-weight: 500;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0 5px 0 0;
+}
+.basic_details_input {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+}
+.all_item_details {
+    margin: 20px 0;
+    overflow-x: hidden;
+    height: 57vh;
+}
+.total-pricing {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+.pricing_Input {
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    border: 2px solid gray;
+    margin-top: 5px;
+}
+.pricing_input_label {
+    font-size: small;
+    font-weight: 400;
+}
+.AllitemVariants {
+    display: flex;
+}
+.perItemVariant {
+    width: 50%;
+    display: flex;
+    border: 1px solid;
+    margin: 10px;
+    border-radius: 5px;
+    justify-content: space-around;
+    padding: 5px;
+}
+.variantDetais {
+    width: 70%;
+}
+.variantName {
+    font-size: 20px;
+    font-weight: 500;
+}
+.variantInfo {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 2px;
+}
+.perVariantIcon {
+    height: 100%;
+    width: auto;
+}
+.menuTabs {
+    cursor: pointer;
+}
+.requirement-type {
+    font-weight: 400;
+    font-size: 10px;
+}
+.requirement-info {
+    font-weight: 600;
+    font-size: 14px;
+}
+.imageRequirements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.itemTimingOption {
+    margin: 10px;
+    font-weight: 400;
+    display: flex;
+}
+.itemTimingInputs {
+    display: flex;
+    flex-direction: column;
+}
+.circle-radio input[type="radio"] {
+    display: none;
+}
+
+.circle-radio label {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.circle-radio input[type="radio"]:checked + div label {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.itemTimingCheckbox {
+    margin: 3px 10px;
+}

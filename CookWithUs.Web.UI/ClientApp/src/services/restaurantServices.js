@@ -40,4 +40,9 @@ export const GetOrdersByUserID = (userId) => {
 export const PlaceOrder = (requestBody) => {
     return axiosInstance.post("/resturant/PlaceOrder",  requestBody );
 };
-
+export const AddMenuCategory = (details) => {
+    return axiosInstance.post("/resturant/AddMenuCategory", details);
+};
+export const FetchMenuCategory = (restaurantId) => {
+    return axiosInstance.get(`/resturant/FetchMenuCategory/${restaurantId}`);
+};

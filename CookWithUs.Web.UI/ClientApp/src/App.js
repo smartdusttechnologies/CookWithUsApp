@@ -12,6 +12,9 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import BottomActionBar from "./Components/BottomNavigation/BottomActionBar";
 import ThreedotMenu from "./Components/Menu/ThreedotMenu";
+import RestaurantSideBar from "./Components/RestaurantUi/SideBar/RestaurantSideBar";
+import RestaurantTopBar from "./Components/RestaurantUi/TopBar/RestaurantTopBar";
+import React, { useState } from 'react';
 
 const lightTheme = createTheme({
     palette: {
@@ -27,25 +30,27 @@ const darkTheme = createTheme({
 
 function App() {
     const darkMode = useSelector((state) => state.app.darkMode);
-
+    const [isActive, setIsActive] = useState(false);
+    
     return (
         <div>
             <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-
-                <NavBar />
-                <ThreedotMenu />
+                <RestaurantSideBar />
+                <RestaurantTopBar isActive={isActive} setIsActive={setIsActive} />
+                {/*<NavBar />*/}
+                {/*<ThreedotMenu />*/}
                 <Box sx={{ display: "flex" }}>
                   {/*  <LeftSideNavigation />*/}
                     <Box sx={{ width: "100%" }}>
-                        <AllRoutes />
+                        <AllRoutes isActive={isActive} />
                     </Box>
                    {/* <RightSideNavigation />*/}
                 </Box>
-                <ShowMoreMenu />
-                <ThreeDotBottomNav />
-                <Footer />
-                <BottomNav />
-                <BottomActionBar />
+                {/*<ShowMoreMenu />*/}
+                {/*<ThreeDotBottomNav />*/}
+                {/*<Footer />*/}
+                {/*<BottomNav />*/}
+                {/*<BottomActionBar />*/}
             </ThemeProvider>
         </div>
     );

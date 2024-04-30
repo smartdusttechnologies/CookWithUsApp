@@ -1,0 +1,7 @@
+.modal-open {
+    overflow: hidden; /* Prevent scrolling */
+    pointer-events: none; /* Disable clicking */
+}
+    .modal-open .modalOpen {
+        pointer-events: auto; /* Enable clicking for elements inside the modal */
+    }

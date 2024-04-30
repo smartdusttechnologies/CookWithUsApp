@@ -723,3 +723,94 @@ svg:not(:root) {
     letter-spacing: -0.3px;
     color: rgba(2, 6, 12, 0.6);
 }
+.gRYJIS {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.hDCEPB {
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(226, 226, 231);
+    height: 40px;
+    border-radius: 8px;
+    width: 120px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    box-shadow: rgba(40, 44, 63, 0.08) 0px 3px 8px;
+}
+.jeDUxN {
+    z-index: 1;
+    padding-left: 16px;
+    padding-right: 12px;
+    transition: all 100ms ease-in-out 0s;
+    transform: translateX(0px);
+}
+.jGPvlk {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: rgb(27, 166, 114);
+}
+.eGQXFL {
+    position: absolute;
+    inset: 0px;
+}
+.fjpNe {
+    transition: all 100ms ease-in-out 0s;
+    height: 40px;
+    cursor: none;
+    pointer-events: none;
+    transform: translateY(-40px);
+    position: absolute;
+    width: 100%;
+}
+.hwdnJe {
+    appearance: none;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+.dhVOKc {
+    transition: none 0s ease 0s;
+    height: 100%;
+    text-align: center;
+    cursor: none;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    transform: translateY(0px);
+}
+.jGPvlk {
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: rgb(27, 166, 114);
+}
+.gxAXcu {
+    padding-right: 16px;
+    padding-left: 12px;
+    transition: all 100ms ease-in-out 0s;
+    transform: translateX(0px);
+}

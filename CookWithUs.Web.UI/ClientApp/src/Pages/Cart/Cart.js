@@ -38,8 +38,6 @@ const Cart = () => {
 
     const [PaymentPage, SetPaymentPage] = useState(null);
 
-
-
     const fetchData = async () => {
         try {
             const response = await axios.get(`/user/CartDetails/1`);
@@ -49,7 +47,6 @@ const Cart = () => {
 
             setItemTotal(calculateItemTotal(response.data));
             setItemDiscount(calculateItemDiscount(response.data));
-
 
             setTotalToPay(calculateTotalToPay());
         } catch (error) {
@@ -65,27 +62,15 @@ const Cart = () => {
         FetchAddress(UserId)
             .then(Response => {
                 setAddresses(Response.data);
-
             });
-
-
-
         fetchData();
-
     }, []);
 
-
-
-
     const PayingAdd = (Id) => {
-
         const selectedAddress = addresses.find(address => address.id === Id);
-
         SetOrderPicker(selectedAddress);
         SetPaymentAdd(true);
     }
-
-
     // Function to calculate total item price
     function calculateItemTotal(items) {
         return items.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -124,34 +109,18 @@ const Cart = () => {
     const handleIncreaseQuantity = (index) => {
         const updatedItems = [...items];
         updatedItems[index].quantity++;
-
-
-
         IncreaseItem(updatedItems[index].id, updatedItems[index].quantity);
-
-
-
     };
-
     const handleDecreaseQuantity = (index) => {
         const updatedItems = [...items];
         updatedItems[index].quantity--;
-
-
-
         IncreaseItem(updatedItems[index].id, updatedItems[index].quantity);
-
     };
-
-
     const [showAddressUpdate, setShowAddressUpdate] = useState(false);
-
     const handleAddressUpdateClick = () => {
-
         setShowAddressUpdate(true);
         setIsSidebarOpen(true);
     };
-
 
     return (
         <>
@@ -241,8 +210,6 @@ const Cart = () => {
                             </div>
                         </div>
                     )}
-
-
                     <div className="ProductDesc">
                         <div className="ProdBox">
                             <button className="ProdBtn">
@@ -283,7 +250,6 @@ const Cart = () => {
                                                     </div>
                                                 ))}
                                             </div>
-
                                             <div className="_3PZFF">
                                                 <div className="_3e0Qi">Bill Details</div>
                                                 <div className="_3rlIu">

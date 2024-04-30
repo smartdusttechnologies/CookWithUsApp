@@ -32,11 +32,35 @@ namespace CookWithUs.Web.UI.Controllers
             var response = _mediator.Send(new AddressUpdate.Command(orderValue)).Result;
             return Ok(response);
         }
+        [Route("UpdateAddress")]
+        [HttpPost]
+        public IActionResult UpdateAddress(AddressDTO Details)
+        {
+            var orderValue = _mapper.Map<AddressDTO, AddressModel>(Details);
+            var response = _mediator.Send(new UpdateAddress.Command(orderValue)).Result;
+            return Ok(response);
+        }
 
         [Route("FetchAddress/{UserId}")]
         [HttpGet]
         public IActionResult FetchAddress( int UserId) {
             var response = _mediator.Send(new FetchAddress.Command(UserId)).Result;
+            return Ok(response);
+        }
+        [Route("DeleteAddress/{Id}")]
+        [HttpGet]
+        public IActionResult DeleteAddress(int Id)
+        {
+            var response = _mediator.Send(new DeleteAddress.Command(Id)).Result;
+            return Ok(response);
+        }
+
+        [Route("AddItemToCart")]
+        [HttpPost]
+        public  IActionResult AddItemToCart(CartDto Details)
+        {
+            var orderValue = _mapper.Map<CartDto, CartModel>(Details);
+            var response =  _mediator.Send(new AddToCart.Command(orderValue)).Result;
             return Ok(response);
         }
 
@@ -53,11 +77,8 @@ namespace CookWithUs.Web.UI.Controllers
         [HttpGet]
         public IActionResult CartDetails(int  UserId)
         {
-            
             var response = _mediator.Send(new FetchCartDetail.Command(UserId)).Result;
             return Ok(response);
         }
-
-        
     }
 }

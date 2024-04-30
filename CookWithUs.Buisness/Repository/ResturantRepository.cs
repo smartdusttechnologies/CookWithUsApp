@@ -39,8 +39,8 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
-                       M.ID, M.Name, M.Type, M.Price, M.Quantity, D.DocUrl AS ImageUrl
+                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, R.CookingTime, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+                       M.ID, M.Name, M.Type, M.Price, M.Quantity,M.rating,M.customer,M.info, D.DocUrl AS ImageUrl
                 FROM Restaurant R
                 LEFT JOIN Menu M ON R.ID = M.RestaurantID
                 LEFT JOIN Document D ON M.ImageID = D.ID
@@ -296,6 +296,36 @@ namespace ServcieBooking.Buisness.Repository
                 return new RequestResult<bool>(false, validationMessages);
             }
         }
+        public RequestResult<bool> AddMenuCategory(MenuCategory menuCategory)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            string menuCategoryInsertQuery = @"
+    INSERT INTO [MenuCategory] (RestaurantId, CategoryName, InStock, NextStockTime)
+    VALUES (@RestaurantId, @CategoryName, @InStock, @NextStockTime)";
+
+            var menuCategoryParameters = new
+            {
+                RestaurantId = menuCategory.RestaurantId,
+                CategoryName = menuCategory.CategoryName,
+                InStock = menuCategory.InStock,
+                NextStockTime = menuCategory.NextStockTime,
+            };
+
+            int result = db.Execute(menuCategoryInsertQuery, menuCategoryParameters);
+            if (result > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+                };
+                return new RequestResult<bool>(false, validationMessages);
+            }
+        }
         public RequestResult<bool> PlaceOrder(OrderModel order)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
@@ -427,6 +457,24 @@ namespace ServcieBooking.Buisness.Repository
 
             return db.QueryFirstOrDefault<OrderModel>(query, parameters);
 
+        }
+        public List<MenuCategory> FetchAllMenuCategory(int resturantId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT TOP (1000) 
+      [CategoryName]
+      ,[InStock]
+      ,[NextStockTime]
+      ,[IsDeleted]
+      ,[Id]
+  FROM [CookWithUs].[dbo].[MenuCategory] WHERE [RestaurantId] = @resturantId AND [IsDeleted] = 0";
+
+            var parameters = new { resturantId };
+
+            var menuCategories = db.Query<MenuCategory>(query, parameters).ToList();
+
+            return menuCategories;
         }
     }
 }

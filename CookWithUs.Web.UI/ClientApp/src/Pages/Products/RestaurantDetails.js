@@ -9,6 +9,8 @@ import Modal from "../../Components/Modal/Modal";
 import "./RestaurantDetails.css";
 import {  IndianRupee } from 'lucide-react';
 import ItemAddedPopUp from "../../Components/Modal/ItemAddedPopUp";
+import { AddItemToCart } from "../../services/UserService";
+import axios from 'axios';
 const RestaurantDetails = () => {
   const [loading, setLoading] = useState(false);
   const [restaurant, setRestaurant] = useState({});
@@ -16,7 +18,8 @@ const RestaurantDetails = () => {
     const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
-  const darkMode = useSelector((state) => state.app.darkMode);
+    const darkMode = useSelector((state) => state.app.darkMode);
+    const [itemCount, setItemCount] = useState(0);
     const Foods = [
         {
             "id": 1,
@@ -44,6 +47,7 @@ const RestaurantDetails = () => {
             "imageUrl" : "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/FOOD_CATALOG/IMAGES/CMS/2024/4/5/5568cd9a-7277-486e-968e-614d6f42b2c0_9a2741e7-1e29-4f4c-b9a0-0ffe9b5cf81d.JPG" ,
         },       
     ]
+
   const handleGetRestaurantDetails = () => {
     setLoading(true);
     getRestaurantDetails(id)
@@ -60,6 +64,44 @@ const RestaurantDetails = () => {
   useEffect(() => {
     handleGetRestaurantDetails();
   }, []);
+    const handleAddClick = () => {
+        setItemCount(prevCount => prevCount + 1);
+    };
+    const [addItems, setAddItems] = useState([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`/user/CartDetails/1`);
+            setAddItems(response.data);
+        } catch (error) {
+            // Handle errors if any
+            console.error("Error fetching data:", error);
+        }
+    };
+    useEffect(() => {
+        const cartItemCount = addItems.length;
+        setItemCount(cartItemCount);
+    }, [addItems]);
+    useEffect(() => {
+        fetchData();
+    }, []);
+    const handleAddToCartItem = async  (item) => {
+        const Details = {
+            Id:0,
+            UserId: 1,
+            ItemId: item.id,
+            Quantity: 1,
+            time: new Date(),
+            RestaurantName: restaurant.name,
+            RestaurantLocation: restaurant.address,
+            RestaurantId: restaurant.id,
+            Price: item.price,
+            Name: item.name,
+            DiscountedPrice:180
+        };
+        await AddItemToCart(Details);
+        fetchData();
+    }
   const handleAddToCart = (item) => {
     let cartData = JSON.parse(localStorage.getItem("cart")) || [];
     const itemInCart = cartData.find((cartItem) => cartItem.id === item.id);
@@ -84,12 +126,36 @@ const RestaurantDetails = () => {
         } else {
             document.body.classList.remove('modal-open');
         }
-
         // Clean-up function to remove the class when component unmounts
         return () => {
             document.body.classList.remove('modal-open');
         };
     }, [showModal]);
+    const IncreaseItem = async (id, quantity) => {
+        try {
+            // Make an Axios POST request to your endpoint
+            const response = await axios.post('/user/CartUpdate', null, {
+                params: {
+                    Id: id,
+                    Quantity: quantity
+                }
+            });
+            // Handle the response data as needed
+            console.log("Response:", response.data);
+            fetchData();
+        } catch (error) {
+            // Handle errors if any
+            console.error("Error fetching data:", error);
+        }
+    };
+    const handleIncreaseQuantity = (id, quantity) => {
+        quantity++;
+        IncreaseItem(id, quantity);
+    };
+    const handleDecreaseQuantity = (id,quantity) => {
+        quantity--;
+        IncreaseItem(id,quantity);
+    };
   return (
     <div
     className="OF_5P"
@@ -322,7 +388,6 @@ const RestaurantDetails = () => {
               <div>
                   {menu.map((item, index) => (
                   <div>
-                      {/* First dish */}
                       <div data-testid="normal-dish-item" className="sc-dLMFU dBkuDa">
                           <div className="sc-eDPEul fgGbcp">
                               <div>
@@ -361,7 +426,6 @@ const RestaurantDetails = () => {
                                       </div>
                               </div>
                                   <div aria-hidden="true" className="sc-feUZmu gKnMlt">
-                                     
                                       <button aria-label={`See more information about ${item.name}`} className="sc-frWhYi bHMxry" style={{ background: 'rgb(251, 238, 215)' }}>
                                           {item.imageUrl && ( 
                                               <img
@@ -374,23 +438,40 @@ const RestaurantDetails = () => {
                                               />
                                           )}
                                           </button>
-                                     
-                                     
                               <div className="sc-hzhJZQ fzObEb">
                                   <div style={{ position: 'relative' }}>
                                       <div className="sc-camqpD gOsNOm">
-                                          <div className="sc-gweoQa cYHmtf">
-                                              <button className="sc-eIcdZJ sc-fyVfxW ksrzPO dsebmM add-button-left-container">
-                                                  <div className="sc-aXZVg jGPvlk">−</div>
-                                              </button>
-                                              <div className="sc-fmzyuX fnLKtp">
-                                                          <button onClick={() => setShowModal(true) } className="sc-eIcdZJ sc-jdUcAg ksrzPO gbqFid add-button-center-container">
-                                                      <div className="sc-aXZVg jGPvlk">Add</div>
-                                                  </button>
-                                              </div>
-                                              <button className="sc-eIcdZJ sc-eHsDsR ksrzPO DfAPv add-button-right-container">
-                                                  <div className="sc-aXZVg jGPvlk">+</div>
-                                              </button>
+                                                  <div className="sc-gweoQa cYHmtf">
+                                                      {addItems.some(items => items.itemId === item.id) ? (
+                                                          <div className="sc-cvBxsj wFLSu">
+                                                              <div style={{ position: 'relative' }}>
+                                                                  <div className="sc-kdBSHD gRYJIS">
+                                                                      <div className="sc-tagGq hDCEPB">
+                                                                          <button onClick={() => handleDecreaseQuantity(addItems.find(itemm => itemm.itemId === item.id)?.id || 0,
+                                                                              addItems.find(itemm => itemm.itemId === item.id)?.quantity || 0)} className="sc-esYiGF sc-fjvvzt hwdnJe jeDUxN add-button-left-container">
+                                                                              <div className="sc-aXZVg jGPvlk">−</div>
+                                                                          </button>
+                                                                          <div className="sc-hknOHE eGQXFL">
+                                                                              <button direction="stable" className="sc-esYiGF sc-uVWWZ hwdnJe dhVOKc">
+                                                                                  <div className="sc-aXZVg jGPvlk">{addItems.find(itemm => itemm.itemId === item.id)?.quantity || 0}</div>
+                                                                              </button>
+                                                                          </div>
+                                                                          <button onClick={() => handleIncreaseQuantity(addItems.find(itemm => itemm.itemId === item.id)?.id || 0,
+                                                                              addItems.find(itemm => itemm.itemId === item.id)?.quantity || 0)} className="sc-esYiGF sc-bbSZdi hwdnJe gxAXcu add-button-right-container">
+                                                                              <div className="sc-aXZVg jGPvlk">+</div>
+                                                                          </button>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      ) : (
+                                                          <button
+                                                              onClick={() => handleAddToCartItem(item)}
+                                                              className="sc-eIcdZJ sc-jdUcAg ksrzPO gbqFid add-button-center-container"
+                                                          >
+                                                              <div className="sc-aXZVg jGPvlk">Add</div>
+                                                          </button>
+                                                      )}
                                           </div>
                                           <div className="sc-BQMaI eMhXA-d">
                                               <div className="sc-aXZVg ifAlvZ">Customisable</div>
@@ -409,9 +490,9 @@ const RestaurantDetails = () => {
                   ))}
               </div>
           </div>
-
+           {itemCount > 0 && <ItemAddedPopUp itemCount={itemCount} />}
           {showModal && <Modal onClose={() => setShowModal(false)} />}
-          <ItemAddedPopUp itemCount="3" />
+         
       {/*{!loading ? (*/}
       {/*  <Box*/}
       {/*    sx={{*/}

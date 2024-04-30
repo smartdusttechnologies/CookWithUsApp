@@ -26,10 +26,12 @@ namespace ServiceBooking.Web.UI.Controllers
         [HttpGet]
         public IActionResult Get(decimal latitude, decimal longitude)
         {
+            
+            latitude = 25.481471440557847M;
+            longitude = 84.86240659540002M;
             var response = _mediator.Send(new GetResturant.Command(latitude, longitude)).Result;
             return Ok(response);
         }
-
         [Route("GetById/{resturantId}")]
         [HttpGet]
         public IActionResult Get(int resturantId)
@@ -37,7 +39,6 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new GetByIdResturant.Command(resturantId)).Result;
             return Ok(response);
         }
-
         [Route("GetByUserID/{userId}")]
         [HttpGet]
         public IActionResult GetByUserID(int userId)
@@ -45,14 +46,21 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new GetRestaurantByUserID.Command(userId)).Result;
             return Ok(response);
         }
-
         [Route("RestaurantResgister")]
         [HttpPost]
         public IActionResult RestaurantRegister (RegisterRestaurantDTO restaurantDetails)
         {
             var restaurantModel = _mapper.Map<RegisterRestaurantDTO, RegisterRestaurantModel>(restaurantDetails);
-
             var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
+            return Ok(response);
+        }
+
+        [Route("AddMenuCategory")]
+        [HttpPost]
+        public IActionResult AddMenuCategory(MenuCategoryDTO MenuCategoryDTO)
+        {
+            var menuCategoryDetails = _mapper.Map<MenuCategoryDTO, MenuCategory>(MenuCategoryDTO);
+            var response = _mediator.Send(new CreateMenuCategory.Command(menuCategoryDetails)).Result;
             return Ok(response);
         }
 
@@ -61,18 +69,23 @@ namespace ServiceBooking.Web.UI.Controllers
         public IActionResult CreateMenu (MenuDTO menuDTO)
         {
             var menuModel = _mapper.Map<MenuDTO, RestaurantMenu>(menuDTO);
-
             var response = _mediator.Send(new CreateMenu.Command(menuModel)).Result;
             return Ok(response);
         }
-
         [Route("UpdateMenu")]
         [HttpPost]
-        public IActionResult UpdateMenu (MenuDTO menuDTO)
+        public IActionResult UpdateMenu(MenuDTO menuDTO)
         {
             var menuModel = _mapper.Map<MenuDTO, RestaurantMenu>(menuDTO);
-
             var response = _mediator.Send(new UpdateMenu.Command(menuModel)).Result;
+            return Ok(response);
+        }
+
+        [Route("FetchMenuCategory/{resturantId}")]
+        [HttpGet]
+        public IActionResult FetchMenuCategory(int resturantId)
+        {
+            var response = _mediator.Send(new FetchAllMenuCategory.Command(resturantId)).Result;
             return Ok(response);
         }
 
@@ -90,7 +103,6 @@ namespace ServiceBooking.Web.UI.Controllers
         public IActionResult PlaceOrder(OrderDTO requestBody)
         {
             var orderModel = _mapper.Map<OrderDTO, OrderModel>(requestBody);
-
             var response = _mediator.Send(new PlaceOrder.Command(orderModel)).Result;
             return Ok(response);
         }

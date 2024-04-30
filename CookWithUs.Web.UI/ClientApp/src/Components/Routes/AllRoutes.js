@@ -16,21 +16,29 @@ import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
 import RestaurantDetails from "../../Pages/Products/RestaurantDetails";
 import Orders from "../../Pages/Orders/Orders";
+import MyOrders from "../../Pages/User/MyAccount/MyOrders";
+import ManageAddress from "../../Pages/User/ManageAddress/ManageAddress";
 import RiderDashboard from "../../Pages/RiderDashboard/Dashboard";
 import Shipping from "../../Pages/Checkout/Shipping";
+import Dashboard from "../../Pages/RiderDashboard/Dashboard";
+import RestaurantDashboard from "../../Pages/RestaurantUi/Dashboard/RestaurantDashboard";
+import RestaurantMenu from "../../Pages/RestaurantUi/Menu/RestaurantMenu";
 
-const AllRoutes = () => {
+const AllRoutes = ({ isActive }) => {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route path="/uesr" element={<Home />}></Route>
       <Route path="/meals" element={<Products />}></Route>
+      <Route path="/my-account" element={<MyOrders />}></Route>
+      <Route path="/my-account/orders" element={<MyOrders />}></Route>
+      <Route path="/my-account/manage_addresses" element={<ManageAddress />}></Route>
       <Route path="/myorders" element={<Orders />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/success" element={<Confirmation />} />
       <Route path="/payment" element={<PaymentCard />} />
-          <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
-          <Route path="/RiderDashboard" element={<RiderDashboard />} />
+      <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
+      <Route path="/RiderDashboard" element={<RiderDashboard />} />
       <Route path="/trackorder" element={<OrderDirection />} />
       <Route path="/trackorder/:id" element={<OrderDirection />} />
       <Route path="/registeraschef" element={<RegistrationForm />} />
@@ -39,8 +47,12 @@ const AllRoutes = () => {
       <Route path="/chefdashboard" element={<ChefDashboard />} />
       <Route path="/restaurant/:id" element={<RestaurantDetails />} />
       <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/Shipping" element={<Shipping />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/Shipping" element={<Shipping />} />
+      <Route path="/" element={<RestaurantDashboard isActive={isActive} />} />
+      <Route path="/Restaurant/Menu" element={<RestaurantMenu />} />
+      <Route path="/Restaurant/Order" element={<RestaurantDashboard isActive={isActive} />} />
+
     </Routes>
   );
 };

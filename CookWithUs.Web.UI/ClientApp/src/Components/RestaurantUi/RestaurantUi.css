@@ -1,0 +1,171 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    color: rgb(104, 11, 255);
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    border: 4px solid green;
+    padding: 20px;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: black;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 9999999999;
+}
+
+    .sidebar li {
+        color: gray;
+        margin: 20px auto;
+        list-style-type: none;
+    }
+
+    .sidebar span {
+        display: block;
+        margin-top: 10px;
+        font-size: 10px;
+    }
+
+.sidenav {
+    text-align: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.topbar2 {
+    display: flex;
+    position: fixed;
+    height: 60px;
+    background-color: #464f69;
+    width: 100vw;
+    top: 80px;
+    left: 100px;
+    padding: 0 20PX;
+    z-index: 99999;
+}
+
+.steps {
+    margin: 20px 0;
+    display: flex;
+}
+
+.stepArrow {
+    margin: 4px 10px;
+    color: white;
+}
+
+.steps li {
+    margin: 20px;
+}
+
+.topbar {
+    display: flex;
+    position: fixed;
+    background-color: #1d2535;
+    width: 100vw;
+    height: 80px;
+    padding: 0px;
+    color: white;
+    justify-content: space-between;
+    z-index: 99999999;
+}
+
+.stepButton {
+    display: flex;
+    background-color: white;
+    width: fit-content;
+    text-align: center;
+    height: 23px;
+    justify-content: center;
+    border-radius: 3px;
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 10px;
+}
+
+    .stepButton span {
+        justify-content: center;
+        justify-items: center;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .stepButton i {
+        justify-content: center;
+        justify-items: center;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        margin: 0 5px 0 0;
+    }
+
+.leftSide {
+    display: flex;
+    margin: 25px 120px;
+}
+
+.rightSide {
+    display: flex;
+    margin: 20px;
+}
+
+    .rightSide div {
+        margin: 0 10px;
+        font-size: 20px;
+    }
+
+.faq {
+    height: 30px;
+    width: 70px;
+    background-color: rgb(231, 105, 15);
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+}
+
+.manageOrder {
+    margin: 0 10px;
+}
+
+.userName {
+    margin: 0 20px;
+}
+/* Hide the default checkbox */
+.toggle-input {
+    display: none;
+}
+/* Style the toggle button */
+.toggle-btn {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.mainDashboard {
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
