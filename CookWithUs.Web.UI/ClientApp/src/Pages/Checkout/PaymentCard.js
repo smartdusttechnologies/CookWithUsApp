@@ -149,7 +149,7 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
     //const [connection, setConnection] = useState();
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [orderId, SetOrderId] = useState(null);
-
+    
     const handlePayment = () => {
         if (!paymentMethod) {
             toast.warn("Please select a payment method.");
@@ -181,27 +181,27 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
                         RestaurantName: item.restaurantName
                     };
                 });
-               
+
                 const Data = {
-                    OrderID: 0, 
+                    OrderID: 0,
                     UserID: Address.OrderPicker.userId,
-                    OrderDate: new Date(), 
+                    OrderDate: new Date(),
                     DeliveryAddress: Address.OrderPicker.address,
                     PaymentMethod: "Cash on Delivery",
                     TotalAmount: TotalAmount.totalToPay,
                     OrderStatus: "Processing",
-                    RiderId:0,
+                    RiderId: 0,
                     RestaurantId: FoodItem.items[0].restaurantId,
                     FoodList: Food
-                    
+
                 };
 
                 axios.post('/user/PlaceOrder', Data)
                     .then(async response => {
                         SetOrderId(response.data.requestedObject);
-                         
-                        const connection  =await ConnectionBuild();
-                        await notifyRestaurantForNewOrder(connection); 
+
+                        const connection = await ConnectionBuild();
+                        await notifyRestaurantForNewOrder(connection, response.data.requestedObject);
                         // Handle success response
                     })
                     .catch(error => {
@@ -209,7 +209,7 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
                         console.error('Error placing order:', error);
                     });
                 /*const response = ConnectionBuild();*/
-                
+
                 break;
             }
 
@@ -228,26 +228,26 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
             console.log("Connection established:", connectionBuild);
             return connectionBuild;
             // Once connection is established, set it
-            
+
         } catch (e) {
             console.log("Error establishing connection:", e);
             throw e;
         }
     };
 
-    const notifyRestaurantForNewOrder = async (connection) => {
+    const notifyRestaurantForNewOrder = async (connection, orderId) => {
         try {
             // Ensure that connection is established before invoking methods
             if (!connection) {
-                await ConnectionBuild(); // Establish connection if not already established
+                await ConnectionBuild();
             }
 
-            // Now connection should be set, you can proceed with invoking methods
-            await connection.invoke("JoinRoom", 2);
+            await connection.invoke("JoinRoom", orderId);
             await connection.invoke("NotifySpecificRestaurantForNewOrder", orderId, FoodItem.items[0].restaurantId);
             navigate("/success");
             console.log("Notification sent to the specific restaurant for new order:", orderId);
         } catch (error) {
+
             console.error("Error notifying the specific restaurant:", error);
         }
     };
