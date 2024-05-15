@@ -9,6 +9,9 @@ using CookWithUs.Buisness.Models;
 using CookWithUs.Business.Common;
 using System.Transactions;
 using CookWithUs.Buisness.Features.Resturant.Queries;
+using System.Data.SqlClient;
+using System.Data.Common;
+using System.Diagnostics.Metrics;
 
 namespace ServcieBooking.Buisness.Repository
 {
@@ -39,7 +42,7 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude, R.CookingTime, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude,R.isActive, R.CookingTime, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
                        M.ID, M.Name, M.Type, M.Price, M.Quantity,M.rating,M.customer,M.info, D.DocUrl AS ImageUrl
                 FROM Restaurant R
                 LEFT JOIN Menu M ON R.ID = M.RestaurantID
@@ -168,34 +171,62 @@ namespace ServcieBooking.Buisness.Repository
         public RequestResult<bool> CreateMenu(RestaurantMenu menu)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
-            string imageInsertQuery = @"
-                   INSERT INTO [Document] (DocUrl)
-                   VALUES (@ImageUrl);
-                   SELECT CAST(SCOPE_IDENTITY() AS INT)";
+            //string imageInsertQuery = @"
+            //       INSERT INTO [Document] (DocUrl)
+            //       VALUES (@ImageUrl);
+            //       SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
-            var parameters = new
-            {
-                menu.ImageUrl
-            };
+            //var parameters = new
+            //{
+            //    menu.ImageUrl
+            //};
 
-            int imageId = db.QuerySingle<int>(imageInsertQuery , parameters);
+            //int imageId = db.QuerySingle<int>(imageInsertQuery , parameters);
 
-            string menuInsertQuery = @"
-                   INSERT INTO [Menu] (RestaurantID,Name,Type,Price,Quantity,ImageID)
-                   VALUES (@RestaurantID, @Name, @Type, @Price, @Quantity, @imageID)";
+                string menuInsertQuery = @"
+                INSERT INTO [Menu] (RestaurantID, Name, Type, Price, Quantity, ImageID, info, CategoryID, InStock, PackingPrice, GstPrice)
+                VALUES (@RestaurantID, @Name, @Type, @Price, @Quantity, @ImageID, @Info, @CategoryID, @InStock, @PackingPrice, @GstPrice)";
+
             var menuParameters = new
             {
-                menu.RestaurantID,
-                menu.Name,
-                menu.Type,
-                menu.Price,
-                menu.Quantity,
-                imageId
+                RestaurantID = menu.RestaurantID,
+                Name = menu.Name,
+                Type = menu.Type,
+                Price = menu.Price,
+                Quantity = menu.Quantity,
+                ImageID = menu.ImageUrl,
+                Info = menu.Info,
+                CategoryID = menu.CategoryID,
+                InStock = menu.InStock,
+                PackingPrice = menu.PackingPrice,
+                GstPrice = menu.GstPrice
             };
-            
+
             int result = db.Execute(menuInsertQuery, menuParameters);
+            string getLastInsertIdQuery = "SELECT MAX(Id) FROM [Menu];";
+            int newMenuId = db.QuerySingle<int>(getLastInsertIdQuery);
             if (result > 0)
             {
+                
+                string variantOptionInsertQuery = @"
+                INSERT INTO [VariantOption] (VariantName, OptionName, OptionType, OptionPrice, IsDeleted, MenuId)
+                VALUES (@VariantName, @OptionName, @OptionType, @OptionPrice, @IsDeleted, @MenuId)
+                ";
+                foreach (var variantOption in menu.Variants)
+                {
+                    var variantOptionParameters = new
+                    {
+                        VariantName = variantOption.VariantName,
+                        OptionName = variantOption.OptionName,
+                        OptionType = variantOption.OptionType,
+                        OptionPrice = variantOption.OptionPrice,
+                        IsDeleted = 0,
+                        MenuId = newMenuId
+                    };
+
+                    int variantResult = db.Execute(variantOptionInsertQuery, variantOptionParameters);
+                }
+
                 return new RequestResult<bool>(true);
             }
             else
@@ -209,77 +240,155 @@ namespace ServcieBooking.Buisness.Repository
         }
         public RequestResult<bool> UpdateMenu(RestaurantMenu menu)
         {
-            using (IDbConnection db = _connectionFactory.GetConnection)
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string menuInsertQuery = @"UPDATE [Menu]
+        SET RestaurantID = @RestaurantID,
+            Name = @Name,
+            Type = @Type,
+            Price = @Price,
+            Quantity = @Quantity,
+            ImageID = @ImageID,
+            info = @Info,
+            CategoryID = @CategoryID,
+            InStock = @InStock,
+            PackingPrice = @PackingPrice,
+            GstPrice = @GstPrice
+        WHERE ID = @ID;";
+
+            var menuParameters = new
             {
-                using (var transaction = db.BeginTransaction())
+                RestaurantID = menu.RestaurantID,
+                Name = menu.Name,
+                Type = menu.Type,
+                Price = menu.Price,
+                Quantity = menu.Quantity,
+                ImageID = menu.ImageUrl,
+                Info = menu.Info,
+                CategoryID = menu.CategoryID,
+                InStock = menu.InStock,
+                PackingPrice = menu.PackingPrice,
+                GstPrice = menu.GstPrice,
+                ID = menu.ID
+            };
+
+            int result = db.Execute(menuInsertQuery, menuParameters);
+
+            if (result > 0)
+            {
+                int newMenuId = menu.ID; // Set newMenuId after successful update
+                string selectQuery = @"SELECT COUNT(*) FROM [VariantOption] WHERE MenuId = @MenuId";
+                int count = db.ExecuteScalar<int>(selectQuery, new { MenuId = newMenuId });
+
+                if (count > 0)
                 {
-                    try
+                    string deleteOlderVariantQuery = @"DELETE FROM [VariantOption] WHERE MenuId = @MenuId";
+                    var deletedParameter = new
                     {
-                        string updateQuery = @"
-                               UPDATE [Menu] SET
-                                   Name = @Name,
-                                   Type = @Type,
-                                   Price = @Price,
-                                   Quantity = @Quantity
-                               WHERE
-                                   ID = @ID;";
-
-                        string docQuery = @"UPDATE [Document]
-                               SET
-                                   [DocUrl] = @ImageUrl
-                               WHERE
-                                   ID = (SELECT ImageID FROM [Menu] WHERE ID = @ID);";
-
-                        var docParameters = new
-                        {
-                            menu.ID,
-                            menu.ImageUrl
-                        };
-                        var parameters = new
-                        {
-                            menu.Name,
-                            menu.Type,
-                            menu.Price,
-                            menu.Quantity,
-                            menu.ID,
-                        };
-
-                        int menuUpdateResult = db.Execute(updateQuery, parameters, transaction);
-                        int docUpdateResult = db.Execute(docQuery, docParameters, transaction);
-
-                        if (menuUpdateResult > 0 && docUpdateResult > 0)
-                        {
-                            transaction.Commit();
-                            return new RequestResult<bool>(true);
-                        }
-                        else
-                        {
-                            transaction.Rollback();
-                            List<ValidationMessage> validationMessages = new List<ValidationMessage>()
-                            {
-                                new ValidationMessage() { Reason = "Unable to update records.", Severity = ValidationSeverity.Error }
-                            };
-                            return new RequestResult<bool>(false, validationMessages);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        // Handle exception, log it, etc.
-                        List<ValidationMessage> validationMessages = new List<ValidationMessage>()
-                        {
-                            new ValidationMessage() { Reason = "An error occurred during the update.", Severity = ValidationSeverity.Error }
-                        };
-                        return new RequestResult<bool>(false, validationMessages);
-                    }
+                        MenuId = newMenuId
+                    };
+                    int deletedResult = db.Execute(deleteOlderVariantQuery, deletedParameter);
                 }
+
+                //string deleteOlderVariantQuery = @"DELETE FROM [VariantOption] WHERE MenuId = @MenuId";
+                //var deletedParameter = new
+                //{
+                //    MenuId = newMenuId
+                //};
+                //int deletedResult = db.Execute(deleteOlderVariantQuery, deletedParameter);
+
+
+                string variantOptionInsertQuery = @"INSERT INTO [VariantOption] (VariantName, OptionName, OptionType, OptionPrice, IsDeleted, MenuId)
+                VALUES (@VariantName, @OptionName, @OptionType, @OptionPrice, @IsDeleted, @MenuId)";
+
+                    foreach (var variantOption in menu.Variants)
+                    {
+                        var variantOptionParameters = new
+                        {
+                            VariantName = variantOption.VariantName,
+                            OptionName = variantOption.OptionName,
+                            OptionType = variantOption.OptionType,
+                            OptionPrice = variantOption.OptionPrice,
+                            IsDeleted = 0,
+                            MenuId = newMenuId
+                        };
+
+                        int variantResult = db.Execute(variantOptionInsertQuery, variantOptionParameters);
+                    }
+
+                    return new RequestResult<bool>(true);
+                
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+        {
+            new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+        };
+                return new RequestResult<bool>(false, validationMessages);
             }
         }
+
+
+        public List<RestaurantMenu> GetMenuItemByCategoryID(int categoryId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT 
+		   M.[ID]
+          ,M.[RestaurantID]
+          ,M.[Name]
+          ,M.[Type]
+          ,M.[Price]
+          ,M.[Quantity]
+          ,M.[ImageID]
+          ,M.[rating]
+          ,M.[customer]
+          ,M.[info]
+          ,M.[CategoryID]
+          ,M.[InStock]
+          ,M.[NextStockTime]
+          ,M.[PackingPrice]
+          ,M.[GstPrice]
+          ,M.[ItemCookingTime]
+          ,M.[IsDeleted]
+            ,V.[Id] as VariantID
+          ,V.[VariantName] 
+          ,V.[OptionName] 
+          ,V.[OptionType] 
+          ,V.[OptionPrice] 
+          ,V.[IsDeleted]
+          ,V.[MenuId]
+          
+          FROM [CookWithUs].[dbo].[Menu] M
+          LEFT JOIN [CookWithUs].[dbo].[VariantOption]V ON M.ID =V.MenuId 
+          WHERE M.IsDeleted = 0 AND M.CategoryID = @CategoryId";
+
+            var statesDictionary = new Dictionary<int, RestaurantMenu>();
+            db.Query<RestaurantMenu, VariantOption, RestaurantMenu>(
+                query,
+                (restaurantMenu, variantOption) =>
+                {
+                    if (!statesDictionary.TryGetValue(restaurantMenu.ID, out var stateEntry))
+                    {
+                        stateEntry = restaurantMenu;
+                        stateEntry.Variants = new List<VariantOption>();
+                        statesDictionary.Add(stateEntry.ID, stateEntry);
+                    }
+                    stateEntry.Variants.Add(variantOption);
+                    return stateEntry;
+                },
+                new { CategoryId = categoryId },
+        splitOn: "VariantID"
+    );
+
+            return statesDictionary.Values.ToList();
+        }
+
 
         public RequestResult<bool> DeleteMenu(int menuId)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
-            string query = @"delete from [Menu] where ID=@ID";
+            string query = @"UPDATE [Menu] SET IsDeleted = 1  where ID=@ID";
 
             int result = db.Execute(query, new { ID = menuId });
 
@@ -310,6 +419,33 @@ namespace ServcieBooking.Buisness.Repository
                 CategoryName = menuCategory.CategoryName,
                 InStock = menuCategory.InStock,
                 NextStockTime = menuCategory.NextStockTime,
+            };
+
+            int result = db.Execute(menuCategoryInsertQuery, menuCategoryParameters);
+            if (result > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                List<ValidationMessage> validationMessages = new List<ValidationMessage>()
+                {
+                    new ValidationMessage() { Reason = "Unable To take Your Request Right Now.", Severity = ValidationSeverity.Error }
+                };
+                return new RequestResult<bool>(false, validationMessages);
+            }
+        }
+        public RequestResult<bool> UpdateMenuCategory(MenuCategory menuCategory) {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            string menuCategoryInsertQuery = @"
+    UPDATE [MenuCategory] SET  CategoryName
+    = @CategoryName WHERE Id = @Id";
+
+            var menuCategoryParameters = new
+            {
+                Id = menuCategory.ID,
+                CategoryName = menuCategory.CategoryName
             };
 
             int result = db.Execute(menuCategoryInsertQuery, menuCategoryParameters);
@@ -440,6 +576,58 @@ namespace ServcieBooking.Buisness.Repository
                 },
                 parameters,
                 splitOn: "ProductID"
+            );
+
+            return orderDictionary.Values.ToList();
+        }
+        public List<OrderModel> getOrderByRestaurantID(int restaurantId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"
+                
+           SELECT 
+	       OD. [OrderID] AS ID
+          ,OD.[UserID]
+          ,OD.[OrderDate]
+          ,OD.[DeliveryAddress] AS Address
+          ,OD.[PaymentMethod]
+          ,OD.[TotalAmount] as OrderPrice
+          ,OD.[OrderStatus]
+           ,OI.[Id]
+          ,OI.[UserId]
+          ,OI.[OrderId]
+          ,OI.[Name]
+          ,OI.[ItemId]
+          ,OI.[Quantity]
+          ,OI.[RestaurantId]
+          ,OI.[Price]
+          ,OI.[DiscountedPrice]
+          ,OI.[Time]
+          
+          FROM [CookWithUs].[dbo].[OrderDetails] OD
+          LEFT JOIN [CookWithUs].[dbo].[OrderItems] OI ON OD.OrderID =OI.OrderId
+          WHERE  OD.RestaurantId = @restaurantId";
+
+            var parameters = new { restaurantId };
+
+            var orderDictionary = new Dictionary<int, OrderModel>();
+
+            db.Query<OrderModel, OrdersProduct, OrderModel>(query,
+                (order, product) =>
+                {
+                    if (!orderDictionary.TryGetValue(order.ID, out var orderEntry))
+                    {
+                        orderEntry = order;
+                        orderEntry.Products = new List<OrdersProduct>();
+                        orderDictionary.Add(order.ID, orderEntry);
+                    }
+
+                    orderEntry.Products.Add(product);
+                    return orderEntry;
+                },
+                parameters,
+                splitOn: "Id"
             );
 
             return orderDictionary.Values.ToList();

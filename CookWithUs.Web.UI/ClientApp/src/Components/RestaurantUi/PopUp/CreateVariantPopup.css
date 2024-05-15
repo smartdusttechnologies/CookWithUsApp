@@ -1,0 +1,63 @@
+﻿.variantSidebar {
+    position: fixed;
+    background-color: #ffffff;
+    height: 85%;
+    width: 50vw;
+    right: 0;
+    z-index: 99999;
+    top: 130px;
+}
+
+.topHeading {
+    display: flex;
+    margin: 8px;
+}
+.variantOption {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 0 30px;
+}
+.VariantOptionName {
+    border-bottom: 2px solid;
+}
+/* SelectBox.css */
+
+.select-box-container {
+    margin-bottom: 20px;
+}
+
+.select-box-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.select-box {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Remove default appearance */
+}
+
+.arrow-down-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none; /* Ensure arrow icon doesn't interfere with select box */
+}
+.VariantOptionItemPriceAmount {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.VariantOptionItemPriceLabel {
+    font-weight: 500;
+    margin: 5px 0;
+}

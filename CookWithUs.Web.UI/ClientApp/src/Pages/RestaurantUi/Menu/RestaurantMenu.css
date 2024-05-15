@@ -16,6 +16,7 @@
     margin: 5px;
     font-weight: 600;
     border-bottom: 1px solid #e6d8d8;
+    cursor: pointer;
 }
 
 .menuCategory {
@@ -66,9 +67,10 @@
     margin: 0 20px;
     width: 70vw;
 }
-.menuItem{
-    display:flex;
-    justify-content:space-between;
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
 }
 .allItem {
     margin: 20px 0;
@@ -220,4 +222,47 @@
 }
 .itemTimingCheckbox {
     margin: 3px 10px;
+}
+.selectedVariant {
+    display: flex;
+    min-height: 200px;
+    width: 250px;
+    border: 1px solid gray;
+    margin: 5px;
+    flex-direction: column;
+}
+.selectedVariantTitle {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.selectedVariantName {
+    font-weight: 700;
+    font-size: 20px;
+}
+.variantCompulsory {
+    margin: 0 10px;
+}
+.selectedVariantType {
+    display: flex;
+}
+.selectedVariantTypes {
+    margin: 10px;
+}
+.selectedVariantTypeName {
+    margin: 0 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.selecteVariantPrice {
+    font-weight: 500;
+}
+.menuCategoryActive {
+    background-color: #44506B !important;
+    color: white !important;
+}
+.unhideElement {
+    opacity: 0.4 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
 }

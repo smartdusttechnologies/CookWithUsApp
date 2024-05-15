@@ -63,6 +63,14 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new CreateMenuCategory.Command(menuCategoryDetails)).Result;
             return Ok(response);
         }
+        [Route("UpdateMenuCategory")]
+        [HttpPost]
+        public IActionResult UpdateMenuCategory(MenuCategoryDTO MenuCategoryDTO)
+        {
+            var menuCategoryDetails = _mapper.Map<MenuCategoryDTO, MenuCategory>(MenuCategoryDTO);
+            var response = _mediator.Send(new UpdateMenuCategory.Command(menuCategoryDetails)).Result;
+            return Ok(response);
+        }
 
         [Route("CreateMenu")]
         [HttpPost]
@@ -78,6 +86,14 @@ namespace ServiceBooking.Web.UI.Controllers
         {
             var menuModel = _mapper.Map<MenuDTO, RestaurantMenu>(menuDTO);
             var response = _mediator.Send(new UpdateMenu.Command(menuModel)).Result;
+            return Ok(response);
+        }
+       
+        [Route("GetMenuByCategoryID/{CategoryId}")]
+        [HttpPost]
+        public IActionResult GetMenuByCategoryID(int CategoryId)
+        {
+            var response = _mediator.Send(new GetMenuByCategoryID.Command(CategoryId)).Result;
             return Ok(response);
         }
 
@@ -122,7 +138,13 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new GetOrdersByUserID.Command(userId)).Result;
             return Ok(response);
         }
-
+        [Route("getOrderByRestaurantID/{restaurantId}")]
+        [HttpGet]
+        public IActionResult getOrderByRestaurantID(int restaurantId)
+        {
+            var response = _mediator.Send(new getOrderByRestaurantID.Command(restaurantId)).Result;
+            return Ok(response);
+        }
         [Route("GetOrderDetails/{orderId}")]
         [HttpGet]
         public IActionResult GetOrderDetails(int orderId)

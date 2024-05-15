@@ -1,12 +1,23 @@
-import React from "react";
+﻿import React, { useEffect,useState} from "react";
 import { Hotel, Soup, ShoppingBag, CircleMinus, MoveRight } from 'lucide-react';
-const RestaurantDashboard = ({ isActive } ) => {
-
+import { getOrderByRestaurantID } from "../../../services/restaurantServices";
+const RestaurantDashboard = ({ isActive }) => {
+    const [allOrder, setAllOrder] = useState([]);
+    useEffect(() => {
+        const RestaurantId = 1;
+        getOrderByRestaurantID(RestaurantId)
+            .then(response => {
+                setAllOrder(response.data);
+            })
+            .catch(error => {
+                console.error("An error occurred while adding address:", error);
+            });
+    }, []); 
     return (
         <div
             style={{
                 width: "100%",
-                margin: "140px 100px"
+                margin: "140px 50px"
             }}>
             <div className="topbar2">
                 <div className="steps">
@@ -40,7 +51,21 @@ const RestaurantDashboard = ({ isActive } ) => {
                 </div>
             </div>
             {isActive ? (
-                <div></div>
+                <div className="orderDashboard">
+                    {allOrder.map((order, orderIndex) => (
+                        order.products.map((product, productIndex) => (
+                            <>
+                                <div className="eachOrder">
+                                    <h4>CWU-{order.id}-{product.orderID }</h4>
+                                    <div className="eachOrderDetails">10:45PM | {product.name} | ₹{product.price}</div>
+                                </div>
+                                <hr />
+                            </>
+                        ))
+                    ))}
+
+                    
+                </div>
             ) : (
                 <div className="mainDashboard">
                     <div className="contant">

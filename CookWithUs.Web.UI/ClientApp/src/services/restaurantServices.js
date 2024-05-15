@@ -21,12 +21,19 @@ export const ResgisterRestaurant = (details) => {
   return axiosInstance.post("/resturant/RestaurantResgister", details);
 };
 
+export const GetMenuByCategoryID = (CategoryId) => {
+    return axiosInstance.post(`/resturant/GetMenuByCategoryID/${CategoryId}`);
+};
+
 export const CreateMenu = (details) => {
   return axiosInstance.post("/resturant/CreateMenu", details);
 };
 
 export const UpdateMenu = (details) => {
   return axiosInstance.post("/resturant/UpdateMenu", details);
+};
+export const DeleteMenu = (ItemId) => {
+    return axiosInstance.post(`/resturant/DeleteMenu/${ItemId}`);
 };
 
 export const GetOrderDetails = (orderId) => {
@@ -35,6 +42,10 @@ export const GetOrderDetails = (orderId) => {
 
 export const GetOrdersByUserID = (userId) => {
   return axiosInstance.get(`/resturant/GetOrdersByUserID/${userId}`);
+};
+
+export const getOrderByRestaurantID = (restaurantId) => {
+    return axiosInstance.get(`/resturant/getOrderByRestaurantID/${restaurantId}`);
 };
 
 export const PlaceOrder = (requestBody) => {
@@ -46,3 +57,6 @@ export const AddMenuCategory = (details) => {
 export const FetchMenuCategory = (restaurantId) => {
     return axiosInstance.get(`/resturant/FetchMenuCategory/${restaurantId}`);
 };
+export const UpdateMenuCategory = (details) => {
+    return axiosInstance.post("/resturant/UpdateMenuCategory", details);
+}

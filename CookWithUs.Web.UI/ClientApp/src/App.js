@@ -31,18 +31,19 @@ const darkTheme = createTheme({
 function App() {
     const darkMode = useSelector((state) => state.app.darkMode);
     const [isActive, setIsActive] = useState(false);
+    const [activeTab, setActiveTab] = useState("");
     
     return (
         <div>
             <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                <RestaurantSideBar />
-                <RestaurantTopBar isActive={isActive} setIsActive={setIsActive} />
+                <RestaurantSideBar setActiveTab={setActiveTab} activeTab={activeTab} />
+                <RestaurantTopBar  isActive={isActive} setIsActive={setIsActive} />
                 {/*<NavBar />*/}
                 {/*<ThreedotMenu />*/}
                 <Box sx={{ display: "flex" }}>
                     <LeftSideNavigation />
                     <Box sx={{ width: "100%" }}>
-                        <AllRoutes isActive={isActive} />
+                        <AllRoutes setActiveTab={setActiveTab} activeTab={activeTab} isActive={isActive} />
                     </Box>
                    {/* <RightSideNavigation />*/}
                 </Box>

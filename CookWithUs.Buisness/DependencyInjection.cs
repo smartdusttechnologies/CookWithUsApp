@@ -26,6 +26,7 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<CreateMenu.Command>, CreateMenu.Authorization>();
             services.AddTransient<IAuthorizationRule<UpdateMenu.Command>, UpdateMenu.Authorization>();
             services.AddTransient<IAuthorizationRule<DeleteMenu.Command>, DeleteMenu.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetMenuByCategoryID.Command>, GetMenuByCategoryID.Authorization>();
             services.AddTransient<IAuthorizationRule<GetRestaurantByUserID.Command>, GetRestaurantByUserID.Authorization>();
             services.AddTransient<IAuthorizationRule<PlaceOrder.Command>, PlaceOrder.Authorization>();
             services.AddTransient<IAuthorizationRule<GetOrders.Command>, GetOrders.Authorization>();
@@ -49,7 +50,9 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<AddToCart.Command>, AddToCart.Authorization>();
             services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
             services.AddTransient<IAuthorizationRule<CreateMenuCategory.Command>, CreateMenuCategory.Authorization>();
+            services.AddTransient<IAuthorizationRule<UpdateMenuCategory.Command>, UpdateMenuCategory.Authorization>();
             services.AddTransient<IAuthorizationRule<FetchAllMenuCategory.Command>, FetchAllMenuCategory.Authorization>();
+            services.AddTransient<IAuthorizationRule<getOrderByRestaurantID.Command>, getOrderByRestaurantID.Authorization>();
 
             services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
             return services;

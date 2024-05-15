@@ -24,7 +24,7 @@ import Dashboard from "../../Pages/RiderDashboard/Dashboard";
 import RestaurantDashboard from "../../Pages/RestaurantUi/Dashboard/RestaurantDashboard";
 import RestaurantMenu from "../../Pages/RestaurantUi/Menu/RestaurantMenu";
 
-const AllRoutes = ({ isActive }) => {
+const AllRoutes = ({ isActive, setActiveTab ,activeTab  }) => {
   return (
     <Routes>
       <Route path="/uesr" element={<Home />}></Route>
@@ -50,7 +50,7 @@ const AllRoutes = ({ isActive }) => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/Shipping" element={<Shipping />} />
       <Route path="/" element={<RestaurantDashboard isActive={isActive} />} />
-      <Route path="/Restaurant/Menu" element={<RestaurantMenu />} />
+          <Route path="/Restaurant/Menu" element={<RestaurantMenu setActiveTab={setActiveTab} activeTab={activeTab} />} />
       <Route path="/Restaurant/Order" element={<RestaurantDashboard isActive={isActive} />} />
 
     </Routes>
