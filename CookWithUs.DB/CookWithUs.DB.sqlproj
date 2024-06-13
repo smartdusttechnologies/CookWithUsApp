@@ -74,9 +74,12 @@
     <Build Include="dbo\Tables\Document.sql" />
     <Build Include="dbo\Tables\DeliveryPartner.sql" />
     <Build Include="dbo\Tables\DeliveryBoys.sql" />
-    <Build Include="dbo\Tables\OrderDetails.sql" />
-    <Build Include="dbo\Tables\OrderItems.sql" />
-    <Build Include="dbo\Tables\MenuCategory.sql" />
     <Build Include="dbo\Tables\VariantOption.sql" />
+    <Build Include="dbo\Tables\UserCartTable_1.sql" />
+    <Build Include="dbo\Tables\OrderItems.sql" />
+    <Build Include="dbo\Tables\OrderDetails.sql" />
+    <Build Include="dbo\Tables\MenuVariant.sql" />
+    <Build Include="dbo\Tables\MenuCategory.sql" />
+    <Build Include="Security\CookWithUs.sql" />
   </ItemGroup>
 </Project>
