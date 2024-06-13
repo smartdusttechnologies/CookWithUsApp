@@ -21,5 +21,6 @@ namespace CookWithUs.Buisness.Models
 
         public string RestaurantLocation { get; set; }
         public string RestaurantName { get; set; }
+        public int variantID { get; set; }
     }
 }

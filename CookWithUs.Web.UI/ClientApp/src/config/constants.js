@@ -1,4 +1,4 @@
-const GOOGLE_MAPS_KEY = 'AIzaSyCzNP5qQql2a5y8lOoO-1yj1lj_tzjVImA';
+const GOOGLE_MAPS_KEY = 'AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg';
 export {
   GOOGLE_MAPS_KEY,
 };

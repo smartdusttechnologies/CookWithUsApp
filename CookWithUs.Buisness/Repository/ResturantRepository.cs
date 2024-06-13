@@ -42,19 +42,23 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-                SELECT R.ID, R.Name, R.Address, R.Latitude, R.Longitude,R.isActive, R.CookingTime, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
-                       M.ID, M.Name, M.Type, M.Price, M.Quantity,M.rating,M.customer,M.info, D.DocUrl AS ImageUrl
-                FROM Restaurant R
-                LEFT JOIN Menu M ON R.ID = M.RestaurantID
-                LEFT JOIN Document D ON M.ImageID = D.ID
-                WHERE R.ID = @restaurantId";
+        SELECT R.ID , R.Name, R.Address, R.Latitude, R.Longitude, R.isActive, R.CookingTime, CONVERT(VARCHAR(5), R.OpeningTime, 108) AS OpeningTime,
+               M.ID, M.Name, M.Type, M.Price, M.Quantity, M.Rating, M.Customer, M.Info, D.DocUrl AS ImageUrl,
+               V.ID AS VariantID, V.OptionName, V.OptionPrice, V.OptionType, V.VariantName
+        FROM Restaurant R
+        LEFT JOIN Menu M ON R.ID = M.RestaurantID
+        LEFT JOIN Document D ON M.ImageID = D.ID
+        LEFT JOIN VariantOption V ON M.ID = V.MenuId
+        WHERE R.ID = @restaurantId";
 
             var parameters = new { restaurantId };
 
             var restaurantDetailsDictionary = new Dictionary<int, RestaurantDetails>();
-            var result = db.Query<RestaurantDetails, RestaurantMenu, RestaurantDetails>(
+            var menuDictionary = new Dictionary<int, RestaurantMenu>();
+
+            var result = db.Query<RestaurantDetails, RestaurantMenu, VariantOption, RestaurantDetails>(
                 query,
-                (restaurant, menu) =>
+                (restaurant, menu, variant) =>
                 {
                     if (!restaurantDetailsDictionary.TryGetValue(restaurant.ID, out var restaurantEntry))
                     {
@@ -65,17 +69,29 @@ namespace ServcieBooking.Buisness.Repository
 
                     if (menu != null)
                     {
-                        restaurantEntry.restaurantMenus.Add(menu);
+                        if (!menuDictionary.TryGetValue(menu.ID, out var menuEntry))
+                        {
+                            menuEntry = menu;
+                            menuEntry.Variants = new List<VariantOption>();
+                            restaurantEntry.restaurantMenus.Add(menuEntry);
+                            menuDictionary.Add(menuEntry.ID, menuEntry);
+                        }
+
+                        if (variant != null)
+                        {
+                            menuEntry.Variants.Add(variant);
+                        }
                     }
 
                     return restaurantEntry;
                 },
                 parameters,
-                splitOn: "ID"
+                splitOn: "ID,VariantID"
             );
 
             return result.FirstOrDefault();
         }
+
 
         public RestaurantDetails GetByUserID(int userId)
         {
@@ -513,6 +529,28 @@ namespace ServcieBooking.Buisness.Repository
                 transaction.Rollback();
                 return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
             }
+        }
+
+        public RequestResult<bool> SetOrderStatus(SetOrderStatusModel details)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = @"UPDATE OrderDetails SET OrderStatus = @Status WHERE OrderID = @OrderId";
+
+            var parameters = new
+            {
+                details.OrderId,
+                details.Status,
+            };
+            int rowsAffected = db.Execute(query, parameters);
+            if (rowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = "Somthing went wrong", Severity = ValidationSeverity.Error } });
+            }
+           
         }
         public List<OrderModel> GetOrders()
         {

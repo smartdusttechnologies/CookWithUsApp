@@ -32,11 +32,6 @@ namespace CookWithUs.Buisness.Hubs
             string restaurantRoomName = $"OrderRoom_Restaurant_{restaurantId}";
             await Clients.Group(restaurantRoomName).SendAsync("NewOrderNotification", orderId);
         }
-       
-
-
-
-
 
     }
 }

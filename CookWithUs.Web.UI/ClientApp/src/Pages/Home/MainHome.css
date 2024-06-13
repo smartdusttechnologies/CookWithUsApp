@@ -1,0 +1,9 @@
+﻿.mainDiv {
+    background-color: black;
+    color:white;
+    width:100vw;
+    height:100vh;
+}
+.options{
+    cursor:pointer;
+}

@@ -47,7 +47,15 @@ export const GetOrdersByUserID = (userId) => {
 export const getOrderByRestaurantID = (restaurantId) => {
     return axiosInstance.get(`/resturant/getOrderByRestaurantID/${restaurantId}`);
 };
-
+export const setOrderStatus = async (details) => {
+    try {
+        const response = await axiosInstance.post("/resturant/SetOrderStatus", details);
+        return response.data;
+    } catch (error) {
+        console.error("Error setting order status:", error);
+        throw error;
+    }
+};
 export const PlaceOrder = (requestBody) => {
     return axiosInstance.post("/resturant/PlaceOrder",  requestBody );
 };

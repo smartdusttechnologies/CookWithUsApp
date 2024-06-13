@@ -74,17 +74,11 @@ const AddressUpdate = ({
             .catch(error => {
                 
                 console.error("An error occurred while adding address:", error);
-            });
-       
-        
+            });               
     };
     const sidebarOpenClose = () => {
-
-
         setIsSidebarOpen(false);
-    }
-   
-
+    }   
     const handleInput = (event) => {
         const nextSibling1 = event.target.nextSibling;
         const nextSibling2 = nextSibling1.nextSibling;

@@ -65,8 +65,8 @@ namespace CookWithUs.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-            INSERT INTO UserCartTable (UserId,ItemId, Quantity, Time, RestaurantName,RestaurantLocation,RestaurantId,Price,Name,DiscountedPrice)
-            VALUES (@UserId,@ItemId,@Quantity,@Time,@RestaurantName,@RestaurantLocation,@RestaurantId,@Price,@Name,@DiscountedPrice)";
+            INSERT INTO UserCartTable (UserId,ItemId, Quantity, Time, RestaurantName,RestaurantLocation,RestaurantId,Price,Name,DiscountedPrice,VariantId)
+            VALUES (@UserId,@ItemId,@Quantity,@Time,@RestaurantName,@RestaurantLocation,@RestaurantId,@Price,@Name,@DiscountedPrice,@variantId)";
 
             var parameters = new
             {
@@ -79,7 +79,8 @@ namespace CookWithUs.Buisness.Repository
                 details.RestaurantId,
                 details.Price,
                 details.Name,
-                details.DiscountedPrice
+                details.DiscountedPrice,
+                details.variantID
             };
 
             int rowsAffected = db.Execute(query, parameters);

@@ -53,6 +53,7 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<UpdateMenuCategory.Command>, UpdateMenuCategory.Authorization>();
             services.AddTransient<IAuthorizationRule<FetchAllMenuCategory.Command>, FetchAllMenuCategory.Authorization>();
             services.AddTransient<IAuthorizationRule<getOrderByRestaurantID.Command>, getOrderByRestaurantID.Authorization>();
+            services.AddTransient<IAuthorizationRule<SetOrderStatus.Command>, SetOrderStatus.Authorization>();
 
             services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
             return services;

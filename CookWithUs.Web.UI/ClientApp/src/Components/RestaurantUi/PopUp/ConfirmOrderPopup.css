@@ -1,0 +1,35 @@
+﻿.confirmSidebar {
+    position: fixed;
+    background-color: #ffffff;
+    height: 100%;
+    width: 40vw;
+    right: 0;
+    z-index: 99999;
+    top: 130px;
+    display:flex;
+    flex-direction:column;
+}
+
+.topHeading {
+    display: flex;
+    margin: 8px;
+}
+
+.perItemVariant {
+    cursor: pointer;
+}
+.itemDetailss{
+    margin:20px;
+}
+.item-info{
+    display:flex;
+    margin:2px;
+}
+.item-info-title {
+    font-size: 15px;
+    width: 150px;
+    font-weight: 500;
+}
+.item-info-des {
+    font-weight: 400;
+}

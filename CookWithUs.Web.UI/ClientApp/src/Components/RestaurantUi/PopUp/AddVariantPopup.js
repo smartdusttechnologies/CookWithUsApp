@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AddVariantPopup.css";
 import CreateVariantPopup from "../../../Components/RestaurantUi/PopUp/CreateVariantPopup";
-import { ArrowLeft, X, ChevronUp, ChevronDown, SquareDot, ShieldQuestion, CookingPot, Soup, Cookie, Pizza, Plus, Cherry, Salad, Citrus, CloudUpload, Info } from 'lucide-react';
+import { ArrowLeft, CookingPot, Soup, Cookie, Pizza, Plus, Cherry, Salad } from 'lucide-react';
 const AddVariantPopup = ({ setOpenCreateVariantPopup, openCreateVariantPopup, setOpenAddVariantPopup, allVariantOption, VariantName, setVariantName }) => {
     
     

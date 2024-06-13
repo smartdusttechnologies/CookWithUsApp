@@ -2,7 +2,10 @@
     margin: 0;
     padding: 0;
 }
-
+.activeDashboardTab {
+    background-color: #a81616 !important ;
+    color: white !important;
+}
 .logo {
     color: rgb(104, 11, 255);
     text-align: center;
@@ -183,4 +186,5 @@ li {
 }
 .eachOrder{
     padding:20px;
+    cursor:pointer;
 }

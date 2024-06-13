@@ -156,8 +156,6 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
             return;
         }
 
-
-
         switch (paymentMethod?.id) {
             case 0:
                 handleRazorpayPayment();

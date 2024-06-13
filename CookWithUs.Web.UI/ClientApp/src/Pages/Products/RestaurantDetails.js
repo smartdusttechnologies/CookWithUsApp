@@ -97,7 +97,8 @@ const RestaurantDetails = () => {
             RestaurantId: restaurant.id,
             Price: item.price,
             Name: item.name,
-            DiscountedPrice:180
+            DiscountedPrice: 180,
+            variantID:0
         };
         await AddItemToCart(Details);
         fetchData();

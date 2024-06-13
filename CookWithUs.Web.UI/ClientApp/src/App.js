@@ -1,8 +1,8 @@
 import "./App.css";
+import { useMediaQuery } from 'react-responsive';
 import BottomNav from "./Components/BottomNavigation/BottomNav";
 import Footer from "./Components/Footer/Footer";
 import ShowMoreMenu from "./Components/Menu/ShowMoreMenu";
-import NavBar from "./Components/NavBar/NavBar";
 import AllRoutes from "./Components/Routes/AllRoutes";
 import LeftSideNavigation from "./Components/SideNavigation/LeftSideNavigation";
 import Box from "@mui/material/Box";
@@ -12,9 +12,8 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import BottomActionBar from "./Components/BottomNavigation/BottomActionBar";
 import ThreedotMenu from "./Components/Menu/ThreedotMenu";
-import RestaurantSideBar from "./Components/RestaurantUi/SideBar/RestaurantSideBar";
-import RestaurantTopBar from "./Components/RestaurantUi/TopBar/RestaurantTopBar";
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import BothNavBar from "./Components/NavBar/BothNavBar";
 
 const lightTheme = createTheme({
     palette: {
@@ -32,18 +31,25 @@ function App() {
     const darkMode = useSelector((state) => state.app.darkMode);
     const [isActive, setIsActive] = useState(false);
     const [activeTab, setActiveTab] = useState("");
-    
+    const [role, setRole] = useState("User");
+    const shouldAddClass = role === 'Rider';
+    useEffect(() => {
+        if (role === 'Rider') {
+            document.body.style.backgroundColor = 'black';
+        } else {
+            document.body.style.backgroundColor = '';
+        }
+    }, [role]);
+    const isPhone = useMediaQuery({ query: '(max-width: 768px)' });
     return (
-        <div>
+        <div className={shouldAddClass ? 'main-container' : ''}>
             <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                <RestaurantSideBar setActiveTab={setActiveTab} activeTab={activeTab} />
-                <RestaurantTopBar  isActive={isActive} setIsActive={setIsActive} />
-                {/*<NavBar />*/}
+                <BothNavBar isPhone={isPhone} isActive={isActive} setIsActive={setIsActive} activeTab={activeTab} setActiveTab={setActiveTab} role={role } />
                 {/*<ThreedotMenu />*/}
                 <Box sx={{ display: "flex" }}>
-                    <LeftSideNavigation />
+                    {/*<LeftSideNavigation />*/}
                     <Box sx={{ width: "100%" }}>
-                        <AllRoutes setActiveTab={setActiveTab} activeTab={activeTab} isActive={isActive} />
+                        <AllRoutes isPhone={isPhone} role={role} setRole={setRole} setActiveTab={setActiveTab} activeTab={activeTab} isActive={isActive} />
                     </Box>
                    {/* <RightSideNavigation />*/}
                 </Box>

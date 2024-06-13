@@ -1,8 +1,14 @@
 ﻿import React, { useEffect,useState} from "react";
 import { Hotel, Soup, ShoppingBag, CircleMinus, MoveRight } from 'lucide-react';
-import { getOrderByRestaurantID } from "../../../services/restaurantServices";
+import { getOrderByRestaurantID, setOrderStatus } from "../../../services/restaurantServices";
+import ConfirmOrderPopup from "../../../Components/RestaurantUi/PopUp/ConfirmOrderPopup";
 const RestaurantDashboard = ({ isActive }) => {
     const [allOrder, setAllOrder] = useState([]);
+    const [openConfirmOrderPopup, setOpenConfirmOrderPopup] = useState(false);
+    const [eachOrderDetails, setEachOrderDetails] = useState([]);
+    const [dashboardTab, setDashboardTab] = useState(1);
+    const [foodStatus, setFoodStatus] = useState();
+
     useEffect(() => {
         const RestaurantId = 1;
         getOrderByRestaurantID(RestaurantId)
@@ -12,7 +18,55 @@ const RestaurantDashboard = ({ isActive }) => {
             .catch(error => {
                 console.error("An error occurred while adding address:", error);
             });
-    }, []); 
+    }, []);
+    const handleOnClickItem = (order, status) => {
+        setFoodStatus(status);
+        setEachOrderDetails(order);
+        setOpenConfirmOrderPopup(true);
+    };
+    const handleOnClickReadyItem = (order, foodStatus) => {
+        const orderId = order.id;
+        const status = foodStatus;
+        const details = {
+            OrderId: orderId,
+            Status: status
+        }
+        setOrderStatus(details).then(response => {
+            const RestaurantId = 1;
+            getOrderByRestaurantID(RestaurantId)
+                .then(response => {
+                    setAllOrder(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
+        })
+            .catch(error => {
+                console.error("An error occurred while adding address:", error);
+            });
+    };
+    useEffect(() => {
+        if (openConfirmOrderPopup) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        // Clean-up function to remove the class when component unmounts
+        return () => {
+            document.body.classList.remove('modal-open');
+        };
+    }, [openConfirmOrderPopup]);
+    useEffect(() => {
+        const RestaurantId = 1;
+        getOrderByRestaurantID(RestaurantId)
+            .then(response => {
+                setAllOrder(response.data);
+            })
+            .catch(error => {
+                console.error("An error occurred while adding address:", error);
+            });
+    }, [dashboardTab]);
+
     return (
         <div
             style={{
@@ -21,50 +75,124 @@ const RestaurantDashboard = ({ isActive }) => {
             }}>
             <div className="topbar2">
                 <div className="steps">
-                    <div className="stepButton">
+                    <div className={`stepButton ${dashboardTab === 1 ? 'activeDashboardTab' : ''}`} onClick={() => setDashboardTab(1)}>
                         <i><Hotel style={{ height: '15px' }} /></i><span>NEW</span>
                     </div>
                     <div className="stepArrow">
                         <MoveRight style={{ height: '15px' }} />
                     </div>
                 </div>
-                <div className="steps">
-                    <div className="stepButton">
+                <div  className="steps">
+                    <div className={`stepButton ${dashboardTab === 2 ? 'activeDashboardTab' : ''}`} onClick={() => setDashboardTab(2)}>
                         <i><Soup style={{ height: '15px' }} /></i><span>PREPARING</span>
                     </div>
                     <div className="stepArrow">
                         <MoveRight style={{ height: '15px' }} />
                     </div>
                 </div>
-                <div className="steps">
-                    <div className="stepButton">
+                <div  className="steps">
+                    <div className={`stepButton ${dashboardTab === 3 ? 'activeDashboardTab' : ''}`} onClick={() => setDashboardTab(3)}>
                         <i><ShoppingBag style={{ height: '15px' }} /></i><span>READY</span>
                     </div>
                     <div className="stepArrow">
                         <MoveRight style={{ height: '15px' }} />
                     </div>
                 </div>
-                <div className="steps">
-                    <div className="stepButton">
+                <div  className="steps">
+                    <div className={`stepButton ${dashboardTab === 4 ? 'activeDashboardTab' : ''}`} onClick={() => setDashboardTab(4)}>
                         <i><CircleMinus style={{ height: '15px' }} /></i><span>PAST ORDERS</span>
                     </div>
                 </div>
             </div>
+            {openConfirmOrderPopup && (
+                <ConfirmOrderPopup foodStatus={foodStatus} setOpenConfirmOrderPopup={setOpenConfirmOrderPopup} eachOrderDetails={eachOrderDetails} />
+            ) }
             {isActive ? (
-                <div className="orderDashboard">
-                    {allOrder.map((order, orderIndex) => (
-                        order.products.map((product, productIndex) => (
-                            <>
-                                <div className="eachOrder">
-                                    <h4>CWU-{order.id}-{product.orderID }</h4>
-                                    <div className="eachOrderDetails">10:45PM | {product.name} | ₹{product.price}</div>
+                <div className="orderDashboard" style={{margin:'auto'} }>
+                    
+                    {dashboardTab === 1 && (
+                        allOrder.filter(order => order.orderStatus === 'Processing').map((order, orderIndex) => (
+                            <React.Fragment key={orderIndex}>
+                                <div onClick={() => handleOnClickItem(order,'Preparing')} className="eachOrder">
+                                    <h4>CWU-{order.id}</h4>
+                                    <div className="eachOrderDetails">
+                                        {order.orderDate} | ₹{order.orderPrice}
+                                    </div>
                                 </div>
                                 <hr />
-                            </>
+                            </React.Fragment>
                         ))
-                    ))}
+                    )}
 
-                    
+                    {dashboardTab === 2 && (
+                        allOrder.filter(order => order.orderStatus === 'Preparing').map((order, orderIndex) => (
+                            <React.Fragment key={orderIndex}>
+                                <div style={{display:'flex',justifyContent:'space-between'} }> 
+                                    <div  className="eachOrder">
+                                        <h4>CWU-{order.id}</h4>
+                                        <div className="eachOrderDetails">
+                                            {order.orderDate} | ₹{order.orderPrice}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => handleOnClickReadyItem(order, 'Ready')} style={{
+                                            backgroundColor: 'green',
+                                            padding: '10px',
+                                            color: 'white',
+                                            borderRadius: '5px',
+                                            fontWeight: '500',
+                                            margin: '20px'
+                                        }}>
+                                            Ready
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr />
+                            </React.Fragment>
+                        ))
+                    )}
+
+                    {dashboardTab === 3 && (
+                        allOrder.filter(order => order.orderStatus === 'Ready').map((order, orderIndex) => (
+                            <React.Fragment key={orderIndex}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}> 
+                                <div onClick={() => handleOnClickItem(order,'Delivered')} className="eachOrder">
+                                    <h4>CWU-{order.id}</h4>
+                                    <div className="eachOrderDetails">
+                                        {order.orderDate} | ₹{order.orderPrice}
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => handleOnClickReadyItem(order, 'Delivered')} style={{
+                                            backgroundColor: 'green',
+                                            padding: '10px',
+                                            color: 'white',
+                                            borderRadius: '5px',
+                                            fontWeight: '500',
+                                            margin: '20px'
+                                        }}>
+                                            Delivered
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr />
+                            </React.Fragment>
+                        ))
+                    )}
+
+                    {dashboardTab === 4 && (
+                        allOrder.filter(order => order.orderStatus === 'Delivered').map((order, orderIndex) => (
+                            <React.Fragment key={orderIndex}>
+                                <div  className="eachOrder">
+                                    <h4>CWU-{order.id}</h4>
+                                    <div className="eachOrderDetails">
+                                        {order.orderDate} | ₹{order.orderPrice}
+                                    </div>
+                                </div>
+                                <hr />
+                            </React.Fragment>
+                        ))
+                    )}
                 </div>
             ) : (
                 <div className="mainDashboard">
@@ -74,7 +202,7 @@ const RestaurantDashboard = ({ isActive }) => {
                     </div>
                 </div>
             )}
-
+            
            
         </div>);
 }

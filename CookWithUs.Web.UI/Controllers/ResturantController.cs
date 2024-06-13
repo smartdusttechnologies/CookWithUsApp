@@ -54,6 +54,15 @@ namespace ServiceBooking.Web.UI.Controllers
             var response = _mediator.Send(new RegisterRestaurant.Command(restaurantModel)).Result;
             return Ok(response);
         }
+        [Route("SetOrderStatus")]
+        [HttpPost]
+        public IActionResult SetOrderStatus(SetOrderStatusDTO details)
+        {
+            var detailsModel = _mapper.Map<SetOrderStatusDTO, SetOrderStatusModel>(details);
+            var response = _mediator.Send(new SetOrderStatus.Command(detailsModel)).Result;
+            return Ok(response);
+        }
+
 
         [Route("AddMenuCategory")]
         [HttpPost]

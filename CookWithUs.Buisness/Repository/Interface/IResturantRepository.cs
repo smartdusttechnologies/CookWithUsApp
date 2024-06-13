@@ -13,6 +13,7 @@ namespace ServiceBooking.Buisness.Repository.Interface
         RequestResult<bool> DeleteMenu(int menuId);
         RequestResult<bool> AddMenuCategory(MenuCategory menucategory);
         RequestResult<bool> UpdateMenuCategory(MenuCategory menucategory);
+        RequestResult<bool> SetOrderStatus(SetOrderStatusModel details);
         RestaurantDetails GetByUserID(int userId);
         RequestResult<bool> PlaceOrder(OrderModel order);
         List<OrderModel> GetOrders();
