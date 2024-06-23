@@ -5,6 +5,7 @@ import RestaurantDashboard from "../RestaurantUi/Dashboard/RestaurantDashboard";
 import { User, Bike, Hotel } from 'lucide-react';
 import RiderDashboard from "../RiderDashboard/RiderDashboard";
 import PhoneHome from "./PhoneHome";
+import PhoneRestaurantDashboard from "../RestaurantUi/Dashboard/PhoneRestaurantDashboard";
 const MainHome = ({ isPhone, isActive, role, setRole }) => {
     const containerStyle = {
         display: 'flex',
@@ -38,7 +39,12 @@ const MainHome = ({ isPhone, isActive, role, setRole }) => {
      else if (role === 'Restaurant') {
         return (
             <>
-                <RestaurantDashboard isActive={isActive} />
+                {isPhone ? (
+                    <PhoneRestaurantDashboard isActive={isActive} />
+                ) : (
+                        <RestaurantDashboard isActive={isActive} />
+                )}
+                
             </>
         );
     } else if (role === 'Rider') {

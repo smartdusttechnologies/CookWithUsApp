@@ -326,14 +326,6 @@
 ._3awyI {
     margin-right: 10px;
 }
-
-:not(input):not(textarea):not(button) {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 .Checkbox_orangeCheckboxLabel__JV0CV {
     position: relative;
     cursor: pointer;
@@ -377,25 +369,9 @@ input:disabled, input:focus, input:hover, textarea:disabled {
     color: #dc643a;
     font-size: 18px;
 }
-
-:not(input):not(textarea):not(button) {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 ._1qmfW {
     color: #ad684e;
     font-weight: 400;
-}
-
-:not(input):not(textarea):not(button) {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 ._2dfTA {
     height: 12px;
@@ -1070,14 +1046,6 @@ input:disabled, input:focus, input:hover, textarea:disabled {
 }
 ._15GdU {
     font-size: 1.07rem;
-}
-
-:not(input):not(textarea):not(button) {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 ._3grjI {
     font-size: .86rem;

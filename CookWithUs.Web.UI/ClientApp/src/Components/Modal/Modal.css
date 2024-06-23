@@ -20,6 +20,7 @@
 .cehVFM.open {
     opacity: 1;
     transition: all 200ms ease-out 0s;
+    pointer-events: auto;
 }
 .cehVFM {
     position: relative;

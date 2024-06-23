@@ -28,6 +28,7 @@ import RiderOrders from "../../Pages/RiderDashboard/RiderOrders";
 import MainCart from "../../Pages/Cart/MainCart";
 import MainRestaurantDetails from "../../Pages/Products/MainRestaurantDetails";
 import MyAccount from "../../Pages/User/MyAccount/MyAccount";
+import MainRestaurantMenu from "../../Pages/RestaurantUi/Menu/MainRestaurantMenu";
 const AllRoutes = ({ isPhone, isActive, setActiveTab, activeTab,role, setRole  }) => {
   return (
     <Routes>
@@ -55,7 +56,7 @@ const AllRoutes = ({ isPhone, isActive, setActiveTab, activeTab,role, setRole  }
       <Route path="/signup" element={<Signup />} />
       <Route path="/Shipping" element={<Shipping />} />
       <Route path="/res" element={<RestaurantDashboard isActive={isActive} />} />
-          <Route path="/Restaurant/Menu" element={<RestaurantMenu setActiveTab={setActiveTab} activeTab={activeTab} />} />
+          <Route path="/Restaurant/Menu" element={<MainRestaurantMenu isPhone={ isPhone} setActiveTab={setActiveTab} activeTab={activeTab} />} />
           <Route path="/Restaurant/Order" element={<RestaurantDashboard isActive={isActive} />} />
 
           <Route path="/rider/dashboard" element={<RiderDashboard />} />

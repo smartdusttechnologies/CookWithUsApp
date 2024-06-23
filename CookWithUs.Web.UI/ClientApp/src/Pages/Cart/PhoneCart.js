@@ -35,7 +35,6 @@ export default function PhoneCart() {
     const isSideNavOpen = useSelector((state) => state.app.isSideNavOpen);
     const darkMode = useSelector((state) => state.app.darkMode);
     const [PaymentAddress, SetPaymentAdd] = useState(null);
-    const [OrderPicker, SetOrderPicker] = useState([]);
     const [IsSidebarOpen, setIsSidebarOpen] = useState(true);
     const [RestaurantDetail, setRestaurnatDetail] = useState(false);
     const [RestaurantLoc, setRestaurantLoc] = useState(false);
@@ -76,11 +75,7 @@ export default function PhoneCart() {
             });
         fetchData();
     }, []);
-    const PayingAdd = (Id) => {
-        const selectedAddress = addresses.find(address => address.id === Id);
-        SetOrderPicker(selectedAddress);
-        SetPaymentAdd(true);
-    }
+
 
     useEffect(() => {
         if (addresses.length > 0) {
@@ -101,7 +96,7 @@ export default function PhoneCart() {
     // Function to calculate total to pay
     function calculateTotalToPay() {
 
-        return itemTotal + deliveryFee + gstAndCharges - itemDiscount;
+        return itemTotal + deliveryFee + gstAndCharges;
     }
 
     const IncreaseItem = async (id, quantity) => {
@@ -219,18 +214,18 @@ export default function PhoneCart() {
                                     </p>
                                     <div className="_1DnwP" aria-hidden="true">{item.name}</div>
                                     <div className="_1kXsR" aria-hidden="true">Half</div>
-                                    <button className="_3dYuL">
-                                        <span>CUSTOMIZED</span>
-                                        <span className="_3FNWW icon-rightArrow"></span>
-                                    </button>
+                                    {/*<button className="_3dYuL">*/}
+                                    {/*    <span>CUSTOMIZED</span>*/}
+                                    {/*    <span className="_3FNWW icon-rightArrow"></span>*/}
+                                    {/*</button>*/}
                                 </div>
                                 <div className="_2pWL- YtkFu" data-cy="item-quantity-button">
-                                    <button aria-label="Decrease Quantity to 0" className="_1H238" onClick={decreaseQuantity}>-</button>
-                                    <div className="_33Vfv" aria-hidden="true">{quantity}</div>
-                                    <button aria-label="Increase Quantity to 2" className="QSzbj" onClick={increaseQuantity}>+</button>
+                                    <button aria-label="Decrease Quantity to 0" className="_1H238" onClick={() => handleDecreaseQuantity(index)}>-</button>
+                                    <div className="_33Vfv" aria-hidden="true">{item.quantity}</div>
+                                    <button aria-label="Increase Quantity to 2" className="QSzbj" onClick={() => handleIncreaseQuantity(index)}>+</button>
                                 </div>
                                 <div className="_31p1C" data-cy="food-item-price" aria-hidden="true">
-                                    <div className="LwgZu">{quantity * 248}</div>
+                                    <div className="LwgZu">{item.quantity *  item.price }</div>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +344,7 @@ export default function PhoneCart() {
             <div className="_2sSwD" role="heading" aria-level="4">Bill Details</div>
             <div className="dMf8y" data-cy="billdetail-item-ITEM_TOTAL">
                 <p className="ScreenReaderOnly_screenReaderOnly___ww-V">
-                    Item Total Rupees 160.
+                            Item Total Rupees {itemTotal}.
                 </p>
                 <div className="_3nvlr">
                     <div data-cy="billdetail-itemName" className="_1DYnm" aria-hidden="true">
@@ -359,7 +354,7 @@ export default function PhoneCart() {
                         <button className="_3u1kN">
                             <div className="XCitJ" aria-hidden="true">
                                 <span></span>
-                                <span className="_2kaUM _3V2AK">160</span>
+                                        <span className="_2kaUM _3V2AK">{itemTotal}</span>
                             </div>
                         </button>
                     </div>
@@ -368,7 +363,7 @@ export default function PhoneCart() {
                 <div className="_1BMTS"></div>
                 <div className="XP__f" data-cy="billdetail-item-POSITIVE_DELIVERY_CHARGES_EXCLUSIVE">
                     <p className="ScreenReaderOnly_screenReaderOnly___ww-V">
-                        Delivery Fee | 6.1 kilometres. Rupees 50. Enjoy Discounted Delivery!
+                            Delivery Fee | 6.1 kilometres. Rupees {deliveryFee}. Enjoy Discounted Delivery!
                     </p>
                     <div className="_3nvlr">
                         <div data-cy="billdetail-itemName" className="_1DYnm">
@@ -381,7 +376,7 @@ export default function PhoneCart() {
                             <button className="_3u1kN">
                                 <div className="XCitJ" aria-hidden="true">
                                     <span></span>
-                                    <span className="_2kaUM _3V2AK">50</span>
+                                        <span className="_2kaUM _3V2AK">{deliveryFee }</span>
                                 </div>
                             </button>
                         </div>
@@ -428,7 +423,7 @@ export default function PhoneCart() {
                 </div>
                 <div className="XP__f" data-cy="billdetail-item-TAXES_AND_CHARGES">
                     <p className="ScreenReaderOnly_screenReaderOnly___ww-V">
-                        GST and Restaurant Charges Rupees 8.90.
+                            GST and Restaurant Charges Rupees {gstAndCharges}.
                     </p>
                     <div className="_3nvlr">
                         <div data-cy="billdetail-itemName" className="_1DYnm">
@@ -441,7 +436,7 @@ export default function PhoneCart() {
                             <button className="_3u1kN">
                                 <div className="XCitJ" aria-hidden="true">
                                     <span></span>
-                                    <span className="_2kaUM _3V2AK">8.90</span>
+                                        <span className="_2kaUM _3V2AK">{gstAndCharges}</span>
                                 </div>
                             </button>
                         </div>
@@ -449,7 +444,7 @@ export default function PhoneCart() {
                 </div>
                 <div className="_1BMTS"></div>
                 <div className="dMf8y _Xz8c" data-cy="billdetail-item-GRAND_TOTAL" style={{ fontWeight: 600 }}>
-                    <p className="ScreenReaderOnly_screenReaderOnly___ww-V">To Pay Rupees 224.</p>
+                    <p className="ScreenReaderOnly_screenReaderOnly___ww-V">To Pay Rupees {totalToPay}.</p>
                     <div className="_3nvlr">
                         <div data-cy="billdetail-itemName" className="_1DYnm" aria-hidden="true">
                             <div className="_2IK3e">To Pay</div>
@@ -458,7 +453,7 @@ export default function PhoneCart() {
                             <button className="_3u1kN" onClick={handleButtonClick}>
                                 <div className="XCitJ" aria-hidden="true">
                                     <span></span>
-                                    <span className="_2kaUM _3V2AK">224</span>
+                                        <span className="_2kaUM _3V2AK">{totalToPay}</span>
                                 </div>
                             </button>
                         </div>
@@ -586,7 +581,7 @@ export default function PhoneCart() {
             </div>
             </div>
             {showChooseAddress && <ChooseAddress chooseCurrentAddress={chooseCurrentAddress} setChooseCurrentAddress={setChooseCurrentAddress} setShowChooseAddress={setShowChooseAddress } />}
-            {makePaymentModal && <PhonePaymentOption FoodItem={{ items }} Address={{ OrderPicker }} TotalAmount={{ totalToPay }} setMakePaymentModal={setMakePaymentModal } />}
+            {makePaymentModal && <PhonePaymentOption FoodItem={{ items }} Address={{ choosesAddress }} TotalAmount={{ totalToPay }} setMakePaymentModal={setMakePaymentModal } />}
     </>
     );
 }

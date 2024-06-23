@@ -1,0 +1,119 @@
+﻿.PhoneConfirnOrderPopupDashboard{
+    height:100vh;
+    width:100vw;
+    position:fixed;
+    background:white;
+}
+._3confirmOrderHeader {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    height: 70px;
+    width: 100%;
+    background: #162c3f;
+    color: white;
+    padding: 15px;
+}
+._3idName {
+    font-size: 20px;
+    font-weight: 500;
+}
+._3confirmOrderHeaderRightSide {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+._3confirmOrderButton {
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border-top: 1px solid;
+    padding: 10px 0;
+}
+._3cnforder {
+    padding: 20px;
+    border: 1px solid;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    width:45%;
+    font-weight:500;
+}
+._3confirmButton{
+    background:green;
+    color:white;
+}
+/* src/BillSummary.css */
+
+.bill-summary {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    margin-top: 70px;
+}
+
+.item {
+    margin-bottom: 20px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-quantity {
+    color: gray;
+}
+
+.item-price {
+    text-align: right;
+    font-weight: bold;
+}
+
+.item-category {
+    color: gray;
+    font-size: 14px;
+}
+
+.bill-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.summary-details {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.discount-description {
+    margin-top: 20px;
+    color: gray;
+    font-size: 14px;
+}
+._3confirmOrderHeaderLeftSide{
+    display:flex;
+}

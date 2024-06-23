@@ -5,6 +5,7 @@ import RiderTopBar from "../RiderUi/RiderTopBar";
 import NavBar from "./NavBar";
 import RiderSideBar from "../RiderUi/RiderSideBar";
 import PhoneNavBar from "./PhoneNavBar";
+import RestaurantPhoneNavBar from "../RestaurantUi/RestaurantPhoneNavBar";
 
 const BothNavBar = ({ isPhone, role, setActiveTab, activeTab, setIsActive, isActive }) => {
     const [riderSideBar, setRiderSideBar] = useState(false);
@@ -24,9 +25,19 @@ const BothNavBar = ({ isPhone, role, setActiveTab, activeTab, setIsActive, isAct
         );
     } else if (role === 'Restaurant') {
         return (
+            <>
+
+                {isPhone ? (
                     <>
-                        <RestaurantSideBar activeTab={activeTab} setActiveTab={setActiveTab} />
-                        <RestaurantTopBar isActive={isActive} setIsActive={setIsActive} />
+                        <RestaurantPhoneNavBar isActive={isActive} setIsActive={setIsActive} activeTab={activeTab} setActiveTab={setActiveTab} />
+                    </>
+                ) : (
+                    <>
+                            <RestaurantSideBar activeTab={activeTab} setActiveTab={setActiveTab} />
+                            <RestaurantTopBar isActive={isActive} setIsActive={setIsActive} />
+                    </>
+                )}
+                      
                     </>
         );
     } else if (role === 'Rider') {

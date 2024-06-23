@@ -84,7 +84,7 @@ const Cart = () => {
     // Function to calculate total to pay
     function calculateTotalToPay() {
 
-        return itemTotal + deliveryFee + gstAndCharges - itemDiscount;
+        return itemTotal + deliveryFee + gstAndCharges ;
     }
 
     const IncreaseItem = async (id, quantity) => {
@@ -269,14 +269,14 @@ const Cart = () => {
                                                         <span className="ZH2UW">{deliveryFee}</span>
                                                     </div>
                                                 </div>
-                                                <div className="_3rlIu" style={{ color: 'rgb(96, 178, 69)' }}>
-                                                    <div className="_2VV4a">
-                                                        <div>Item Discount</div>
-                                                    </div>
-                                                    <div className="_1I8bA">
-                                                        <span className="ZH2UW">{itemDiscount}</span>
-                                                    </div>
-                                                </div>
+                                                {/*<div className="_3rlIu" style={{ color: 'rgb(96, 178, 69)' }}>*/}
+                                                {/*    <div className="_2VV4a">*/}
+                                                {/*        <div>Item Discount</div>*/}
+                                                {/*    </div>*/}
+                                                {/*    <div className="_1I8bA">*/}
+                                                {/*        <span className="ZH2UW">{itemDiscount}</span>*/}
+                                                {/*    </div>*/}
+                                                {/*</div>*/}
                                                 <div className="_3rlIu">
                                                     <div className="_2VV4a">
                                                         <div>GST and Restaurant Charges</div>

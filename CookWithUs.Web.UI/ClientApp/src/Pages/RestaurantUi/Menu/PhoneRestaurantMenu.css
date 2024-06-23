@@ -1,0 +1,97 @@
+﻿._3mainMenuTopBar {
+    height: 100px;
+    position: fixed;
+    width: 100%;
+}
+._3allManuTab {
+    display: flex;
+    justify-content: space-between;
+    height: 60%;
+    background: #282c3f;
+    padding: 20px;
+    margin: 0;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+}
+._3MenuSearch {
+    height: 40%;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+}
+input._3menuSearchTextField {
+    height: 100%;
+    width: 85%;
+    border: none;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 17px;
+}
+._3menuSearchIcon {
+    padding: 10px;
+}
+._3outOfStockSection {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 30px;
+    background: #fef8d8;
+    border: solid #dedede;
+    border-width: 10px 0 0 0;
+    margin-top: 100px;
+}
+._3outOfStockSectionMaintext {
+    font-size: 20px;
+    font-weight: 600;
+}
+._3toggle-label {
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+._3toggle-container {
+    position: relative;
+    display: inline-block;
+}
+._3toggle-input {
+    display: none;
+}
+._3toggle-label:before {
+        content: '';
+        position: absolute;
+        top: -5%;
+        left: 0px;
+        width: 20px;
+        height: 20px;
+        background-color: #009f37;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+}
+
+._3toggle-input:checked + ._3toggle-label:before {
+    transform: translateX(25px);
+}
+._3menuItem {
+    display: flex;
+    justify-content: space-between;
+}
+._3menuItem {
+    padding: 30px;
+    margin: 5px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6d8d8;
+    cursor: pointer;
+}
+._3CategoryName {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 20px 10px;
+}
+._3categoryWithMenu {
+    border: solid #dedede;
+    border-width: 10px 0 0 0;
+}

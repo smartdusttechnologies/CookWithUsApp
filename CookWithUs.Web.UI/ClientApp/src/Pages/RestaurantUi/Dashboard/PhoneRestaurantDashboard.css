@@ -1,0 +1,114 @@
+﻿._3phoneRestaurantdashboardOff {
+    height: 100%;
+    margin: 100px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+._3youOffline {
+    font-size: 35px;
+    font-weight: 500;
+    color: red;
+    padding: 50px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+._3mainDashboardPhoneRestaurant {
+    margin: 180px 0px;
+    background: #e7e7e7;
+}
+._3ordersText {
+    margin: 0;
+    height: 70px;
+    position: fixed;
+    width: 100vw;
+    top: 50px;
+    left: 0;
+    right: 0px;
+    background: #013e4c;
+    color: white;
+    padding: 10px 30px;
+    font-size: 35px;
+    font-weight: 500;
+}
+._3ordersTabs {
+    background: white;
+    position: fixed;
+    top: 120px;
+    display: flex;
+    overflow-x: auto;
+    padding: 5px;
+    width: 100%;
+    justify-content: space-around;
+    border-bottom: 1px solid gray;
+}
+._3ordersTab {
+    min-width: 60px;
+    display: flex;
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 5px;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+    color: gray;
+}
+._3ordersTabActive {
+    min-width: 60px;
+    display: flex;
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 5px;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+    color: #d6d1d1;
+    background: #4c4949;
+}
+._3preparingItem {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+    background: white;
+}
+._3StatusTime {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+._3timeText {
+    display: flex;
+    justify-content: space-around;
+    width: 160px;
+}
+._3StatusPreparing {
+    background: #ffdfa5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    height: 20px;
+    color: #ffa400;
+    font-weight: 500;
+}
+._3timeCount {
+    border: 5px solid #47e801;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+._3ItemCwuId {
+    margin: 0 20px;
+}
+._3AddressWithPrice {
+    margin: 0 20px;
+}

@@ -31,7 +31,7 @@ function App() {
     const darkMode = useSelector((state) => state.app.darkMode);
     const [isActive, setIsActive] = useState(false);
     const [activeTab, setActiveTab] = useState("");
-    const [role, setRole] = useState("User");
+    const [role, setRole] = useState("Restaurant");
     const shouldAddClass = role === 'Rider';
     useEffect(() => {
         if (role === 'Rider') {

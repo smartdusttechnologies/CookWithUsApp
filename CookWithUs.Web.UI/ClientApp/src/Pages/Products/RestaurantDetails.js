@@ -47,7 +47,9 @@ const RestaurantDetails = () => {
             "imageUrl" : "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/FOOD_CATALOG/IMAGES/CMS/2024/4/5/5568cd9a-7277-486e-968e-614d6f42b2c0_9a2741e7-1e29-4f4c-b9a0-0ffe9b5cf81d.JPG" ,
         },       
     ]
-
+    const [itemSelectedForVariant, setItemSelectedForVariant] = useState(0);
+    const [selectedItemVariantId, setSelectedItemVariantId] = useState(0);
+    const [selectedItemVariants, setSelectedItemVariants] = useState(null);
   const handleGetRestaurantDetails = () => {
     setLoading(true);
     getRestaurantDetails(id)
@@ -157,6 +159,11 @@ const RestaurantDetails = () => {
         quantity--;
         IncreaseItem(id,quantity);
     };
+    const handleOpenVariantModal = (id, item) => {
+        setSelectedItemVariants(id);
+        setItemSelectedForVariant(item);
+        setShowModal(true);
+    }
   return (
     <div
     className="OF_5P"
@@ -467,7 +474,15 @@ const RestaurantDetails = () => {
                                                           </div>
                                                       ) : (
                                                           <button
-                                                              onClick={() => handleAddToCartItem(item)}
+                                                                  onClick={() => {
+                                                                      if (item.variants.length != 0) {
+                                                                          if (item.variants[0].variantName != null) {
+                                                                              handleOpenVariantModal(item.variants, item);
+                                                                          }
+                                                                      } else {
+                                                                          handleAddToCartItem(item);
+                                                                      }
+                                                                  }}
                                                               className="sc-eIcdZJ sc-jdUcAg ksrzPO gbqFid add-button-center-container"
                                                           >
                                                               <div className="sc-aXZVg jGPvlk">Add</div>
@@ -492,7 +507,7 @@ const RestaurantDetails = () => {
               </div>
           </div>
            {itemCount > 0 && <ItemAddedPopUp itemCount={itemCount} />}
-          {showModal && <Modal onClose={() => setShowModal(false)} />}
+          {showModal && <Modal itemSelectedForVariant={itemSelectedForVariant} restaurant={restaurant} selectedItemVariantId={selectedItemVariantId} setSelectedItemVariantId={setSelectedItemVariantId} selectedItemVariants={selectedItemVariants}  onClose={() => setShowModal(false)} />}
          
       {/*{!loading ? (*/}
       {/*  <Box*/}

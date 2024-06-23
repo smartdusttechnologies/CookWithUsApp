@@ -5,7 +5,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { InitiateRazorPayPayment } from "../../services/paymentServices";
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, Address, TotalAmount }) {
+export default function PhonePaymentOption({ setMakePaymentModal, FoodItem, Address, TotalAmount }) {
+
     const notifyRestaurantForNewOrder = async (connection, orderId) => {
         try {
             // Ensure that connection is established before invoking methods
@@ -53,6 +54,18 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
             elements3[i].style.display = 'none';
         }
     }, []);
+    const handleCloseMakePayment = () => {
+        const elements = document.getElementsByClassName('_2_q9F');
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.display = '';
+        }
+        
+        const elements3 = document.getElementsByClassName('_hideWithPopup');
+        for (let i = 0; i < elements3.length; i++) {
+            elements3[i].style.display = '';
+        }
+        setMakePaymentModal(false);
+    }
     const navigate = useNavigate();
 
     //const [connection, setConnection] = useState();
@@ -153,22 +166,16 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
     };
 
 
-    const handlePayment = () => {
-        if (!paymentMethod) {
-            toast.warn("Please select a payment method.");
-            return;
-        }
+    const handlePayment = (paymentMethod) => {
 
-
-
-        switch (paymentMethod?.id) {
-            case 0:
+        switch (paymentMethod) {
+            case "RazorPay":
                 handleRazorpayPayment();
                 break;
-            case 1:
+            case "Paytm":
                 handlePaytmPayment();
                 break;
-            case 2: {
+            case "COD": {
                 const Food = FoodItem.items.map(item => {
                     return {
                         Id: 0,
@@ -181,15 +188,16 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
                         DiscountedPrice: item.discountedPrice,
                         Time: item.time,
                         RestaurantLocation: item.restaurantLocation,
-                        RestaurantName: item.restaurantName
+                        RestaurantName: item.restaurantName,
+                        VariantId:item.variantID
                     };
                 });
 
                 const Data = {
                     OrderID: 0,
-                    UserID: Address.OrderPicker.userId,
+                    UserID: Address.choosesAddress.userId,
                     OrderDate: new Date(),
-                    DeliveryAddress: Address.OrderPicker.address,
+                    DeliveryAddress: Address.choosesAddress.address,
                     PaymentMethod: "Cash on Delivery",
                     TotalAmount: TotalAmount.totalToPay,
                     OrderStatus: "Processing",
@@ -203,7 +211,7 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
                     .then(async response => {
                         SetOrderId(response.data.requestedObject);
 
-                        const connection = await ConnectionBuild();
+                        const connection = await ConnectionBuild;
                         await notifyRestaurantForNewOrder(connection, response.data.requestedObject);
                         // Handle success response
                     })
@@ -230,7 +238,7 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
                             <div className="styles_container_2U_BJoll styles_containerUx4_2R4FRGb5">
                                 <div className="styles_header_3pJd-soj styles_headerUx4_1WAu6S4B">
                                     <div className="Header_container_17TeZht_ Header_containerUx4_2XTqmRvT"><button
-                                        onClick={() => setIsOpenVariantModal(false) }
+                                        onClick={handleCloseMakePayment }
                                         data-testid="header_back"
                                         className="Header_containerButton_8joGRyzf Header_containerButtonUx4_1oib6YLY"
                                         aria-label="Go Back"><svg width="20" height="18" viewBox="0 0 20 16" fill="none"
@@ -477,7 +485,7 @@ export default function PhonePaymentOption({ setIsOpenVariantModal,  FoodItem, A
                                                                 className="styles-v4_iconImg_25Y5Kzks"
                                                                 src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_64,e_grayscale/portal/m/COD_icon.png" />
                                                         </div>
-                                                        <div className="styles_container_1npcgTkG styles_name_Lvfatkqb styles_containerDisabled_1Hy16t9n"
+                                                        <div onClick={() => {handlePayment("COD");}} className="styles_container_1npcgTkG styles_name_Lvfatkqb styles_containerDisabled_1Hy16t9n"
                                                             data-testid="pm_cod_name">
                                                             <div aria-label="Cash Cash on delivery is not available."
                                                                 aria-disabled="true" tabindex="0" role="button"

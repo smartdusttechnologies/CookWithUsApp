@@ -159,8 +159,8 @@ namespace CookWithUs.Buisness.Repository
                 cartItem.OrderId = generatedOrderId;
                 // Define the SQL insert query
                 string query = @"
-                INSERT INTO OrderItems (UserId, Name, ItemId,OrderId, Quantity, RestaurantId, Price, DiscountedPrice, Time, RestaurantLocation, RestaurantName)
-                VALUES (@UserId, @Name, @ItemId,@OrderId, @Quantity, @RestaurantId, @Price, @DiscountedPrice, @Time, @RestaurantLocation, @RestaurantName);";
+                INSERT INTO OrderItems (UserId, Name, ItemId,OrderId, Quantity, RestaurantId, Price, DiscountedPrice, Time, RestaurantLocation, RestaurantName,VariantId)
+                VALUES (@UserId, @Name, @ItemId,@OrderId, @Quantity, @RestaurantId, @Price, @DiscountedPrice, @Time, @RestaurantLocation, @RestaurantName,@VariantId);";
 
                 int rowsAffected = db.Execute(query, cartItem);
 

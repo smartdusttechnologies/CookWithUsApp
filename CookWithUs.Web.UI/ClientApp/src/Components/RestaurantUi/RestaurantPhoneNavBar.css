@@ -1,0 +1,69 @@
+﻿html{
+    height:100%;
+    box-sizing:border-box;
+}
+body{
+    position:relative;
+    margin:0;
+    min-height:100%;
+    box-sizing:inherit;
+    padding-bottom:6.74rem; 
+}
+.mainBottomBar {
+    display: flex;
+    justify-content: space-around;
+    background: gray;
+    position: fixed;
+    left:0;
+    right:0;
+    bottom: 0px;
+    padding: 15px;
+}
+._2PhoneTopBar {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #013e4c;
+    color: white;
+    padding: 10px;
+}
+._2leftSide {
+    display: flex;
+    justify-content: space-around;
+    min-width: 70%;
+}
+._2RightSide {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
+._2RestaurantName {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0px 0px 2px 0px;
+}
+._2ActiveButton {
+    background: green;
+    padding: 6px;
+    height: 30px;
+    border-radius: 30px;
+    margin: 0 6px;
+    font-weight: 600;
+}
+._2DeActiveButton {
+    background: gray;
+    padding: 6px;
+    height: 30px;
+    border-radius: 30px;
+    margin: 0 6px;
+    font-weight: 600;
+}
+.restaurantNavIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
