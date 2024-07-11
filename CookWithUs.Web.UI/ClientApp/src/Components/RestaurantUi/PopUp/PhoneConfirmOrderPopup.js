@@ -5,12 +5,15 @@ import { setOrderStatus } from "../../../services/restaurantServices";
 import OrderCountDown from "./OrderCountDown";
 export default function PhoneConfirmOrderPopup({ setCountdown, foodStatus, setOpenPhoneConfirmOrderPopup, eachOrderDetails }) {
     const [openOrderCountDown, setOpenCountDown] = useState(false);
-    const handleConfirm = (item) => {
+
+    const handleConfirm = (item, prepareTime, acceptOrderTime) => {
         const orderId = item.id;
         const status = foodStatus;
         const details = {
             OrderId: orderId,
-            Status: status
+            Status: status,
+            PrepareTime: prepareTime,
+            AcceptOrderTime: acceptOrderTime
         }
         setOrderStatus(details).then(response => {
             setOpenPhoneConfirmOrderPopup(false);
@@ -88,7 +91,7 @@ export default function PhoneConfirmOrderPopup({ setCountdown, foodStatus, setOp
                     </div>
                 </div>
             </div>
-                { openOrderCountDown && <OrderCountDown handleConfirm={handleConfirm} eachOrderDetails={eachOrderDetails} setOpenCountDown={setOpenCountDown} setCountdown={setCountdown} /> }
+            {openOrderCountDown && <OrderCountDown   handleConfirm={handleConfirm} eachOrderDetails={eachOrderDetails} setOpenCountDown={setOpenCountDown} setCountdown={setCountdown} /> }
         </>
     );
 }

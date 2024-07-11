@@ -1,0 +1,66 @@
+﻿body {
+    padding:0;
+    margin:0;
+}
+._4PickFoodTopBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    color: white;
+    height: 90px;
+    align-items: center;
+    background: black;
+    position:fixed;
+    top:0;
+    width:100%;
+}
+._4PickFoodTopLeftSide {
+    display: flex;
+    justify-content: space-around;
+}
+._4PickFoodBackIcon {
+    margin: 0 10px;
+}
+._4pickFood {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bc8d36;
+    font-weight: 700;
+}
+._4PickFoodTopRightSide {
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+}
+._4SosIcon {
+    background: #ffd0ae;
+    padding: 5px;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: red;
+    border: 2px solid red;
+}
+._4HelpIcon {
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: 5px;
+}
+._4readyPopup {
+    margin-top: 90px;
+    background: green;
+    padding: 15px;
+    color: white;
+    font-weight: 500;
+}

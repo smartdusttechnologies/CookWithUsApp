@@ -29,11 +29,13 @@ import MainCart from "../../Pages/Cart/MainCart";
 import MainRestaurantDetails from "../../Pages/Products/MainRestaurantDetails";
 import MyAccount from "../../Pages/User/MyAccount/MyAccount";
 import MainRestaurantMenu from "../../Pages/RestaurantUi/Menu/MainRestaurantMenu";
-const AllRoutes = ({ isPhone, isActive, setActiveTab, activeTab,role, setRole  }) => {
+import RiderLiveTask from "../../Pages/RiderDashboard/RiderLiveTask";
+import RiderPickFood from "../../Pages/RiderDashboard/RiderPickFood";
+const AllRoutes = ({ riderSideBar, setRiderSideBar, isPhone, isActive, setActiveTab, activeTab,role, setRole  }) => {
   return (
     <Routes>
-          <Route path="/uesr" element={<Home  />}></Route>
-          <Route path="/" element={<MainHome isPhone={isPhone} isActive={isActive} role={role} setRole={setRole} /> }></Route>
+          <Route path="/user" element={<Home  />}></Route>
+          <Route path="/" element={<MainHome riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} isPhone={isPhone} isActive={isActive} role={role} setRole={setRole} /> }></Route>
       <Route path="/meals" element={<Products />}></Route>
           <Route path="/my-account" element={<MyAccount isPhone={isPhone} />}></Route>
       <Route path="/my-account/orders" element={<MyOrders />}></Route>
@@ -61,6 +63,7 @@ const AllRoutes = ({ isPhone, isActive, setActiveTab, activeTab,role, setRole  }
 
           <Route path="/rider/dashboard" element={<RiderDashboard />} />
           <Route path="/rider/getOrder" element={<RiderOrders />} />
+          <Route path="/component/checkcomponent" element={<RiderPickFood />} />
     </Routes>
   );
 };

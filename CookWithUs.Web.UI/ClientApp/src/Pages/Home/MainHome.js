@@ -6,7 +6,7 @@ import { User, Bike, Hotel } from 'lucide-react';
 import RiderDashboard from "../RiderDashboard/RiderDashboard";
 import PhoneHome from "./PhoneHome";
 import PhoneRestaurantDashboard from "../RestaurantUi/Dashboard/PhoneRestaurantDashboard";
-const MainHome = ({ isPhone, isActive, role, setRole }) => {
+const MainHome = ({ riderSideBar, setRiderSideBar, isPhone, isActive, role, setRole }) => {
     const containerStyle = {
         display: 'flex',
         flexDirection:'column',
@@ -49,7 +49,7 @@ const MainHome = ({ isPhone, isActive, role, setRole }) => {
         );
     } else if (role === 'Rider') {
             return (
-                <RiderDashboard />
+                <RiderDashboard riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} />
             );
     }
     else {

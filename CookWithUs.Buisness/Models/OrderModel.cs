@@ -18,6 +18,8 @@ namespace CookWithUs.Buisness.Models
         public int OrderPrice { get; set; }
         public string Phone { get; set; }
         public string OrderStatus { get; set; }
+        public int? PrepareTime { get; set; }
+        public string? AcceptOrderTime { get; set; }
         public List<OrdersProduct> Products { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }

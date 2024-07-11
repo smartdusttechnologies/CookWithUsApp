@@ -30,8 +30,9 @@ const darkTheme = createTheme({
 function App() {
     const darkMode = useSelector((state) => state.app.darkMode);
     const [isActive, setIsActive] = useState(false);
+    const [riderIsActive, setRiderIsActive] = useState(false);
     const [activeTab, setActiveTab] = useState("");
-    const [role, setRole] = useState("Restaurant");
+    const [role, setRole] = useState("Rider");
     const shouldAddClass = role === 'Rider';
     useEffect(() => {
         if (role === 'Rider') {
@@ -41,15 +42,16 @@ function App() {
         }
     }, [role]);
     const isPhone = useMediaQuery({ query: '(max-width: 768px)' });
+    const [riderSideBar, setRiderSideBar] = useState(false);
     return (
         <div className={shouldAddClass ? 'main-container' : ''}>
             <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                <BothNavBar isPhone={isPhone} isActive={isActive} setIsActive={setIsActive} activeTab={activeTab} setActiveTab={setActiveTab} role={role } />
+                <BothNavBar riderIsActive={riderIsActive} setRiderIsActive={setRiderIsActive} riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} isPhone={isPhone} isActive={isActive} setIsActive={setIsActive} activeTab={activeTab} setActiveTab={setActiveTab} role={role } />
                 {/*<ThreedotMenu />*/}
                 <Box sx={{ display: "flex" }}>
                     {/*<LeftSideNavigation />*/}
                     <Box sx={{ width: "100%" }}>
-                        <AllRoutes isPhone={isPhone} role={role} setRole={setRole} setActiveTab={setActiveTab} activeTab={activeTab} isActive={isActive} />
+                        <AllRoutes riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} isPhone={isPhone} role={role} setRole={setRole} setActiveTab={setActiveTab} activeTab={activeTab} isActive={isActive} />
                     </Box>
                    {/* <RightSideNavigation />*/}
                 </Box>

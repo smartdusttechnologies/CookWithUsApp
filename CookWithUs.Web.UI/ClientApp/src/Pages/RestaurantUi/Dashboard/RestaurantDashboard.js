@@ -1,14 +1,41 @@
-﻿import React, { useEffect,useState} from "react";
+﻿import React, { useEffect,useState,useRef} from "react";
 import { Hotel, Soup, ShoppingBag, CircleMinus, MoveRight } from 'lucide-react';
 import { getOrderByRestaurantID, setOrderStatus } from "../../../services/restaurantServices";
 import ConfirmOrderPopup from "../../../Components/RestaurantUi/PopUp/ConfirmOrderPopup";
+import Timer from "../../../Components/RestaurantUi/PopUp/Timer";
 const RestaurantDashboard = ({ isActive }) => {
     const [allOrder, setAllOrder] = useState([]);
     const [openConfirmOrderPopup, setOpenConfirmOrderPopup] = useState(false);
     const [eachOrderDetails, setEachOrderDetails] = useState([]);
     const [dashboardTab, setDashboardTab] = useState(1);
     const [foodStatus, setFoodStatus] = useState();
+    const [countdown, setCountdown] = useState(0);
+    const timerId = useRef();
+    useEffect(() => {
+        timerId.current = setInterval(() => {
+            const RestaurantId = 1;
+            getOrderByRestaurantID(RestaurantId)
+                .then(response => {
+                    setAllOrder(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
+        }, 1000)
+        return () => clearInterval(timerId.current);
+    }, []);
+    useEffect(() => {
+        if (countdown <= 0) {
+            clearInterval(timerId.current);
 
+        }
+        localStorage.setItem('countdown', countdown);
+    }, [countdown]);
+    useEffect(() => {
+        if (localStorage.getItem('countdown')) {
+            setCountdown(localStorage.getItem('countdown'));
+        }
+    }, []);
     useEffect(() => {
         const RestaurantId = 1;
         getOrderByRestaurantID(RestaurantId)
@@ -66,6 +93,11 @@ const RestaurantDashboard = ({ isActive }) => {
                 console.error("An error occurred while adding address:", error);
             });
     }, [dashboardTab]);
+    const addMinutes = (datetime, minutes) => {
+        const date = new Date(datetime);
+        date.setMinutes(date.getMinutes() + minutes);
+        return date.toISOString();
+    };
 
     return (
         <div
@@ -105,7 +137,7 @@ const RestaurantDashboard = ({ isActive }) => {
                 </div>
             </div>
             {openConfirmOrderPopup && (
-                <ConfirmOrderPopup foodStatus={foodStatus} setOpenConfirmOrderPopup={setOpenConfirmOrderPopup} eachOrderDetails={eachOrderDetails} />
+                <ConfirmOrderPopup setCountdown={setCountdown} foodStatus={foodStatus} setOpenConfirmOrderPopup={setOpenConfirmOrderPopup} eachOrderDetails={eachOrderDetails} />
             ) }
             {isActive ? (
                 <div className="orderDashboard" style={{margin:'auto'} }>
@@ -128,13 +160,27 @@ const RestaurantDashboard = ({ isActive }) => {
                         allOrder.filter(order => order.orderStatus === 'Preparing').map((order, orderIndex) => (
                             <React.Fragment key={orderIndex}>
                                 <div style={{display:'flex',justifyContent:'space-between'} }> 
-                                    <div  className="eachOrder">
+                                    <div  className="eachOrder centerDiv">
                                         <h4>CWU-{order.id}</h4>
                                         <div className="eachOrderDetails">
                                             {order.orderDate} | ₹{order.orderPrice}
                                         </div>
-                                    </div>
-                                    <div>
+                                        <div className="_3StatusPreparing" style={{margin:'0 25px'} }>
+                                            PREPARNG
+                                        </div>
+                                    </div>                                    
+                                    <div style={{display:'flex'} }>
+                                        <div className="_3StatusTime centerDiv">                                            
+                                            <div className="_3timeText">
+                                                <div className="centerDiv" style={{ fontWeight: '500' }}>
+                                                    Driver arriving in
+                                                </div>
+                                                <div className="_3timeCount">
+                                                    <div style={{ fontWeight: '600' }}><Timer handleOnClickReadyItem={handleOnClickReadyItem} order={order} targetDateTime={addMinutes(order.acceptOrderTime, order.prepareTime)} /></div>
+                                                    <div style={{ fontSize: '10px' }}>MINS</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button onClick={() => handleOnClickReadyItem(order, 'Ready')} style={{
                                             backgroundColor: 'green',
                                             padding: '10px',

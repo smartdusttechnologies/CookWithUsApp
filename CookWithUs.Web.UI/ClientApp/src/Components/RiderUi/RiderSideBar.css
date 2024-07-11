@@ -175,6 +175,7 @@ body {
     background-color: white;
     top: 0;
     border: 1px solid;
+    z-index:1;
 }
 
 .sidebarTop {
@@ -386,4 +387,16 @@ body {
 
 .rejectIcon {
     margin: 0 5px;
+}
+.RiderGetOrderconfirmButton {
+    background: #16ab04;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    position:fixed;
+    bottom:0;
+    width:300px;
 }

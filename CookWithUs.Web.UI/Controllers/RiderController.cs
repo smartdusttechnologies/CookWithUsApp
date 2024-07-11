@@ -15,7 +15,6 @@ namespace CookWithUs.Web.UI.Controllers
       
         private readonly IMapper _mapper;
 
-
         public RIderController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
@@ -33,11 +32,8 @@ namespace CookWithUs.Web.UI.Controllers
         [Route("RiderDetail")]
         [HttpGet]
         public IActionResult RiderDetail( decimal lat, decimal lon)
-        {
-            
-
-
-                var  lats = 25.6094725259607;
+        {            
+            var  lats = 25.6094725259607;
             var  lons = 85.13652488421577;
             var response = _mediator.Send(new RiderList.Command(lats, lons)).Result;
             response.userLatitude = lats;
@@ -61,11 +57,40 @@ namespace CookWithUs.Web.UI.Controllers
             var response  = _mediator.Send(new RiderOrderById.Command(UserId)).Result;
             return Ok(response);
         }
+        [Route("RiderGetById/{userId}")]
+        [HttpGet]
+        public IActionResult RiderGetById(int UserId)
+        {
+            var response = _mediator.Send(new RiderDetailsById.Command(UserId)).Result;
+            return Ok(response);
+        }
+        [Route("FindOrder/{Id}")]
+        [HttpGet]
+        public IActionResult FindOrder(int Id)
+        {
+            var response = _mediator.Send(new FindOrder.Command(Id)).Result;
+            return Ok(response);
+        }
+        [Route("GetOrderDetailsById/{Id}")]
+        [HttpGet]
+        public IActionResult GetOrderDetailsById(int Id)
+        {
+            var response = _mediator.Send(new GetOrderDetailsById.Command(Id)).Result;
+            return Ok(response);
+        }
         [Route("OrderUpdate")]
         [HttpPost]
         public IActionResult OrderUpdate([FromBody] int orderId)
         {
             var response = _mediator.Send(new OrderUpdate.Command(orderId)).Result;
+            return Ok(response);
+        }
+        [Route("RiderSetStatus")]
+        [HttpPost]
+        public IActionResult RiderSetStatus(SetOrderStatusDTO details)
+        {
+            var orderValue = _mapper.Map<SetOrderStatusDTO, SetOrderStatusModel>(details);
+            var response = _mediator.Send(new RiderSetStatus.Command(orderValue)).Result;
             return Ok(response);
         }
     }

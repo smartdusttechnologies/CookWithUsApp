@@ -11,7 +11,7 @@ export default function RiderTopBar({ setRiderSideBar }) {
                     <div className="lines"></div>
                     <div className="lines"></div>
                 </div>
-                <div className="moreOptions">
+                <div onClick={() => setRiderSideBar(false)} className="moreOptions">
                     <div className="mapIcon"><Map /></div>
                     <div className="bellIcon"><Bell /></div>
                     <div className="HelpIcon"><CircleHelp /></div>

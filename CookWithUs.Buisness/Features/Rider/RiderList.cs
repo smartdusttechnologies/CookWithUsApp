@@ -53,7 +53,7 @@ namespace CookWithUs.Buisness.Features.Rider
             {
                 var userLatitude = request.latitude;
                 var userLongitude = request.longitude;
-                var maxDistance = 10; // Adjust based on your preference
+                var maxDistance = 5; // Adjust based on your preference
 
                 var allRiders = _riders.GetRiderList();
 

@@ -1,0 +1,10 @@
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\bin\Debug\CookWithUs.DB.dacpac
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\bin\Debug\CookWithUs.DB.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\bin\Debug\CookWithUs.DB.pdb
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\CookWithUs.DB.sqlproj.AssemblyReference.cache
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\CookWithUs.DB.dll
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\CookWithUs.DB.pdb
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\Model.xml
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\refactor.xml
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\postdeploy.sql
+D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.DB\obj\Debug\predeploy.sql

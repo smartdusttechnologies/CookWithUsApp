@@ -112,3 +112,8 @@
 ._3AddressWithPrice {
     margin: 0 20px;
 }
+.centerDiv{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}

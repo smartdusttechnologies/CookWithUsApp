@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import RiderDashboard from '../../Pages/RiderDashboard/RiderDashboard';
 
 const RiderEarningsCard = ({ enableStartDuty }) => {
     return (
@@ -31,6 +32,7 @@ const RiderEarningsCard = ({ enableStartDuty }) => {
                     <div onClick={enableStartDuty } className="start-duty">START DUTY</div>
                 </div>
             </div>
+           
         </div>
     );
 };

@@ -7,8 +7,8 @@ import RiderSideBar from "../RiderUi/RiderSideBar";
 import PhoneNavBar from "./PhoneNavBar";
 import RestaurantPhoneNavBar from "../RestaurantUi/RestaurantPhoneNavBar";
 
-const BothNavBar = ({ isPhone, role, setActiveTab, activeTab, setIsActive, isActive }) => {
-    const [riderSideBar, setRiderSideBar] = useState(false);
+const BothNavBar = ({ riderSideBar, setRiderSideBar, isPhone, role, setActiveTab, activeTab, setIsActive, isActive, setRiderIsActive, riderIsActive }) => {
+   
     if (role === 'User') {
         return (
          <>
@@ -44,8 +44,8 @@ const BothNavBar = ({ isPhone, role, setActiveTab, activeTab, setIsActive, isAct
         
         return (
             <>
-                {riderSideBar && <RiderSideBar setRiderSideBar={setRiderSideBar } />}
-                <RiderTopBar setRiderSideBar={setRiderSideBar} />
+                {riderSideBar && <RiderSideBar setRiderIsActive={setRiderIsActive} riderIsActive={riderIsActive} setRiderSideBar={setRiderSideBar } />}
+                <RiderTopBar  setRiderSideBar={setRiderSideBar} />
             </>
         ); 
     }

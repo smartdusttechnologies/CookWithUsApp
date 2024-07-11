@@ -1,0 +1,94 @@
+﻿/* App.css */
+
+._4restaurantDetails {
+    min-height: 200px;
+    background: #42a4ff;
+    display: flex;
+    gap: 10px;
+}
+._4userDetails {
+    margin-top:20px;
+    background: #363636;
+    display: flex;
+    gap: 10px;
+}
+._4icon {
+    padding: 10px;
+    height: 35px;
+    width: 35px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    padding: 5px;
+}
+._4iconLocation {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    margin: 40px 0px 0px 15px;
+}
+._4iconMap {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    margin: 0 0px 20% 15px;
+}
+._4hrParent {
+    border-left: 1px solid white;
+    height: 100%;
+    position: relative;
+    left: 15px;
+}
+._4RestaurantInfo {
+    background: #363636;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 20px;
+}
+._4UserInfo {
+    background: black;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 20px;
+    width:90%;
+}
+._4RestaurantTitle {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+._4Stauts {
+    font-size: 25px;
+    color: orange;
+    font-weight: 400;
+}
+._4RightArrow {
+    background: #42a4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    font-weight: 400;
+}
+._4RestaurantName {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+._4RestaurantLocation {
+    font-size: 16px;
+    font-weight: 500;
+    color: #e4dfdf;
+}
+._4UserName{
+    font-size:20px;
+}

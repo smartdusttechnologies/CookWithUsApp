@@ -534,12 +534,14 @@ namespace ServcieBooking.Buisness.Repository
         public RequestResult<bool> SetOrderStatus(SetOrderStatusModel details)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
-            string query = @"UPDATE OrderDetails SET OrderStatus = @Status WHERE OrderID = @OrderId";
+            string query = @"UPDATE OrderDetails SET OrderStatus = @Status, PrepareTime = @PrepareTime, AcceptOrderTime = @AcceptOrderTime WHERE OrderID = @OrderId;";
 
             var parameters = new
             {
                 details.OrderId,
                 details.Status,
+                details.PrepareTime,
+                details.AcceptOrderTime
             };
             int rowsAffected = db.Execute(query, parameters);
             if (rowsAffected > 0)
@@ -622,8 +624,7 @@ namespace ServcieBooking.Buisness.Repository
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            var query = @"
-                
+            var query = @"                
            SELECT 
 	       OD. [OrderID] AS ID
           ,OD.[UserID]
@@ -632,7 +633,9 @@ namespace ServcieBooking.Buisness.Repository
           ,OD.[PaymentMethod]
           ,OD.[TotalAmount] as OrderPrice
           ,OD.[OrderStatus]
-           ,OI.[Id]
+          ,OD.[PrepareTime]
+          ,OD.[AcceptOrderTime]
+          ,OI.[Id]
           ,OI.[UserId]
           ,OI.[OrderId]
           ,OI.[Name]
@@ -641,8 +644,7 @@ namespace ServcieBooking.Buisness.Repository
           ,OI.[RestaurantId]
           ,OI.[Price]
           ,OI.[DiscountedPrice]
-          ,OI.[Time]
-          
+          ,OI.[Time]          
           FROM [CookWithUs].[dbo].[OrderDetails] OD
           LEFT JOIN [CookWithUs].[dbo].[OrderItems] OI ON OD.OrderID =OI.OrderId
           WHERE  OD.RestaurantId = @restaurantId";
@@ -689,12 +691,12 @@ namespace ServcieBooking.Buisness.Repository
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"SELECT TOP (1000) 
-      [CategoryName]
-      ,[InStock]
-      ,[NextStockTime]
-      ,[IsDeleted]
-      ,[Id]
-  FROM [CookWithUs].[dbo].[MenuCategory] WHERE [RestaurantId] = @resturantId AND [IsDeleted] = 0";
+                          [CategoryName]
+                          ,[InStock]
+                          ,[NextStockTime]
+                          ,[IsDeleted]
+                          ,[Id]
+                          FROM [CookWithUs].[dbo].[MenuCategory] WHERE [RestaurantId] = @resturantId AND [IsDeleted] = 0";
 
             var parameters = new { resturantId };
 

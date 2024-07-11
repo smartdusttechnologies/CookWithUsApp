@@ -51,33 +51,43 @@ export default function RiderOrders() {
         fontWeight: '500',
         marginBottom:'10px',
     };
+    const RiderOrderCss = {
+        top: 0,
+        width: '100%',
+        height:'100%'
+    }
     return (
-        <div>
-            <div ><GoogleMapComponent style={{ width: '100%', height: '60vh' }}
-                origin={origin}
-                destination={destination}
-                zoom={7} // Adjust the zoom level as needed
-            /></div>
-            <div className="reject">
-                <div className="reject-order">
-                    <X /> <span>REJECT</span>
-                </div>
-            </div>
-            <div style={cardStyle}>
-                <div style={headerStyle}>
-                    <div>
-                        <div style={earningsTextStyle}>Total earning</div>
-                        <div style={amountStyle}>₹22</div>
+        <>
+            <div style={RiderOrderCss}>
+                <div ><GoogleMapComponent style={{ width: '100%', height: '60vh' }}
+                    origin={origin}
+                    destination={destination}
+                    zoom={7} // Adjust the zoom level as needed
+                /></div>
+                <div className="reject">
+                    <div className="reject-order">
+                        <X /> <span>REJECT</span>
                     </div>
-                    <div style={pickFoodStyle}>PICK FOOD</div>
                 </div>
-                <div style={detailStyle}>
-                    <Bike size={20} /> 4.06 km
-                </div>
-                <div style={detailStyle}>
-                    <Clock size={20} /> 13 mins to deliver
+                <div style={cardStyle}>
+                    <div style={headerStyle}>
+                        <div>
+                            <div style={earningsTextStyle}>Total earning</div>
+                            <div style={amountStyle}>₹22</div>
+                        </div>
+                        <div style={pickFoodStyle}>PICK FOOD</div>
+                    </div>
+                    <div style={detailStyle}>
+                        <Bike size={20} /> 4.06 km
+                    </div>
+                    <div style={detailStyle}>
+                        <Clock size={20} /> 13 mins to deliver
+                    </div>
                 </div>
             </div>
-        </div>
+            <div className="RiderGetOrderconfirmButton">
+                CONFIRM ORDER
+            </div>
+        </>
     );
 } 

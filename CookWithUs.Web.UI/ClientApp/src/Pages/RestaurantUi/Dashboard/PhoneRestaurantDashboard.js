@@ -3,6 +3,7 @@ import { Hotel, Soup, ShoppingBag, CircleMinus, PowerOff, Search } from 'lucide-
 import { getOrderByRestaurantID, setOrderStatus } from "../../../services/restaurantServices";
 import "./PhoneRestaurantDashboard.css";
 import PhoneConfirmOrderPopup from "../../../Components/RestaurantUi/PopUp/PhoneConfirmOrderPopup";
+import Timer from "../../../Components/RestaurantUi/PopUp/Timer";
 export default function PhoneRestaurantDashboard({ isActive }) {
     const [foodStatus, setFoodStatus] = useState();
     const [allOrder, setAllOrder] = useState([]);
@@ -13,10 +14,17 @@ export default function PhoneRestaurantDashboard({ isActive }) {
     const timerId = useRef();
     useEffect(() => {
         timerId.current = setInterval(() => {
-            setCountdown(prev => prev - 1)
+            const RestaurantId = 1;
+            getOrderByRestaurantID(RestaurantId)
+                .then(response => {
+                    setAllOrder(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
         }, 1000)
         return () => clearInterval(timerId.current);
-    });
+    },[]);
     useEffect(() => {
         if (countdown <= 0) {
             clearInterval(timerId.current);
@@ -76,6 +84,11 @@ export default function PhoneRestaurantDashboard({ isActive }) {
                 console.error("An error occurred while adding address:", error);
             });
     };
+    const addMinutes = (datetime, minutes) => {
+        const date = new Date(datetime);
+        date.setMinutes(date.getMinutes() + minutes);
+        return date.toISOString();
+    };
     return (
         <>
             <div className="_3ordersText">
@@ -129,8 +142,8 @@ export default function PhoneRestaurantDashboard({ isActive }) {
                                                 Driver arriving in
                                             </div>
                                             <div className="_3timeCount">
-                                                <div style={{ fontWeight: '600' }}>{countdown}</div>
-                                                <div style={{fontSize:'10px'} }>seconds</div>
+                                                <div style={{ fontWeight: '600' }}><Timer handleOnClickReadyItem={handleOnClickReadyItem} order={order} targetDateTime={addMinutes(order.acceptOrderTime,order.prepareTime)} /></div>
+                                                <div style={{fontSize:'10px'} }>MINS</div>
                                             </div>
                                         </div>
                                     </div>
