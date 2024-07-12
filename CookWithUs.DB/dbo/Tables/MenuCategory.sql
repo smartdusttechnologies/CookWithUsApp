@@ -1,4 +1,5 @@
-﻿CREATE TABLE [dbo].[MenuCategory] (
+﻿
+CREATE TABLE [dbo].[MenuCategory] (
     [RestaurantId]  NCHAR (10)    NULL,
     [CategoryName]  NVARCHAR (50) NULL,
     [InStock]       NCHAR (10)    NULL,
@@ -8,5 +9,3 @@
     CONSTRAINT [PK_MenuCategory] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
-ALTER TABLE [dbo].[MenuCategory] ADD  CONSTRAINT [DF_Table_1_IsActive]  DEFAULT ((0)) FOR [IsDeleted]
-GO

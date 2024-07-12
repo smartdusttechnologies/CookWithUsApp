@@ -15,10 +15,10 @@ namespace CookWithUs.Buisness.Features.Rider
     {
         public class Command : IRequest<List<OrderHistoryModel>>
         {
-            public int Id { get; set; }
-            public Command(int Id)
+            public int OrderId { get; set; }
+            public Command(int id)
             {
-                Id = Id;
+                OrderId = id;
             }
         }
         public class Authorization : IAuthorizationRule<Command>
@@ -27,9 +27,9 @@ namespace CookWithUs.Buisness.Features.Rider
             public Task Authorize(Command request, CancellationToken cancellationToken, IHttpContextAccessor contex)
             {
                 //Check If This Rquest Is Accessable To User Or Not
-                var user = new { UserId = 10, UserName = "Yashraj" };
-                var userClaim = new { UserId = 10, ClaimType = "application", Claim = "GetUiPageType" };
-                if (userClaim.Claim == "GetUiPageType" && user.UserId == userClaim.UserId)
+                var user = new { Userid = 10, UserName = "Yashraj" };
+                var userClaim = new { Userid = 10, ClaimType = "application", Claim = "GetUiPageType" };
+                if (userClaim.Claim == "GetUiPageType" && user.Userid == userClaim.Userid)
                 {
                     return Task.CompletedTask;
                 }
@@ -47,7 +47,7 @@ namespace CookWithUs.Buisness.Features.Rider
 
             Task<List<OrderHistoryModel>> IRequestHandler<Command, List<OrderHistoryModel>>.Handle(Command request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_rider.GetOrderDetailsById(request.Id));
+                return Task.FromResult(_rider.GetOrderDetailsById(request.OrderId));
             }
         }
     }

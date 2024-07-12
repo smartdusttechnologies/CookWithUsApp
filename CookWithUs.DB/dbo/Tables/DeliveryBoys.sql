@@ -6,6 +6,11 @@
     [Pincode]   VARCHAR (10)  NULL,
     [Latitude]  FLOAT (53)    NULL,
     [Longitude] FLOAT (53)    NULL,
+    [RiderIsActive] [int] DEFAULT ((0)) NULL,
+	[RiderLastWeekIncome] [int] NULL,
+	[RiderThisWeekIncome] [int] NULL,
+	[RiderOrderAssign] [int] NULL,
+	[IsDeleted] [int] DEFAULT ((0)) NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

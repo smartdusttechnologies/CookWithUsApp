@@ -8,6 +8,8 @@
     [OrderStatus]     VARCHAR (50)    NULL,
     [RiderId]         INT             NULL,
     [RestaurantId]    INT             NULL,
+    [PrepareTime]     int             NULL,
+	[AcceptOrderTime] datetime        NULL,
     PRIMARY KEY CLUSTERED ([OrderID] ASC)
 );
 

@@ -18,32 +18,38 @@ export default function RiderDashboard({ riderSideBar, setRiderSideBar }) {
         }
     };
     
+    //useEffect(() => {
+    //    GetOrderDetailsById(1010)
+    //        .then(response => {
+    //            setOrderDetails(response.data);
+    //        })
+    //        .catch(error => {
+    //            console.error("An error occurred while adding address:", error);
+    //        });
+    //}, [orders]);
     useEffect(() => {
-        GetOrderDetailsById(1010)
-            .then(response => {
-                setOrderDetails(response.data);
-            })
-            .catch(error => {
-                console.error("An error occurred while adding address:", error);
-            });
-    },[])
-    useEffect(() => {
-        let intervalId;
-        if (startDuty) {
-            // Call fetchOrders immediately
-            fetchOrders();
-
-            // Set up the interval to call fetchOrders every 30 seconds
-            intervalId = setInterval(fetchOrders, 30000);
-        }
-
-        // Clean up the interval when startDuty changes or the component unmounts
-        return () => {
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-        };
+        //if (startDuty) {
+        //    // Call fetchOrders immediately
+           fetchOrders();
+        //}
     }, [startDuty]);
+    //useEffect(() => {
+    //    let intervalId;
+    //    if (startDuty) {
+    //        // Call fetchOrders immediately
+    //        fetchOrders();
+
+    //        // Set up the interval to call fetchOrders every 30 seconds
+    //        intervalId = setInterval(fetchOrders, 30000);
+    //    }
+
+    //    // Clean up the interval when startDuty changes or the component unmounts
+    //    return () => {
+    //        if (intervalId) {
+    //            clearInterval(intervalId);
+    //        }
+    //    };
+    //}, [startDuty]);
     return (
         <div onClick={() => setRiderSideBar(false)}>
             <RiderShiftDetails />

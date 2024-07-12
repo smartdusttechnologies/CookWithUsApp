@@ -73,9 +73,9 @@ namespace CookWithUs.Web.UI.Controllers
         }
         [Route("GetOrderDetailsById/{Id}")]
         [HttpGet]
-        public IActionResult GetOrderDetailsById(int Id)
+        public IActionResult GetOrderDetailsById(int id)
         {
-            var response = _mediator.Send(new GetOrderDetailsById.Command(Id)).Result;
+            var response = _mediator.Send(new GetOrderDetailsById.Command(id)).Result;
             return Ok(response);
         }
         [Route("OrderUpdate")]
