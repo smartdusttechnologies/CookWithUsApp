@@ -3,6 +3,7 @@ import { Hotel, Soup, ShoppingBag, CircleMinus, MoveRight } from 'lucide-react';
 import { getOrderByRestaurantID, setOrderStatus } from "../../../services/restaurantServices";
 import ConfirmOrderPopup from "../../../Components/RestaurantUi/PopUp/ConfirmOrderPopup";
 import Timer from "../../../Components/RestaurantUi/PopUp/Timer";
+import * as signalR from '@microsoft/signalr';
 const RestaurantDashboard = ({ isActive }) => {
     const [allOrder, setAllOrder] = useState([]);
     const [openConfirmOrderPopup, setOpenConfirmOrderPopup] = useState(false);
