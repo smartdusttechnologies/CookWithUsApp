@@ -6,6 +6,7 @@ using System.Data;
 using CookWithUs.Buisness.Repository.Interface;
 using ServcieBooking.Buisness.Infrastructure;
 using CookWithUs.Buisness.Features.User;
+using CookWithUs.Business.Common;
 
 
 
@@ -168,6 +169,142 @@ namespace CookWithUs.Buisness.Repository
             return generatedOrderId;
            
         }
+        public RequestResult<bool> CheckUserMobileNumber(string MobileNumber)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+            string query = "SELECT COUNT(1) FROM Users WHERE UserName = @MobileNumber AND IsDeleted = 0";
+            var parameters = new { MobileNumber = MobileNumber };
+
+            int count = db.ExecuteScalar<int>(query, parameters);
+            if (count > 0)
+            {
+                return new RequestResult<bool>(false);              
+            }
+            else
+            {
+                return new RequestResult<bool>(true);
+            }
+        }
+        public RequestResult<bool> SignupUser(UserDetailsModel riderAllDetails, PasswordLogin passwordLogin)
+        {
+            try
+            {
+                using IDbConnection db = _connectionFactory.GetConnection;
+
+                // Step 1: Insert into Users and retrieve the generated UserId
+                var insertRiderQuery = @"
+            INSERT INTO [Users] (
+                [Name],
+                [UserName],
+                [isDeleted]
+            ) VALUES (
+                @Name,
+                @UserName,
+                @isDeleted
+            );
+            SELECT CAST(SCOPE_IDENTITY() AS INT);";  // Retrieve the generated UserId
+
+                var parameters = new
+                {
+                    Name = riderAllDetails.Name,
+                    UserName = riderAllDetails.UserName,
+                    isDeleted = riderAllDetails.IsDeleted
+                };
+
+                // Execute the insert query and get the generated UserId
+                var riderId = db.QuerySingle<int>(insertRiderQuery, parameters);
+
+                // Step 2: Insert into UserPasswordLogin using the retrieved UserId
+                var insertPasswordQuery = @"
+            INSERT INTO [UserPasswordLogin] (
+                [PasswordHash],
+                [PasswordSalt],
+                [UserId],
+                [ChangeDate]
+            ) VALUES (
+                @PasswordHash,
+                @PasswordSalt,
+                @RiderId,
+                @ChangeDate
+            )";
+
+                var passwordParameters = new
+                {
+                    PasswordHash = passwordLogin.PasswordHash,
+                    PasswordSalt = passwordLogin.PasswordSalt,
+                    RiderId = riderId,  // Use the retrieved RiderId here
+                    ChangeDate = DateTime.Now
+                };
+
+                int passwordRowsAffected = db.Execute(insertPasswordQuery, passwordParameters);
+
+                // Check if both operations were successful
+                if (passwordRowsAffected > 0)
+                {
+                    return new RequestResult<bool>(true);
+                }
+                else
+                {
+                    return new RequestResult<bool>(false, new List<ValidationMessage>
+            {
+                new ValidationMessage
+                {
+                    Reason = "Something went wrong with PasswordLogin insertion",
+                    Severity = ValidationSeverity.Error
+                }
+            });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error (you can replace this with your logging logic)
+                Console.WriteLine("Error occurred: " + ex.Message);
+
+                return new RequestResult<bool>(false, new List<ValidationMessage>
+        {
+            new ValidationMessage
+
+            {
+                Reason = $"Exception: {ex.Message}",
+                Severity = ValidationSeverity.Error
+            }
+        });
+            }
+        }
+        public UserDetailsModel GetUserLoginDetailsByUserName(string username)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [Users] WHERE [UserName] = @usersUserName";
+
+            var parameters = new
+            {
+                usersUserName = username
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            UserDetailsModel user = db.QuerySingleOrDefault<UserDetailsModel>(query, parameters);
+
+            return user;
+        }
+        public PasswordLogin GetUserPassworByUserId(int userId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [UserPasswordLogin] WHERE [UserId] = @UsersUserId";
+
+            var parameters = new
+            {
+                UsersUserId = userId
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            PasswordLogin password = db.QuerySingleOrDefault<PasswordLogin>(query, parameters);
+
+            return password;
+        }
+
+
 
     }
 }

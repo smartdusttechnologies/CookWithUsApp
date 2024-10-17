@@ -35,40 +35,106 @@ namespace CookWithUs.Buisness.Repository
             return db.Query<RiderListModel>(query).ToList();
         }
 
-        public RiderListModel GetRiderDetailsById(int ID)
+        public RiderDetailsModel GetRiderDetailsById(int ID)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
             var query = @"
-        SELECT  [ID]
-              ,[Name]
-              ,[Age]
-              ,[MobileNo]
-              ,[Pincode]
-              ,[Latitude]
-              ,[Longitude]
-              ,[RiderIsActive]
-              ,[RiderLastWeekIncome]
-              ,[RiderThisWeekIncome]
-              ,[RiderOrderAssign]
-              ,[IsDeleted]
-            FROM [CookWithUs].[dbo].[DeliveryBoys]
-            WHERE [ID] = @ID
-    ";
+            SELECT  *
+            FROM [RiderDetails]
+            WHERE [Id] = @ID
+            ";
 
             var parameters = new { ID = ID };
-            var result = db.QuerySingleOrDefault<RiderListModel>(query, parameters);
+            var result = db.QuerySingleOrDefault<RiderDetailsModel>(query, parameters);
             return result;
         }
         public RequestResult<bool> SetRiderStatus(SetOrderStatusModel details)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            var query = "UPDATE [CookWithUs].[dbo].[DeliveryBoys] SET [RiderIsActive] = @RiderIsActive WHERE [ID] = @ID";
+            var query = "UPDATE [DeliveryBoys] SET [RiderIsActive] = @RiderIsActive WHERE [ID] = @ID";
 
             var parameters = new { 
                 ID = details.OrderId,
                 RiderIsActive = int.TryParse(details.Status, out int status) ? status : 0
+            };
+            int rowsAffected = db.Execute(query, parameters);
+            if (rowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = "Somthing went wrong", Severity = ValidationSeverity.Error } });
+            }
+        }
+        public RequestResult<bool> SendRequestOfRider(SendOrderRequestModel allRiderDetails)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            // Construct the query with an IN clause
+            var query = "UPDATE [DeliveryBoys] SET [RiderOrderAssign] = @OrderId WHERE [ID] IN @RiderIds";
+
+            // Create the parameters object
+            var parameters = new
+            {
+                OrderId = allRiderDetails.OrderId,
+                RiderIds = allRiderDetails.RiderIds // Dapper supports passing a list for IN clauses
+            };
+
+            // Execute the query
+            int rowsAffected = db.Execute(query, parameters);
+
+            // Return the result
+            if (rowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage>
+        {
+            new ValidationMessage { Reason = "Something went wrong", Severity = ValidationSeverity.Error }
+        });
+            }
+        }
+
+
+        public RequestResult<bool> AssignRider(FindOrderModel assignDetails)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = "INSERT INTO [RiderOrderDetails] ([RiderID], [OrderID], [Price], [OrderStatus]) VALUES (@RiderID, @OrderID, @Price, @OrderStatus)";
+
+            var parameters = new
+            {
+                RiderID = assignDetails.RiderID,
+                OrderID = assignDetails.OrderID,
+                Price = assignDetails.Price,
+                OrderStatus = assignDetails.OrderStatus
+            };
+            int rowsAffected = db.Execute(query, parameters);
+            if (rowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = "Somthing went wrong", Severity = ValidationSeverity.Error } });
+            }
+        }
+
+        public RequestResult<bool> RiderStatus(FindOrderModel assignDetails)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = "UPDATE [RiderOrderDetails] SET [OrderStatus] = @OrderStatus WHERE [ID] =@ID";
+
+            var parameters = new
+            {
+                ID = assignDetails.ID,
+                OrderStatus = assignDetails.OrderStatus
             };
             int rowsAffected = db.Execute(query, parameters);
             if (rowsAffected > 0)
@@ -121,13 +187,13 @@ namespace CookWithUs.Buisness.Repository
 
 
         }
-        public FindOrderModel FindOrder(int Id)
+        public FindOrderModel FindOrder(int orderId)
         {
             using IDbConnection db = _connectionFactory.GetConnection;
 
-            var query = @"SELECT TOP (1000) [ID],[RiderID],[OrderID],[Price],[OrderStatus] FROM [CookWithUs].[dbo].[RiderOrderDetails] WHERE [RiderID] = @ID";
+            var query = @"SELECT TOP (1000) [ID],[RiderID],[OrderID],[Price],[OrderStatus] FROM [RiderOrderDetails] WHERE [RiderID] = @ID";
 
-            var parameters = new { ID = Id };
+            var parameters = new { ID = orderId };
             var result = db.QuerySingleOrDefault<FindOrderModel>(query, parameters);
             return result;
         }
@@ -160,9 +226,9 @@ namespace CookWithUs.Buisness.Repository
             OI.RestaurantName,
             OI.VariantId
         FROM 
-            CookWithUs.dbo.OrderDetails OD
+            OrderDetails OD
         LEFT JOIN 
-            CookWithUs.dbo.OrderItems OI 
+            OrderItems OI 
         ON 
             OD.OrderID = OI.OrderId 
         WHERE 
@@ -191,6 +257,240 @@ namespace CookWithUs.Buisness.Repository
 
             return orderDictionary.Values.ToList();
         }
+        public RequestResult<bool> RiderSignup(RiderDetailsModel riderAllDetails, PasswordLogin passwordLogin)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            // Step 1: Insert into RiderDetails and retrieve the generated RiderId
+            var insertRiderQuery = @"
+    INSERT INTO [RiderDetails] (
+        [Mobile],
+        [Area],
+        [VechicleType],
+        [Shift],
+        [FirstName],
+        [LastName],
+        [DoorNo],
+        [Street],
+        [City],
+        [Pincode],
+        [LandMark],
+        [Gender],
+        [BankName],
+        [AccountNumber],
+        [IfscCode],
+        [PanCard],
+        [DrivingLicenceFront],
+        [DrivingLicenceBack],
+        [Image],
+        [isDeleted]
+    ) VALUES (
+        @Mobile,
+        @Area,
+        @VechicleType,
+        @Shift,
+        @FirstName,
+        @LastName,
+        @DoorNo,
+        @Street,
+        @City,
+        @Pincode,
+        @LandMark,
+        @Gender,
+        @BankName,
+        @AccountNumber,
+        @IfscCode,
+        @PanCard,
+        @DrivingLicenceFront,
+        @DrivingLicenceBack,
+        @Image,
+        @isDeleted
+    );
+    SELECT CAST(SCOPE_IDENTITY() AS INT);";  // Retrieve the generated RiderId
+
+            var parameters = new
+            {
+                Mobile = riderAllDetails.Mobile,
+                Area = riderAllDetails.Area,
+                VechicleType = riderAllDetails.VechicleType,
+                Shift = riderAllDetails.Shift,
+                FirstName = riderAllDetails.FirstName,
+                LastName = riderAllDetails.LastName,
+                DoorNo = riderAllDetails.DoorNo,
+                Street = riderAllDetails.Street,
+                City = riderAllDetails.City,
+                Pincode = riderAllDetails.Pincode,
+                LandMark = riderAllDetails.LandMark,
+                Gender = riderAllDetails.Gender,
+                BankName = riderAllDetails.BankName,
+                AccountNumber = riderAllDetails.AccountNumber,
+                IfscCode = riderAllDetails.IfscCode,
+                PanCard = riderAllDetails.PanCard,
+                DrivingLicenceFront = riderAllDetails.DrivingLicenceFront,
+                DrivingLicenceBack = riderAllDetails.DrivingLicenceBack,
+                Image = riderAllDetails.Image,
+                isDeleted = riderAllDetails.IsDeleted
+            };
+
+            // Execute the insert query and get the generated RiderId
+            var riderId = db.QuerySingle<int>(insertRiderQuery, parameters);
+
+            // Step 2: Insert into PasswordLogin using the retrieved RiderId
+            var insertPasswordQuery = @"
+    INSERT INTO [PasswordLogin] (
+        [PasswordHash],
+        [PasswordSalt],
+        [RiderId],
+        [ChangeDate]
+    ) VALUES (
+        @PasswordHash,
+        @PasswordSalt,
+        @RiderId,
+        @ChangeDate
+    )";
+
+            var passwordParameters = new
+            {
+                PasswordHash = passwordLogin.PasswordHash,
+                PasswordSalt = passwordLogin.PasswordSalt,
+                RiderId = riderId,  // Use the retrieved RiderId here
+                ChangeDate = DateTime.Now
+            };
+
+            int passwordRowsAffected = db.Execute(insertPasswordQuery, passwordParameters);
+
+            // Check if both operations were successful
+            if (passwordRowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = "Something went wrong with PasswordLogin insertion", Severity = ValidationSeverity.Error } });
+            }
+        }
+
+        public RequestResult<bool> CheckMobileNumber(string mobileNumber)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT COUNT(1) FROM [RiderDetails] WHERE [Mobile] = @riderMobile";
+
+            var parameters = new
+            {
+                riderMobile = mobileNumber
+            };
+
+            int count = db.ExecuteScalar<int>(query, parameters);
+            if (count > 0)
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage>
+        {
+            new ValidationMessage { Reason = "Mobile number already exists", Severity = ValidationSeverity.Error }
+        });
+            }
+            else
+            {
+                return new RequestResult<bool>(true);
+            }
+        }
+        public RequestResult<bool> DeleteAllOTP(string otpDetails)
+        {
+            try
+            {
+                using IDbConnection db = _connectionFactory.GetConnection;
+
+                var query = @"DELETE FROM [ManageOTP] WHERE [Details] = @riderMobile";
+
+                var parameters = new
+                {
+                    riderMobile = otpDetails
+                };
+
+                int rowsAffected = db.Execute(query, parameters);
+                return new RequestResult<bool>(true);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = ex.Message, Severity = ValidationSeverity.Error } });
+            }
+        }
+
+        public RequestResult<bool> AddOTP(ManageOtpModel details)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"INSERT INTO [ManageOTP] ([Type], [Details], [OTP], [DateTime], [Role]) VALUES (@Type, @Details, @OTP, @DateTime, @Role);";
+
+            var parameters = new
+            {
+               Type =details.Type,
+                Details=details.Details,
+                OTP=details.OTP,
+                DateTime=details.DateTime,
+                Role=details.Role
+            };
+
+            int rowsAffected = db.Execute(query, parameters);
+            if (rowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+               return new RequestResult<bool>(false, new List<ValidationMessage> { new ValidationMessage { Reason = "Something went wrong", Severity = ValidationSeverity.Error } });
+            }
+        }
+        public ManageOtpModel MatchOTP(string otpDetails)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [ManageOTP] WHERE [Details] = @riderMobile";
+
+            var parameters = new
+            {
+                riderMobile = otpDetails
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            ManageOtpModel otpModel = db.QuerySingleOrDefault<ManageOtpModel>(query, parameters);
+
+            return otpModel;
+        }
+        public RiderDetailsModel GetRiderLoginDetailsByUserName(string username)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [RiderDetails] WHERE [Mobile] = @riderUserName";
+
+            var parameters = new
+            {
+                riderUserName = username
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            RiderDetailsModel rider = db.QuerySingleOrDefault<RiderDetailsModel>(query, parameters);
+
+            return rider;
+        }
+        public PasswordLogin GetRiderPassworByUserId(int userId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [PasswordLogin] WHERE [RiderId] = @riderUserId";
+
+            var parameters = new
+            {
+                riderUserId = userId
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            PasswordLogin password = db.QuerySingleOrDefault<PasswordLogin>(query, parameters);
+
+            return password;
+        }
+
 
     }
 }

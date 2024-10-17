@@ -24,6 +24,7 @@ import RestaurantDashboard from "../../Pages/RestaurantUi/Dashboard/RestaurantDa
 import RestaurantMenu from "../../Pages/RestaurantUi/Menu/RestaurantMenu";
 import MainHome from "../../Pages/Home/MainHome";
 import RiderDashboard from "../../Pages/RiderDashboard/RiderDashboard";
+import RiderLogin from "../../Pages/RiderDashboard/RiderLogin";
 import RiderOrders from "../../Pages/RiderDashboard/RiderOrders";
 import MainCart from "../../Pages/Cart/MainCart";
 import MainRestaurantDetails from "../../Pages/Products/MainRestaurantDetails";
@@ -31,41 +32,47 @@ import MyAccount from "../../Pages/User/MyAccount/MyAccount";
 import MainRestaurantMenu from "../../Pages/RestaurantUi/Menu/MainRestaurantMenu";
 import RiderLiveTask from "../../Pages/RiderDashboard/RiderLiveTask";
 import RiderPickFood from "../../Pages/RiderDashboard/RiderPickFood";
-const AllRoutes = ({ riderSideBar, setRiderSideBar, isPhone, isActive, setActiveTab, activeTab,role, setRole  }) => {
-  return (
-    <Routes>
-          <Route path="/user" element={<Home  />}></Route>
-          <Route path="/" element={<MainHome riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} isPhone={isPhone} isActive={isActive} role={role} setRole={setRole} /> }></Route>
-      <Route path="/meals" element={<Products />}></Route>
-          <Route path="/my-account" element={<MyAccount isPhone={isPhone} />}></Route>
-      <Route path="/my-account/orders" element={<MyOrders />}></Route>
-      <Route path="/my-account/manage_addresses" element={<ManageAddress />}></Route>
-      <Route path="/myorders" element={<Orders />}></Route>
-          <Route path="/cart" element={<MainCart isPhone={isPhone } />}></Route>
-      <Route path="/checkout" element={<Checkout />}></Route>
-      <Route path="/success" element={<Confirmation />} />
-      <Route path="/payment" element={<PaymentCard />} />
-      <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
-          <Route path="/RiderDashboard" element={<Dashboard />} />
-      <Route path="/trackorder" element={<OrderDirection />} />
-      <Route path="/trackorder/:id" element={<OrderDirection />} />
-      <Route path="/registeraschef" element={<RegistrationForm />} />
-      <Route path="/registerasrider" element={<RegisterAsRider />} />
-      <Route path="/admindashboard" element={<AdminDashboard />} />
-      <Route path="/chefdashboard" element={<ChefDashboard />} />
-          <Route path="/restaurant/:id" element={<MainRestaurantDetails isPhone={isPhone} />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/Shipping" element={<Shipping />} />
-      <Route path="/res" element={<RestaurantDashboard isActive={isActive} />} />
-          <Route path="/Restaurant/Menu" element={<MainRestaurantMenu isPhone={ isPhone} setActiveTab={setActiveTab} activeTab={activeTab} />} />
-          <Route path="/Restaurant/Order" element={<RestaurantDashboard isActive={isActive} />} />
+import RestaurantSignup from "../../Pages/RestaurantUi/RestaurantSignUp/RestaurantSignup";
+import RiderProfile from "../../Pages/RiderDashboard/RiderProfile";
+import RestaurantProfile from "../../Pages/RestaurantUi/RestaurantProfile";
 
-          <Route path="/rider/dashboard" element={<RiderDashboard />} />
-          <Route path="/rider/getOrder" element={<RiderOrders />} />
-          <Route path="/component/checkcomponent" element={<RiderPickFood />} />
-    </Routes>
-  );
+const AllRoutes = ({ riderSideBar, setRiderSideBar, isPhone, isActive, setActiveTab, activeTab, role, setRole }) => {
+    return (
+        <Routes>
+            <Route path="/user" element={<Home />}></Route>
+            <Route path="/" element={<MainHome riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} isPhone={isPhone} isActive={isActive} role={role} setRole={setRole} />}></Route>
+            <Route path="/meals" element={<Products />}></Route>
+            <Route path="/my-account" element={<MyAccount isPhone={isPhone} />}></Route>
+            <Route path="/my-account/orders" element={<MyOrders />}></Route>
+            <Route path="/my-account/manage_addresses" element={<ManageAddress />}></Route>
+            <Route path="/myorders" element={<Orders />}></Route>
+            <Route path="/cart" element={<MainCart isPhone={isPhone} />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
+            <Route path="/success" element={<Confirmation />} />
+            <Route path="/payment" element={<PaymentCard />} />
+            <Route path="/livelocationmap/:orderId" element={<LiveLocationTracker />} />
+            <Route path="/RiderDashboard" element={<Dashboard />} />
+            <Route path="/trackorder" element={<OrderDirection />} />
+            <Route path="/trackorder/:id" element={<OrderDirection />} />
+            <Route path="/registeraschef" element={<RegistrationForm />} />
+            <Route path="/registerasrider" element={<RegisterAsRider />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/chefdashboard" element={<ChefDashboard />} />
+            <Route path="/restaurant/:id" element={<MainRestaurantDetails isPhone={isPhone} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/Shipping" element={<Shipping />} />
+            <Route path="/res" element={<RestaurantDashboard isActive={isActive} />} />
+            <Route path="/Restaurant/Menu" element={<MainRestaurantMenu isPhone={isPhone} setActiveTab={setActiveTab} activeTab={activeTab} />} />
+            <Route path="/Restaurant/Order" element={<RestaurantDashboard isActive={isActive} />} />
+            <Route path="/rider/login" element={<RiderLogin />} />
+            <Route path="/rider/dashboard" element={<RiderDashboard />} />
+            <Route path="/rider/getOrder" element={<RiderOrders />} />
+            <Route path="/rider/profile" element={<RiderProfile />} />
+            <Route path="/component/checkcomponent" element={<RestaurantSignup />} />
+            <Route path="/Restaurant/Profile" element={<RestaurantProfile />} />
+        </Routes>
+    );
 };
 
 export default AllRoutes;

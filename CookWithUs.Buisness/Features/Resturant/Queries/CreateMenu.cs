@@ -25,17 +25,34 @@ namespace CookWithUs.Buisness.Features.Resturant.Queries
         }
         public class Authorization : IAuthorizationRule<Command>
         {
+            private readonly IHttpContextAccessor _httpContextAccessor;
 
+            public Authorization(IHttpContextAccessor httpContextAccessor)
+            {
+                _httpContextAccessor = httpContextAccessor;
+            }
             public Task Authorize(Command request, CancellationToken cancellationToken, IHttpContextAccessor contex)
             {
-                //Check If This Rquest Is Accessable To User Or Not
-                var user = new { UserId = 10, UserName = "Yashraj" };
-                var userClaim = new { UserId = 10, ClaimType = "application", Claim = "GetUiPageType" };
-                if (userClaim.Claim == "GetUiPageType" && user.UserId == userClaim.UserId)
+                var httpContext = _httpContextAccessor.HttpContext;
+                if (httpContext == null || !httpContext.User.Identity.IsAuthenticated)
                 {
+                    httpContext.Response.StatusCode = 401; // Return 401 for unauthenticated users
                     return Task.CompletedTask;
                 }
-                return Task.FromException(new UnauthorizedAccessException("You are Unauthorized"));
+                var claimType = httpContext.User.Claims.FirstOrDefault(c => c.Type == "Role");
+
+                if (claimType != null)
+                {
+                    // Replace with your actual authorization logic
+                    if (claimType.Value == Role.Restaurant.ToString())
+                    {
+                        return Task.CompletedTask;
+                    }
+                }
+                // If the role doesn't match, set the status code to 403 and throw an exception
+                httpContext.Response.StatusCode = 403; // Forbidden
+                return Task.FromException(new UnauthorizedAccessException("You are unauthorized to access this resource."));
+
             }
         }
         public class Handler : IRequestHandler<Command, RequestResult<bool>>

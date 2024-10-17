@@ -1,13 +1,20 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import RiderShiftDetails from "../../Components/RiderUi/RiderShiftDetails";
 import RiderEarningsCard from "../../Components/RiderUi/RiderEarningCard";
 import RiderSearchingCard from "../../Components/RiderUi/RiderSearchingCard";
-import { FindOrder,GetOrderDetailsById } from "../../services/riderServices";
-export default function RiderDashboard({ riderSideBar, setRiderSideBar }) {
+import { FindOrder,checkRiderOrderDetails, GetOrderDetailsById } from "../../services/riderServices";
+import { getRestaurantDetails } from "../../services/restaurantServices";
+import RiderOrders from "./RiderOrders";
+import RiderLiveTask from "./RiderLiveTask";
+
+const RiderDashboard= ({ riderSideBar, setRiderSideBar }) => {
     const [orderDetails, setOrderDetails] = useState([]);
     const [startDuty, setStartDuty] = useState(false);
+    const [restaurantDetails,setRestaurantDetails] = useState([]);
     const [orders, setOrders] = useState([]); // State to hold fetched data
     const riderId = 1; // Replace with the actual ID you need to pass
+    const timerId = useRef();
+    const [riderDetails, setRiderDetails] = useState([]);
 
     const fetchOrders = async () => {
         try {
@@ -17,22 +24,49 @@ export default function RiderDashboard({ riderSideBar, setRiderSideBar }) {
             console.error('Error fetching orders:', error);
         }
     };
-    
-    //useEffect(() => {
-    //    GetOrderDetailsById(1010)
-    //        .then(response => {
-    //            setOrderDetails(response.data);
-    //        })
-    //        .catch(error => {
-    //            console.error("An error occurred while adding address:", error);
-    //        });
-    //}, [orders]);
+    useEffect(() => {
+        timerId.current = setInterval(() => {
+            checkRiderOrderDetails(riderId)
+                .then(response => {
+                    setRiderDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
+        }, 1000)
+        return () => clearInterval(timerId.current);
+    }, []);
     useEffect(() => {
         //if (startDuty) {
-        //    // Call fetchOrders immediately
-           fetchOrders();
+        // Call fetchOrders immediately
+        fetchOrders();
         //}
-    }, [startDuty]);
+    }, []);
+    
+    useEffect(() => {
+        if (orders.length > 0) {
+            GetOrderDetailsById(orders.orderID)
+                .then(response => {
+                    setOrderDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
+        }
+    }, [orders]);
+
+    useEffect(() => {
+        if (orderDetails.length > 0 && orderDetails[0]?.restaurantId) {
+            getRestaurantDetails(orderDetails[0].restaurantId)
+                .then(response => {
+                    setRestaurantDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while fetching restaurant details:", error);
+                });
+        }
+    }, [orderDetails]);
+
     //useEffect(() => {
     //    let intervalId;
     //    if (startDuty) {
@@ -51,16 +85,26 @@ export default function RiderDashboard({ riderSideBar, setRiderSideBar }) {
     //    };
     //}, [startDuty]);
     return (
-        <div onClick={() => setRiderSideBar(false)}>
-            <RiderShiftDetails />
-            {startDuty ? (
-                <RiderSearchingCard />
+        <>
+            {orders.id ? (
+                orders.orderStatus === 'Pending' ? (
+                    <RiderOrders restaurantDetails={restaurantDetails} orders={orders} />
+                ) : orders.orderStatus === 'Confirm' ? (
+                        <RiderLiveTask restaurantDetails={restaurantDetails} />
+                ) : null
             ) : (
-                    <>
-                        <RiderEarningsCard enableStartDuty={() => setStartDuty(true)} />
-                        
-                    </>                    
+                <div onClick={() => setRiderSideBar(false)}>
+                    <RiderShiftDetails />
+                    {startDuty ? (
+                        <RiderSearchingCard />
+                    ) : (
+                        <>
+                            <RiderEarningsCard enableStartDuty={() => setStartDuty(true)} />
+                        </>
+                    )}
+                </div>
             )}
-        </div>
+        </>
     );
-} 
+}
+export default RiderDashboard;

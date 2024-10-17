@@ -90,6 +90,13 @@ namespace CookWithUs.Web.UI.Controllers
 
             return Ok(response);
         }
+        [Route("GetUserByUserName/{UserName}")]
+        [HttpGet]
+        public IActionResult GetUserByUserName(string UserName)
+        {
+            var responce = _mediator.Send(new GetUserByUserName.Command(UserName)).Result;
+            return Ok(responce);
+        }
 
 
     }

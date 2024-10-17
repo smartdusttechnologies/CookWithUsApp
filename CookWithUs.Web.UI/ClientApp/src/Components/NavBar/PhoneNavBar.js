@@ -1,8 +1,49 @@
-import * as React from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./PhoneNavBar.css";
 import { User, Soup, NotepadText, Search, Home } from 'lucide-react';
+import PhoneUserLogin from "../UserAuth/PhoneUserLogin";
+import UserSideBar from "./UserSideBar";
+import AuthContext from "../../Pages/AuthProvider";
+import { GetUserByUserName } from "../../services/UserService";
+import { jwtDecode } from 'jwt-decode';
 export default function PhoneNavBar() {
-   
+    const [openPhoneLogin, setOpenPhoneLogin] = useState(false);
+    const { auth, setAuth } = useContext(AuthContext);
+    const [userDetails, setUserDetails] = useState(null);
+    const timerId = useRef();
+    useEffect(() => {
+        timerId.current = setInterval(() => {
+            getDetails();
+        }, 1000)
+        return () => clearInterval(timerId.current);
+    }, []);
+    useEffect(() => {
+        if (auth.userName) {
+            GetUserByUserName(auth.userName)
+                .then(response => {
+                    setUserDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                }
+                );
+        }
+    }, [auth.userName]);
+    const getDetails = () => {
+        if (auth.isAuthenticated) {
+            const token = localStorage.getItem('jwtToken');
+            const decodedToken = jwtDecode(token);
+            const username = decodedToken.sub;
+            GetUserByUserName(username)
+                .then(response => {
+                    setUserDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                }
+                );
+        }
+    }
     return (
         <>
             <div className="_2456r">
@@ -47,6 +88,7 @@ export default function PhoneNavBar() {
                         <p className="_9v2Jj">Chhoti Badalpura, Bihar 801105, India (Khagaul)</p>
                     </button>
                     <button
+                        onClick={setOpenPhoneLogin }
                         className="_11VKU"
                         data-testid="listing-header-account"
                         aria-label="Double tap to go to Account page."
@@ -99,6 +141,20 @@ export default function PhoneNavBar() {
                     </button>
                 </div>
             </div>
+            {openPhoneLogin &&
+                <>
+                {auth.isAuthenticated ? (
+                    <>
+                        <UserSideBar/>
+                    </>
+                ) : (
+                    <>
+                        <PhoneUserLogin setOpenPhoneLogin={setOpenPhoneLogin} />
+                    </>
+                )
+                }
+                </>
+            }
         </>
     );
 }

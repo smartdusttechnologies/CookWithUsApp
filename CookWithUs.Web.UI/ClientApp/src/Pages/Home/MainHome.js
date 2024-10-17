@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Home from "./Home";
 import "./MainHome.css";
 import RestaurantDashboard from "../RestaurantUi/Dashboard/RestaurantDashboard";
 import { User, Bike, Hotel } from 'lucide-react';
-import RiderDashboard from "../RiderDashboard/RiderDashboard";
+import RiderDashboard from "./../RiderDashboard/RiderDashboard";
 import PhoneHome from "./PhoneHome";
 import PhoneRestaurantDashboard from "../RestaurantUi/Dashboard/PhoneRestaurantDashboard";
+import AuthContext from "../AuthProvider";
+import RiderLogin from "../RiderDashboard/RiderLogin";
+import RestaurantLogin from "../RestaurantUi/RestaurantLogin/RestaurantLogin";
+import PhoneRestaurantLogin  from "../RestaurantUi/RestaurantLogin/PhoneRestaurantLogin";
+
+
+
 const MainHome = ({ riderSideBar, setRiderSideBar, isPhone, isActive, role, setRole }) => {
+    const { auth, setAuth } = useContext(AuthContext);
     const containerStyle = {
         display: 'flex',
         flexDirection:'column',
@@ -40,16 +48,38 @@ const MainHome = ({ riderSideBar, setRiderSideBar, isPhone, isActive, role, setR
         return (
             <>
                 {isPhone ? (
-                    <PhoneRestaurantDashboard isActive={isActive} />
+                    <>
+                    {
+                        auth.isAuthenticated ? (
+                                <PhoneRestaurantDashboard isActive={isActive} />
+                        ) : (
+                           <PhoneRestaurantLogin />
+                        )
+                    }
+                    </>     
                 ) : (
-                        <RestaurantDashboard isActive={isActive} />
+                    <>
+                    {
+                        auth.isAuthenticated ? (
+                            <RestaurantDashboard isActive={isActive} />
+                        ) : (
+                            <RestaurantLogin setRole={setRole} />
+                        )
+                    }
+                    </>                        
                 )}
                 
             </>
         );
     } else if (role === 'Rider') {
             return (
-                <RiderDashboard riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} />
+                <>
+                        {auth.isAuthenticated ? (
+                            <RiderDashboard riderSideBar={riderSideBar} setRiderSideBar={setRiderSideBar} />
+                        ) : (
+                            <RiderLogin setRole={setRole} />
+                        )}
+                </>
             );
     }
     else {

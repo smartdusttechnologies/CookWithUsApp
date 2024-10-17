@@ -1,0 +1,22 @@
+﻿._5resIcon {
+    height: 30px;
+    width: 30px;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right:5px;
+}
+._5resNameRow{
+    display:flex;
+
+}
+._5desIcon {
+    height: 30px;
+    width: 30px;
+    border: 2px solid;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background:blue;
+    color:white;
+}

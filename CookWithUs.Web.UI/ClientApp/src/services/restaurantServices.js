@@ -1,7 +1,7 @@
 import axiosInstance from "../utils/axiosInstance";
 
 export const getRestaurants = (latitude, longitude) => {
-  return axiosInstance.get("/resturant/Get", {
+    return axiosInstance.get("/Publicdetails/Get", {
     params: {
       latitude: latitude,
       longitude: longitude,
@@ -10,7 +10,7 @@ export const getRestaurants = (latitude, longitude) => {
 };
 
 export const getRestaurantDetails = (id) => {
-  return axiosInstance.get(`/resturant/GetById/${id}`);
+    return axiosInstance.get(`/Publicdetails/GetById/${id}`);
 };
 
 export const getRestaurantDetailsByUserID = (Userid) => {
@@ -18,11 +18,11 @@ export const getRestaurantDetailsByUserID = (Userid) => {
 };
 
 export const ResgisterRestaurant = (details) => {
-  return axiosInstance.post("/resturant/RestaurantResgister", details);
+  return axiosInstance.post("/Auth/RestaurantResgister", details);
 };
 
 export const GetMenuByCategoryID = (CategoryId) => {
-    return axiosInstance.post(`/resturant/GetMenuByCategoryID/${CategoryId}`);
+    return axiosInstance.post(`/Publicdetails/GetMenuByCategoryID/${CategoryId}`);
 };
 
 export const CreateMenu = (details) => {
@@ -63,8 +63,20 @@ export const AddMenuCategory = (details) => {
     return axiosInstance.post("/resturant/AddMenuCategory", details);
 };
 export const FetchMenuCategory = (restaurantId) => {
-    return axiosInstance.get(`/resturant/FetchMenuCategory/${restaurantId}`);
+    return axiosInstance.get(`/Publicdetails/FetchMenuCategory/${restaurantId}`);
 };
 export const UpdateMenuCategory = (details) => {
     return axiosInstance.post("/resturant/UpdateMenuCategory", details);
 }
+export const GetRestaurantCategory = () => {
+    return axiosInstance.get("/Auth/GetRestaurantCategory");
+};
+export const GetRestaurantByEmail = (email) => {
+    return axiosInstance.get(`/resturant/GetRestaurantByEmail/${email}`);
+};
+export const RestaurantDetailsSignup = (details) => {
+    return axiosInstance.post("/Auth/RestaurantSignup", details);
+};
+export const RestaurantDetailsLogin = (loginDetails) => {
+    return axiosInstance.post("/Auth/RestaurantDetailsLogin", loginDetails);
+};

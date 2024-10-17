@@ -4,9 +4,13 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using CookWithUs.Buisness.Features.Rider;
 using CookWithUs.Buisness.Models;
+using Microsoft.AspNetCore.Identity;
+using CookWithUs.Web.UI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CookWithUs.Web.UI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class RIderController : ControllerBase
@@ -14,12 +18,14 @@ namespace CookWithUs.Web.UI.Controllers
         private readonly IMediator _mediator;
       
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
-        public RIderController(IMediator mediator, IMapper mapper)
+        public RIderController(IMediator mediator, IMapper mapper, IEmailService emailService)
         {
             _mediator = mediator;
             
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         [Route("RiderRegister")]
@@ -33,11 +39,9 @@ namespace CookWithUs.Web.UI.Controllers
         [HttpGet]
         public IActionResult RiderDetail( decimal lat, decimal lon)
         {            
-            var  lats = 25.6094725259607;
-            var  lons = 85.13652488421577;
+            var  lats = (double)lat;
+            var  lons = (double)lon;
             var response = _mediator.Send(new RiderList.Command(lats, lons)).Result;
-            response.userLatitude = lats;
-            response.userLongitude = lons;
             return Ok(response);
         }
 
@@ -49,6 +53,7 @@ namespace CookWithUs.Web.UI.Controllers
             var response = _mediator.Send(new OrderHistory.Command(orderValue)).Result;
             return Ok(response);
         }
+
 
         [Route("RiderOrderList")]
         [HttpGet]
@@ -64,11 +69,18 @@ namespace CookWithUs.Web.UI.Controllers
             var response = _mediator.Send(new RiderDetailsById.Command(UserId)).Result;
             return Ok(response);
         }
-        [Route("FindOrder/{Id}")]
+        [Route("checkRiderOrderDetails/{riderId}")]
         [HttpGet]
-        public IActionResult FindOrder(int Id)
+        public IActionResult checkRiderOrderDetails(int riderId)
         {
-            var response = _mediator.Send(new FindOrder.Command(Id)).Result;
+            var response = _mediator.Send(new checkRiderOrderDetails.Command(riderId)).Result;
+            return Ok(response);
+        }
+        [Route("FindOrder/{orderId}")]
+        [HttpGet]
+        public IActionResult FindOrder(int orderId)
+        {
+            var response = _mediator.Send(new FindOrder.Command(orderId)).Result;
             return Ok(response);
         }
         [Route("GetOrderDetailsById/{Id}")]
@@ -85,12 +97,38 @@ namespace CookWithUs.Web.UI.Controllers
             var response = _mediator.Send(new OrderUpdate.Command(orderId)).Result;
             return Ok(response);
         }
+        [Route("AssignRiderOrder")]
+        [HttpPost]
+        public IActionResult AssignRiderOrder(FindOrderDTO details)
+        {
+            var assignDetails = _mapper.Map<FindOrderDTO, FindOrderModel>(details);
+            var response = _mediator.Send(new AssignRiderOrder.Command(assignDetails)).Result;
+            return Ok(response);
+        }
+        [Route("SendOrderRequest")]
+        [HttpPost]
+        public IActionResult SendOrderRequest(SendOrderRequestDTO details)
+        {
+            var riderDetails = _mapper.Map<SendOrderRequestDTO, SendOrderRequestModel>(details);
+            var response = _mediator.Send(new SendOrderRequest.Command(riderDetails)).Result;
+            return Ok(response);
+        }
+
         [Route("RiderSetStatus")]
         [HttpPost]
         public IActionResult RiderSetStatus(SetOrderStatusDTO details)
         {
             var orderValue = _mapper.Map<SetOrderStatusDTO, SetOrderStatusModel>(details);
             var response = _mediator.Send(new RiderSetStatus.Command(orderValue)).Result;
+            return Ok(response);
+        }
+
+        [Route("RiderStatus")]
+        [HttpPost]
+        public IActionResult RiderStatus(FindOrderDTO details)
+        {
+            var orderValue = _mapper.Map<FindOrderDTO, FindOrderModel>(details);
+            var response = _mediator.Send(new RiderStatus.Command(orderValue)).Result;
             return Ok(response);
         }
     }

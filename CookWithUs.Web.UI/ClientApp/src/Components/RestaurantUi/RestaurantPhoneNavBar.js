@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useContext,useEffect,useState,useRef } from "react";
 import "./RestaurantPhoneNavBar.css";
 import { BarChart, CircleEllipsis, BookUp, FileBarChart2, Home, ScanLine, Search } from 'lucide-react';
-export default function RestaurantPhoneNavBar({ isActive, setIsActive ,activeTab , setActiveTab }) {
+import { jwtDecode } from 'jwt-decode';
+import AuthContext from "../../Pages/AuthProvider";
+import { GetRestaurantByEmail } from "../../services/restaurantServices";
+
+export default function RestaurantPhoneNavBar({ isActive, setIsActive, activeTab, setActiveTab }) {
+    const { auth, setAuth } = useContext(AuthContext);
+    const [restaurantDetails, setRestaurantDetails] = useState('');
+    const timerId = useRef();
+    const getDetails = () => {
+        if (auth.isAuthenticated) {
+            const token = localStorage.getItem('jwtToken');
+            const decodedToken = jwtDecode(token);
+            const username = decodedToken.sub;
+            GetRestaurantByEmail(username)
+                .then(response => {
+                    setRestaurantDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                }
+                );
+        }
+    }
+    useEffect(() => {
+        getDetails();
+    }, []);
+    useEffect(() => {
+        timerId.current = setInterval(() => {
+            getDetails();
+        }, 1000)
+        return () => clearInterval(timerId.current);
+    }, []);
     return (
         <>
             <div>
@@ -19,10 +50,10 @@ export default function RestaurantPhoneNavBar({ isActive, setIsActive ,activeTab
                         
                         <div>
                         <div className="_2RestaurantName">
-                            KFCRestaurant,Sharma Para
+                                {restaurantDetails.restaurantName}
                         </div>
                         <div className="_2closestime">
-                        Closes at 10:45 pm,Today
+                                Closes at {restaurantDetails.closingTime }
                             </div>
                         </div>
                     </div>

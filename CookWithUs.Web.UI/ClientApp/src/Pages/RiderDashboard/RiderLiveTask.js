@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./RiderLiveTask.css";
 import { Utensils, ChevronRight, MapPin, Info } from 'lucide-react';
+import RiderNextDirection from './RiderNextDirection';
 
-const RiderLiveTask = () => {
+
+const RiderLiveTask = ({ restaurantDetails }) => {
+    const [seeLocation, setSeeLocation] = useState(false);
+    const handleCheckRestaurentLocation = () => {
+        setSeeLocation(true);
+    }
     return (
-        <>
+
+        seeLocation ? (
+            <>
+                <RiderNextDirection setSeeLocation={setSeeLocation} destinationReached={" REACHED PICKUP LOCATION "} nextDestination={restaurantDetails} />
+            </>
+            ) : (
             <div className="_4mainContainer">
                 <div className="_4restaurantDetails">
                     <div className="_4iconLocation">
@@ -20,16 +31,15 @@ const RiderLiveTask = () => {
                             <div className="_4Stauts">
                                 Pick Food
                             </div>
-                            <div className="_4RightArrow">
+                            <div onClick={handleCheckRestaurentLocation } className="_4RightArrow">
                                 <ChevronRight />
                             </div>
                         </div>
                         <div className="_4RestaurantName">
-                            Theobroma
+                            {restaurantDetails.name }
                         </div>
                         <div className="_4RestaurantLocation">
-                            Plot 10, Ground Floor, Defence Colony Main Market , Defence Colon,
-                            New Delhi
+                            {restaurantDetails.address}
                         </div>
                     </div>
                 </div>
@@ -59,7 +69,8 @@ const RiderLiveTask = () => {
                     </div>
                 </div>
             </div>
-        </>
+            )
+        
     );
 };
 

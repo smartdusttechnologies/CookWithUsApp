@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace CookWithUs.Buisness.Features.Rider
 {
-    public class RiderList
+    public static class RiderList
     {
 
-        public class Command : IRequest<RiderListModel>
+        public class Command : IRequest<List<RiderListModel>>
         {
             public double latitude { get; set; }
             public double longitude { get; set; }
@@ -40,7 +40,7 @@ namespace CookWithUs.Buisness.Features.Rider
                 return Task.FromException(new UnauthorizedAccessException("You are Unauthorized"));
             }
         }
-        public class Handler : IRequestHandler<Command, RiderListModel>
+        public class Handler : IRequestHandler<Command, List<RiderListModel>>
         {
             private readonly IRiderRepository _riders;
 
@@ -48,8 +48,7 @@ namespace CookWithUs.Buisness.Features.Rider
             {
                 _riders = riders;
             }
-
-            public Task<RiderListModel> Handle(Command request, CancellationToken cancellationToken)
+            Task<List<RiderListModel>> IRequestHandler<Command, List<RiderListModel>>.Handle(Command request, CancellationToken cancellationToken)
             {
                 var userLatitude = request.latitude;
                 var userLongitude = request.longitude;
@@ -57,7 +56,7 @@ namespace CookWithUs.Buisness.Features.Rider
 
                 var allRiders = _riders.GetRiderList();
 
-                var nearbyRider = allRiders
+                var nearbyRiders = allRiders
                     .Select(rider =>
                     {
                         rider.Distance = CalculateDistance(userLatitude, userLongitude, rider.Latitude, rider.Longitude);
@@ -65,9 +64,9 @@ namespace CookWithUs.Buisness.Features.Rider
                     })
                     .Where(rider => rider.Distance < maxDistance)
                     .OrderBy(rider => rider.Distance)
-                    .FirstOrDefault();
+                    .ToList();
 
-                return Task.FromResult(nearbyRider);
+                return Task.FromResult(nearbyRiders);
             }
 
             private decimal CalculateDistance(double lat1, double lon1, double lat2, double lon2)
@@ -86,15 +85,10 @@ namespace CookWithUs.Buisness.Features.Rider
                 double distance = R * c; // Distance in kilometers
                 return (decimal)distance;
             }
-
             private double ToRadians(double angleInDegrees)
             {
                 return Math.PI * angleInDegrees / 180.0;
             }
         }
-
-
     }
 }
-
-

@@ -15,10 +15,10 @@ namespace CookWithUs.Buisness.Features.Rider
     {
         public class Command : IRequest<FindOrderModel>
         {
-            public int Id { get; set; }
+            public int orderId { get; set; }
             public Command(int Id)
             {
-                Id = Id;
+                orderId = Id;
             }
         }
         public class Authorization : IAuthorizationRule<Command>
@@ -47,7 +47,7 @@ namespace CookWithUs.Buisness.Features.Rider
 
             Task<FindOrderModel> IRequestHandler<Command, FindOrderModel>.Handle(Command request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_rider.FindOrder(request.Id));
+                return Task.FromResult(_rider.FindOrder(request.orderId));
             }
         }
     }

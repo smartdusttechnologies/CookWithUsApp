@@ -4,7 +4,7 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 //const target = "https://localhost:44481";
 //Put controller Name Here ->
 const context = [
-    "/weatherforecast", "/resturant", "/document", "/payment", "/Rider", "/user"
+    "/weatherforecast", "/resturant", "/document", "/payment", "/Rider", "/user", "/location", "/Auth","/Publicdetails"
 ];
 
 module.exports = function (app) {
@@ -12,9 +12,8 @@ module.exports = function (app) {
          target: target,
        // target: 'http://localhost:51303',
         secure: false,
-        headers: {
-            Connection: 'Keep-Alive'
-        }
+        ws : true
+    
     });
 
     app.use(appProxy);

@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { InitiateRazorPayPayment } from "../../services/paymentServices";
 import { ToastContainer, toast } from "react-toastify";
-import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import * as signalR from '@microsoft/signalr';
 
 
 
@@ -149,6 +149,7 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
     //const [connection, setConnection] = useState();
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [orderId, SetOrderId] = useState(null);
+    const [userID, setUserID] = useState(1);
     
     const handlePayment = () => {
         if (!paymentMethod) {
@@ -164,21 +165,19 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
                 handlePaytmPayment();
                 break;
             case 2: {
-                const Food = FoodItem.items.map(item => {
-                    return {
-                        Id: 0,
-                        UserId: item.userId,
-                        Name: item.name,
-                        ItemId: item.itemId,
-                        Quantity: item.quantity,
-                        RestaurantId: item.restaurantId,
-                        Price: item.price,
-                        DiscountedPrice: item.discountedPrice,
-                        Time: item.time,
-                        RestaurantLocation: item.restaurantLocation,
-                        RestaurantName: item.restaurantName
-                    };
-                });
+                const Food = FoodItem.items.map(item => ({
+                    Id: 0,
+                    UserId: item.userId,
+                    Name: item.name,
+                    ItemId: item.itemId,
+                    Quantity: item.quantity,
+                    RestaurantId: item.restaurantId,
+                    Price: item.price,
+                    DiscountedPrice: item.discountedPrice,
+                    Time: item.time,
+                    RestaurantLocation: item.restaurantLocation,
+                    RestaurantName: item.restaurantName
+                }));
 
                 const Data = {
                     OrderID: 0,
@@ -191,23 +190,24 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
                     RiderId: 0,
                     RestaurantId: FoodItem.items[0].restaurantId,
                     FoodList: Food
-
                 };
 
                 axios.post('/user/PlaceOrder', Data)
                     .then(async response => {
                         SetOrderId(response.data.requestedObject);
-
-                        const connection = await ConnectionBuild();
-                        await notifyRestaurantForNewOrder(connection, response.data.requestedObject);
-                        // Handle success response
+                        try {
+                            const connection = await ConnectionBuild();
+                            await addUserInRoom(connection, response.data.requestedObject);
+                            await notifyRestaurantForNewOrder(connection, response.data.requestedObject);
+                            await checkUsersInRoom(connection, response.data.requestedObject);
+                        } catch (error) {
+                            console.error('Error in establishing connection or notifying restaurant:', error);
+                        }
                     })
                     .catch(error => {
                         // Handle error
                         console.error('Error placing order:', error);
                     });
-                /*const response = ConnectionBuild();*/
-
                 break;
             }
 
@@ -215,40 +215,52 @@ function PaymentCard({ loading, FoodItem, Address, TotalAmount }) {
                 toast.warn("Invalid payment method.");
         }
     };
+
     const ConnectionBuild = async () => {
         try {
-            const connectionBuild = new HubConnectionBuilder()
-                .withUrl("https://localhost:7042/location")
-                .configureLogging(LogLevel.Information)
+            const connectionBuild = new signalR.HubConnectionBuilder()
+                .withUrl('/location', {
+                    skipNegotiation: true,
+                    transport: signalR.HttpTransportType.WebSockets
+                })
                 .build();
 
-            await connectionBuild.start(); // Wait for connection to be established
+            await connectionBuild.start();
             console.log("Connection established:", connectionBuild);
             return connectionBuild;
-            // Once connection is established, set it
-
         } catch (e) {
-            console.log("Error establishing connection:", e);
+            console.error("Error establishing connection:", e);
             throw e;
         }
     };
-
+    const addUserInRoom = async (connection, orderId) => {
+        try {
+            await connection.invoke("JoinRoom", orderId,"User",1010);           
+            console.log("User Join This Room:", orderId);
+        } catch (error) {
+            console.error("Error notifying the specific User:", error);
+        }
+    };
     const notifyRestaurantForNewOrder = async (connection, orderId) => {
         try {
-            // Ensure that connection is established before invoking methods
-            if (!connection) {
-                await ConnectionBuild();
-            }
-
-            await connection.invoke("JoinRoom", orderId);
+            await connection.invoke("JoinRoom", orderId,"Restaurant",1);
+            console.log("User Join This Room:", orderId);
             await connection.invoke("NotifySpecificRestaurantForNewOrder", orderId, FoodItem.items[0].restaurantId);
             navigate("/success");
             console.log("Notification sent to the specific restaurant for new order:", orderId);
         } catch (error) {
-
             console.error("Error notifying the specific restaurant:", error);
         }
     };
+    const checkUsersInRoom = async (connection, orderId) => {
+        try {
+            const users = await connection.invoke("GetUsersInRoom", orderId);
+            console.log(`Users in room for order ${orderId}:`, users);
+        } catch (error) {
+            console.error("Error getting users in room:", error);
+        }
+    };
+
 
     const theme = createTheme();
 

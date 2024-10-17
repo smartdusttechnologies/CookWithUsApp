@@ -62,3 +62,16 @@ D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookW
 D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\refint\CookWithUs.Buisness.dll
 D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.pdb
 D:\Smartdust\CookWithUs\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\ref\CookWithUs.Buisness.dll
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.deps.json
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.dll
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\bin\Debug\net6.0\CookWithUs.Buisness.pdb
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.csproj.AssemblyReference.cache
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.GeneratedMSBuildEditorConfig.editorconfig
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.AssemblyInfoInputs.cache
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.AssemblyInfo.cs
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.csproj.CoreCompileInputs.cache
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.sourcelink.json
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.dll
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\refint\CookWithUs.Buisness.dll
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\CookWithUs.Buisness.pdb
+D:\cookwithus\CookWithUsApp\CookWithUs.Buisness\obj\Debug\net6.0\ref\CookWithUs.Buisness.dll

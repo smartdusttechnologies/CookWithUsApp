@@ -1,5 +1,4 @@
 ﻿/* App.css */
-
 ._4restaurantDetails {
     min-height: 200px;
     background: #42a4ff;
@@ -49,6 +48,7 @@
     flex-direction: column;
     color: white;
     padding: 20px;
+    width:100%;
 }
 ._4UserInfo {
     background: black;

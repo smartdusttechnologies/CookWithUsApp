@@ -375,8 +375,8 @@ namespace ServcieBooking.Buisness.Repository
           ,V.[IsDeleted]
           ,V.[MenuId]
           
-          FROM [CookWithUs].[dbo].[Menu] M
-          LEFT JOIN [CookWithUs].[dbo].[VariantOption]V ON M.ID =V.MenuId 
+          FROM [Menu] M
+          LEFT JOIN [VariantOption]V ON M.ID =V.MenuId 
           WHERE M.IsDeleted = 0 AND M.CategoryID = @CategoryId";
 
             var statesDictionary = new Dictionary<int, RestaurantMenu>();
@@ -645,8 +645,8 @@ namespace ServcieBooking.Buisness.Repository
           ,OI.[Price]
           ,OI.[DiscountedPrice]
           ,OI.[Time]          
-          FROM [CookWithUs].[dbo].[OrderDetails] OD
-          LEFT JOIN [CookWithUs].[dbo].[OrderItems] OI ON OD.OrderID =OI.OrderId
+          FROM [OrderDetails] OD
+          LEFT JOIN [OrderItems] OI ON OD.OrderID =OI.OrderId
           WHERE  OD.RestaurantId = @restaurantId";
 
             var parameters = new { restaurantId };
@@ -696,7 +696,7 @@ namespace ServcieBooking.Buisness.Repository
                           ,[NextStockTime]
                           ,[IsDeleted]
                           ,[Id]
-                          FROM [CookWithUs].[dbo].[MenuCategory] WHERE [RestaurantId] = @resturantId AND [IsDeleted] = 0";
+                          FROM [MenuCategory] WHERE [RestaurantId] = @resturantId AND [IsDeleted] = 0";
 
             var parameters = new { resturantId };
 
@@ -704,5 +704,206 @@ namespace ServcieBooking.Buisness.Repository
 
             return menuCategories;
         }
+        public List<RestaurantCategory> GetRestaurantCategory()
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [RestaurantCategories]";
+
+            var restaurantCategories = db.Query<RestaurantCategory>(query).ToList();
+
+            return restaurantCategories;
+        }
+        public RequestResult<bool> RestaurantSignup(RestaurantDetailsModel restaurantDetails, PasswordLogin passwordLogin)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            // Insert query with OUTPUT to retrieve the newly inserted RestaurantId
+            string query = @"
+    INSERT INTO RestaurantDetails (
+        ownerFullName,
+        restaurantName,
+        Latitude,
+        Longitude,
+        email,
+        mobile,
+        whatsapp,
+        workingDays,
+        OpeningTime,
+        ClosingTime,
+        category,
+        ownerPan,
+        GstIn,
+        ifscCode,
+        accountNumber,
+        fssaiNumber,
+        menu,
+        isDeleted
+    ) 
+    OUTPUT INSERTED.Id  -- Returns the newly inserted Id
+    VALUES (
+        @OwnerFullName,
+        @RestaurantName,
+        @Latitude,
+        @Longitude,
+        @Email,
+        @Mobile,
+        @Whatsapp,
+        @WorkingDays,
+        @OpeningTime,
+        @ClosingTime,
+        @Category,
+        @OwnerPan,
+        @GstIn,
+        @IfscCode,
+        @AccountNumber,
+        @FssaiNumber,
+        @Menu,
+        @IsDeleted
+    );";
+
+            var parameters = new
+            {
+                restaurantDetails.OwnerFullName,
+                restaurantDetails.RestaurantName,
+                restaurantDetails.Latitude,
+                restaurantDetails.Longitude,
+                restaurantDetails.Email,
+                restaurantDetails.Mobile,
+                restaurantDetails.Whatsapp,
+                restaurantDetails.WorkingDays,
+                restaurantDetails.OpeningTime,
+                restaurantDetails.ClosingTime,
+                restaurantDetails.Category,
+                restaurantDetails.OwnerPan,
+                restaurantDetails.GstIn,
+                restaurantDetails.IfscCode,
+                restaurantDetails.AccountNumber,
+                restaurantDetails.FssaiNumber,
+                restaurantDetails.Menu,
+                restaurantDetails.IsDeleted
+            };
+
+            // Execute the insert query and get the generated RestaurantId
+            var restaurantId = db.QuerySingle<int>(query, parameters);
+
+            // Step 2: Insert into PasswordLogin using the retrieved RestaurantId
+            var insertPasswordQuery = @"
+        INSERT INTO [RestaurantPasswordLogin] (
+            [PasswordHash],
+            [PasswordSalt],
+            [RestaurantId],
+            [ChangeDate]
+        ) VALUES (
+            @PasswordHash,
+            @PasswordSalt,
+            @RestaurantId,
+            @ChangeDate
+        )";
+
+            var passwordParameters = new
+            {
+                PasswordHash = passwordLogin.PasswordHash,
+                PasswordSalt = passwordLogin.PasswordSalt,
+                RestaurantId = restaurantId,  // Use the retrieved RestaurantId here
+                ChangeDate = DateTime.Now
+            };
+
+            int passwordRowsAffected = db.Execute(insertPasswordQuery, passwordParameters);
+
+            // Check if both operations were successful
+            if (passwordRowsAffected > 0)
+            {
+                return new RequestResult<bool>(true);
+            }
+            else
+            {
+                return new RequestResult<bool>(false, new List<ValidationMessage>
+        {
+            new ValidationMessage
+            {
+                Reason = "Something went wrong with PasswordLogin insertion",
+                Severity = ValidationSeverity.Error
+            }
+        });
+            }
+        }
+        public RestaurantDetailsModel GetRestaurantByEmail(string email)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT 
+            [id] AS Id,
+            [ownerFullName] AS OwnerFullName,
+            [restaurantName] AS RestaurantName,
+            [Latitude] AS Latitude,
+            [Longitude] AS Longitude,
+            [email] AS Email, -- Alias for case sensitivity
+            [mobile] AS Mobile, -- Alias for case sensitivity
+            [whatsapp] AS Whatsapp,
+            [workingDays] AS WorkingDays,
+            CONVERT(varchar(8), [OpeningTime], 108) AS OpeningTime, -- Convert time to string
+            CONVERT(varchar(8), [ClosingTime], 108) AS ClosingTime, 
+            [category] AS Category,
+            [ownerPan] AS OwnerPan,
+            [GstIn] AS GstIn,
+            [ifscCode] AS IfscCode,
+            [accountNumber] AS AccountNumber,
+            [fssaiNumber] AS FssaiNumber,
+            [menu] AS Menu,
+            [packagingCharge] AS PackagingCharge, -- Include this if needed
+            [isDeleted] AS IsDeleted
+            FROM [cook].[dbo].[RestaurantDetails]
+            WHERE [email] = @email;
+            ";
+
+            var parameters = new
+            {
+                email = email
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            RestaurantDetailsModel restaurant = db.QuerySingleOrDefault<RestaurantDetailsModel>(query, parameters);
+
+            return restaurant;
+        }
+        public RequestResult<bool> CheckRestaurantEmail(string email)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [RestaurantDetails] WHERE [email] = @email";
+
+            var parameters = new
+            {
+                email = email
+            };
+            int count = db.ExecuteScalar<int>(query, parameters);
+            if (count > 0)
+            {
+                return new RequestResult<bool>(false);
+            }
+            else
+            {
+                return new RequestResult<bool>(true);
+            }
+
+        }
+        public PasswordLogin GetPasswordByRestaurantId(int userId)
+        {
+            using IDbConnection db = _connectionFactory.GetConnection;
+
+            var query = @"SELECT * FROM [RestaurantPasswordLogin] WHERE [RestaurantId] = @UsersUserId";
+
+            var parameters = new
+            {
+                UsersUserId = userId
+            };
+
+            // QuerySingleOrDefault will return a single result or default (null) if no rows are found.
+            PasswordLogin password = db.QuerySingleOrDefault<PasswordLogin>(query, parameters);
+
+            return password;
+        }
+
     }
 }

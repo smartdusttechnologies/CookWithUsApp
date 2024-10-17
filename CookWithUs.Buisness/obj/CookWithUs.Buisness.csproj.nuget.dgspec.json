@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
+    "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {}
   },
   "projects": {
-    "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
+    "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "projectUniqueName": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
         "projectName": "CookWithUs.Buisness",
-        "projectPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
+        "projectPath": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\CookWithUs.Buisness.csproj",
         "packagesPath": "C:\\Users\\msi-laptop\\.nuget\\packages\\",
-        "outputPath": "D:\\Smartdust\\CookWithUs\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
+        "outputPath": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\msi-laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -46,11 +56,11 @@
             },
             "Dapper": {
               "target": "Package",
-              "version": "[2.1.15, )"
+              "version": "[2.1.35, )"
             },
             "FluentValidation": {
               "target": "Package",
-              "version": "[11.8.0, )"
+              "version": "[11.9.2, )"
             },
             "FluentValidation.AspNetCore": {
               "target": "Package",
@@ -58,23 +68,31 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[12.4.0, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.1.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[13.0.3, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[4.8.5, )"
+              "version": "[4.8.6, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -93,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

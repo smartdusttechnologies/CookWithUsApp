@@ -1,0 +1,41 @@
+﻿._6RiderLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    background: #07d107;
+    color: white;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+    width:100%;
+}
+._6RiderSignupButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #07d107;
+    background: white;
+    color: #07d107;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+._6RiderLoginButton {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    justify-content: end;
+    height: 100%;
+}
+._6RiderLoginPage{
+    height:60vh;
+}
+.fullLayoutRider{
+    background-image:url('../../assets/usedImage/rider1.jpg');
+}

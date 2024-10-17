@@ -1,0 +1,48 @@
+﻿._7mobileNumber {
+    height: 70vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin-bottom: 30px;
+}
+._7mobileInput{
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid green;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom:10px;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    color: black;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.inputContainer .labelField {
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    top: 5px;
+    transition: 0.3s;
+    font-weight: 600;
+    pointer-events: none;
+}
+._7directPassword {
+    font-size: 15px;
+    padding-left: 10px;
+    font-weight: 600;
+}
+
+    .inputContainer .inputfield:valid ~ .labelField,
+    .inputContainer .inputfield:focus ~ .labelField {
+        transition: 0.3s;
+        padding-left: 2px;
+        transform: translateY(-25px);
+    }

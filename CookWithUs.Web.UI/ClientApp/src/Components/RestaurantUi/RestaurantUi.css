@@ -188,3 +188,18 @@ li {
     padding:20px;
     cursor:pointer;
 }
+.restaurantUserModal {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background: gray;
+    padding: 10px;
+    border-radius: 30px;
+}
+.restaurantUserLogOut{
+    font-size:10px;
+}
+.userProfile:hover .restaurantUserModal {
+    display: block;
+}

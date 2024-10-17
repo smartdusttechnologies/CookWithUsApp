@@ -22,5 +22,10 @@ namespace ServiceBooking.Buisness.Repository.Interface
         List<OrderModel> getOrderByRestaurantID(int userId);
         OrderModel GetOrderDetails(int orderId);
         List<RestaurantMenu> GetMenuItemByCategoryID(int categoryId);
+        List<RestaurantCategory> GetRestaurantCategory();
+        RequestResult<bool> RestaurantSignup(RestaurantDetailsModel restaurantDetails, PasswordLogin passwordLogin);
+        RestaurantDetailsModel GetRestaurantByEmail(string email);
+        RequestResult<bool> CheckRestaurantEmail(string email);
+        PasswordLogin GetPasswordByRestaurantId(int userId);
     }
 }

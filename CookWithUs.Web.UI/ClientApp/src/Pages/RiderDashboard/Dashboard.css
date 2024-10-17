@@ -9,3 +9,70 @@
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow effect */
 }
+
+._9RiderProfieIcon {
+    height: 150px;
+    width: 150px;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+._9RiderProfilePic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+._9RiderUserName {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+._9RiderDetailsCard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+}
+
+    ._9RiderDetailsCard h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+._9RiderLabel {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+._9RiderValue {
+    font-weight: 600;
+}
+
+._9RiderUserImg {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+._9RiderUserInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+    ._9RiderUserInfo ._9RiderLabel,
+    ._9RiderUserInfo ._9RiderValue {
+        font-size: 14px;
+    }
+
+._9RiderScrollY {
+    height: 50vh;
+    overflow-y: scroll;
+}

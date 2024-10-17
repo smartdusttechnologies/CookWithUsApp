@@ -1,0 +1,299 @@
+﻿._1r-M3 {
+    z-index: 201;
+}
+.sendOtpButton {
+    font-weight: 500;
+    font-size: 15px;
+    background: orange;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+._3C3Tg {
+    -webkit-animation: _2yWjm .3s ease-in forwards;
+    animation: _2yWjm .3s ease-in forwards;
+}
+
+._3JaG6 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 200;
+    -webkit-transition: -webkit-transform .3s ease-in;
+    transition: -webkit-transform .3s ease-in;
+    -o-transition: transform .3s ease-in;
+    transition: transform .3s ease-in;
+    transition: transform .3s ease-in, -webkit-transform .3s ease-in;
+    -webkit-animation: _2RsLF .3s ease-in;
+    animation: _2RsLF .3s ease-in;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+._3EFMg {
+    margin: 0;
+    padding: 16px;
+    background-color: rgba(211, 219, 234, .3);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(40, 44, 63, .05);
+    box-shadow: 0 1px 1px 0 rgba(40, 44, 63, .05);
+    height: 160px;
+    position: relative;
+}
+._1rfuP {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    max-height: 134px;
+}
+
+._2yQPs {
+    opacity: 1;
+}
+._1im59 {
+    position: absolute !important;
+    overflow: hidden !important;
+    top: 0;
+    left: 0;
+}
+._2QN4q {
+    padding: 16px 16px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    line-height: 0;
+    outline: 0;
+}
+.uHGrw {
+    stroke-width: 0;
+    stroke: currentColor;
+    width: 20px;
+    height: 20px;
+    fill: #3d4152;
+    vertical-align: middle;
+}
+._1IbBN {
+    position: absolute;
+    bottom: 20px;
+}
+._2clOW {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+._2_k47 {
+    margin-right: 85px;
+}
+
+.DLItg {
+    color: #7e808c;
+    line-height: 1.4;
+    margin-top: 4px;
+    font-size: .93rem;
+}
+.cDWSj {
+    padding: 5px 16px;
+    position: relative;
+}
+.npnSS {
+    position: relative;
+}
+._11Jfu {
+    margin: 30px 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+._3Aw9B {
+    font-size: .8rem;
+    -webkit-transform: translateY(-158%);
+    -ms-transform: translateY(-158%);
+    transform: translateY(-158%);
+}
+ 
+._21cv8 {
+    color: #7e808c;
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+    font-size: .93rem;
+    cursor: text;
+    -webkit-transition: .2s ease;
+    -o-transition: .2s ease;
+    transition: .2s ease;
+    width: 100%;
+    text-transform: uppercase;
+    will-change: transform, color, font-size;
+}
+
+._2yoTv {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 999;
+    right: 0;
+}
+._11Jfu {
+    margin: 30px 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+._3Aw9B {
+    font-size: .8rem;
+    -webkit-transform: translateY(-158%);
+    -ms-transform: translateY(-158%);
+    transform: translateY(-158%);
+}
+
+._21cv8 {
+    color: #7e808c;
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+    font-size: .93rem;
+    cursor: text;
+    -webkit-transition: .2s ease;
+    -o-transition: .2s ease;
+    transition: .2s ease;
+    width: 100%;
+    text-transform: uppercase;
+    will-change: transform, color, font-size;
+}
+.cDWSj input {
+    font-weight: 500;
+    color: #000;
+    opacity: 1;
+}
+
+._1g81h {
+    padding-left: 35px !important;
+    font-weight: 500 !important;
+}
+
+._1ZK9h {
+    background-color: rgba(0, 0, 0, 0);
+    line-height: normal;
+    border: none;
+    border-bottom: 1px solid #bebfc5;
+    outline: 0;
+    height: 42px;
+    width: 100%;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+.Qe5_f {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    height: 2px;
+    margin-top: -1px;
+    width: 100%;
+    background-color: #ff5200;
+    -webkit-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+._2YNHY {
+    top: 0;
+    line-height: 42px;
+    font-weight: 500;
+    position: absolute;
+    font-size: 15px;
+    opacity: 0;
+    will-change: opacity;
+    -webkit-transition: opacity .25s ease-in-out;
+    -o-transition: opacity .25s ease-in-out;
+    transition: opacity .25s ease-in-out;
+}
+.cDWSj ._3nBzT {
+    margin-top: 30px;
+}
+
+._3JGzG {
+    position: relative;
+    clear: both;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+._2UPEv {
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    background-color: #ff5200;
+    color: #fff;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 2rem;
+    outline: 0;
+}
+
+._1vTVI {
+    line-height: 48px !important;
+    padding: 0 !important;
+    height: auto !important;
+    border-radius: 1px !important;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12);
+    font-weight: 600;
+    opacity: 1;
+    -webkit-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+.cDWSj ._1CZpY {
+    margin-top: 12px;
+    color: #686b78;
+    font-size: .86rem;
+}
+.cDWSj ._1yKIM {
+    color: #282c3f;
+    font-weight: 400;
+    text-decoration: none;
+}
+.inputContainer .labelField {
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    top: 5px;
+    transition: 0.3s;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.inputContainer .inputfield:valid ~ .labelField,
+.inputContainer .inputfield:focus ~ .labelField {
+    transition: 0.3s;
+    padding-left: 2px;
+    transform: translateY(-25px);
+}
+
+._381fS{
+    height:50px !important;
+    margin-bottom:5px;
+}
+.errorMesssage {
+    color: red;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 10px 0 0 0;
+}

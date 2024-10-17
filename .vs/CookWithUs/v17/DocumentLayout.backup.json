@@ -1,0 +1,552 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\cookwithus\\CookWithUsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\restaurantui\\restaurantsignup\\restaurantsignup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\restaurantui\\restaurantsignup\\restaurantsignup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\pancard.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\pancard.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridercontinuewithsignup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridercontinuewithsignup.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\updatemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\updatemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\restaurantdetailslogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\restaurantdetailslogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\riderdetailsbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\riderdetailsbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\riderlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\riderlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\getrestaurantbyemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\getrestaurantbyemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\riderorderbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\riderorderbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\updatemenucategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\updatemenucategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\deletemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\deletemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\createmenucategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\createmenucategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\resturant\\queries\\createmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\resturant\\queries\\createmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\utils\\axiosinstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\utils\\axiosinstance.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\services\\userservice.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\services\\userservice.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\middleware\\globalexceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\middleware\\globalexceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\sendorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\sendorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderprofile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderprofile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\drivinglicence.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\drivinglicence.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\uploadpic.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\ridersignup\\uploadpic.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\user\\getuserbyusername.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\user\\getuserbyusername.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\ridersetstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\ridersetstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\features\\rider\\riderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\features\\rider\\riderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\components\\restaurantui\\topbar\\restauranttopbar.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\components\\restaurantui\\topbar\\restauranttopbar.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\home\\home.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\home\\home.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderlogin\\logindetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderlogin\\logindetails.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.buisness\\common\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B622F97-3743-4FD4-BA8E-415F53AD8FA5}|CookWithUs.Buisness\\CookWithUs.Buisness.csproj|solutionrelative:cookwithus.buisness\\common\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|d:\\cookwithus\\cookwithusapp\\cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderlogin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{90FFBEB5-C1F2-4F99-A94F-18AD7BC9963A}|CookWithUs.Web.UI\\CookWithUs.Web.UI.csproj|solutionrelative:cookwithus.web.ui\\clientapp\\src\\pages\\riderdashboard\\riderlogin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PanCard.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\PanCard.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\PanCard.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\PanCard.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\PanCard.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T23:22:30.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RestaurantSignup.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RestaurantUi\\RestaurantSignUp\\RestaurantSignup.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RestaurantUi\\RestaurantSignUp\\RestaurantSignup.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RestaurantUi\\RestaurantSignUp\\RestaurantSignup.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RestaurantUi\\RestaurantSignUp\\RestaurantSignup.js",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAswOAAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-17T09:47:37.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RestaurantDetailsLogin.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\RestaurantDetailsLogin.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\RestaurantDetailsLogin.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\RestaurantDetailsLogin.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\RestaurantDetailsLogin.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAArwBoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T09:32:42.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UpdateMenuCategory.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenuCategory.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenuCategory.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenuCategory.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenuCategory.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAIwDkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T08:51:51.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateMenu.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenu.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenu.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenu.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\UpdateMenu.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAADwvzgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T08:51:40.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DeleteMenu.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\DeleteMenu.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\DeleteMenu.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\DeleteMenu.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\DeleteMenu.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAADwvzgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T08:50:51.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CreateMenuCategory.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenuCategory.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenuCategory.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenuCategory.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenuCategory.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAADwvzkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T08:50:40.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CreateMenu.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenu.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenu.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenu.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\CreateMenu.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAADwvzgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T08:50:15.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RiderLogin.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderLogin.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\RiderLogin.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderLogin.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\RiderLogin.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAswJoAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T09:09:15.377Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "CookWithUs.Web.UI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAADwv5AAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T04:13:58.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Dashboard.css",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\Dashboard.css",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\Dashboard.css",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\Dashboard.css",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\Dashboard.css",
+              "ViewState": "AgIAADAAAAAAAAAAAIAwwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-16T23:54:22.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UploadPic.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\UploadPic.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\UploadPic.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\UploadPic.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\UploadPic.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T23:33:06.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DrivingLicence.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\DrivingLicence.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\DrivingLicence.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\DrivingLicence.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderSignup\\DrivingLicence.js",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwDkAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T23:32:02.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RiderContinueWithSignup.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderContinueWithSignup.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderContinueWithSignup.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderContinueWithSignup.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderContinueWithSignup.js",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAnwJwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T23:20:25.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "GetUserByUserName.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\User\\GetUserByUserName.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\User\\GetUserByUserName.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\User\\GetUserByUserName.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\User\\GetUserByUserName.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAkwBgAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:17:50.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "RiderSetStatus.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderSetStatus.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\RiderSetStatus.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderSetStatus.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\RiderSetStatus.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAywDsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:16:34.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "RiderStatus.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderStatus.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\RiderStatus.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderStatus.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\RiderStatus.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA0wDsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:15:55.902Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SendOrderRequest.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\SendOrderRequest.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\SendOrderRequest.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\SendOrderRequest.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\SendOrderRequest.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAcwBgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:14:50.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "RiderProfile.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderProfile.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderProfile.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderProfile.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderProfile.js",
+              "ViewState": "AgIAABEAAAAAAAAAAAApwBYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T13:00:52.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RiderOrderById.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderOrderById.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\RiderOrderById.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderOrderById.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\RiderOrderById.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwDgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:16:46.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "axiosInstance.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\utils\\axiosInstance.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\utils\\axiosInstance.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\utils\\axiosInstance.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\utils\\axiosInstance.js",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T21:49:11.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Home.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\Home\\Home.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\Home\\Home.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\Home\\Home.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\Home\\Home.js",
+              "ViewState": "AgIAAHkAAAAA/////38pwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T19:46:16.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "LoginDetails.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin\\LoginDetails.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin\\LoginDetails.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin\\LoginDetails.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin\\LoginDetails.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T19:29:35.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RiderDetailsById.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderDetailsById.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Rider\\RiderDetailsById.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Rider\\RiderDetailsById.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Rider\\RiderDetailsById.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAA+wEUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T23:17:21.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetRestaurantByEmail.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\GetRestaurantByEmail.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\GetRestaurantByEmail.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Features\\Resturant\\Queries\\GetRestaurantByEmail.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Features\\Resturant\\Queries\\GetRestaurantByEmail.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAiwDMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T02:38:56.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\App.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\App.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\App.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\App.js",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAwEUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-15T15:20:04.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UserService.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\services\\UserService.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\services\\UserService.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\services\\UserService.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\services\\UserService.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-16T04:48:38.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "RiderLogin.css",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin.css",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin.css",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin.css",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Pages\\RiderDashboard\\RiderLogin.css",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-16T04:21:25.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Program.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\Program.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Program.cs",
+              "RelativeToolTip": "CookWithUs.Web.UI\\Program.cs",
+              "ViewState": "AgIAAJAAAAAAipmZmZkawKYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T03:24:06.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GlobalExceptionHandlerMiddleware.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Middleware\\GlobalExceptionHandlerMiddleware.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\Middleware\\GlobalExceptionHandlerMiddleware.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\Middleware\\GlobalExceptionHandlerMiddleware.cs",
+              "RelativeToolTip": "CookWithUs.Web.UI\\Middleware\\GlobalExceptionHandlerMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T03:22:49.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Enums.cs",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Common\\Enums.cs",
+              "RelativeDocumentMoniker": "CookWithUs.Buisness\\Common\\Enums.cs",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Buisness\\Common\\Enums.cs",
+              "RelativeToolTip": "CookWithUs.Buisness\\Common\\Enums.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T02:36:09.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "RestaurantTopBar.js",
+              "DocumentMoniker": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Components\\RestaurantUi\\TopBar\\RestaurantTopBar.js",
+              "RelativeDocumentMoniker": "CookWithUs.Web.UI\\ClientApp\\src\\Components\\RestaurantUi\\TopBar\\RestaurantTopBar.js",
+              "ToolTip": "D:\\cookwithus\\CookWithUsApp\\CookWithUs.Web.UI\\ClientApp\\src\\Components\\RestaurantUi\\TopBar\\RestaurantTopBar.js",
+              "RelativeToolTip": "CookWithUs.Web.UI\\ClientApp\\src\\Components\\RestaurantUi\\TopBar\\RestaurantTopBar.js",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAlwC8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-15T15:20:28.231Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

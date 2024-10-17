@@ -1,0 +1,523 @@
+﻿._7SignUpRestaurantPage {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #f5f5f5;
+}
+._7SignupRestaurantPageTopbar {
+    background: white;
+    height: 60px;
+    width: 100%;
+}
+._7SignupRestaurantPageTopbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+._7logoName {
+    font-size: 20px;
+    font-weight: 700;
+    color: green;
+    text-shadow: 3px 3px 8px #bb5858;
+}
+._7FAQs {
+    font-size: 20px;
+    font-weight: 500;
+}
+._7mainPage {
+    display: flex;
+    flex-direction:column;
+    margin: 100px 400px 0px 400px;
+}
+._7RestaurantContainer {
+    display: flex;
+    height:90%;
+}
+
+._7RestaurantSidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: 100vh;
+}
+
+._7RestaurantStepList {
+    list-style-type: none;
+}
+
+._7RestaurantStepItem {
+    margin-bottom: 40px;
+}
+
+._7StepActive {
+    color: #2a9d8f;
+}
+
+._7RestaurantStepNumber {
+    font-size: 12px;
+    color: #bbb;
+    text-transform: uppercase;
+}
+
+._7RestaurantStepTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+._7RestaurantStepDescription {
+    color: #777;
+    font-size: 14px;
+}
+
+._7RestaurantEditLink {
+    margin-top: 5px;
+}
+
+    ._7RestaurantEditLink a {
+        font-size: 12px;
+        color: #e76f51;
+        text-decoration: none;
+    }
+
+._7RestaurantMainContent {
+    padding: 40px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+._7RestaurantHeading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+._7RestaurantFormGroup {
+    margin-bottom: 20px;
+}
+
+    ._7RestaurantFormGroup label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    ._7RestaurantFormGroup input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+._7RestaurantAddressGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+._7RestaurantEditBtn {
+    color: #e76f51;
+    text-decoration: none;
+}
+
+._7RestaurantSubheading {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+._7RestaurantOneEachDetails {
+    background: white;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 30px;
+    margin:20px;
+}
+.working-days-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.select-all-link {
+    color: orange;
+    cursor: pointer;
+}
+.working-days-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.days-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.day-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+._7selectedDays {
+    margin-right: 8px;
+    border: 2px solid green;
+    height: 10px;
+    background: #22fd22 !important;
+    width: 10px;
+}
+
+._7unselectedDays {
+    margin-right: 8px;
+    border: 2px solid green;
+    height: 10px;
+    width: 10px;
+}
+
+._7selectedDaysLabel {
+    font-size: 20px;
+    font-weight: 500;
+}
+._7ProceedButton {
+    width: 100%;
+    background: #92d9af;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+._7RestaurantRegisterInputs{
+    height:50px;
+    border:1px solid !important;
+    border-radius:20px !important;
+    font-size:20px;
+    font-weight:500;
+}
+._7blurFullDisplay {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: #00000082;
+    justify-content: end;
+    display: flex;
+    top:0;
+}
+._7sideBarSelectCategory {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 40px;
+    margin-top: 50px;
+    height: 90%;
+}
+._7sideBarSelectCategoryLayout {
+    position: fixed;
+    height: 100vh;
+    width: 500px;
+    background: #d9d9d9;
+    border-radius: 20px 0 0 20px;
+}
+._7restaurantCategory {
+    margin-bottom: 20px;
+    padding: 25px 15px 15px 15px;
+    border: 2px solid #acacac;
+    border-radius: 25px;
+    background: white;
+    height: 30%;
+}
+
+    ._7restaurantCategory h3 {
+        margin: 0;
+        font-size: 1.4em;
+        color: #004d40;
+    }
+
+    ._7restaurantCategory p {
+        margin: 5px 0;
+        color: #004d40;
+    }
+
+    ._7restaurantCategory button {
+        padding: 10px 20px;
+        background: #00796b;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+        ._7restaurantCategory button:hover {
+            background: #004d40;
+        }
+._7restaurantCategoryTopbar {
+    height: 50px;
+    background: white;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    border-radius: 20px 0 0 0;
+    right: 0;
+    display:flex;
+    padding:20px;
+}
+._7restaurantCategoryTopbarText {
+    font-size: 18px;
+    font-weight: 600;
+}
+._7restaurantCategoryTopbarCut {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 400;
+}
+._7restaurantCategoryName {
+    font-size: 20px;
+    margin:0 0 20px 0;
+    font-weight: 600;
+}
+._7restaurantGst {
+    font-weight: 500;
+    height: 30px;
+    display: flex;
+    align-items: end;
+    border-top: 1px dotted;
+    margin-top: 20px;
+}
+._7restaurantCategorySelectThis {
+    display: flex;
+    justify-content: space-between;
+}
+._7restaurantCategorySelectButton {
+    font-weight: 500;
+    color: #d65901;
+    cursor: pointer;
+}
+._7RestaurantCategorySelectedName {
+    font-size: 15px;
+}
+._7RestaurantSelectButton {
+    color: #ef4805;
+    font-size: 15px;
+    cursor: pointer;
+}
+p._7RestaurantError {
+    color: #eb0000;
+    font-weight: 500;
+    margin: 0 10px;
+}
+._8modelLayout {
+    position: fixed;
+    height: 300px;
+    width: 500px;
+    background: #ebebeb;
+    box-shadow: 0px 0px 21px -1px black;
+    border-radius:10px;
+    padding:20px;
+}
+._8otpDetailsText{
+    text-align:center;
+    font-weight:600;
+    font-size:20px;
+}
+._8otpDetailsButton {
+   display:flex;
+   justify-content:space-around;
+}
+._8otpDetailsCancelButton{
+    border : 2px solid black;
+    padding:5px;
+    font-weight:600;
+    border-radius:5px;
+}
+._8otpDetailsSubmitButton {
+    border: 2px solid green;
+    padding: 5px;
+    font-weight: 600;
+    border-radius: 5px;
+    color:green;
+    background:lightgreen;
+}
+._7rightSide {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    align-items: center;
+}
+._7loginButton {
+    display: flex;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #12cb6f;
+}
+
+/*For Phone View Restaurant Css*/
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
+
+._8PhoneRestaurantSignUp-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #9ca3af;
+    font-family: Open Sans, sans-serif;
+}
+
+._8PhoneRestaurantSignUp-webcrumbs {
+    width: 100%;
+}
+
+._8PhoneRestaurantSignUp-container {
+    width: 400px;
+    min-height: 500px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 24px;
+    padding: 24px;
+}
+
+._8PhoneRestaurantSignUp-title {
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 24px;
+    color: #fa5f30;
+}
+
+._8PhoneRestaurantSignUp-step {
+    margin-bottom: 24px;
+}
+
+._8PhoneRestaurantSignUp-subtitle {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+._8PhoneRestaurantSignUp-inputGroup {
+    margin-bottom: 16px;
+}
+
+._8PhoneRestaurantSignUp-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+._8PhoneRestaurantSignUp-input,
+._8PhoneRestaurantSignUp-select {
+    margin-top: 4px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    padding: 8px;
+}
+
+._8PhoneRestaurantSignUp-timeGroup {
+    display: flex;
+    gap: 16px;
+}
+
+._8PhoneRestaurantSignUp-submitButton {
+    width: 100%;
+    height: 50px;
+    background-color: #fa5f30;
+    border-radius: 8px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+._7anotherLoginButton {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+    color: gray;
+    border: 2px solid;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+._9RiderContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff; /* White card background */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    margin:100px auto;
+}
+
+._9RiderHeader {
+    background-color: #003366; /* Dark blue header */
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+    ._9RiderHeader h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+._9RiderSubheader {
+    font-size: 1.1rem;
+    color: #99ccff;
+}
+
+._9RiderDetails {
+    padding: 20px;
+}
+
+._9RiderSectionTitle {
+    font-size: 1.5rem;
+    margin: 20px 0 10px;
+    color: #003366; /* Dark blue section titles */
+    border-bottom: 2px solid #99ccff; /* Light blue underline */
+    padding-bottom: 5px;
+}
+
+._9RiderDetailRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+    ._9RiderDetailRow:last-child {
+        border-bottom: none;
+    }
+
+._9RiderLabel {
+    font-weight: bold;
+    color: #003366; /* Dark blue labels */
+}
+
+._9RiderValue {
+    color: #333;
+}
+
+._9RiderContactInfo, ._9RiderBankInfo, ._9RiderMenuInfo {
+    margin-top: 20px;
+}
+
+    ._9RiderMenuInfo ._9RiderValue {
+        font-style: italic;
+        color: #003366; /* Dark blue for the menu items */
+    }

@@ -2,10 +2,14 @@
 import { useState } from "react"; // Import useState hook
 import "../RestaurantUi.css";
 import { PackageCheck, CircleHelp, School, ShoppingCart, BarChart3, Utensils } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 export default function RestaurantSideBar({ setActiveTab, activeTab } ) {
 
     setActiveTab("ORDERS");
+    const navigate = useNavigate(); // Use useNavigate hook
+    const handleClick = () => {
+        navigate('/rider/profile'); // Redirect to the specified URL
+    };
 
     return (
         <div className="sidebar">
@@ -54,7 +58,7 @@ export default function RestaurantSideBar({ setActiveTab, activeTab } ) {
                     </li>
                     <li>
                         <a href="/Restaurant/Profile"  >
-                            <div className="sidenav">
+                            <div className="sidenav" onClick={handleClick}>
                                 <i><School className={activeTab === "PROFILE" ? "active" : ""} style={{ padding: '6px', border: '1px solid white', borderRadius: '100%', height: '40px', width: 'auto' }} /></i>
                                 <span>PROFILE</span>
                             </div>

@@ -13,6 +13,19 @@ export default function PhoneRestaurantDashboard({ isActive }) {
     const [countdown, setCountdown] = useState(0);
     const timerId = useRef();
     useEffect(() => {
+        // Get elements by class name
+        const sidebar = document.getElementsByClassName('_2PhoneTopBar');
+        const topbar = document.getElementsByClassName('mainBottomBar');
+
+        // Loop through the elements and set display to 'none'
+        for (let i = 0; i < sidebar.length; i++) {
+            sidebar[i].style.display = '';
+        }
+        for (let i = 0; i < topbar.length; i++) {
+            topbar[i].style.display = '';
+        }
+    }, []);
+    useEffect(() => {
         timerId.current = setInterval(() => {
             const RestaurantId = 1;
             getOrderByRestaurantID(RestaurantId)

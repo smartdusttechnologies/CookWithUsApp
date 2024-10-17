@@ -1,0 +1,14 @@
+﻿._7RiderSignUpTopBar {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+._7RiderSignupTopbarLeft {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+._7RiderSignupTopbarLeftStep {
+    font-weight: 600;
+}

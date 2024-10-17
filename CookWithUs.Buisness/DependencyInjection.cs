@@ -57,10 +57,25 @@ namespace ServcieBooking.Buisness
             services.AddTransient<IAuthorizationRule<RiderDetailsById.Command>, RiderDetailsById.Authorization>();
             services.AddTransient<IAuthorizationRule<RiderSetStatus.Command>, RiderSetStatus.Authorization>();
             services.AddTransient<IAuthorizationRule<GetOrderDetailsById.Command>, GetOrderDetailsById.Authorization>();
-
+            services.AddTransient<IAuthorizationRule<FindOrder.Command>, FindOrder.Authorization>();
             services.AddTransient<IAuthorizationRule<Cart.Command>, Cart.Authorization>();
+            services.AddTransient<IAuthorizationRule<AssignRiderOrder.Command>, AssignRiderOrder.Authorization>();
+            services.AddTransient<IAuthorizationRule<RiderStatus.Command>, RiderStatus.Authorization>();
+            services.AddTransient<IAuthorizationRule<SendOrderRequest.Command>, SendOrderRequest.Authorization>();
+            services.AddTransient<IAuthorizationRule<checkRiderOrderDetails.Command>, checkRiderOrderDetails.Authorization>();
+            services.AddTransient<IAuthorizationRule<RiderSignup.Command>, RiderSignup.Authorization>();
+            services.AddTransient<IAuthorizationRule<CheckUserMobile.Command>, CheckUserMobile.Authorization>();
+            services.AddTransient<IAuthorizationRule<OTPAuthenticate.Command>, OTPAuthenticate.Authorization>();
+            services.AddTransient<IAuthorizationRule<MatchOTP.Command>, MatchOTP.Authorization>();
+            services.AddTransient<IAuthorizationRule<RiderLogin.Command>, RiderLogin.Authorization>();
+            services.AddTransient<IAuthorizationRule<SignupUser.Command>, SignupUser.Authorization>();
+            services.AddTransient<IAuthorizationRule<LoginUser.Command>, LoginUser.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetUserByUserName.Command>, GetUserByUserName.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetRestaurantCategory.Command>, GetRestaurantCategory.Authorization>();
+            services.AddTransient<IAuthorizationRule<RestaurantSignup.Command>, RestaurantSignup.Authorization>();
+            services.AddTransient<IAuthorizationRule<RestaurantDetailsLogin.Command>, RestaurantDetailsLogin.Authorization>();
+            services.AddTransient<IAuthorizationRule<GetRestaurantByEmail.Command>, GetRestaurantByEmail.Authorization>();
             return services;
-
         }
     }
 }

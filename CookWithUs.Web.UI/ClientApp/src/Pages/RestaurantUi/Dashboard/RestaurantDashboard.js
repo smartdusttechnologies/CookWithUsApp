@@ -13,6 +13,19 @@ const RestaurantDashboard = ({ isActive }) => {
     const [countdown, setCountdown] = useState(0);
     const timerId = useRef();
     useEffect(() => {
+        // Get elements by class name
+        const sidebar = document.getElementsByClassName('sidebar');
+        const topbar = document.getElementsByClassName('topbar');
+
+        // Loop through the elements and set display to 'none'
+        for (let i = 0; i < sidebar.length; i++) {
+            sidebar[i].style.display = 'block';
+        }
+        for (let i = 0; i < topbar.length; i++) {
+            topbar[i].style.display = 'flex';
+        }
+    }, []);
+    useEffect(() => {
         timerId.current = setInterval(() => {
             const RestaurantId = 1;
             getOrderByRestaurantID(RestaurantId)
@@ -144,17 +157,24 @@ const RestaurantDashboard = ({ isActive }) => {
                 <div className="orderDashboard" style={{margin:'auto'} }>
                     
                     {dashboardTab === 1 && (
-                        allOrder.filter(order => order.orderStatus === 'Processing').map((order, orderIndex) => (
-                            <React.Fragment key={orderIndex}>
-                                <div onClick={() => handleOnClickItem(order,'Preparing')} className="eachOrder">
-                                    <h4>CWU-{order.id}</h4>
-                                    <div className="eachOrderDetails">
-                                        {order.orderDate} | ₹{order.orderPrice}
-                                    </div>
-                                </div>
-                                <hr />
-                            </React.Fragment>
-                        ))
+                        <div>
+                            {allOrder && Array.isArray(allOrder) ? (
+                                allOrder.filter(order => order.orderStatus === 'Processing').map((order, orderIndex) => (
+                                    <React.Fragment key={orderIndex}>
+                                        <div onClick={() => handleOnClickItem(order, 'Preparing')} className="eachOrder">
+                                            <h4>CWU-{order.id}</h4>
+                                            <div className="eachOrderDetails">
+                                                {order.orderDate} | ₹{order.orderPrice}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </React.Fragment>
+                                ))
+                            ) : (
+                                <>
+                                </>
+                            )}
+                        </div>
                     )}
 
                     {dashboardTab === 2 && (

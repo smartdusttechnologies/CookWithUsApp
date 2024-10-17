@@ -1,8 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState,useContext } from "react";
 import "../RestaurantUi.css";
 import {  Megaphone, CircleUserRound, CirclePower } from 'lucide-react';
 import RestaurantIsActivePopUp from "../PopUp/RestaurantIsActivePopUp";
-import { getRestaurantDetails } from "../../../services/restaurantServices";
+import { getRestaurantDetails, GetRestaurantByEmail } from "../../../services/restaurantServices";
+import { jwtDecode } from 'jwt-decode';
+import AuthContext from "../../../Pages/AuthProvider";
+
 const RestaurantTopBar = ({ isActive, setIsActive })=> {
     const toggleActive = (option) => {
         setIsActive(option);
@@ -20,22 +23,38 @@ const RestaurantTopBar = ({ isActive, setIsActive })=> {
             document.body.classList.remove('modal-open');
         };
     }, [openActivePopup]);
+    const [restaurantDetails, setRestaurantDetails] = useState('');
+    const { auth, setAuth,logOut } = useContext(AuthContext);
+    const timerId = useRef();
+    const getDetails = () => {
+        if (auth.isAuthenticated) {
+            const token = localStorage.getItem('jwtToken');
+            const decodedToken = jwtDecode(token);
+            const username = decodedToken.sub;
+            GetRestaurantByEmail(username)
+                .then(response => {
+                    setRestaurantDetails(response.data);
+                })
+                .catch(error => {
+                    console.error("An error occurred while adding address:", error);
+                });
+        }
+    }
     useEffect(() => {
-        const RestaurantId = 1;
-        getRestaurantDetails(RestaurantId)
-            .then(response => {
-                setThisResturentDetails(response.data);
-            })
-            .catch(error => {
-                console.error("An error occurred while adding address:", error);
-            });
+        getDetails();
+    }, []);
+    useEffect(() => {
+        timerId.current = setInterval(() => {
+            getDetails();
+        }, 1000)
+        return () => clearInterval(timerId.current);
     }, []);
     return (
         <div>
             <div className="topbar">
                 <div className="leftSide">
                     <div className="manageOrder">MANAGE ORDERS</div>
-                    <div className="userName">{thisResturentDetails.name }</div>
+                    <div className="userName">{restaurantDetails.restaurantName}</div>
                     {isActive ? (
                         <div onClick={() => toggleActive(false)} className="toggle-btn">
                             <CirclePower style={{ height: "20px", color: "green", transform: "translateX(15px)", transition: "transform 0.3s" }} />
@@ -53,6 +72,9 @@ const RestaurantTopBar = ({ isActive, setIsActive })=> {
                     </div>
                     <div className="userProfile">
                         <CircleUserRound />
+                        <div className="restaurantUserModal">
+                            <div className="restaurantUserLogOut" onClick={logOut}>LogOut</div>
+                        </div>
                     </div>
                 </div>
             </div>

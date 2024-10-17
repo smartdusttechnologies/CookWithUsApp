@@ -1,5 +1,6 @@
 ﻿using CookWithUs.Buisness.Models;
 using CookWithUs.Buisness.Repository.Interface;
+using CookWithUs.Business.Common;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using ServcieBooking.Buisness.Interface;
@@ -13,7 +14,7 @@ namespace CookWithUs.Buisness.Features.Rider
 {
     public class RiderDetailsById
     {
-        public class Command : IRequest<RiderListModel>
+        public class Command : IRequest<RiderDetailsModel>
         {
             public int userId { get; set; }
             public Command(int UserId)
@@ -23,20 +24,38 @@ namespace CookWithUs.Buisness.Features.Rider
         }
         public class Authorization : IAuthorizationRule<Command>
         {
+            private readonly IHttpContextAccessor _httpContextAccessor;
+
+            public Authorization(IHttpContextAccessor httpContextAccessor)
+            {
+                _httpContextAccessor = httpContextAccessor;
+            }
 
             public Task Authorize(Command request, CancellationToken cancellationToken, IHttpContextAccessor contex)
             {
-                //Check If This Rquest Is Accessable To User Or Not
-                var user = new { UserId = 10, UserName = "Yashraj" };
-                var userClaim = new { UserId = 10, ClaimType = "application", Claim = "GetUiPageType" };
-                if (userClaim.Claim == "GetUiPageType" && user.UserId == userClaim.UserId)
+                var httpContext = _httpContextAccessor.HttpContext;
+                if (httpContext == null || !httpContext.User.Identity.IsAuthenticated)
                 {
+                    httpContext.Response.StatusCode = 401; // Return 401 for unauthenticated users
                     return Task.CompletedTask;
                 }
-                return Task.FromException(new UnauthorizedAccessException("You are Unauthorized"));
+                var claimType = httpContext.User.Claims.FirstOrDefault(c => c.Type == "Role");
+
+                if (claimType != null)
+                {
+                    // Replace with your actual authorization logic
+                    if (claimType.Value == Role.Rider.ToString())
+                    {
+                        return Task.CompletedTask;
+                    }
+                }
+                // If the role doesn't match, set the status code to 403 and throw an exception
+                httpContext.Response.StatusCode = 403; // Forbidden
+                return Task.FromException(new UnauthorizedAccessException("You are unauthorized to access this resource."));
+
             }
         }
-        public class Handler : IRequestHandler<Command, RiderListModel>
+        public class Handler : IRequestHandler<Command, RiderDetailsModel>
         {
             private readonly IRiderRepository _rider;
 
@@ -45,7 +64,7 @@ namespace CookWithUs.Buisness.Features.Rider
                 _rider = rider;
             }
 
-            Task<RiderListModel> IRequestHandler<Command, RiderListModel>.Handle(Command request, CancellationToken cancellationToken)
+            Task<RiderDetailsModel> IRequestHandler<Command, RiderDetailsModel>.Handle(Command request, CancellationToken cancellationToken)
             {
                 return Task.FromResult(_rider.GetRiderDetailsById(request.userId));
             }

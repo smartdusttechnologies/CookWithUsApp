@@ -1,0 +1,92 @@
+﻿/* General styles */
+._8phoneRestaurantLogin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+._8phoneRestaurantLogin-box {
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+._8phoneRestaurantLogin-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+._8phoneRestaurantLogin-form-group {
+    margin-bottom: 20px;
+}
+
+    ._8phoneRestaurantLogin-form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #333;
+    }
+
+._8phoneRestaurantLogin-input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+._8phoneRestaurantLogin-input-container {
+    position: relative;
+}
+
+._8phoneRestaurantLogin-toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #16df13;
+    cursor: pointer;
+}
+
+._8phoneRestaurantLogin-login-button,
+._8phoneRestaurantLogin-otp-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #16df13;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+    ._8phoneRestaurantLogin-login-button:hover,
+    ._8phoneRestaurantLogin-otp-button:hover {
+        background-color: #16df13;
+    }
+._8phoneRestaurantLogin-signText{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:15px;
+    font-weight:600;
+
+}
+._8phoneRestaurantLogin-signButton{
+    margin:10px 10px;
+    color:green;
+    text-decoration:underline;
+    cursor:pointer;
+}
